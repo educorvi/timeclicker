@@ -1,0 +1,9 @@
+{
+  "name": "timeclicker",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "packageManager": "yarn@3.3.1"
+}
