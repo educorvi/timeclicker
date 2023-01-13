@@ -1,85 +1,83 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <NavTopBar/>
+  <div id="content" v-if="authenticated === authenticatedState">
+    <RouterView/>
+  </div>
+  <div id="login" v-else-if="authenticated === unauthenticatedState">
+    <b-card header="Bitte melde dich an">
+      <b-button variant="primary" class="w-100" @click="login">Educorvi SSO</b-button>
+    </b-card>
+  </div>
+  <customSpinner v-else/>
 </template>
 
+<script lang="ts">
+import {RouterView} from 'vue-router'
+import NavTopBar from "@/components/NavTopBar.vue";
+import Keycloak from "keycloak-js";
+import {mapActions, mapState} from "pinia";
+import {authState, useKeycloakStore} from "@/stores/keycloak";
+import CustomSpinner from "@/CustomSpinner.vue";
+
+export default {
+  components: {CustomSpinner, NavTopBar, RouterView},
+  methods: {
+    receiveMessage(event: any) {
+      console.log(event);
+    },
+    login() {
+      this.keycloak.login()
+    },
+    ...mapActions(useKeycloakStore, ["setKeycloak", "setAuthenticated"])
+  },
+  mounted () {
+    let keycloak = new Keycloak({
+      url: "https://sso.educorvi.de",
+      realm: "educorvi",
+      clientId: "timeclicker"
+    })
+
+    this.setKeycloak(keycloak);
+
+    keycloak.init({
+      onLoad: 'check-sso',
+      silentCheckSsoRedirectUri: window.location.origin + 'auth.html'
+    }).then(auth => {
+      console.log(auth)
+      if (auth) {
+        this.setAuthenticated(authState.authenticated);
+      } else {
+        this.setAuthenticated(authState.unauthenticated);
+      }
+      console.log(keycloak);
+
+    });
+
+  },
+  computed: {
+    ...mapState(useKeycloakStore, ["authenticated", "keycloak"]),
+    authenticatedState() {
+      return authState.authenticated;
+    },
+    unauthenticatedState() {
+      return authState.unauthenticated;
+    },
+  }
+}
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+#content {
+  padding: 10px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+#login{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  width: 200px;
+  height: 200px;
 }
 </style>

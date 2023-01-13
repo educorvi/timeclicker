@@ -14,10 +14,10 @@ export default class Activity {
     to: Date
 
     @Column()
-    comment: string
+    note: string
 
     @Column()
-    private_comment: string
+    private_note: string
 
     @ManyToOne(()=> User, {nullable: false, onDelete: "CASCADE"})
     user: User
