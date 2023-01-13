@@ -5,8 +5,10 @@
     </b-navbar-brand>
     <!--      <h6 style="color: black">v{{version}}</h6>-->
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown :text="userdata.firstName+' '+userdata.lastName" right v-if="userdata">
-<!--        <b-dropdown-item :href="userdata.accURL">Account</b-dropdown-item>-->
+      <b-nav-item-dropdown right v-if="userdata">
+        <template #button-content>
+          <b-avatar :src="'data:image/png;base64, '+userdata.attributes.profilePicture[0]" size="1.8rem"/> {{ userdata.firstName}} {{userdata.lastName }}
+        </template>
         <b-dropdown-item :href="keycloak.createLogoutUrl()">Logout</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
