@@ -1,7 +1,9 @@
 <template>
   <NavTopBar/>
-  <div id="content" v-if="authenticated === authenticatedState">
-    <RouterView/>
+  <div id="content-container" v-if="authenticated === authenticatedState">
+    <div id="content">
+      <RouterView/>
+    </div>
   </div>
   <div id="login" v-else-if="authenticated === unauthenticatedState">
     <b-card header="Bitte melde dich an">
@@ -18,23 +20,21 @@ import Keycloak from "keycloak-js";
 import {mapActions, mapState} from "pinia";
 import {authState, useKeycloakStore} from "@/stores/keycloak";
 import CustomSpinner from "@/CustomSpinner.vue";
+import {BCard, BButton} from "bootstrap-vue";
 
 export default {
-  components: {CustomSpinner, NavTopBar, RouterView},
+  components: {CustomSpinner, NavTopBar, RouterView, BCard, BButton},
   methods: {
-    receiveMessage(event: any) {
-      console.log(event);
-    },
     login() {
-      this.keycloak.login()
+      this.keycloak?.login()
     },
     ...mapActions(useKeycloakStore, ["setKeycloak", "setAuthenticated"])
   },
   mounted () {
     let keycloak = new Keycloak({
-      url: "https://sso.educorvi.de",
-      realm: "educorvi",
-      clientId: "timeclicker"
+      url: import.meta.env.VITE_KC_URL,
+      realm: import.meta.env.VITE_KC_REALM,
+      clientId: import.meta.env.VITE_KC_CLIENTID
     })
 
     this.setKeycloak(keycloak);
@@ -49,8 +49,6 @@ export default {
       } else {
         this.setAuthenticated(authState.unauthenticated);
       }
-      console.log(keycloak);
-
     });
 
   },
@@ -67,8 +65,15 @@ export default {
 </script>
 
 <style scoped>
+#content-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 #content {
   padding: 10px;
+  max-width: 800px;
+  width: 100%;
 }
 
 #login{
