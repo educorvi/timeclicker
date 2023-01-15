@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="dev" type="CompoundRunConfigurationType">
+    <toRun name="Test DB" type="docker-deploy" />
     <toRun name="dev client" type="js.build_tools.npm" />
     <toRun name="dev server" type="js.build_tools.npm" />
     <method v="2" />
