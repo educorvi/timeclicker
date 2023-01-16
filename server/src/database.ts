@@ -60,6 +60,13 @@ export default class Database {
         return await this.tasksRepository.find();
     }
 
+    async getOpenTasks(): Promise<Array<Task>> {
+        return await this.tasksRepository.find({where: {open: true}});
+    }
+    async getClosedTasks(): Promise<Array<Task>> {
+        return await this.tasksRepository.find({where: {open: false}});
+    }
+
     async saveTask(id: string, details: Omit<Task, "id" | "activities">) {
         let existing = await this.getTask(id);
         if (existing) {
