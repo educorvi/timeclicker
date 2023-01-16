@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: superdupertest
     ports:
       - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
 
   adminer:
     image: adminer

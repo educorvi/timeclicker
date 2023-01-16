@@ -7,16 +7,10 @@ export default class Task {
     id: string
 
     @Column()
-    project: string
-
-    @Column()
-    customer: string
-
-    @Column()
     title: string
 
     @Column()
-    comment_mandatory: boolean
+    note_mandatory: boolean
 
     @Column()
     open: boolean

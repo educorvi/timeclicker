@@ -10,7 +10,8 @@ export default class Database {
     readonly password: string;
     readonly database: string;
     private AppDataSource: DataSource;
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>;
+    private tasksRepository: Repository<Task>;
 
 
     constructor(username: string, password: string, database: string = "timeclicker", host: string = "localhost", port: number = 5432) {
@@ -36,6 +37,7 @@ export default class Database {
 
         await this.AppDataSource.initialize();
         this.userRepository = this.AppDataSource.getRepository(User);
+        this.tasksRepository = this.AppDataSource.getRepository(Task);
     }
 
     async getUser(id: string): Promise<User | null> {
@@ -48,6 +50,32 @@ export default class Database {
         user.email = email;
         user.name = name;
         await this.userRepository.save(user);
+    }
+
+    async getTask(id: string): Promise<Task | null> {
+        return await this.tasksRepository.findOneBy({id})
+    }
+
+    async getAllTasks(): Promise<Array<Task>> {
+        return await this.tasksRepository.find();
+    }
+
+    async saveTask(id: string, details: Omit<Task, "id" | "activities">) {
+        let existing = await this.getTask(id);
+        if (existing) {
+            existing = {
+                ...existing,
+                ...details
+            };
+            await this.tasksRepository.save(existing);
+        } else {
+            const task = new Task();
+            task.id = id;
+            task.title = details.title;
+            task.note_mandatory = details.note_mandatory;
+            task.open = details.open;
+            await this.tasksRepository.save(task);
+        }
     }
 
 };
