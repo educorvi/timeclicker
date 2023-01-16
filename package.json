@@ -5,5 +5,8 @@
     "server",
     "client"
   ],
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@3.3.1",
+  "resolutions": {
+    "keycloak-backend": "portal:/home/julian/projects/arbeit/keycloak-backend"
+  }
 }

@@ -1,8 +1,9 @@
-import {Controller, Get, Path, Query, Route, Response} from "tsoa";
+import {Controller, Get, Path, Query, Route, Response, Security} from "tsoa";
 import Task from "../classes/Task";
 import {db} from "../globals";
 
 @Route("tasks")
+@Security("educorvi_sso")
 export class TaskController extends Controller {
     /**
      * Get tasks

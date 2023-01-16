@@ -4,9 +4,19 @@
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {
     "outputDirectory": "build",
-    "specVersion": 3
+    "specVersion": 3,
+    "securityDefinitions": {
+      "educorvi_sso": {
+        "type": "oauth2",
+        "authorizationUrl": "https://sso.educorvi.de/realms/educorvi/protocol/openid-connect/auth",
+        "flow": "implicit",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
   },
   "routes": {
-    "routesDir": "build"
+    "routesDir": "build",
+    "authenticationModule": "./src/authentication.ts"
   }
 }
