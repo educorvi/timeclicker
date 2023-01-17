@@ -1,7 +1,7 @@
 import express from "express";
-import init from "keycloak-backend-ts";
+import Keycloak from "keycloak-backend-ts";
 
-const keycloak = init({
+const keycloak = new Keycloak({
     "realm": "educorvi",
     "keycloak_base_url": "https://sso.educorvi.de",
     "client_id": "timeclicker"

@@ -3156,14 +3156,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keycloak-backend-ts@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "keycloak-backend-ts@npm:3.0.0"
+"keycloak-backend-ts@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "keycloak-backend-ts@npm:4.0.0"
   dependencies:
     axios: ^1.2.1
     jsonwebtoken: ^9.0.0
     jwt-decode: ^3.1.2
-  checksum: ea1b5e36f8b3fc0b115e551675add550295fea10e597290f3eec53ba61ea66e0e1953d2c8baa9d08ebfff78f0c2f37a1ee96a839376ae7c6c8dc9956f940ad13
+  checksum: 8d3b95cc419948f244371cbc35b2771b175119c03726005daf84c2ddcb099989539b609ce22549faee20eaf775d4a478d4816f547b5ec7d2d0b5be3064608168
   languageName: node
   linkType: hard
 
@@ -4866,7 +4866,7 @@ __metadata:
     "@types/swagger-ui-express": ^4.1.3
     axios: ^1.2.2
     express: ^4.18.2
-    keycloak-backend-ts: ^3.0.0
+    keycloak-backend-ts: ^4.0.0
     nodemon: ^2.0.20
     pg: ^8.8.0
     reflect-metadata: ^0.1.13
