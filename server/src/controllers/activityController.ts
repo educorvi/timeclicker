@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Route, Security, SuccessResponse, Response} from "tsoa";
+import {Body, Controller, Get, Post, Route, Security, SuccessResponse, Response, Delete, Path} from "tsoa";
 import Activity from "../classes/Activity";
 import {db} from "../globals";
 import {Request} from "tsoa";
@@ -33,7 +33,24 @@ export class ActivityController extends Controller {
     @Get()
     public async getActivities(@Request() req: express.Request): Promise<Array<Activity>> {
         const user = await getOrCreateUser(req);
-        return db.getAllActivities({where: {user}});
+        return db.getActivities({where: {user}, relations: {task: true, user: true}});
+    }
+
+    @Delete("{activityId}")
+    @Response(404, "Not found")
+    public async deleteActivity(@Request() req: express.Request,  @Path() activityId: string) {
+        const user = await getOrCreateUser(req);
+        const activity = await db.getActivity(activityId);
+        if (!activity) {
+            this.setStatus(404);
+            return;
+        }
+        if (activity.user.id !== user.id) {
+            this.setStatus(401);
+            return;
+        }
+        await db.deleteActivity(activity);
+
     }
 
     @SuccessResponse("201", "Created")

@@ -83,8 +83,18 @@ export default class Database {
         }
     }
 
-    async getAllActivities(options?: FindManyOptions<Activity>) {
+    async getActivities(options?: FindManyOptions<Activity>) {
         return this.activityRepository.find(options);
+    }
+
+    async getActivity(id: string):Promise<Activity | null> {
+        return await this.activityRepository.findOne({
+            where: {id},
+            relations: {
+                user: true,
+                task: true
+            }
+        })
     }
 
     async createActivity(activityData: Omit<Activity, "id">) {
@@ -96,4 +106,8 @@ export default class Database {
         await this.activityRepository.save(activity);
     }
 
+
+    async deleteActivity(activity: Activity) {
+        await this.activityRepository.delete({id: activity.id})
+    }
 };
