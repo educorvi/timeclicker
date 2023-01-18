@@ -26,7 +26,7 @@ export default {
   components: {CustomSpinner, NavTopBar, RouterView, BCard, BButton},
   methods: {
     login() {
-      this.keycloak?.login()
+      this.keycloak?.login({scope: ["openid", "profile", "email"].join(" ")})
     },
     ...mapActions(useKeycloakStore, ["setKeycloak", "setAuthenticated"])
   },

@@ -8,8 +8,12 @@ import {db, logger} from "./globals";
 import {RegisterRoutes} from "../build/routes";
 import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "../build/swagger.json"
+import cors from "cors"
 
 const app = express();
+
+
+app.use(cors());
 app.use(
     urlencoded({
         extended: true,

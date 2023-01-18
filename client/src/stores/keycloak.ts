@@ -20,17 +20,6 @@ export const useKeycloakStore = defineStore('keycloak', {
     actions: {
         setKeycloak(keycloak: Keycloak) {
             this.keycloak = keycloak;
-            axios.defaults.headers.common['Authorization'] = `${keycloak.token}`;
-            setInterval(() => {
-                keycloak.updateToken(70).then((refreshed) => {
-                    if (refreshed) {
-                        console.log('Token refreshed' + refreshed);
-                        axios.defaults.headers.common['Authorization'] = `${keycloak.token}`;
-                    }
-                }).catch(() => {
-                    console.error('Failed to refresh token');
-                });
-            }, 6000)
         },
         setAuthenticated(currAuthState: authState) {
             this.authenticated = currAuthState;
@@ -38,6 +27,18 @@ export const useKeycloakStore = defineStore('keycloak', {
                 this.keycloak.loadUserProfile().then(res => {
                     this.userdata = res;
                 });
+                const keycloak = this.keycloak;
+                axios.defaults.headers.common['Authorization'] = `${keycloak.token}`;
+                setInterval(() => {
+                    keycloak.updateToken(70).then((refreshed) => {
+                        if (refreshed) {
+                            console.log('Token refreshed' + refreshed);
+                            axios.defaults.headers.common['Authorization'] = `${keycloak.token}`;
+                        }
+                    }).catch(() => {
+                        console.error('Failed to refresh token');
+                    });
+                }, 6000)
             }
         },
     },

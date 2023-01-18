@@ -17,6 +17,7 @@
     "bootstrap-vue": "^2.23.1",
     "keycloak-js": "^20.0.3",
     "pinia": "^2.0.28",
+    "timeclicker_server": "workspace:*",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
