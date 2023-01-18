@@ -11,7 +11,12 @@
         "authorizationUrl": "https://sso.educorvi.de/realms/educorvi/protocol/openid-connect/auth",
         "flow": "implicit",
         "name": "Authorization",
-        "in": "header"
+        "in": "header",
+        "scopes": {
+          "openid": "default scope",
+          "profile": "profile scope",
+          "email": "email scope"
+        }
       }
     }
   },

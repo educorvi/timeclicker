@@ -7,11 +7,11 @@ export default class Activity {
     @PrimaryGeneratedColumn("uuid")
     id: string
 
-    @Column({ type: 'timestamptz' })
-    from: Date
+    @Column({ type: 'timestamptz', nullable: true })
+    from: Date | null
 
-    @Column({ type: 'timestamptz' })
-    to: Date
+    @Column({ type: 'timestamptz', nullable: true })
+    to: Date | null
 
     @Column()
     note: string

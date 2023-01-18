@@ -1,4 +1,4 @@
-import {DataSource, Repository} from "typeorm";
+import {DataSource, FindManyOptions, Repository} from "typeorm";
 import User from "./classes/User";
 import Activity from "./classes/Activity";
 import Task from "./classes/Task";
@@ -12,6 +12,7 @@ export default class Database {
     private AppDataSource: DataSource;
     private userRepository: Repository<User>;
     private tasksRepository: Repository<Task>;
+    private activityRepository: Repository<Activity>;
 
 
     constructor(username: string, password: string, database: string = "timeclicker", host: string = "localhost", port: number = 5432) {
@@ -38,17 +39,14 @@ export default class Database {
         await this.AppDataSource.initialize();
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
+        this.activityRepository = this.AppDataSource.getRepository(Activity);
     }
 
     async getUser(id: string): Promise<User | null> {
         return await this.userRepository.findOneBy({id})
     }
 
-    async saveUser(id: string, email: string, name: string) {
-        const user = new User();
-        user.id = id;
-        user.email = email;
-        user.name = name;
+    async saveUser(user: User) {
         await this.userRepository.save(user);
     }
 
@@ -83,6 +81,19 @@ export default class Database {
             task.open = details.open;
             await this.tasksRepository.save(task);
         }
+    }
+
+    async getAllActivities(options?: FindManyOptions<Activity>) {
+        return this.activityRepository.find(options);
+    }
+
+    async createActivity(activityData: Omit<Activity, "id">) {
+        let activity = new Activity();
+        activity = {
+            ...activity,
+            ...activityData
+        };
+        await this.activityRepository.save(activity);
     }
 
 };

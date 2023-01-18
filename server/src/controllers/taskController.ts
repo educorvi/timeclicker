@@ -4,6 +4,7 @@ import {db} from "../globals";
 
 @Route("tasks")
 @Security("educorvi_sso")
+@Response(401, "Unauthorized")
 export class TaskController extends Controller {
     /**
      * Get tasks
