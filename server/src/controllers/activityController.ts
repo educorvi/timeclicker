@@ -1,9 +1,10 @@
-import {Body, Controller, Get, Post, Route, Security, SuccessResponse, Response, Delete, Path} from "tsoa";
+import {Body, Controller, Get, Post, Route, Security, SuccessResponse, Response, Delete, Path, Query} from "tsoa";
 import Activity from "../classes/Activity";
 import {db} from "../globals";
 import {Request} from "tsoa";
 import express from "express";
 import {User} from "../classes";
+import {LessThanOrEqual, MoreThanOrEqual} from "typeorm";
 
 async function getOrCreateUser(req: express.Request): Promise<User> {
     const tokStr = req.rawHeaders[req.rawHeaders.indexOf("token") + 1];
@@ -22,20 +23,27 @@ async function getOrCreateUser(req: express.Request): Promise<User> {
     return user;
 }
 
-export type createActivityParams = Omit<Activity, "id" | "user" | "task"> & {taskId: string}
+export type createActivityParams = Omit<Activity, "id" | "user" | "task"> & { taskId: string }
+
 @Route("activities")
 @Security("educorvi_sso")
 @Response(401, "Unauthorized")
 export class ActivityController extends Controller {
     @Get()
-    public async getActivities(@Request() req: express.Request): Promise<Array<Activity>> {
+    public async getActivities(@Request() req: express.Request, @Query() from?: Date, @Query() to?: Date): Promise<Array<Activity>> {
         const user = await getOrCreateUser(req);
-        return db.getActivities({where: {user}, relations: {task: true, user: true}});
+        return db.getActivities({
+            where: {
+                user,
+                from: from ? MoreThanOrEqual(from) : undefined,
+                to: to ? LessThanOrEqual(to) : undefined},
+            relations: {task: true, user: true}
+        });
     }
 
     @Delete("{activityId}")
     @Response(404, "Not found")
-    public async deleteActivity(@Request() req: express.Request,  @Path() activityId: string) {
+    public async deleteActivity(@Request() req: express.Request, @Path() activityId: string) {
         const user = await getOrCreateUser(req);
         const activity = await db.getActivity(activityId);
         if (!activity) {
