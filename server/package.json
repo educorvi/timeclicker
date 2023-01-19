@@ -2,8 +2,8 @@
   "name": "timeclicker_server",
   "version": "1.0.0",
   "description": "Server for the timeclicker App",
-  "main": "dist/src/classes/index.js",
-  "types": "dist/src/classes/index.d.ts",
+  "main": "dist/src/libindex.js",
+  "types": "dist/src/libindex.d.ts",
   "bin": "dist/src/index.j",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

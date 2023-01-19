@@ -22,10 +22,7 @@ async function getOrCreateUser(req: express.Request): Promise<User> {
     return user;
 }
 
-type ActivityCreationAdditionalParams = {
-    taskId: string
-}
-
+export type createActivityParams = Omit<Activity, "id" | "user" | "task"> & {taskId: string}
 @Route("activities")
 @Security("educorvi_sso")
 @Response(401, "Unauthorized")
@@ -57,7 +54,7 @@ export class ActivityController extends Controller {
     @Response(400, "Bad Request")
     @Post("create")
     public async createActivity(
-        @Body() requestBody: Omit<Activity, "id" | "user" | "task"> & ActivityCreationAdditionalParams,
+        @Body() requestBody: createActivityParams,
         @Request() req: express.Request) {
         const user = await getOrCreateUser(req);
         const task = await db.getTask(requestBody.taskId);
