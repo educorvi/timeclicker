@@ -4,8 +4,11 @@
   </div>
 </template>
 <script lang="ts">
+import {BSpinner} from "bootstrap-vue";
+
 export default {
-  name: 'customSpinner'
+  name: 'customSpinner',
+  components: {BSpinner}
 }
 </script>
 

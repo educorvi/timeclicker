@@ -19,7 +19,7 @@ import NavTopBar from "@/components/NavTopBar.vue";
 import Keycloak from "keycloak-js";
 import {mapActions, mapState} from "pinia";
 import {authState, useKeycloakStore} from "@/stores/keycloak";
-import CustomSpinner from "@/CustomSpinner.vue";
+import CustomSpinner from "@/components/CustomSpinner.vue";
 import {BCard, BButton} from "bootstrap-vue";
 
 export default {
@@ -41,7 +41,7 @@ export default {
 
     keycloak.init({
       onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: window.location.origin + 'auth.html'
+      silentCheckSsoRedirectUri: window.location.origin + '/auth.html'
     }).then(auth => {
       console.log(auth)
       if (auth) {

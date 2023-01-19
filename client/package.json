@@ -15,6 +15,7 @@
     "axios": "^1.2.2",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
+    "humanize-duration": "^3.28.0",
     "keycloak-js": "^20.0.3",
     "pinia": "^2.0.28",
     "timeclicker_server": "workspace:*",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
+    "@types/humanize-duration": "^3.27.1",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.45",

@@ -1,7 +1,15 @@
 <template>
   <div style="display: flex; width: 100%; justify-content: center">
-    <b-button v-b-modal.new-entry-modal variant="success">Neuer Eintrag</b-button>
+    <div style="display: block">
+      <b-button v-b-modal.new-entry-modal variant="primary" class="w-100">Neuer Eintrag</b-button>
+      <b-input-group style="width: 300px; max-width: 100%">
+        <b-form-select :options="months.map((val, index)=> {return {value: index+1, text: val}})" v-model="month"></b-form-select>
+        <b-form-select :options="years" v-model="year"></b-form-select>
+      </b-input-group>
+    </div>
   </div>
+
+  <overview :year="year" :month="month"/>
 
   <b-modal v-model="modalVisible" id="new-entry-modal" title="Neuer Eintrag" centered size="xl" scrollable
            @hidden="onClose" hide-footer>
@@ -34,13 +42,14 @@
 </template>
 
 <script lang="ts">
-import {BButton, BFormTextarea} from "bootstrap-vue";
+import {BButton, BFormTextarea, BInputGroup} from "bootstrap-vue";
 import axios from "axios";
 import type {createActivityParams, Task} from "timeclicker_server";
+import Overview from "@/components/Overview.vue";
 
 export default {
   name: "Home",
-  components: {BButton, BFormTextarea},
+  components: {Overview, BButton, BFormTextarea, BInputGroup},
   data() {
     return {
       tasks: [] as Array<Task>,
@@ -52,10 +61,31 @@ export default {
         note: "",
         private_note: ""
       },
-      modalVisible: false
+      modalVisible: false,
+      month: (new Date()).getMonth() + 1,
+      months: [
+          "Januar",
+          "Februar",
+          "März",
+          "April",
+          "Mai",
+          "Juni",
+          "Juli",
+          "August",
+          "September",
+          "Oktober",
+          "November",
+          "Dezember"
+      ],
+      years: [],
+      year: (new Date()).getFullYear()
     }
   },
   created() {
+    const currYear = (new Date()).getFullYear();
+    for (let i = currYear; i > 2021; i--) {
+      this.years.push(i);
+    }
     axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
       this.tasks = <Array<Task>>res.data;
     }).catch(() => {

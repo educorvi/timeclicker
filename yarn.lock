@@ -468,6 +468,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/humanize-duration@npm:^3.27.1":
+  version: 3.27.1
+  resolution: "@types/humanize-duration@npm:3.27.1"
+  checksum: d3d69b64918d0cee4aa69580dd04d1b96e3385645d398e27b1535f8c6d0252b0235defb16619379a6196c6bbdfc7b6032f010b25cac44903a32b09db8aa06f30
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
@@ -2710,6 +2717,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"humanize-duration@npm:^3.28.0":
+  version: 3.28.0
+  resolution: "humanize-duration@npm:3.28.0"
+  checksum: dde595ab4729d82147db41d8ca0afa86bf3f20d74cd1323ea52f299091a4f1dcb2a45b2d27ce78ab9bb0d9e66d8eb8f2628a67be36a535af645eb282a963ff7f
+  languageName: node
+  linkType: hard
+
 "humanize-ms@npm:^1.2.1":
   version: 1.2.1
   resolution: "humanize-ms@npm:1.2.1"
@@ -4851,6 +4865,7 @@ __metadata:
   resolution: "timeclicker_client@workspace:client"
   dependencies:
     "@rushstack/eslint-patch": ^1.1.4
+    "@types/humanize-duration": ^3.27.1
     "@types/node": ^18.11.12
     "@vitejs/plugin-vue": ^4.0.0
     "@vue/compat": ^3.2.45
@@ -4863,6 +4878,7 @@ __metadata:
     bootstrap-vue: ^2.23.1
     eslint: ^8.22.0
     eslint-plugin-vue: ^9.3.0
+    humanize-duration: ^3.28.0
     keycloak-js: ^20.0.3
     npm-run-all: ^4.1.5
     pinia: ^2.0.28
