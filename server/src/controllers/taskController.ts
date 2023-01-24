@@ -7,7 +7,7 @@ import {db} from "../globals";
 @Response(401, "Unauthorized")
 export class TaskController extends Controller {
     /**
-     * Get tasks
+     * Get all tasks
      */
     @Get("/")
     public async getTasks(
@@ -27,13 +27,13 @@ export class TaskController extends Controller {
 
     }
     /**
-     * Get specific task
+     * Get a specific task
      */
     @Get("{taskId}")
     @Response(404, "Not found")
     public async getTask(
         /**
-         * Return open, closed or all tasks
+         * The id of the requested task
          */
         @Path() taskId: string
     ): Promise<Task|null>{

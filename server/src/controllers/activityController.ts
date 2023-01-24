@@ -29,6 +29,12 @@ export type saveActivityParams = Omit<Activity, "id" | "user" | "task"> & { id?:
 @Security("educorvi_sso")
 @Response(401, "Unauthorized")
 export class ActivityController extends Controller {
+    /**
+     * Returns all activities that are associated with the authenticated user
+     * @param req
+     * @param from Only return activities after this date
+     * @param to Only return activities up to this date
+     */
     @Get()
     public async getActivities(@Request() req: express.Request, @Query() from?: Date, @Query() to?: Date): Promise<Array<Activity>> {
         const user = await getOrCreateUser(req);
@@ -42,6 +48,11 @@ export class ActivityController extends Controller {
         });
     }
 
+    /**
+     * Deletes the activity
+     * @param req
+     * @param activityId id of the activity to delete
+     */
     @Delete("{activityId}")
     @Response(404, "Not found")
     public async deleteActivity(@Request() req: express.Request, @Path() activityId: string) {
@@ -59,6 +70,12 @@ export class ActivityController extends Controller {
 
     }
 
+
+    /**
+     * Creates or updates an activity. If `id` is passed in the body, then the activity with this id will be updated, otherwise a new activity will be created.
+     * @param requestBody
+     * @param req
+     */
     @SuccessResponse("201", "Created")
     @Response(400, "Bad Request")
     @Post()
