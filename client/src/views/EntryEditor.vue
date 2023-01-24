@@ -4,7 +4,7 @@
     <b-form @submit="onSubmit">
       <label for="project-select">Projekt:</label>
       <b-form-select id="project-select" required v-model="newData.task"
-                     :options="[{value: null, text: 'Bitte wähle ein Projekt'}].concat(taskOptions)"/>
+                     :options="taskOptions"/>
       <hr>
       <label for="date-select">Datum:</label>
       <b-input required v-model="newData.date" id="date-select" type="date"></b-input>
@@ -34,24 +34,13 @@
 import type {Task, Activity} from "timeclicker_server";
 import {BFormInput as BInput, BFormTextarea, BButton} from "bootstrap-vue";
 import {computed, onMounted, ref} from "vue";
+import type {ComputedRef} from "vue";
 import type {saveActivityParams} from "timeclicker_server/src/controllers";
 import axios from "axios";
 
-export type NewData = {
-  task: string | null,
-  date: string,
-  from: string,
-  to: string,
-  note: string,
-  private_note: string
-}
-
-/**
- * Props
- */
+//Props
 const props = defineProps<{
   tasks: Array<Task>,
-  done?: () => void,
   id?: string,
   initialData?: Activity
 }>()
@@ -66,8 +55,13 @@ const newData = ref({
   private_note: ""
 })
 
+const emit = defineEmits<{
+  (e: 'on-close'): void
+  (e: 'on-submit'): void
+}>()
+
 function initializeData() {
-  let from = "", to = "", date="";
+  let from = "", to = "", date = "";
   if (props.initialData?.from) {
     from = props.initialData.from.getHours() + ":" + props.initialData.from.getMinutes();
     date = props.initialData.from.toISOString().split("T")[0]
@@ -87,9 +81,12 @@ const visibility = ref(false)
 
 
 //Computed
-const taskOptions = computed(() => props.tasks.map(t => {
+const taskOptions: ComputedRef<{ value: string | null, text: string }[]> = computed(() => [{
+  value: null as string | null,
+  text: 'Bitte wähle ein Projekt'
+}].concat(props.tasks.map(t => {
   return {value: t.id, text: t.title}
-}));
+})));
 
 
 //Methods
@@ -116,13 +113,11 @@ function onSubmit(event: Event) {
     to: to,
     note: newData.value.note,
     private_note: newData.value.private_note,
-    taskId: newData.value.task||""
+    taskId: newData.value.task || ""
   };
   axios.post(import.meta.env.VITE_API_ENDPOINT + "activities", {id: props.id, ...submitData}).then(() => {
     visibility.value = false
-    if (props.done) {
-      props.done();
-    }
+    emit("on-submit");
   })
   //     .catch(err => {
   //   this.$bvToast.toast('Aktivität konnte nicht gespeichert werden: ' + err.title, {
@@ -134,12 +129,14 @@ function onSubmit(event: Event) {
 }
 
 function onClose() {
+  emit("on-close");
   initializeData();
 }
 
 onMounted(initializeData)
 
 defineExpose({
-  setVisibility
+  setVisibility,
+  id: props.id
 })
 </script>

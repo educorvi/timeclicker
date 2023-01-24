@@ -9,41 +9,33 @@
   <entry-editor ref="entryModal" :done="refresh" :tasks="tasks"/>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {BButton} from "bootstrap-vue";
 import axios from "axios";
 import type {Task} from "timeclicker_server";
 import Overview from "@/components/Overview.vue";
 import EntryEditor from "@/views/EntryEditor.vue";
+import type {Ref} from "vue";
+import {onMounted, ref} from "vue";
 
-export default {
-  name: "Home",
-  components: {EntryEditor, Overview, BButton},
-  data() {
-    return {
-      tasks: [] as Array<Task>,
-      modalVisible: false
-    }
-  },
-  created() {
-    axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
-      this.tasks = <Array<Task>>res.data;
-    }).catch(() => {
-      this.$bvToast.toast('Aufgaben konnten nicht geladen werden. Probiere es später erneut.', {
-        title: "Fehler",
-        variant: "danger",
-        autoHideDelay: 20000
-      })
-    });
-  },
-  methods: {
-    showModal() {
-      this.$refs.entryModal.setVisibility(true);
-    },
-    refresh() {
-      this.$refs.overview.loadActivities();
-    },
-  }
+const tasks: Ref<Array<Task>> = ref([]);
+
+onMounted(() => {
+  axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
+    tasks.value = <Array<Task>>res.data;
+  })
+});
+
+
+const entryModal = ref<InstanceType<typeof EntryEditor>|null>(null);
+const overview = ref<InstanceType<typeof Overview>|null>(null);
+
+function showModal() {
+  entryModal.value?.setVisibility(true)
+}
+
+function refresh() {
+  overview.value?.loadActivities();
 }
 </script>
 

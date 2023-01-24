@@ -39,7 +39,7 @@
     "axios": "^1.2.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "keycloak-backend": "^3.0.0",
+    "keycloak-backend-ts": "^4.0.0",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.6.0",

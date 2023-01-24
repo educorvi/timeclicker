@@ -1,4 +1,5 @@
-import {DataSource, FindManyOptions, Repository} from "typeorm";
+import {DataSource, Repository} from "typeorm";
+import type {FindManyOptions} from "typeorm"
 import User from "./classes/User";
 import Activity from "./classes/Activity";
 import Task from "./classes/Task";

@@ -3,7 +3,7 @@
     <h1 style="display: inline; width: max-content">Übersicht für </h1>
     <div class="w-100 d-flex justify-content-center">
       <b-input-group style="max-width: 300px">
-        <b-form-select :options="months.map((val, index)=> {return {value: index+1, text: val}})"
+        <b-form-select :options="monthOptions"
                        v-model="month"></b-form-select>
         <b-form-select :options="years" v-model="year"></b-form-select>
       </b-input-group>
@@ -17,130 +17,125 @@
       Für diesen Monat liegen noch keine Einträge vor
     </b-card>
     <div v-if="loaded">
-      <b-card v-for="(activity, index) in activities" class="mb-2">
-        <h5 class="mb-0">{{ new Date(activity.from).toLocaleDateString("de") }}</h5>
-        <p class="mb-2">{{ humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), { language: "de" }) }}</p>
+      <b-card v-for="(activity) in activities" ref="cards" :key="activity.id" class="mb-2">
+        <h5 class="mb-0">{{ activity.from?.toLocaleDateString("de") }}</h5>
+        <p class="mb-2">{{
+            (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {language: "de", units: ["h", "m"]}) : "-"
+          }}</p>
         <p class="mb-0 text-muted">{{ activity.task.title }}</p>
         <b-button-group class="mt-2 w-100">
-          <b-button variant="outline-primary" @click="editActivity(index)">Bearbeiten</b-button>
-          <b-button variant="outline-danger" @click="deleteActivity(index)">Löschen</b-button>
+          <b-button variant="outline-primary" @click="editActivity(activity)">Bearbeiten</b-button>
+          <b-button variant="outline-danger" @click="deleteActivity(activity)">Löschen</b-button>
         </b-button-group>
-
-        <entry-editor :ref="'editor_'+index" :tasks="tasks" :id="activity.id" :done="loadActivities" :initial-data="activity"/>
       </b-card>
+      <entry-editor v-if="editableActivity" ref="acEditor" :tasks="tasks" :id="editableActivity.id"
+                     :initial-data="editableActivity" @on-submit="onEditorSubmit" @on-close="onEditorClose"/>
     </div>
     <custom-spinner v-else/>
   </div>
 </template>
 
-<script lang="ts">
-import type {Activity} from "timeclicker_server";
+<script lang="ts" setup>
+import type {Activity, Task} from "timeclicker_server";
 import CustomSpinner from "./CustomSpinner.vue";
 import {BCard, BInputGroup, BButtonGroup, BButton} from "bootstrap-vue";
 import axios from "axios";
 import humanizeDuration from "humanize-duration";
 import EntryEditor from "@/views/EntryEditor.vue";
+import {computed, nextTick, onMounted, ref, watch} from "vue";
 
-export default {
-  name: "Overview",
-  components: {EntryEditor, CustomSpinner, BCard, BInputGroup, BButtonGroup, BButton},
-  props: {
-    tasks: {
-      type: Array,
-      required: true
+const props = defineProps<{tasks: Array<Task>}>()
+
+const editableActivity = ref<Activity | null>(null)
+const acEditor = ref<InstanceType<typeof EntryEditor>|null>(null);
+
+const loaded = ref(false);
+const activities = ref<Array<Activity>>([]);
+const month = ref((new Date()).getMonth() + 1);
+
+const months = [
+  "Januar",
+  "Februar",
+  "März",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Dezember"
+]
+const monthOptions = computed(() => months.map((val, index) => {
+  return {value: index + 1, text: val}
+}));
+
+const years = ref<Array<number>>([]);
+const year = ref((new Date()).getFullYear());
+
+const hours = computed(() => {
+  return humanizeDuration(
+      activities.value.reduce((prev: number, curr: Activity) => {
+        return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
+      }, 0),
+      { language: "de" , units: ["h", "m"]}
+  )
+});
+
+function loadActivities() {
+  loaded.value = false;
+  const startDate = new Date(year.value, month.value - 1, 1)
+  const endDate = new Date(year.value, month.value, 0, 23, 59, 59, 999)
+  axios.get(import.meta.env.VITE_API_ENDPOINT + "activities", {
+    params: {
+      from: startDate.toISOString(),
+      to: endDate.toISOString()
     }
-  },
-  data() {
-    return {
-      loaded: false,
-      activities: [] as Array<Activity>,
-      month: (new Date()).getMonth() + 1,
-      months: [
-        "Januar",
-        "Februar",
-        "März",
-        "April",
-        "Mai",
-        "Juni",
-        "Juli",
-        "August",
-        "September",
-        "Oktober",
-        "November",
-        "Dezember"
-      ],
-      years: [],
-      year: (new Date()).getFullYear()
-    }
-  },
-  methods: {
-    humanizeDuration,
-    loadActivities() {
-      this.loaded = false;
-      const startDate = new Date(this.year, this.month - 1, 1)
-      const endDate = new Date(this.year, this.month, 0, 23, 59, 59, 999)
-      axios.get(import.meta.env.VITE_API_ENDPOINT + "activities", {
-        params: {
-          from: startDate.toISOString(),
-          to: endDate.toISOString()
-        }
-      }).then(res => {
-        this.activities = <Array<Activity>>res.data.map((a: any) => {
-          return {
-            ...a,
-            from: new Date(a.from),
-            to: new Date(a.to)
-          }
-        })
-        this.loaded = true;
-      }).catch((e) => {
-        this.$bvToast.toast('Fehler beim Abrufen der Einträge.', {
-          title: "Fehler",
-          variant: "danger",
-          autoHideDelay: 20000
-        })
-        console.error(e)
-      });
-    },
-    deleteActivity(index: number) {
-      axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/"+this.activities[index].id).then(this.loadActivities).catch(err => {
-        this.$bvToast.toast('Aktivität konnte nicht gelöscht werden: ' + err.title, {
-          title: "Fehler",
-          variant: "danger",
-          autoHideDelay: 20000
-        })
-      });
-    },
-    editActivity(index: number) {
-      this.$refs['editor_'+index][0].setVisibility(true)
-    },
-  },
-  mounted() {
-    this.loadActivities();
-    const currYear = (new Date()).getFullYear();
-    for (let i = currYear; i > 2021; i--) {
-      this.years.push(i);
-    }
-  },
-  computed: {
-    hours() {
-      return humanizeDuration(
-          this.activities.reduce((prev: number, curr: Activity) => {
-            return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
-          }, 0),
-          { language: "de" }
-      )
-    }
-  },
-  watch: {
-    year() {
-      this.loadActivities();
-    },
-    month() {
-      this.loadActivities();
-    },
-  }
+  }).then(res => {
+    activities.value = <Array<Activity>>res.data.map((a: any) => {
+      return {
+        ...a,
+        from: new Date(a.from),
+        to: new Date(a.to)
+      }
+    })
+    loaded.value = true;
+  });
 }
+
+function deleteActivity(activity: Activity) {
+  axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/"+activity.id).then(loadActivities)
+}
+
+async function editActivity(activity: Activity) {
+  editableActivity.value = activity;
+  await nextTick()
+  acEditor.value?.setVisibility(true);
+}
+
+function onEditorClose() {
+  editableActivity.value = null;
+}
+
+function onEditorSubmit() {
+  loadActivities();
+}
+
+watch(year, loadActivities);
+watch(month, loadActivities);
+
+onMounted(() => {
+  loadActivities();
+  const currYear = (new Date()).getFullYear();
+  for (let i = currYear; i > 2021; i--) {
+    years.value.push(i);
+  }
+});
+
+defineExpose({
+  loadActivities
+})
 </script>
 
 <style scoped>

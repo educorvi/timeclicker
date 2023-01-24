@@ -1,8 +1,8 @@
 import {Body, Controller, Get, Post, Route, Security, SuccessResponse, Response, Delete, Path, Query} from "tsoa";
-import Activity from "../classes/Activity";
+import type Activity from "../classes/Activity";
 import {db} from "../globals";
 import {Request} from "tsoa";
-import express from "express";
+import type express from "express";
 import {User} from "../classes";
 import {LessThanOrEqual, MoreThanOrEqual} from "typeorm";
 

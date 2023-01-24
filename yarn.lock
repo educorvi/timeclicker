@@ -3189,15 +3189,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keycloak-backend@portal:/home/julian/projects/arbeit/keycloak-backend::locator=timeclicker%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "keycloak-backend@portal:/home/julian/projects/arbeit/keycloak-backend::locator=timeclicker%40workspace%3A."
+"keycloak-backend-ts@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "keycloak-backend-ts@npm:4.0.0"
   dependencies:
     axios: ^1.2.1
     jsonwebtoken: ^9.0.0
     jwt-decode: ^3.1.2
+  checksum: 8d3b95cc419948f244371cbc35b2771b175119c03726005daf84c2ddcb099989539b609ce22549faee20eaf775d4a478d4816f547b5ec7d2d0b5be3064608168
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "keycloak-js@npm:^20.0.3":
   version: 20.0.3
@@ -4903,7 +4904,7 @@ __metadata:
     axios: ^1.2.2
     cors: ^2.8.5
     express: ^4.18.2
-    keycloak-backend: ^3.0.0
+    keycloak-backend-ts: ^4.0.0
     nodemon: ^2.0.20
     pg: ^8.8.0
     reflect-metadata: ^0.1.13

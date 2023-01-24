@@ -1,5 +1,5 @@
 import express from "express";
-import Keycloak from "keycloak-backend";
+import Keycloak from "keycloak-backend-ts";
 
 const keycloak = new Keycloak({
     "realm": "educorvi",
