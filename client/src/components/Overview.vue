@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 text-center" style="width: 100%">
+  <div class="text-center" style="width: 100%">
     <h1 style="display: inline; width: max-content">Übersicht für </h1>
     <div class="w-100 d-flex justify-content-center">
       <b-input-group style="max-width: 300px">
@@ -9,17 +9,24 @@
       </b-input-group>
     </div>
   </div>
-  <p class="w-100 text-center mt-2">Arbeitszeit in diesem Monat: {{ hours }}</p>
+  <p class="w-100 text-center mt-2">Summe: {{ hours }}</p>
 
+  <slot/>
   <div style="width: 100%; display: flex; justify-content: center">
     <b-card v-if="loaded && activities.length===0" style="width: 25rem; text-align: center; max-width: 100%">
       Für diesen Monat liegen noch keine Einträge vor
     </b-card>
     <div v-if="loaded">
-      <b-card v-for="activity in activities" class="mb-2">
-        <h5 class="mb-0">{{ new Date(activity.from).toLocaleDateString() }}</h5>
-        <p class="mb-2">{{ humanizeDuration(activity.to?.getTime() - activity.from?.getTime()) }}</p>
+      <b-card v-for="(activity, index) in activities" class="mb-2">
+        <h5 class="mb-0">{{ new Date(activity.from).toLocaleDateString("de") }}</h5>
+        <p class="mb-2">{{ humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), { language: "de" }) }}</p>
         <p class="mb-0 text-muted">{{ activity.task.title }}</p>
+        <b-button-group class="mt-2 w-100">
+          <b-button variant="outline-primary" @click="editActivity(index)">Bearbeiten</b-button>
+          <b-button variant="outline-danger" @click="deleteActivity(index)">Löschen</b-button>
+        </b-button-group>
+
+        <entry-editor :ref="'editor_'+index" :tasks="tasks" :id="activity.id" :done="loadActivities" :initial-data="activity"/>
       </b-card>
     </div>
     <custom-spinner v-else/>
@@ -29,13 +36,20 @@
 <script lang="ts">
 import type {Activity} from "timeclicker_server";
 import CustomSpinner from "./CustomSpinner.vue";
-import {BCard, BInputGroup} from "bootstrap-vue";
+import {BCard, BInputGroup, BButtonGroup, BButton} from "bootstrap-vue";
 import axios from "axios";
 import humanizeDuration from "humanize-duration";
+import EntryEditor from "@/views/EntryEditor.vue";
 
 export default {
   name: "Overview",
-  components: {CustomSpinner, BCard, BInputGroup},
+  components: {EntryEditor, CustomSpinner, BCard, BInputGroup, BButtonGroup, BButton},
+  props: {
+    tasks: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       loaded: false,
@@ -88,6 +102,18 @@ export default {
         console.error(e)
       });
     },
+    deleteActivity(index: number) {
+      axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/"+this.activities[index].id).then(this.loadActivities).catch(err => {
+        this.$bvToast.toast('Aktivität konnte nicht gelöscht werden: ' + err.title, {
+          title: "Fehler",
+          variant: "danger",
+          autoHideDelay: 20000
+        })
+      });
+    },
+    editActivity(index: number) {
+      this.$refs['editor_'+index][0].setVisibility(true)
+    },
   },
   mounted() {
     this.loadActivities();
@@ -101,7 +127,8 @@ export default {
       return humanizeDuration(
           this.activities.reduce((prev: number, curr: Activity) => {
             return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
-          }, 0)
+          }, 0),
+          { language: "de" }
       )
     }
   },

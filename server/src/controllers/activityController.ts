@@ -23,7 +23,7 @@ async function getOrCreateUser(req: express.Request): Promise<User> {
     return user;
 }
 
-export type createActivityParams = Omit<Activity, "id" | "user" | "task"> & { taskId: string }
+export type saveActivityParams = Omit<Activity, "id" | "user" | "task"> & { id?: string, taskId: string }
 
 @Route("activities")
 @Security("educorvi_sso")
@@ -61,9 +61,9 @@ export class ActivityController extends Controller {
 
     @SuccessResponse("201", "Created")
     @Response(400, "Bad Request")
-    @Post("create")
-    public async createActivity(
-        @Body() requestBody: createActivityParams,
+    @Post()
+    public async saveActivity(
+        @Body() requestBody: saveActivityParams,
         @Request() req: express.Request) {
         const user = await getOrCreateUser(req);
         const task = await db.getTask(requestBody.taskId);

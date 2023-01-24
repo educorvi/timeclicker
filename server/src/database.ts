@@ -97,7 +97,7 @@ export default class Database {
         })
     }
 
-    async createActivity(activityData: Omit<Activity, "id">) {
+    async createActivity(activityData: Omit<Activity, "id"> & {id?: string}) {
         let activity = new Activity();
         activity = {
             ...activity,
