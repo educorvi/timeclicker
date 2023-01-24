@@ -31,11 +31,10 @@
   </b-modal>
 </template>
 <script lang="ts" setup>
-import type {Task, Activity} from "timeclicker_server";
 import {BFormInput as BInput, BFormTextarea, BButton} from "bootstrap-vue";
 import {computed, onMounted, ref} from "vue";
 import type {ComputedRef} from "vue";
-import type {saveActivityParams} from "timeclicker_server/src/controllers";
+import type {saveActivityParams, Task, Activity} from "timeclicker_server/src/libindex";
 import axios from "axios";
 
 //Props

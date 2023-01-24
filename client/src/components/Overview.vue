@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {Activity, Task} from "timeclicker_server";
+import type {Activity, Task} from "timeclicker_server/src/libindex";
 import CustomSpinner from "./CustomSpinner.vue";
 import {BCard, BInputGroup, BButtonGroup, BButton} from "bootstrap-vue";
 import axios from "axios";

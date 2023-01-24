@@ -12,7 +12,7 @@
 <script lang="ts" setup>
 import {BButton} from "bootstrap-vue";
 import axios from "axios";
-import type {Task} from "timeclicker_server";
+import type {Task} from "timeclicker_server/src/libindex";
 import Overview from "@/components/Overview.vue";
 import EntryEditor from "@/views/EntryEditor.vue";
 import type {Ref} from "vue";
