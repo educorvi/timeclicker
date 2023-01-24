@@ -37,7 +37,8 @@ export class ActivityController extends Controller {
                 user,
                 from: from ? MoreThanOrEqual(from) : undefined,
                 to: to ? LessThanOrEqual(to) : undefined},
-            relations: {task: true, user: true}
+            relations: {task: true, user: true},
+            order: { from: "ASC"}
         });
     }
 
