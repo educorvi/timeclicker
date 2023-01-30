@@ -41,7 +41,7 @@ import CustomSpinner from "./CustomSpinner.vue";
 import {BCard, BInputGroup, BButtonGroup, BButton} from "bootstrap-vue";
 import axios from "axios";
 import humanizeDuration from "humanize-duration";
-import EntryEditor from "@/views/EntryEditor.vue";
+import EntryEditor from "@/components/EntryEditor.vue";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 
 const props = defineProps<{tasks: Array<Task>}>()
