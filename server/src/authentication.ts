@@ -1,4 +1,4 @@
-import express from "express";
+import type express from "express";
 import Keycloak from "keycloak-backend-ts";
 
 const keycloak = new Keycloak({

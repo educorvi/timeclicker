@@ -1,6 +1,6 @@
 import {Controller} from "@tsoa/runtime";
 import {Response, Route, Security, Request, Get, Query} from "tsoa";
-import express from "express";
+import type express from "express";
 import {UnauthorizedError} from "../authentication";
 import {db} from "../globals";
 import {Any, LessThanOrEqual, MoreThanOrEqual} from "typeorm";
