@@ -5,6 +5,7 @@ import {
 } from "express";
 import { ValidateError } from "tsoa";
 import {UnauthorizedError} from "./authentication";
+import {logger} from "./globals";
 
 export function errorHandler(
     err: unknown,
@@ -27,6 +28,7 @@ export function errorHandler(
     }
 
     if (err instanceof Error) {
+        logger.error(err);
         return res.status(500).json({
             message: "Internal Server Error",
         });

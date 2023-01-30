@@ -37,7 +37,7 @@ export function expressAuthentication(
             if (token.isExpired()) {
                 reject(new UnauthorizedError("Token has expired"));
             }
-            request.rawHeaders.push("token", JSON.stringify(token));
+            request.rawHeaders.push("token", JSON.stringify({...token, isOrga: token.hasRealmRole("orga")}));
             resolve(null);
         } else {
             reject();

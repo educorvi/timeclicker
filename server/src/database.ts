@@ -47,6 +47,10 @@ export default class Database {
         return await this.userRepository.findOneBy({id})
     }
 
+    async getUsers(): Promise<Array<User>> {
+        return await this.userRepository.find();
+    }
+
     async saveUser(user: User) {
         await this.userRepository.save(user);
     }
