@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    env_file:
+      - server/.env
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+  client:
+    image: timeclicker-client:latest
+    build:
+      context: ./
+      dockerfile: client/Dockerfile
+    container_name: timeclicker-client
+    ports:
+      - "3001:80"
+  server:
+    image: timeclicker-server:latest
+    depends_on:
+      - db
+    build:
+      context: ./
+      dockerfile: server/Dockerfile
+    container_name: timeclicker-server
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+    env_file:
+      - server/.env
+    ports:
+      - "3000:3000"

@@ -11,3 +11,4 @@ build
 .tsbuildinfo
 .env
 postgres-data
+docker-compose.env
