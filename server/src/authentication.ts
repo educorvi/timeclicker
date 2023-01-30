@@ -10,13 +10,14 @@ const keycloak = new Keycloak({
 export class UnauthorizedError extends Error {
     public readonly status = 401;
     constructor(message: string) {
-        super("Unauthorized: "+message);
+        super(message);
     }
 }
 
 export function expressAuthentication(
     request: express.Request,
     securityName: string,
+    // @ts-ignore
     scopes?: string[]
 ): Promise<any> {
     return new Promise(async (resolve, reject) => {
@@ -30,16 +31,11 @@ export function expressAuthentication(
             try {
                 token = await keycloak.jwt.verify(authHeader);
             } catch (e){
-                console.error(e);
                 reject(new UnauthorizedError("Token is not valid"));
                 return;
             }
             if (token.isExpired()) {
                 reject(new UnauthorizedError("Token has expired"));
-            }
-            if (scopes?.includes("orga") && !token.hasRealmRole("orga")) {
-                //TODO test
-                reject(new UnauthorizedError("Missing orga Role"));
             }
             request.rawHeaders.push("token", JSON.stringify(token));
             resolve(null);
