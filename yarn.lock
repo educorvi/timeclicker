@@ -468,6 +468,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/file-saver@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@types/file-saver@npm:2.0.5"
+  checksum: a31d6ee2abf99598647139f8f35b37b6e1bacf6c7ddf05c66651b9b0e6e53381aa0e8ed13f37faa6e496e0eb1da87c97e6c70fd589d5b83b0c95c57cb64ce92a
+  languageName: node
+  linkType: hard
+
 "@types/humanize-duration@npm:^3.27.1":
   version: 3.27.1
   resolution: "@types/humanize-duration@npm:3.27.1"
@@ -2252,6 +2259,13 @@ __metadata:
   dependencies:
     flat-cache: ^3.0.4
   checksum: f49701feaa6314c8127c3c2f6173cfefff17612f5ed2daaafc6da13b5c91fd43e3b2a58fd0d63f9f94478a501b167615931e7200e31485e320f74a33885a9c74
+  languageName: node
+  linkType: hard
+
+"file-saver@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "file-saver@npm:2.0.5"
+  checksum: c62d96e5cebc58b4bdf3ae8a60d5cf9607ad82f75f798c33a4ee63435ac2203002584d5256a2a780eda7feb5e19dc3b6351c2212e58b3f529e63d265a7cc79f7
   languageName: node
   linkType: hard
 
@@ -4866,6 +4880,7 @@ __metadata:
   resolution: "timeclicker_client@workspace:client"
   dependencies:
     "@rushstack/eslint-patch": ^1.1.4
+    "@types/file-saver": ^2.0.5
     "@types/humanize-duration": ^3.27.1
     "@types/node": ^18.11.12
     "@vitejs/plugin-vue": ^4.0.0
@@ -4879,6 +4894,7 @@ __metadata:
     bootstrap-vue: ^2.23.1
     eslint: ^8.22.0
     eslint-plugin-vue: ^9.3.0
+    file-saver: ^2.0.5
     humanize-duration: ^3.28.0
     keycloak-js: ^20.0.3
     npm-run-all: ^4.1.5

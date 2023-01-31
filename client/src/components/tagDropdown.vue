@@ -1,13 +1,13 @@
 <template>
   <b-form-group :label="label" label-for="tags-with-dropdown">
-    <b-form-tags id="tags-with-dropdown" v-model="value" no-outer-focus class="mb-2">
-        <ul v-if="value.length > 0" class="list-inline d-inline-block mb-2">
-          <li v-for="tag in value" :key="tag" class="list-inline-item">
+    <b-form-tags id="tags-with-dropdown" no-outer-focus class="mb-2">
+        <ul v-if="tags.length > 0" class="list-inline d-inline-block mb-2">
+          <li v-for="tag in tags" :key="tag.id" class="list-inline-item">
             <b-form-tag
                 @remove="removeTag(tag)"
                 :title="tag.desc"
-                variant="info"
-            >{{ tag.desc }}
+                variant="primary"
+            >
             </b-form-tag>
           </li>
         </ul>
@@ -73,14 +73,14 @@ const props = defineProps<{
 }>()
 
 const search = ref("");
-const value: Ref<Array<TagOption>> = ref([])
+const tags: Ref<TagOption[]> = ref([])
 
 const criteria = computed(() => {
   return search.value.trim().toLowerCase();
 });
 
 const availableOptions = computed(() => {
-  const options = props.options.filter(opt => value.value.indexOf(opt) === -1)
+  const options = props.options.filter(opt => tags.value.indexOf(opt) === -1)
   if (criteria.value) {
     // Show only options that match criteria
     return options.filter(opt => opt.desc.toLowerCase().indexOf(criteria.value) > -1);
@@ -97,18 +97,18 @@ const searchDesc = computed(() => {
 });
 
 function onOptionClick(option: TagOption) {
-  value.value.push(option);
+  tags.value.push(option);
   search.value = ''
 }
 
 function removeTag(option: TagOption) {
-  value.value.splice(value.value.indexOf(option), 1);
+  tags.value.splice(tags.value.indexOf(option), 1);
 }
 
-const emit = defineEmits<{ (e: 'change', newValue: Ref<Array<TagOption>>): void }>()
+const emit = defineEmits<{ (e: 'change', newValue: TagOption[]): void }>()
 
-watch(value, () => {
-  emit("change", value)
+watch(tags, () => {
+  emit("change", tags.value)
 });
 </script>
 
