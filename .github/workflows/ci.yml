@@ -47,3 +47,10 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - run: yarn run release
+      - run: |
+          git config --global user.name 'Bot'
+          git config --global user.email 'info@educorvi.de'
+          git commit -am "chore: version"
+          git checkout develop
+          git rebase main
+          git push
