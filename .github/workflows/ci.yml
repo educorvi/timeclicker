@@ -37,7 +37,7 @@ jobs:
       - run: docker-compose build
 
   release:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.head_ref == 'refs/heads/main'
     needs: docker
     runs-on: ubuntu-latest
     steps:
