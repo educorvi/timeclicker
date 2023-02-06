@@ -36,7 +36,7 @@ jobs:
       - run: cp server/.env.template server/.env
       - run: docker-compose build
 
-  release_server:
+  release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -56,29 +56,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: |
-          git config --global user.name 'Bot'
-          git config --global user.email 'info@educorvi.de'
-          git commit -am "chore: version[skip-ci]"
-          git push
-
-  release_client:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: release_server
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'yarn'
-      - run: yarn install
+      - run: yarn up
       - run: yarn run semantic-release -e semantic-release-monorepo
-        name: Release Server
+        name: Release Client
         working-directory: ./client
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -86,7 +66,36 @@ jobs:
       - run: |
           git config --global user.name 'Bot'
           git config --global user.email 'info@educorvi.de'
-          git commit -am "chore: version[skip-ci]"
-          git checkout develop
-          git rebase main
+          git add -A
+          git diff-index --quiet HEAD || git commit -am "chore: version[skip-ci]"
           git push
+
+#  release_client:
+#    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+#    needs: release_server
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+#      - name: Setup NodeJS
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: 18
+#          cache: 'yarn'
+#      - run: yarn install
+#      - run: yarn run semantic-release -e semantic-release-monorepo
+#        name: Release Client
+#        working-directory: ./client
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#      - run: |
+#          git config --global user.name 'Bot'
+#          git config --global user.email 'info@educorvi.de'
+#          git commit -am "chore: version[skip-ci]"
+#          git pull --rebase
+#          git checkout develop
+#          git rebase main
+#          git push
