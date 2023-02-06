@@ -6,7 +6,7 @@
     "client"
   ],
   "scripts": {
-    "release": "yarn workspaces foreach run semantic-release -e semantic-release-monorepo"
+    "release": "yarn workspaces foreach --verbose run semantic-release -e semantic-release-monorepo"
   },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
