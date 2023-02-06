@@ -27,7 +27,7 @@
 import {BInputGroup, BFormInput, BCard, BTable, BButton} from "bootstrap-vue";
 import {computed, onMounted, ref, watch} from "vue";
 import type {Ref} from "vue";
-import type {Task, User, Activity} from "timeclicker_server";
+import type {Task, User, Activity} from "../../../server/src/libindex";
 import axios from "axios";
 import TagDropdown from "@/components/tagDropdown.vue";
 import type {TagOption} from "@/components/tagDropdown.vue";
