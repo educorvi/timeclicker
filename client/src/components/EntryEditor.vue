@@ -34,7 +34,7 @@
 import {BFormInput as BInput, BFormTextarea, BButton} from "bootstrap-vue";
 import {computed, onMounted, ref} from "vue";
 import type {ComputedRef} from "vue";
-import type {saveActivityParams, Task, Activity} from "timeclicker_server/src/libindex";
+import type {saveActivityParams, Task, Activity} from "../../../server/src/libindex";
 import axios from "axios";
 
 //Props

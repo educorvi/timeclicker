@@ -8,6 +8,11 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/Home.vue')
     },
+    {
+      path: '/orga',
+      name: 'orga',
+      component: () => import('../views/Orga.vue')
+    },
   ]
 })
 

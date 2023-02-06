@@ -26,10 +26,34 @@ jobs:
       - run: yarn workspaces foreach run build
 
   docker:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event.pull_request.base.ref == 'main'
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: echo "do docker!"
+      - run: cp client/.env.template client/.env
+      - run: cp server/.env.template server/.env
+      - run: docker-compose build
+
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+      - run: yarn install --immutable
+      - run: yarn run release
+      - run: |
+          git config --global user.name 'Bot'
+          git config --global user.email 'info@educorvi.de'
+          git commit -am "chore: version"
+          git checkout develop
+          git rebase main
+          git push

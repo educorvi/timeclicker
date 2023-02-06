@@ -1,14 +1,15 @@
 <template>
   <b-navbar id="navbar" variant="light">
-    <b-navbar-brand>
+    <b-navbar-brand to="/">
       <clock-solid style="width: 35px"/> TimeClicker
     </b-navbar-brand>
     <!--      <h6 style="color: black">v{{version}}</h6>-->
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown right v-if="userdata">
+      <b-nav-item-dropdown right v-if="userdata && keycloak">
         <template #button-content>
           <b-avatar :src="'data:image/png;base64, '+profilePicture" size="1.8rem"/> {{ userdata.firstName}} {{userdata.lastName }}
         </template>
+        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/orga">Organisationsoberfläche</b-dropdown-item>
         <b-dropdown-item :href="keycloak?.createLogoutUrl()">Logout</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
