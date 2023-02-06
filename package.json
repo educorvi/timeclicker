@@ -8,8 +8,5 @@
   "scripts": {
     "release": "yarn workspaces foreach --verbose run semantic-release -e semantic-release-monorepo"
   },
-  "packageManager": "yarn@3.3.1",
-  "devDependencies": {
-    "@semantic-release/github": "^8.0.7"
-  }
+  "packageManager": "yarn@3.3.1"
 }
