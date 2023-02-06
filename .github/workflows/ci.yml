@@ -50,6 +50,9 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - run: yarn run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: |
           git config --global user.name 'Bot'
           git config --global user.email 'info@educorvi.de'
