@@ -38,7 +38,6 @@ jobs:
 
   release_server:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -50,6 +49,7 @@ jobs:
         with:
           node-version: 18
           cache: 'yarn'
+      - name: yarn install
       - run: yarn run semantic-release -e semantic-release-monorepo
         name: Release Server
         working-directory: ./server
@@ -76,6 +76,7 @@ jobs:
         with:
           node-version: 18
           cache: 'yarn'
+      - name: yarn install
       - run: yarn run semantic-release -e semantic-release-monorepo
         name: Release Server
         working-directory: ./client
