@@ -64,6 +64,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: yarn up
       - run: |
           git config --global user.name 'Bot'
           git config --global user.email 'info@educorvi.de'
