@@ -51,7 +51,15 @@ jobs:
           node-version: 18
           cache: 'yarn'
       - run: yarn install --immutable
-      - run: yarn run release
+      - run: semantic-release -e semantic-release-monorepo
+        name: Release Server
+        working-directory: ./server
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: semantic-release -e semantic-release-monorepo
+        name: Release Client
+        working-directory: ./client
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
