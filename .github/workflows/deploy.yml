@@ -1,0 +1,33 @@
+name: Deploy to Server
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  deploy:
+    name: Deploy
+    environment: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd $FOLDER
+            git pull
+            git checkout ${GITHUB_SHA}
+            docker compose --env-file server/.env build
+      - name: Restart
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd $FOLDER
+            docker compose down
+            docker compose --env-file server/.env up
