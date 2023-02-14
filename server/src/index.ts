@@ -58,12 +58,17 @@ async function synchronizeTasks() {
 }
 
 async function start() {
-    await db.init();
-    logger.info("Connected to database")
+    try {
+        await db.init();
+        logger.info("Connected to database");
+    } catch (e) {
+        logger.fatal("Could not connect to database: ", e);
+        process.exit(-1);
+    }
     await synchronizeTasks();
     setInterval(synchronizeTasks, 1000*60*60)
     app.listen(port, () =>
-        console.log(`Example app listening at http://localhost:${port}`)
+        console.log(`App listening at http://localhost:${port}`)
     );
 }
 
