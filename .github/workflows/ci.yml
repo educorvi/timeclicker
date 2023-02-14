@@ -64,15 +64,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: yarn up
-      - name: Commit and rebase
+      - name: Git Settings
         run: |
           git config --global user.name 'Bot'
           git config --global user.email 'info@educorvi.de'
+      - name: Commit
+        run: |
           git add -A
           git diff-index --quiet main || git commit -am "chore: version[skip-ci]"
+      - name: Push
+        run: |
           git pull -r
           git push
-          git checkout develop --reapply-cherry-picks
+      - name: Rebase develop
+        run: |
+          git checkout develop
           git rebase main
           git push
   deploy:
