@@ -73,3 +73,8 @@ jobs:
           git checkout develop
           git rebase main
           git push
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [release]
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
