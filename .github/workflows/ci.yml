@@ -74,12 +74,12 @@ jobs:
           git diff-index --quiet main || git commit -am "chore: version[skip-ci]"
       - name: Push
         run: |
-          git pull -r
           git push
       - name: Rebase develop
         run: |
           git checkout develop
           git rebase main
+          git pull -r
           git push
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
