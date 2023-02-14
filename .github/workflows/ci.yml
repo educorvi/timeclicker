@@ -72,7 +72,7 @@ jobs:
           git diff-index --quiet main || git commit -am "chore: version[skip-ci]"
           git pull -r
           git push
-          git checkout develop
+          git checkout develop --reapply-cherry-picks
           git rebase main
           git push
   deploy:
