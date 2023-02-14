@@ -1789,6 +1789,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bootswatch@npm:^4.6.2":
+  version: 4.6.2
+  resolution: "bootswatch@npm:4.6.2"
+  checksum: 0f1ffcae7786ea2828be9ae974a5bc415b938ec0f7f238f6d13514b0ff23d04579fb9af864585a3e04f6fdfe1b5e9fdcd02908c66c13187b004ef9b2fcdd461c
+  languageName: node
+  linkType: hard
+
 "bottleneck@npm:^2.18.1":
   version: 2.19.5
   resolution: "bottleneck@npm:2.19.5"
@@ -7695,6 +7702,7 @@ __metadata:
     axios: ^1.2.2
     bootstrap: ^4.6.2
     bootstrap-vue: ^2.23.1
+    bootswatch: ^4.6.2
     eslint: ^8.22.0
     eslint-plugin-vue: ^9.3.0
     file-saver: ^2.0.5
