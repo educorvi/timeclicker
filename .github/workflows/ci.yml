@@ -26,7 +26,7 @@ jobs:
       - run: yarn workspaces foreach run build
 
   docker:
-    if: github.event.pull_request.base.ref == 'main'
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -65,9 +65,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: yarn up
-      - run: |
+      - name: Commit and rebase
+        run: |
           git config --global user.name 'Bot'
           git config --global user.email 'info@educorvi.de'
+          git checkout main
           git add -A
           git diff-index --quiet HEAD || git commit -am "chore: version[skip-ci]"
           git checkout develop
@@ -75,6 +77,6 @@ jobs:
           git push
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [release]
+    needs: [release, docker]
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
