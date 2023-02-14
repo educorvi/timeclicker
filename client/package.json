@@ -20,6 +20,7 @@
     "humanize-duration": "^3.28.0",
     "keycloak-js": "^20.0.3",
     "pinia": "^2.0.28",
+    "showdown": "^2.1.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
@@ -30,6 +31,7 @@
     "@types/file-saver": "^2.0.5",
     "@types/humanize-duration": "^3.27.1",
     "@types/node": "^18.11.12",
+    "@types/showdown": "^2.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.45",
     "@vue/eslint-config-prettier": "^7.0.0",
