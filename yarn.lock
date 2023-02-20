@@ -1783,7 +1783,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.2.1, axios@npm:^1.2.2":
+"axios@npm:^1.2.2, axios@npm:^1.3.3":
   version: 1.3.3
   resolution: "axios@npm:1.3.3"
   dependencies:
@@ -3362,6 +3362,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express-rate-limit@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "express-rate-limit@npm:6.7.0"
+  peerDependencies:
+    express: ^4 || ^5
+  checksum: 7bd3f298b202cdb11c3d7c2dcff9be12c6885be5e64fb112f6c79103ba93a8e5d899ce15a5a3ce48f82190ab3515bed403e067dc3e42fc2832558cbe2620f955
+  languageName: node
+  linkType: hard
+
 "express@npm:^4.18.2":
   version: 4.18.2
   resolution: "express@npm:4.18.2"
@@ -4869,21 +4878,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jwt-decode@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "jwt-decode@npm:3.1.2"
-  checksum: 20a4b072d44ce3479f42d0d2c8d3dabeb353081ba4982e40b83a779f2459a70be26441be6c160bfc8c3c6eadf9f6380a036fbb06ac5406b5674e35d8c4205eeb
-  languageName: node
-  linkType: hard
-
-"keycloak-backend-ts@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "keycloak-backend-ts@npm:4.0.0"
+"keycloak-backend@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "keycloak-backend@npm:4.0.1"
   dependencies:
-    axios: ^1.2.1
+    axios: ^1.3.3
     jsonwebtoken: ^9.0.0
-    jwt-decode: ^3.1.2
-  checksum: 8d3b95cc419948f244371cbc35b2771b175119c03726005daf84c2ddcb099989539b609ce22549faee20eaf775d4a478d4816f547b5ec7d2d0b5be3064608168
+  checksum: 8d4a891442802bebd30865fb150ab7ba9bff26faa4a732cbe87cb08915cabf928305079233b84180504ee063c6394f2e80ddbf67300ad134ad5896790e2a7bf1
   languageName: node
   linkType: hard
 
@@ -8219,7 +8220,8 @@ __metadata:
     axios: ^1.2.2
     cors: ^2.8.5
     express: ^4.18.2
-    keycloak-backend-ts: ^4.0.0
+    express-rate-limit: ^6.7.0
+    keycloak-backend: ^4.0.1
     nodemon: ^2.0.20
     pg: ^8.8.0
     reflect-metadata: ^0.1.13

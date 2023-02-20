@@ -1,8 +1,7 @@
-import * as process from "process";
-
 require('dotenv').config();
+import * as process from "process";
+import rateLimit from 'express-rate-limit'
 import express, {json, urlencoded, static as staticContent} from "express";
-
 import axios from "axios";
 import {db, logger} from "./globals";
 import {RegisterRoutes} from "../build/routes";
@@ -17,6 +16,15 @@ const vuePath = path.join(projectRoot, "client/dist");
 
 const app = express();
 
+// @ts-ignore
+const rateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000, // Limit each IP to 1000 requests per `window`
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+app.use(rateLimiter);
 
 app.use(cors());
 app.use(
