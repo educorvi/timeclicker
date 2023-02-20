@@ -1,7 +1,7 @@
 import * as process from "process";
 
 require('dotenv').config();
-import express, {json, urlencoded} from "express";
+import express, {json, urlencoded, static as staticContent} from "express";
 
 import axios from "axios";
 import {db, logger} from "./globals";
@@ -10,6 +10,8 @@ import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "../build/swagger.json"
 import cors from "cors"
 import {errorHandler} from "./errorHandler";
+
+const vuePath = __dirname + '/../../client/dist';
 
 const app = express();
 
@@ -23,9 +25,15 @@ app.use(
 app.use(json());
 RegisterRoutes(app);
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use(staticContent(vuePath))
 
 app.use(errorHandler);
+
+app.get('/', (_req, res) => {
+    res.sendFile(vuePath + '/index.html', e => console.error(e));
+});
 
 const port = process.env.PORT || 3000;
 
