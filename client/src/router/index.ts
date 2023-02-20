@@ -13,6 +13,11 @@ const router = createRouter({
       name: 'orga',
       component: () => import('../views/Orga.vue')
     },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/About.vue')
+    },
   ]
 })
 

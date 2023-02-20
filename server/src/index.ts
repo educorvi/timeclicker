@@ -1,8 +1,7 @@
-import * as process from "process";
-
 require('dotenv').config();
-import express, {json, urlencoded} from "express";
-
+import * as process from "process";
+import rateLimit from 'express-rate-limit'
+import express, {json, urlencoded, static as staticContent} from "express";
 import axios from "axios";
 import {db, logger} from "./globals";
 import {RegisterRoutes} from "../build/routes";
@@ -10,9 +9,22 @@ import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "../build/swagger.json"
 import cors from "cors"
 import {errorHandler} from "./errorHandler";
+import path from "path";
+
+const projectRoot = path.resolve(__dirname).split('server').slice(0, -1).join("server");
+const vuePath = path.join(projectRoot, "client/dist");
 
 const app = express();
 
+// @ts-ignore
+const rateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000, // Limit each IP to 1000 requests per `window`
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+app.use(rateLimiter);
 
 app.use(cors());
 app.use(
@@ -23,9 +35,15 @@ app.use(
 app.use(json());
 RegisterRoutes(app);
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use(staticContent(vuePath))
 
 app.use(errorHandler);
+
+app.get('/', (_req, res) => {
+    res.sendFile(path.join(vuePath, 'index.html'), e => console.error(e));
+});
 
 const port = process.env.PORT || 3000;
 
@@ -66,7 +84,7 @@ async function start() {
         process.exit(-1);
     }
     await synchronizeTasks();
-    setInterval(synchronizeTasks, 1000*60*60)
+    setInterval(synchronizeTasks, 1000 * 60 * 60)
     app.listen(port, () =>
         console.log(`App listening at http://localhost:${port}`)
     );

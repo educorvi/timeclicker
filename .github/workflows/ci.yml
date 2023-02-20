@@ -57,6 +57,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: yarn up
+      - name: Generate license file for client
+        run: yarn run licenses
+        working-directory: ./client
       - run: yarn run semantic-release -e semantic-release-monorepo
         name: Release Client
         working-directory: ./client

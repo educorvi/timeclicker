@@ -10,7 +10,8 @@
           <b-avatar :src="'data:image/png;base64, '+profilePicture" size="1.8rem"/> {{ userdata.firstName}} {{userdata.lastName }}
         </template>
         <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/orga">Organisationsoberfläche</b-dropdown-item>
-        <b-dropdown-item :href="keycloak?.createLogoutUrl()">Logout</b-dropdown-item>
+        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/about">Über</b-dropdown-item>
+        <b-dropdown-item :href="keycloak?.createLogoutUrl()">Abmelden</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
   </b-navbar>

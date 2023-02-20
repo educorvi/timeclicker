@@ -12,3 +12,4 @@ build
 .env
 postgres-data
 docker-compose.env
+package-lock.json

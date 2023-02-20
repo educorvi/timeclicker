@@ -18,10 +18,12 @@
           "email": "email scope"
         }
       }
-    }
+    },
+    "basePath": "/api"
   },
   "routes": {
     "routesDir": "build",
-    "authenticationModule": "./src/authentication.ts"
+    "authenticationModule": "./src/authentication.ts",
+    "basePath": "/api"
   }
 }
