@@ -1,5 +1,5 @@
 <template>
-  <b-modal v-model="visibility" title="Neuer Eintrag" centered size="xl" scrollable
+  <b-modal v-model="visibility" title="Eintrag bearbeiten" centered size="xl" scrollable
            @hidden="onClose" hide-footer no-close-on-backdrop>
     <b-form @submit="onSubmit">
       <label for="project-select">Projekt:</label>
@@ -59,14 +59,23 @@ const emit = defineEmits<{
   (e: 'on-submit'): void
 }>()
 
+function getTimeString(date: Date) {
+  return String(date.getHours()).padStart(2,"0") + ":" + String(date.getMinutes()).padStart(2,"0");
+}
+
 function initializeData() {
+
+
   let from = "", to = "", date = "";
   if (props.initialData?.from) {
-    from = props.initialData.from.getHours() + ":" + props.initialData.from.getMinutes();
+    from = getTimeString(props.initialData.from)
     date = props.initialData.from.toISOString().split("T")[0]
   }
   if (props.initialData?.to) {
-    to = props.initialData.to.getHours() + ":" + props.initialData.to.getMinutes();
+    to = getTimeString(props.initialData.to)
+    if (!date) {
+      date = props.initialData.to.toISOString().split("T")[0]
+    }
   }
   newData.value.task = props.initialData?.task.id || null;
   newData.value.date = date;
@@ -74,6 +83,7 @@ function initializeData() {
   newData.value.to = to;
   newData.value.note = props.initialData?.note || "";
   newData.value.private_note = props.initialData?.private_note || "";
+  console.log(newData);
 }
 
 const visibility = ref(false)

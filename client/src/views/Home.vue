@@ -8,7 +8,7 @@
     </div>
   </overview>
 
-  <entry-editor ref="entryModal" :done="refresh" :tasks="tasks"/>
+  <entry-editor ref="entryModal" @on-submit="refresh" :tasks="tasks"/>
 </template>
 
 <script lang="ts" setup>
@@ -37,6 +37,7 @@ function showModal() {
 }
 
 function refresh() {
+  console.log(!!overview.value)
   overview.value?.loadActivities();
 }
 </script>
