@@ -10,8 +10,10 @@ import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "../build/swagger.json"
 import cors from "cors"
 import {errorHandler} from "./errorHandler";
+import path from "path";
 
-const vuePath = __dirname + '/../../client/dist';
+const projectRoot = path.resolve(__dirname).split('server').slice(0, -1).join("server");
+const vuePath = path.join(projectRoot, "client/dist");
 
 const app = express();
 
@@ -32,7 +34,7 @@ app.use(staticContent(vuePath))
 app.use(errorHandler);
 
 app.get('/', (_req, res) => {
-    res.sendFile(vuePath + '/index.html', e => console.error(e));
+    res.sendFile(path.join(vuePath, 'index.html'), e => console.error(e));
 });
 
 const port = process.env.PORT || 3000;
@@ -74,7 +76,7 @@ async function start() {
         process.exit(-1);
     }
     await synchronizeTasks();
-    setInterval(synchronizeTasks, 1000*60*60)
+    setInterval(synchronizeTasks, 1000 * 60 * 60)
     app.listen(port, () =>
         console.log(`App listening at http://localhost:${port}`)
     );
