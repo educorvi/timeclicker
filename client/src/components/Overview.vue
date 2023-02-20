@@ -20,16 +20,22 @@
       <b-card v-for="(activity) in activities" ref="cards" :key="activity.id" class="mb-2">
         <h5 class="mb-0">{{ activity.from?.toLocaleDateString("de") }}</h5>
         <p class="mb-2">{{
-            (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {language: "de", units: ["h", "m"]}) : "-"
+            (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
+              language: "de",
+              units: ["h", "m"]
+            }) : "-"
           }}</p>
         <p class="mb-0 text-muted">{{ activity.task.title }}</p>
         <b-button-group class="mt-2 w-100">
           <b-button variant="outline-primary" @click="editActivity(activity)">Bearbeiten</b-button>
-          <b-button variant="outline-danger" @click="deleteActivity(activity)">Löschen</b-button>
+          <b-button variant="outline-danger" @click="askToDeleteActivity(activity)">Löschen</b-button>
         </b-button-group>
       </b-card>
       <entry-editor v-if="editableActivity" ref="acEditor" :tasks="tasks" :id="editableActivity.id"
-                     :initial-data="editableActivity" @on-submit="onEditorSubmit" @on-close="onEditorClose"/>
+                    :initial-data="editableActivity" @on-submit="onEditorSubmit" @on-close="onEditorClose"/>
+      <b-modal @ok="deleteActivity" ref="deleteModal" title="Eintrag löschen" ok-title="Löschen" ok-variant="danger" cancel-title="Abbrechen"
+               centered>Soll der Eintrag wirklich gelöscht werden?
+      </b-modal>
     </div>
     <custom-spinner v-else/>
   </div>
@@ -38,16 +44,17 @@
 <script lang="ts" setup>
 import type {Activity, Task} from "timeclicker_server/src/libindex";
 import CustomSpinner from "./CustomSpinner.vue";
-import {BCard, BInputGroup, BButtonGroup, BButton} from "bootstrap-vue";
+import {BCard, BInputGroup, BButtonGroup, BButton, BModal} from "bootstrap-vue";
 import axios from "axios";
 import humanizeDuration from "humanize-duration";
 import EntryEditor from "@/components/EntryEditor.vue";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 
-const props = defineProps<{tasks: Array<Task>}>()
+const props = defineProps<{ tasks: Array<Task> }>()
 
 const editableActivity = ref<Activity | null>(null)
-const acEditor = ref<InstanceType<typeof EntryEditor>|null>(null);
+const acEditor = ref<InstanceType<typeof EntryEditor> | null>(null);
+const deleteModal = ref<InstanceType<typeof BModal> | null>(null);
 
 const loaded = ref(false);
 const activities = ref<Array<Activity>>([]);
@@ -79,7 +86,7 @@ const hours = computed(() => {
       activities.value.reduce((prev: number, curr: Activity) => {
         return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
       }, 0),
-      { language: "de" , units: ["h", "m"]}
+      {language: "de", units: ["h", "m"]}
   )
 });
 
@@ -104,8 +111,15 @@ function loadActivities() {
   });
 }
 
-function deleteActivity(activity: Activity) {
-  axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/"+activity.id).then(loadActivities)
+function askToDeleteActivity(activity: Activity) {
+  editableActivity.value = activity;
+  deleteModal.value?.show();
+}
+
+function deleteActivity() {
+  if (editableActivity.value) {
+    axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/"+editableActivity.value.id).then(loadActivities)
+  }
 }
 
 async function editActivity(activity: Activity) {
