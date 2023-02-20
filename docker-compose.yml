@@ -27,4 +27,4 @@ services:
       - server/.env
       - client/.env
     ports:
-      - "3003:3000"
+      - "3000:3000"
