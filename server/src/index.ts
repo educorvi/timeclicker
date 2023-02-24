@@ -41,7 +41,7 @@ app.use(staticContent(vuePath))
 
 app.use(errorHandler);
 
-app.get('/', (_req, res) => {
+app.get('*', (_req, res) => {
     res.sendFile(path.join(vuePath, 'index.html'), e => console.error(e));
 });
 
