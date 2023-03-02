@@ -9,7 +9,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "licenses": "license-report --only=prod > public/licenses.json && license-downloader --source ./public/licenses.json --licDir public/license-files --download"
+    "licenses": "license-report --only=prod > public/licenses.json && license-downloader --source ./public/licenses.json --licDir public/license-files --download",
+    "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
   },
   "dependencies": {
     "@vue/compat": "^3.2.45",

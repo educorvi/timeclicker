@@ -7,6 +7,7 @@
 !.yarn/versions
 node_modules
 dist
+dev-dist
 build
 .tsbuildinfo
 .env

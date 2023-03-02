@@ -6,6 +6,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/.yarn" />
+      <excludeFolder url="file://$MODULE_DIR$/client/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/client/dev-dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
