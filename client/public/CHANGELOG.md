@@ -1,3 +1,17 @@
+# [timeclicker_client-v1.4.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.3.0...timeclicker_client-v1.4.0) (2023-03-02)
+
+
+### Bug Fixes
+
+* about page design ([f1b5866](https://github.com/educorvi/timeclicker/commit/f1b586660e2a34ec8767ba16f3f5432d19b6138d))
+* some smaller design improvements ([d5a6347](https://github.com/educorvi/timeclicker/commit/d5a6347588502d1b93415d886f0e9d77c74d2bd5))
+* validate times in entry editor ([13367ad](https://github.com/educorvi/timeclicker/commit/13367ade7b78e555401cf18188019d3a0494f38d)), closes [#8](https://github.com/educorvi/timeclicker/issues/8)
+
+
+### Features
+
+* make timeclicker a pwa ([8251eab](https://github.com/educorvi/timeclicker/commit/8251eab3b785762a267ad96c9a3d901fe9cc9371)), closes [#3](https://github.com/educorvi/timeclicker/issues/3)
+
 # [timeclicker_client-v1.3.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.2.0...timeclicker_client-v1.3.0) (2023-02-20)
 
 
