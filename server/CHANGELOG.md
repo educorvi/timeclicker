@@ -1,3 +1,10 @@
+# [timeclicker_server-v1.4.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.3.0...timeclicker_server-v1.4.0) (2023-03-02)
+
+
+### Features
+
+* enable compression for static files ([40afe25](https://github.com/educorvi/timeclicker/commit/40afe25ac4995f1f6851622dde8820cfe708fc30))
+
 # [timeclicker_server-v1.3.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.2.0...timeclicker_server-v1.3.0) (2023-03-02)
 
 

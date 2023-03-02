@@ -10422,9 +10422,9 @@ __metadata:
   linkType: hard
 
 "tslog@npm:^4.7.1":
-  version: 4.7.5
-  resolution: "tslog@npm:4.7.5"
-  checksum: ed514850adbcd912c43cf10d72ef7c4ca003f9218e835a39903ae331f02eae7f0b38061121400ceee8fdecdb8d829e10b0cf9508c78069fe6969d093c541b0f4
+  version: 4.8.1
+  resolution: "tslog@npm:4.8.1"
+  checksum: 66e6937d47a03b56e0a2d03afb88f3316a1603b66ed03dc25fb7d61ff93c348a125da9212e18e7a40ab0fab88b2d1fa9f99f43b0ce1607cd9ffad8527139dffe
   languageName: node
   linkType: hard
 

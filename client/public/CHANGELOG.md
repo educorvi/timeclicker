@@ -1,3 +1,17 @@
+# [timeclicker_client-v1.5.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.4.1...timeclicker_client-v1.5.0) (2023-03-02)
+
+
+### Bug Fixes
+
+* add background color to manifest ([ec7f82a](https://github.com/educorvi/timeclicker/commit/ec7f82a1914cc5a6e52068412df70545084865f7))
+* don't use webfonts ([9f13923](https://github.com/educorvi/timeclicker/commit/9f13923c6f09b652b13af6da1e6c96af4485b2d1))
+* educorvi logo in about page ([523ec35](https://github.com/educorvi/timeclicker/commit/523ec351f1b238572b3615708a1c791b06ad251b))
+
+
+### Features
+
+* error alerts ([3ca773b](https://github.com/educorvi/timeclicker/commit/3ca773b167605a66e7a9ea243342b52bd74e095f))
+
 # [timeclicker_client-v1.4.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.4.0...timeclicker_client-v1.4.1) (2023-03-02)
 
 
