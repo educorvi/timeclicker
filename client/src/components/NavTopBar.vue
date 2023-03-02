@@ -1,7 +1,7 @@
 <template>
-  <b-navbar id="navbar" variant="light">
+  <b-navbar id="navbar" variant="primary" class="navbar-dark">
     <b-navbar-brand to="/">
-      <clock-solid style="width: 35px"/> TimeClicker
+        <clock-solid style="width: 35px;" /> TimeClicker
     </b-navbar-brand>
     <!--      <h6 style="color: black">v{{version}}</h6>-->
     <b-navbar-nav class="ml-auto">
