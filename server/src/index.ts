@@ -10,6 +10,7 @@ import swaggerDocument from "../build/swagger.json"
 import cors from "cors"
 import {errorHandler} from "./errorHandler";
 import path from "path";
+import compression from "compression"
 
 const projectRoot = path.resolve(__dirname).split('server').slice(0, -1).join("server");
 const vuePath = path.join(projectRoot, "client/dist");
@@ -25,7 +26,7 @@ const rateLimiter = rateLimit({
 })
 
 app.use(rateLimiter);
-
+app.use(compression());
 app.use(cors());
 app.use(
     urlencoded({
