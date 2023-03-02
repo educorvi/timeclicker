@@ -19,18 +19,24 @@ import Overview from "@/components/Overview.vue";
 import EntryEditor from "@/components/EntryEditor.vue";
 import type {Ref} from "vue";
 import {onMounted, ref} from "vue";
+import {UiError, useErrorStore} from "@/stores/error";
+
+const errorStore = useErrorStore();
 
 const tasks: Ref<Array<Task>> = ref([]);
 
 onMounted(() => {
   axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
     tasks.value = <Array<Task>>res.data;
+  }).catch(error => {
+    tasks.value = [];
+    errorStore.setError(new UiError("Tasks konnten nicht geladen werden!", error));
   })
 });
 
 
-const entryModal = ref<InstanceType<typeof EntryEditor>|null>(null);
-const overview = ref<InstanceType<typeof Overview>|null>(null);
+const entryModal = ref<InstanceType<typeof EntryEditor> | null>(null);
+const overview = ref<InstanceType<typeof Overview> | null>(null);
 
 function showModal() {
   entryModal.value?.setVisibility(true)

@@ -1,11 +1,12 @@
 <template>
-  <div class="w-100 text-center">
+  <div class="w-100 align-items-center d-flex flex-column">
     <h1>TimeClicker v{{ version }}</h1>
-    <p>Entwickelt von Educorvi</p>
+    <p>Entwickelt von </p>
+    <div id="logo" class="rounded"><img alt="educorvi logo" src="@/assets/educorvi_logo.png"/></div>
   </div>
   <hr>
   <b-button-group class="w-100">
-      <b-button variant="outline-light" v-b-modal.changelog-modal>Changelog</b-button>
+    <b-button variant="outline-light" v-b-modal.changelog-modal>Changelog</b-button>
     <b-button variant="outline-light" v-b-modal.license-modal>Bibliotheken</b-button>
   </b-button-group>
   <b-modal id="changelog-modal" title="Changelog" size="xl" centered hide-footer scrollable>
@@ -14,12 +15,13 @@
     <custom-spinner v-else/>
   </b-modal>
   <b-modal id="license-modal" title="Verwendete Bibliotheken" size="xl" centered hide-footer scrollable>
-    <b-card class="mb-4" v-for="license of licenses" :header="`${license.name}@${license.installedVersion} by ${license.author}`">
-      <b>Source Code:</b> {{license.link}}
+    <b-card class="mb-4" v-for="license of licenses"
+            :header="`${license.name}@${license.installedVersion} by ${license.author}`">
+      <b>Source Code:</b> {{ license.link }}
       <hr>
       <div v-if="licenseTexts.get(license.name)">
         <b>License text:</b><br>
-        {{licenseTexts.get(license.name)}}
+        {{ licenseTexts.get(license.name) }}
       </div>
       <custom-spinner v-else/>
     </b-card>
@@ -66,6 +68,11 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-
+<style lang="scss">
+#logo {
+  max-width: 90%;
+  background-color: white;
+  width: min-content;
+  padding: 10px;
+}
 </style>

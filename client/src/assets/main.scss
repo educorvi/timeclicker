@@ -1,0 +1,23 @@
+$web-font-path: false;
+
+h1 {
+  font-size: 1.75em;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+@import "bootswatch/dist/darkly/_variables.scss";
+@import "bootstrap/scss/bootstrap.scss";
+@import "bootstrap-vue/src/index.scss";
+@import "bootswatch/dist/darkly/_bootswatch.scss";

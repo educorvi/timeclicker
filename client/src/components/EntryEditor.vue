@@ -38,6 +38,9 @@ import {computed, onMounted, ref} from "vue";
 import type {ComputedRef} from "vue";
 import type {saveActivityParams, Task, Activity} from "../../../server/src/libindex";
 import axios from "axios";
+import {UiError, useErrorStore} from "@/stores/error";
+
+const errorStore = useErrorStore();
 
 //Props
 const props = defineProps<{
@@ -128,14 +131,8 @@ function onSubmit(event: Event) {
   axios.post(import.meta.env.VITE_API_ENDPOINT + "activities", {id: props.id, ...submitData}).then(() => {
     visibility.value = false
     emit("on-submit");
-  })
-  //     .catch(err => {
-  //   this.$bvToast.toast('Aktivität konnte nicht gespeichert werden: ' + err.title, {
-  //     title: "Fehler",
-  //     variant: "danger",
-  //     autoHideDelay: 20000
-  //   })
-  // });
+  }).catch(error => {
+    errorStore.setError(new UiError("Speichern fehlgeschlagen!", error));})
 }
 
 function onClose() {

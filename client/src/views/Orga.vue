@@ -34,6 +34,9 @@ import type {TagOption} from "@/components/tagDropdown.vue";
 import CustomSpinner from "@/App.vue";
 import humanizeDuration from "humanize-duration";
 import {saveAs} from "file-saver"
+import {UiError, useErrorStore} from "@/stores/error";
+
+const errorStore = useErrorStore();
 
 const tasks: Ref<Array<Task>> = ref([]);
 const users: Ref<Array<User>> = ref([]);
@@ -53,11 +56,15 @@ const to = ref(lastOfMonth.toISOString().split("T")[0])
 
 onMounted(() => {
   axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
+    console.log(res.status);
     tasks.value = <Array<Task>>res.data;
-  })
+  }).catch(error => {
+    errorStore.setError(new UiError("Tasks konnten nicht geladen werden!", error));})
+
   axios.get(import.meta.env.VITE_API_ENDPOINT + "orga/users").then(res => {
     users.value = <Array<User>>res.data;
-  })
+  }).catch(error => {
+    errorStore.setError(new UiError("Nutzer konnten nicht geladen werden!", error));})
   loadActivities()
 });
 
@@ -88,7 +95,8 @@ function loadActivities() {
         to: new Date(a.to)
       }
     })
-  }).catch(e => console.error(e.message));
+  }).catch(error => {
+    errorStore.setError(new UiError("Aktivitäten konnten nicht geladen werden!", error));})
 }
 
 const hours = computed(() => {

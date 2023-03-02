@@ -4,10 +4,7 @@ import {createPinia} from 'pinia';
 import App from './App.vue';
 import router from './router';
 
-// import 'bootstrap/dist/css/bootstrap.css';
-import 'bootswatch/dist/darkly/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import './assets/main.css';
+import './assets/main.scss';
 
 import {ModalPlugin, FormPlugin, FormInputPlugin, FormSelectPlugin, ToastPlugin} from "bootstrap-vue";
 
