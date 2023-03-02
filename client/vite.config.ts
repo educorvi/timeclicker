@@ -27,6 +27,7 @@ export default defineConfig({
                 short_name: "Clicker",
                 description: "An app to log your hours",
                 theme_color: "#375A7F",
+                background_color: "#222222",
                 icons: [
                     {
                         src: '/icons/android-chrome-192x192.png',
