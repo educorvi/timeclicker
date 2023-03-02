@@ -83,7 +83,6 @@ function initializeData() {
   newData.value.to = to;
   newData.value.note = props.initialData?.note || "";
   newData.value.private_note = props.initialData?.private_note || "";
-  console.log(newData);
 }
 
 const visibility = ref(false)
