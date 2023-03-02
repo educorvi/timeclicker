@@ -1,14 +1,21 @@
 import type express from "express";
 import {Keycloak} from "keycloak-backend";
+import {logger} from "./globals";
+
+if (!process.env.KC_REALM || !process.env.KC_BASE_URL || !process.env.KC_CLIENT) {
+    logger.fatal("Keycloak is not defined in server/.env. See server/.env.template");
+    process.exit(-2);
+}
 
 const keycloak = new Keycloak({
-    "realm": "educorvi",
-    "keycloak_base_url": "https://sso.educorvi.de",
-    "client_id": "timeclicker"
+    "realm": process.env.KC_REALM,
+    "keycloak_base_url": process.env.KC_BASE_URL,
+    "client_id": process.env.KC_CLIENT
 });
 
 export class UnauthorizedError extends Error {
     public readonly status = 401;
+
     constructor(message: string) {
         super(message);
     }
@@ -30,7 +37,7 @@ export function expressAuthentication(
             let token;
             try {
                 token = await keycloak.jwt.verify(authHeader);
-            } catch (e){
+            } catch (e) {
                 reject(new UnauthorizedError("Token is not valid"));
                 return;
             }
