@@ -5,7 +5,7 @@
       <b-alert :key="error" v-for="(error) in errorStore.errors" show variant="danger" class="m-2">
         <div style="display: flex; justify-content: space-between; align-items: center">
           <p class="m-0" style="height: min-content">Fehler: {{ error.message }}</p>
-          <BButton @click="errorStore.removeError(error)" variant="outline-light">
+          <BButton @click="errorStore.removeError(error)" variant="outline-light" style="width: 50px">
             <b-icon-x/>
           </BButton>
         </div>

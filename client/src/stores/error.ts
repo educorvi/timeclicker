@@ -3,11 +3,14 @@ import {defineStore} from "pinia";
 export class UiError {
     readonly message: string
 
-    readonly error?: Error
+    readonly error?: any
 
-    constructor(message: string, error?: Error) {
+    constructor(message: string, error?: any) {
         this.message = message;
         this.error = error;
+        if (error) {
+            console.error(error);
+        }
     }
 
 

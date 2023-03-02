@@ -49,8 +49,11 @@ import axios from "axios";
 import humanizeDuration from "humanize-duration";
 import EntryEditor from "@/components/EntryEditor.vue";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
+import {UiError, useErrorStore} from "@/stores/error";
 
 const props = defineProps<{ tasks: Array<Task> }>()
+
+const errorStore = useErrorStore();
 
 const editableActivity = ref<Activity | null>(null)
 const acEditor = ref<InstanceType<typeof EntryEditor> | null>(null);
@@ -108,6 +111,10 @@ function loadActivities() {
       }
     })
     loaded.value = true;
+  }).catch(error => {
+    activities.value = [];
+    loaded.value = true;
+    errorStore.setError(new UiError("Aktivitäten konnten nicht geladen werden!", error));
   });
 }
 
