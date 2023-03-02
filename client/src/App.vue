@@ -43,7 +43,6 @@ export default {
       onLoad: 'check-sso',
       silentCheckSsoRedirectUri: window.location.origin + '/auth.html'
     }).then(auth => {
-      console.log(auth)
       if (auth) {
         this.setAuthenticated(authState.authenticated);
       } else {

@@ -10,8 +10,10 @@
       <b-input required v-model="newData.date" id="date-select" type="date"></b-input>
       <label for="from-select" class="mt-3">Von:</label>
       <b-input v-model="newData.from" required id="from-select" type="time"></b-input>
+      <b-form-invalid-feedback :state="validTimes">Der Beginn des Eintrags muss vor dem Ende liegen!</b-form-invalid-feedback>
       <label for="to-select" class="mt-3">Bis:</label>
       <b-input v-model="newData.to" required id="to-select" type="time"></b-input>
+      <b-form-invalid-feedback :state="validTimes">Der Beginn des Eintrags muss vor dem Ende liegen!</b-form-invalid-feedback>
       <hr>
       <label
           for="note-input">Notiz{{
@@ -31,7 +33,7 @@
   </b-modal>
 </template>
 <script lang="ts" setup>
-import {BFormInput as BInput, BFormTextarea, BButton} from "bootstrap-vue";
+import {BFormInput as BInput, BFormTextarea, BButton, BFormInvalidFeedback} from "bootstrap-vue";
 import {computed, onMounted, ref} from "vue";
 import type {ComputedRef} from "vue";
 import type {saveActivityParams, Task, Activity} from "../../../server/src/libindex";
@@ -53,6 +55,8 @@ const newData = ref({
   note: "",
   private_note: ""
 })
+
+const validTimes = ref(true);
 
 const emit = defineEmits<{
   (e: 'on-close'): void
@@ -83,7 +87,6 @@ function initializeData() {
   newData.value.to = to;
   newData.value.note = props.initialData?.note || "";
   newData.value.private_note = props.initialData?.private_note || "";
-  console.log(newData);
 }
 
 const visibility = ref(false)
@@ -109,14 +112,12 @@ function onSubmit(event: Event) {
   from.setHours(Number.parseInt(newData.value.from.split(":")[0]), Number.parseInt(newData.value.from.split(":")[1]))
   const to = new Date(newData.value.date);
   to.setHours(Number.parseInt(newData.value.to.split(":")[0]), Number.parseInt(newData.value.to.split(":")[1]))
-  // if (to.getTime() < from.getTime()) {
-  //   this.$bvToast.toast('Die Uhrzeit "Von" muss vor der Uhrzeit "Bis" sein!', {
-  //     title: "Fehler",
-  //     variant: "danger",
-  //     autoHideDelay: 20000
-  //   })
-  //   return;
-  // }
+  if (to.getTime() < from.getTime()) {
+    validTimes.value = false;
+    return;
+  } else {
+    validTimes.value = true;
+  }
   const submitData: saveActivityParams = {
     from: from,
     to: to,

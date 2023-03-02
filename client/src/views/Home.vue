@@ -3,7 +3,7 @@
   <overview ref="overview" :tasks="tasks">
 
     <div style="display: flex; width: 100%; justify-content: center" class="mb-4">
-      <b-button @click="showModal" variant="primary" style="max-width: 400px" class="w-100">Neuer Eintrag
+      <b-button @click="showModal" variant="secondary" style="max-width: 400px" class="w-100">Neuer Eintrag
       </b-button>
     </div>
   </overview>

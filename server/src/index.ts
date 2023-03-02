@@ -41,7 +41,7 @@ app.use(staticContent(vuePath))
 
 app.use(errorHandler);
 
-app.get('/', (_req, res) => {
+app.get('*', (_req, res) => {
     res.sendFile(path.join(vuePath, 'index.html'), e => console.error(e));
 });
 
@@ -86,7 +86,7 @@ async function start() {
     await synchronizeTasks();
     setInterval(synchronizeTasks, 1000 * 60 * 60)
     app.listen(port, () =>
-        console.log(`App listening at http://localhost:${port}`)
+        logger.info(`App listening at http://localhost:${port}`)
     );
 }
 
