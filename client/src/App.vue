@@ -1,5 +1,17 @@
 <template>
   <NavTopBar/>
+  <div id="alerts">
+    <TransitionGroup name="list" class="alertlist">
+      <b-alert :key="error" v-for="(error) in errorStore.errors" show variant="danger" class="m-2">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <p class="m-0" style="height: min-content">Fehler: {{ error.message }}</p>
+          <BButton @click="errorStore.removeError(error)" variant="outline-light">
+            <b-icon-x/>
+          </BButton>
+        </div>
+      </b-alert>
+    </TransitionGroup>
+  </div>
   <div id="content-container" v-if="kcStore.authenticated === authenticatedState">
     <div id="content">
       <RouterView/>
@@ -19,10 +31,12 @@ import NavTopBar from "@/components/NavTopBar.vue";
 import Keycloak from "keycloak-js";
 import {authState, useKeycloakStore} from "@/stores/keycloak";
 import CustomSpinner from "@/components/CustomSpinner.vue";
-import {BCard, BButton} from "bootstrap-vue";
+import {BCard, BButton, BAlert, BIconX} from "bootstrap-vue";
 import {computed} from "vue";
+import {useErrorStore} from "@/stores/error";
 
 const kcStore = useKeycloakStore();
+const errorStore = useErrorStore();
 
 let keycloak = new Keycloak({
   url: import.meta.env.VITE_KC_URL,
@@ -50,21 +64,30 @@ function login() {
 
 const authenticatedState = computed(() => authState.authenticated);
 const unauthenticatedState = computed(() => authState.unauthenticated);
+
 </script>
 
 <style scoped>
+#alerts {
+  position: absolute;
+  width: 100%;
+
+  z-index: 10000;
+}
+
 #content-container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 #content {
   padding: 10px;
   max-width: 800px;
   width: 100%;
 }
 
-#login{
+#login {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -72,5 +95,29 @@ const unauthenticatedState = computed(() => authState.unauthenticated);
   margin-left: -100px;
   width: 200px;
   height: 200px;
+}
+</style>
+
+<style>
+.alertlist {
+  display: block;
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px) scaleY(0);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
 }
 </style>

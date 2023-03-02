@@ -1,19 +1,33 @@
 import {defineStore} from "pinia";
 
-export const errorState = defineStore('error', {
+export class UiError {
+    readonly message: string
+
+    readonly error?: Error
+
+    constructor(message: string, error?: Error) {
+        this.message = message;
+        this.error = error;
+    }
+
+
+}
+export const useErrorStore = defineStore('error', {
     state: () => {
         return {
-            error: false,
-            message: ""
+            errors: [] as UiError[]
         }
     },
     actions: {
-        setError(message: string) {
-            this.message = message;
-            this.error = true;
+        setError(uiError: UiError) {
+            this.errors.push(uiError);
+
         },
-        removeError() {
-            this.error = true;
+        removeError(e: UiError) {
+            this.errors = this.errors.filter(i => i != e);
         },
+    },
+    getters: {
+        getAllErrors: state => state.errors
     }
 })
