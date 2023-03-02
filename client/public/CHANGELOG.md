@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.4.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.4.0...timeclicker_client-v1.4.1) (2023-03-02)
+
+
+### Bug Fixes
+
+* add background color to manifest ([16ca315](https://github.com/educorvi/timeclicker/commit/16ca3155c6594db8a2da569289446b6ea4c94b04))
+
 # [timeclicker_client-v1.4.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.3.0...timeclicker_client-v1.4.0) (2023-03-02)
 
 
