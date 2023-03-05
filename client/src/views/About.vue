@@ -1,8 +1,8 @@
 <template>
-  <div class="w-100 align-items-center d-flex flex-column">
+  <div class="w-100 align-items-center d-flex flex-column text-center">
     <h1>TimeClicker v{{ version }}</h1>
     <p>Entwickelt von </p>
-    <div id="logo" class="rounded"><img alt="educorvi logo" src="@/assets/educorvi_logo.png"/></div>
+    <div id="logo" class="rounded"><img style="max-width: 100%;" alt="educorvi logo" src="@/assets/educorvi_logo.png"/></div>
   </div>
   <hr>
   <b-button-group class="w-100">
@@ -72,7 +72,7 @@ onMounted(() => {
 #logo {
   max-width: 90%;
   background-color: white;
-  width: min-content;
+  width: fit-content;
   padding: 10px;
 }
 </style>
