@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.5.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.5.0...timeclicker_client-v1.5.1) (2023-03-05)
+
+
+### Bug Fixes
+
+* minor style fixes ([c9235e7](https://github.com/educorvi/timeclicker/commit/c9235e752d23f92c0c4ee02d43a5ed952a31ee0d))
+
 # [timeclicker_client-v1.5.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.4.1...timeclicker_client-v1.5.0) (2023-03-02)
 
 
