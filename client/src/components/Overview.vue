@@ -1,6 +1,6 @@
 <template>
   <div class="text-center" style="width: 100%">
-    <h1 style="display: inline; width: max-content">{{t('overview_for')}}</h1>
+    <h1 style="display: inline; width: max-content">{{ t('overview_for') }}</h1>
     <div class="w-100 d-flex justify-content-center">
       <b-input-group style="max-width: 300px">
         <b-form-select :options="monthOptions"
@@ -9,42 +9,55 @@
       </b-input-group>
     </div>
   </div>
-  <p class="w-100 text-center mt-2">{{t('total')}}: {{ hours }}</p>
+  <p class="w-100 text-center mt-2">{{ t('total') }}: {{ hours }}</p>
 
   <slot/>
-  <div style="width: 100%; display: flex; justify-content: center">
-    <b-card v-if="loaded && activities.length===0" style="width: 25rem; text-align: center; max-width: 100%">
-      {{t('no_entries')}}
-    </b-card>
-    <div v-if="loaded">
-      <b-card v-for="(activity) in activities" ref="cards" :key="activity.id" class="mb-2">
-        <h5 class="mb-0">{{ activity.from ? d(activity.from, 'long') : "" }}</h5>
-        <p class="mb-2">{{
-            (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
-              language: locale,
-              units: ["h", "m"]
-            }) : "-"
-          }}</p>
-        <p class="mb-0 text-muted">{{ activity.task.title }}</p>
-        <b-button-group class="mt-2 w-100">
-          <b-button variant="outline-primary" @click="editActivity(activity)">{{t('edit')}}</b-button>
-          <b-button variant="outline-danger" @click="askToDeleteActivity(activity)">{{t('delete')}}</b-button>
-        </b-button-group>
-      </b-card>
-      <entry-editor v-if="editableActivity" ref="acEditor" :tasks="tasks" :id="editableActivity.id"
-                    :initial-data="editableActivity" @on-submit="onEditorSubmit" @on-close="onEditorClose"/>
-      <b-modal @ok="deleteActivity" ref="deleteModal" :title="t('delete_entry')" :ok-title="t('delete')" ok-variant="danger" :cancel-title="t('cancel')"
-               centered>{{t('delete_prompt')}}
-      </b-modal>
-    </div>
-    <custom-spinner v-else/>
+
+  <div v-if="loaded">
+    <b-container fluid style="padding: 0">
+      <b-row align-v="stretch" id="row">
+        <b-col v-if="loaded && activities.length===0">
+          <b-card class="activity-card text-center">
+            {{ t('no_entries') }}
+          </b-card>
+        </b-col>
+        <b-col v-for="(activity) in activities" :key="activity.id" class="mb-4">
+          <b-card no-body class="activity-card">
+            <b-card-body>
+              <h5 class="mb-0">{{ activity.from ? d(activity.from, 'long') : "" }}</h5>
+              <p class="mb-2">{{
+                  (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
+                    language: locale,
+                    units: ["h", "m"]
+                  }) : "-"
+                }}</p>
+              <p class="mb-0 text-muted">{{ activity.task.title }}</p>
+            </b-card-body>
+            <b-card-footer>
+              <b-button-group class="mt-2 w-100">
+                <b-button variant="outline-primary" @click="editActivity(activity)">{{ t('edit') }}</b-button>
+                <b-button variant="outline-danger" @click="askToDeleteActivity(activity)">{{ t('delete') }}</b-button>
+              </b-button-group>
+            </b-card-footer>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <entry-editor v-if="editableActivity" ref="acEditor" :tasks="tasks" :id="editableActivity.id"
+                  :initial-data="editableActivity" @on-submit="onEditorSubmit" @on-close="onEditorClose"/>
+    <b-modal @ok="deleteActivity" ref="deleteModal" :title="t('delete_entry')" :ok-title="t('delete')"
+             ok-variant="danger" :cancel-title="t('cancel')"
+             centered>{{ t('delete_prompt') }}
+    </b-modal>
   </div>
+  <custom-spinner v-else/>
 </template>
 
 <script lang="ts" setup>
 import type {Activity, Task} from "timeclicker_server/src/libindex";
 import CustomSpinner from "./CustomSpinner.vue";
-import {BCard, BInputGroup, BButtonGroup, BButton, BModal} from "bootstrap-vue";
+import {BCard, BInputGroup, BButtonGroup, BButton, BModal, BRow, BCol, BContainer, BCardBody, BCardFooter} from "bootstrap-vue";
 import axios from "axios";
 import humanizeDuration from "humanize-duration";
 import EntryEditor from "@/components/EntryEditor.vue";
@@ -128,7 +141,7 @@ function askToDeleteActivity(activity: Activity) {
 
 function deleteActivity() {
   if (editableActivity.value) {
-    axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/"+editableActivity.value.id).then(loadActivities)
+    axios.delete(import.meta.env.VITE_API_ENDPOINT + "activities/" + editableActivity.value.id).then(loadActivities)
   }
 }
 
@@ -162,6 +175,27 @@ defineExpose({
 })
 </script>
 
-<style scoped>
+<style>
+.activity-card {
+  width: 23rem;
+  max-width: 100%;
+  height: 100%;
+}
 
+#row {
+  width: 100%;
+  padding-left: -30px;
+  padding-right: -30px;
+  margin: 0;
+}
+
+#row .col {
+  max-width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.activity-card .card-footer {
+  background-color: unset;
+}
 </style>

@@ -86,7 +86,7 @@ const {t} = useI18n();
 
 #content {
   padding: 10px;
-  max-width: 800px;
+  max-width: 1300px;
   width: 100%;
 }
 

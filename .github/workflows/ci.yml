@@ -69,8 +69,8 @@ jobs:
       - run: yarn up
       - name: Git Settings
         run: |
-          git config --global user.name 'Bot'
-          git config --global user.email 'info@educorvi.de'
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
       - name: Commit
         run: |
           git add -A
@@ -78,13 +78,8 @@ jobs:
       - name: Push
         run: |
           git push
-  deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [release, docker]
-    uses: ./.github/workflows/deploy.yml
-    secrets: inherit
   rebase:
-    needs: [release]
+    needs: [ release ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -97,3 +92,8 @@ jobs:
           git checkout develop
           git rebase main
           git push
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [release, docker]
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
