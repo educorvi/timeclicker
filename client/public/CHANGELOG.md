@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.6.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.0...timeclicker_client-v1.6.1) (2023-03-07)
+
+
+### Bug Fixes
+
+* improve desktop ui ([a7b0c06](https://github.com/educorvi/timeclicker/commit/a7b0c067a36b838eb11af724466d4378ea4522ce))
+
 # [timeclicker_client-v1.6.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.5.1...timeclicker_client-v1.6.0) (2023-03-07)
 
 
