@@ -15,11 +15,11 @@
         <b-dropdown size="sm" variant="outline-secondary" block menu-class="w-100">
           <template #button-content>
             <b-icon icon="tag-fill"></b-icon>
-            Filter hinzufügen
+            {{t('add_filter')}}
           </template>
           <b-dropdown-form @submit.stop.prevent="() => {}">
             <b-form-group
-                label="Suchen"
+                :label="t('search')"
                 label-for="tag-search-input"
                 label-cols-md="auto"
                 class="mb-0"
@@ -44,7 +44,7 @@
             {{ option.desc }}
           </b-dropdown-item-button>
           <b-dropdown-text v-if="availableOptions.length === 0">
-            Keine Optionen verfügbar
+            {{t('no_option_fits_this_search')}}
           </b-dropdown-text>
         </b-dropdown>
     </b-form-tags>
@@ -65,8 +65,11 @@ import {
   BDropdownText,
   BDropdownDivider
 } from "bootstrap-vue";
+import {useI18n} from "vue-i18n";
+import type {TagOption} from "@/additionalTypes";
 
-export type TagOption = { desc: string, id: string };
+const {t} = useI18n();
+
 const props = defineProps<{
   options: Array<TagOption>,
   label: string
@@ -91,7 +94,7 @@ const availableOptions = computed(() => {
 
 const searchDesc = computed(() => {
   if (criteria.value && availableOptions.value.length === 0) {
-    return 'Keine Option stimmt mit der Suche überein '
+    return t('no_option_fits_this_search');
   }
   return ''
 });

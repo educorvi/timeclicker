@@ -1,24 +1,25 @@
 <template>
   <div v-if="tasks && users">
-    <b-card id="filterContainer" header="Filter">
-      <b-input-group prepend="Von">
+    <b-card id="filterContainer" :header="t('filter', 2)">
+      <b-input-group :prepend="t('from')">
         <b-form-input v-model="from" class="dateInput" type="date"></b-form-input>
       </b-input-group>
-      <b-input-group prepend="Bis">
+      <b-input-group :prepend="t('to')">
         <b-form-input v-model="to" class="dateInput" type="date"></b-form-input>
       </b-input-group>
       <hr>
-      <tag-dropdown @change="taskFilterChange" label="Aufgaben"
+      <tag-dropdown @change="taskFilterChange" :label="t('task', 2)"
                     :options="tasks.map(u => {return {desc: u.title, id: u.id}})"></tag-dropdown>
       <hr>
       <tag-dropdown @change="userFilterChange" :options="users.map(u => {return {desc: u.name, id: u.id}})"
-                    label="Nutzer"></tag-dropdown>
+                    :label="t('user', 2)"></tag-dropdown>
     </b-card>
 
-    <b-button class="w-100 mt-4 mb-4" variant="primary" @click="downloadJSON">Download</b-button>
+    <b-button class="w-100 mt-4 mb-4" variant="primary" @click="downloadJSON">{{ t('download') }}</b-button>
 
-    <b>Gesamte Zeit: {{hours}}</b>
-    <b-table :tbody-transition-props="{name: 'flip-list'}" striped responsive="sm" :items="tableActivities" :fields="fields" primary-key="id"></b-table>
+    <b>{{ t('total_time') }}: {{ hours }}</b>
+    <b-table :tbody-transition-props="{name: 'flip-list'}" striped responsive="sm" :items="tableActivities"
+             :fields="fields" primary-key="id"></b-table>
   </div>
   <custom-spinner v-else/>
 </template>
@@ -30,11 +31,12 @@ import type {Ref} from "vue";
 import type {Task, User, Activity} from "../../../server/src/libindex";
 import axios from "axios";
 import TagDropdown from "@/components/tagDropdown.vue";
-import type {TagOption} from "@/components/tagDropdown.vue";
 import CustomSpinner from "@/App.vue";
 import humanizeDuration from "humanize-duration";
 import {saveAs} from "file-saver"
 import {UiError, useErrorStore} from "@/stores/error";
+import {useI18n} from "vue-i18n";
+import type {TagOption} from "@/additionalTypes";
 
 const errorStore = useErrorStore();
 
@@ -54,17 +56,20 @@ lastOfMonth.setMonth(lastOfMonth.getMonth() + 1, 0);
 const from = ref(firstOfMonth.toISOString().split("T")[0])
 const to = ref(lastOfMonth.toISOString().split("T")[0])
 
+const {t, locale} = useI18n();
+
 onMounted(() => {
   axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
-    console.log(res.status);
     tasks.value = <Array<Task>>res.data;
   }).catch(error => {
-    errorStore.setError(new UiError("Tasks konnten nicht geladen werden!", error));})
+    errorStore.setError(new UiError(t('errors.tasks_failed'), error));
+  })
 
   axios.get(import.meta.env.VITE_API_ENDPOINT + "orga/users").then(res => {
     users.value = <Array<User>>res.data;
   }).catch(error => {
-    errorStore.setError(new UiError("Nutzer konnten nicht geladen werden!", error));})
+    errorStore.setError(new UiError(t('errors.users_failed'), error));
+  })
   loadActivities()
 });
 
@@ -96,7 +101,8 @@ function loadActivities() {
       }
     })
   }).catch(error => {
-    errorStore.setError(new UiError("Aktivitäten konnten nicht geladen werden!", error));})
+    errorStore.setError(new UiError(t('errors.act_failed'), error));
+  })
 }
 
 const hours = computed(() => {
@@ -104,7 +110,7 @@ const hours = computed(() => {
       activities.value.reduce((prev: number, curr: Activity) => {
         return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
       }, 0),
-      { language: "de" , units: ["h", "m"]}
+      {language: locale.value, units: ["h", "m"]}
   )
 });
 
@@ -113,34 +119,34 @@ const tableActivities = computed(() => activities.value.map(a => {
     ...a,
     to: a.to?.toLocaleString(),
     from: a.from?.toLocaleString(),
-    duration: humanizeDuration((a.to?.getTime() || 0) - (a.from?.getTime() ||0), { language: "de" , units: ["h", "m"]})
+    duration: humanizeDuration((a.to?.getTime() || 0) - (a.from?.getTime() || 0), {language: locale.value, units: ["h", "m"]})
   }
 }));
 
 const fields = ref([
   {
     key: "user.name",
-    label: "Nutzer",
+    label: t('user'),
     sortable: true
   },
   {
     key: "task.title",
-    label: "Aufgabe",
+    label: t('task'),
     sortable: true
   },
   {
     key: "duration",
-    label: "Dauer",
+    label: t('duration'),
     sortable: true
   },
   {
     key: "from",
-    label: "Von",
+    label: t('from'),
     sortable: true
   },
   {
     key: "to",
-    label: "Bis",
+    label: t('to'),
     sortable: true
   }
 ])
@@ -164,6 +170,7 @@ watch(selectedUsers, loadActivities);
 table .flip-list-move {
   transition: transform 1s;
 }
+
 table .flip-list-enter-active,
 table .flip-list-leave-active {
   transition: opacity 0.5s ease;

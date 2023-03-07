@@ -1,34 +1,34 @@
 <template>
-  <b-modal v-model="visibility" title="Eintrag bearbeiten" centered size="xl" scrollable
+  <b-modal v-model="visibility" :title="t('edit_entry')" centered size="xl" scrollable
            @hidden="onClose" hide-footer no-close-on-backdrop>
     <b-form @submit="onSubmit">
-      <label for="project-select">Projekt:</label>
+      <label for="project-select">{{t('task')}}:</label>
       <b-form-select id="project-select" required v-model="newData.task"
                      :options="taskOptions"/>
       <hr>
-      <label for="date-select">Datum:</label>
+      <label for="date-select">{{t('date')}}:</label>
       <b-input required v-model="newData.date" id="date-select" type="date"></b-input>
-      <label for="from-select" class="mt-3">Von:</label>
+      <label for="from-select" class="mt-3">{{t('from')}}:</label>
       <b-input v-model="newData.from" required id="from-select" type="time"></b-input>
-      <b-form-invalid-feedback :state="validTimes">Der Beginn des Eintrags muss vor dem Ende liegen!</b-form-invalid-feedback>
-      <label for="to-select" class="mt-3">Bis:</label>
+      <b-form-invalid-feedback :state="validTimes">{{t('beg_of_entry_bef_end')}}</b-form-invalid-feedback>
+      <label for="to-select" class="mt-3">{{t('to')}}:</label>
       <b-input v-model="newData.to" required id="to-select" type="time"></b-input>
-      <b-form-invalid-feedback :state="validTimes">Der Beginn des Eintrags muss vor dem Ende liegen!</b-form-invalid-feedback>
+      <b-form-invalid-feedback :state="validTimes">{{t('beg_of_entry_bef_end')}}</b-form-invalid-feedback>
       <hr>
       <label
-          for="note-input">Notiz{{
-          (tasks.filter(t => t.id === newData.task)[0] || {note_mandatory: false}).note_mandatory ? " (verpflichtend)" : ""
+          for="note-input">{{t('note')}}{{
+          (tasks.filter(t => t.id === newData.task)[0] || {note_mandatory: false}).note_mandatory ? ` (${t('mandatory').toLowerCase()})` : ""
         }}:</label>
       <b-form-textarea v-model="newData.note"
                        :required="(tasks.filter(t => t.id === newData.task)[0]||{note_mandatory: false}).note_mandatory"
                        id="note-input" rows="3"/>
 
-      <label for="private-note-input" class="mt-3">Private Notiz:</label>
+      <label for="private-note-input" class="mt-3">{{t('private_note')}}:</label>
       <b-form-textarea v-model="newData.private_note" id="private-note-input" rows="3"/>
 
       <hr>
 
-      <b-button type="submit" variant="primary" class="w-100">Speichern</b-button>
+      <b-button type="submit" variant="primary" class="w-100">{{t('save')}}</b-button>
     </b-form>
   </b-modal>
 </template>
@@ -39,6 +39,9 @@ import type {ComputedRef} from "vue";
 import type {saveActivityParams, Task, Activity} from "../../../server/src/libindex";
 import axios from "axios";
 import {UiError, useErrorStore} from "@/stores/error";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 const errorStore = useErrorStore();
 
@@ -98,7 +101,7 @@ const visibility = ref(false)
 //Computed
 const taskOptions: ComputedRef<{ value: string | null, text: string }[]> = computed(() => [{
   value: null as string | null,
-  text: 'Bitte wähle ein Projekt'
+  text: t('please_select_task')
 }].concat(props.tasks.map(t => {
   return {value: t.id, text: t.title}
 })));
@@ -132,7 +135,7 @@ function onSubmit(event: Event) {
     visibility.value = false
     emit("on-submit");
   }).catch(error => {
-    errorStore.setError(new UiError("Speichern fehlgeschlagen!", error));})
+    errorStore.setError(new UiError(t('errors.saving_failed'), error));})
 }
 
 function onClose() {

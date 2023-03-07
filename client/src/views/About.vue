@@ -1,20 +1,20 @@
 <template>
   <div class="w-100 align-items-center d-flex flex-column text-center">
     <h1>TimeClicker v{{ version }}</h1>
-    <p>Entwickelt von </p>
+    <p>{{t('developed_by')}}</p>
     <div id="logo" class="rounded"><img style="max-width: 100%;" alt="educorvi logo" src="@/assets/educorvi_logo.png"/></div>
   </div>
   <hr>
   <b-button-group class="w-100">
     <b-button variant="outline-light" v-b-modal.changelog-modal>Changelog</b-button>
-    <b-button variant="outline-light" v-b-modal.license-modal>Bibliotheken</b-button>
+    <b-button variant="outline-light" v-b-modal.license-modal>{{t('library',2)}}</b-button>
   </b-button-group>
   <b-modal id="changelog-modal" title="Changelog" size="xl" centered hide-footer scrollable>
     <span v-if="changelog.length" v-html="changelog">
     </span>
     <custom-spinner v-else/>
   </b-modal>
-  <b-modal id="license-modal" title="Verwendete Bibliotheken" size="xl" centered hide-footer scrollable>
+  <b-modal id="license-modal" :title="t('libraries_modal_header')" size="xl" centered hide-footer scrollable>
     <b-card class="mb-4" v-for="license of licenses"
             :header="`${license.name}@${license.installedVersion} by ${license.author}`">
       <b>Source Code:</b> {{ license.link }}
@@ -36,6 +36,9 @@ import axios from "axios";
 import {onMounted, ref} from "vue";
 import CustomSpinner from "@/components/CustomSpinner.vue"
 import {Converter} from "showdown"
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 type License = {
   "name": string,
