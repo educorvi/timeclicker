@@ -84,7 +84,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
   rebase:
-    needs: [release],
+    needs: [release]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
