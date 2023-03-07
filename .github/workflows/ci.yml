@@ -78,12 +78,6 @@ jobs:
       - name: Push
         run: |
           git push
-      - name: Rebase develop
-        run: |
-          git checkout develop
-          git rebase main
-          git pull -r
-          git push
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: [release, docker]
