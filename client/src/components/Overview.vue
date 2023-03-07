@@ -22,21 +22,23 @@
           </b-card>
         </b-col>
         <b-col v-for="(activity) in activities" :key="activity.id" class="mb-4">
-          <b-card class="activity-card">
-            <h5 class="mb-0">{{ activity.from ? d(activity.from, 'long') : "" }}</h5>
-            <p class="mb-2">{{
-                (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
-                  language: locale,
-                  units: ["h", "m"]
-                }) : "-"
-              }}</p>
-            <p class="mb-0 text-muted">{{ activity.task.title }}</p>
-            <template #footer>
+          <b-card no-body class="activity-card">
+            <b-card-body>
+              <h5 class="mb-0">{{ activity.from ? d(activity.from, 'long') : "" }}</h5>
+              <p class="mb-2">{{
+                  (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
+                    language: locale,
+                    units: ["h", "m"]
+                  }) : "-"
+                }}</p>
+              <p class="mb-0 text-muted">{{ activity.task.title }}</p>
+            </b-card-body>
+            <b-card-footer>
               <b-button-group class="mt-2 w-100">
                 <b-button variant="outline-primary" @click="editActivity(activity)">{{ t('edit') }}</b-button>
                 <b-button variant="outline-danger" @click="askToDeleteActivity(activity)">{{ t('delete') }}</b-button>
               </b-button-group>
-            </template>
+            </b-card-footer>
           </b-card>
         </b-col>
       </b-row>
@@ -55,7 +57,7 @@
 <script lang="ts" setup>
 import type {Activity, Task} from "timeclicker_server/src/libindex";
 import CustomSpinner from "./CustomSpinner.vue";
-import {BCard, BInputGroup, BButtonGroup, BButton, BModal, BRow, BCol, BContainer} from "bootstrap-vue";
+import {BCard, BInputGroup, BButtonGroup, BButton, BModal, BRow, BCol, BContainer, BCardBody, BCardFooter} from "bootstrap-vue";
 import axios from "axios";
 import humanizeDuration from "humanize-duration";
 import EntryEditor from "@/components/EntryEditor.vue";
