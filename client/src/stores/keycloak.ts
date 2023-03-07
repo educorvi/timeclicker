@@ -32,7 +32,7 @@ export const useKeycloakStore = defineStore('keycloak', {
                 setInterval(() => {
                     keycloak.updateToken(70).then((refreshed) => {
                         if (refreshed) {
-                            console.log('Token refreshed' + refreshed);
+                            console.log('Token refreshed');
                             axios.defaults.headers.common['Authorization'] = `${keycloak.token}`;
                         }
                     }).catch(() => {

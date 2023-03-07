@@ -3,7 +3,8 @@
   <overview ref="overview" :tasks="tasks">
 
     <div style="display: flex; width: 100%; justify-content: center" class="mb-4">
-      <b-button @click="showModal" variant="secondary" style="max-width: 400px" class="w-100">Neuer Eintrag
+      <b-button @click="showModal" variant="secondary" style="max-width: 400px" class="w-100">
+        {{t('new_entry')}}
       </b-button>
     </div>
   </overview>
@@ -20,6 +21,9 @@ import EntryEditor from "@/components/EntryEditor.vue";
 import type {Ref} from "vue";
 import {onMounted, ref} from "vue";
 import {UiError, useErrorStore} from "@/stores/error";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 const errorStore = useErrorStore();
 
@@ -30,7 +34,7 @@ onMounted(() => {
     tasks.value = <Array<Task>>res.data;
   }).catch(error => {
     tasks.value = [];
-    errorStore.setError(new UiError("Tasks konnten nicht geladen werden!", error));
+    errorStore.setError(new UiError(t('errors.tasks_failed'), error));
   })
 });
 
