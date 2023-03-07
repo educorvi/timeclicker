@@ -69,8 +69,8 @@ jobs:
       - run: yarn up
       - name: Git Settings
         run: |
-          git config --global user.name 'Bot'
-          git config --global user.email 'info@educorvi.de'
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
       - name: Commit
         run: |
           git add -A
