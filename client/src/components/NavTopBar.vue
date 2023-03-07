@@ -12,7 +12,8 @@
           {{ userdata.firstName }} {{ userdata.lastName }}
         </template>
         <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/orga">{{ t('orga_ui') }}</b-dropdown-item>
-        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/about">{{t('about')}}</b-dropdown-item>
+        <b-dropdown-item to="/settings">{{t('settings')}}</b-dropdown-item>
+        <b-dropdown-item to="/about">{{t('about')}}</b-dropdown-item>
         <b-dropdown-item :href="keycloak?.createLogoutUrl()">{{t('logout')}}</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>

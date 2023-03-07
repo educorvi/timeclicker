@@ -28,6 +28,7 @@ const de = {
     delete_prompt: "Soll der Eintrag wirklich gelöscht werden?",
     beg_of_entry_bef_end: "Der Beginn des Eintrags muss vor dem Ende liegen!",
     please_select_task: "Bitte wähle eine Aufgabe",
+    reload_to_activate: "Laden Sie die Seite neu, um die Änderungen zu aktivieren",
     orga_ui: "Organisationsoberfläche",
     about: "Über",
 
@@ -51,6 +52,7 @@ const de = {
     private_note: "Private Notiz | Private Notizen",
     activity: "Aktivität | Aktivitäten",
     duration: "Dauer",
+    language: "Sprache | Sprachen",
 
     download: "Herunterladen",
     search: "Suchen",
@@ -58,6 +60,7 @@ const de = {
     delete: "Löschen",
     cancel: "Abbrechen",
     logout: "Abmelden",
+    settings: "Einstellungen",
     save: "Speichern",
 
     mandatory: "Verpflichtend",
@@ -96,6 +99,7 @@ const en = {
     delete_prompt: "Do you really want to delete this entry?",
     beg_of_entry_bef_end: "The beginning of an entry must be before its end!",
     please_select_task: "Please select a task",
+    reload_to_activate: "Reload the page to load the changes",
     orga_ui: "Organization Panel",
     about: "About",
 
@@ -117,6 +121,7 @@ const en = {
     private_note: "Private Note | Private Notes",
     activity: "Activity | Activities",
     duration: "Duration",
+    language: "Language | Languages",
 
     download: "Download",
     search: "Search",
@@ -124,6 +129,7 @@ const en = {
     delete: "Delete",
     cancel: "Cancel",
     logout: "Logout",
+    settings: "Settings",
     save: "Save",
 
     mandatory: "Verpflichtend",
