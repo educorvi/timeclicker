@@ -12,6 +12,18 @@ import messages from "@/i18n/messages";
 
 const app = createApp(App);
 
+let lang = localStorage.getItem("language");
+if (!lang) {
+    const navLang = navigator.language.split("-")[0];
+    if (Object.keys(messages).includes(navLang)) {
+        lang = navLang;
+    } else {
+        console.info(`Language ${navLang} is not supported. Using en instead.`)
+        lang = `en`;
+    }
+    localStorage.setItem("language", lang);
+}
+
 app.use(createPinia());
 app.use(router);
 app.use(ModalPlugin);
@@ -20,9 +32,9 @@ app.use(FormInputPlugin);
 app.use(FormSelectPlugin);
 app.use(ToastPlugin);
 app.use(createI18n({
+    locale: lang,
     legacy: false,
-    locale: 'en',
-    fallbackLocale: 'de',
+    fallbackLocale: 'en',
     messages,
     datetimeFormats: {
         'en': {
