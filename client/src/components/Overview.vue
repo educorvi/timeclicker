@@ -1,6 +1,6 @@
 <template>
   <div class="text-center" style="width: 100%">
-    <h1 style="display: inline; width: max-content">Übersicht für </h1>
+    <h1 style="display: inline; width: max-content">{{t('overview_for')}}</h1>
     <div class="w-100 d-flex justify-content-center">
       <b-input-group style="max-width: 300px">
         <b-form-select :options="monthOptions"
@@ -9,12 +9,12 @@
       </b-input-group>
     </div>
   </div>
-  <p class="w-100 text-center mt-2">Summe: {{ hours }}</p>
+  <p class="w-100 text-center mt-2">{{t('total')}}: {{ hours }}</p>
 
   <slot/>
   <div style="width: 100%; display: flex; justify-content: center">
     <b-card v-if="loaded && activities.length===0" style="width: 25rem; text-align: center; max-width: 100%">
-      Für diesen Monat liegen noch keine Einträge vor
+      {{t('no_entries')}}
     </b-card>
     <div v-if="loaded">
       <b-card v-for="(activity) in activities" ref="cards" :key="activity.id" class="mb-2">
@@ -27,14 +27,14 @@
           }}</p>
         <p class="mb-0 text-muted">{{ activity.task.title }}</p>
         <b-button-group class="mt-2 w-100">
-          <b-button variant="outline-primary" @click="editActivity(activity)">Bearbeiten</b-button>
-          <b-button variant="outline-danger" @click="askToDeleteActivity(activity)">Löschen</b-button>
+          <b-button variant="outline-primary" @click="editActivity(activity)">{{t('edit')}}</b-button>
+          <b-button variant="outline-danger" @click="askToDeleteActivity(activity)">{{t('delete')}}</b-button>
         </b-button-group>
       </b-card>
       <entry-editor v-if="editableActivity" ref="acEditor" :tasks="tasks" :id="editableActivity.id"
                     :initial-data="editableActivity" @on-submit="onEditorSubmit" @on-close="onEditorClose"/>
-      <b-modal @ok="deleteActivity" ref="deleteModal" title="Eintrag löschen" ok-title="Löschen" ok-variant="danger" cancel-title="Abbrechen"
-               centered>Soll der Eintrag wirklich gelöscht werden?
+      <b-modal @ok="deleteActivity" ref="deleteModal" :title="t('delete_entry')" :ok-title="t('delete')" ok-variant="danger" :cancel-title="t('cancel')"
+               centered>{{t('delete_prompt')}}
       </b-modal>
     </div>
     <custom-spinner v-else/>
@@ -50,8 +50,11 @@ import humanizeDuration from "humanize-duration";
 import EntryEditor from "@/components/EntryEditor.vue";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 import {UiError, useErrorStore} from "@/stores/error";
+import {useI18n} from "vue-i18n";
 
 const props = defineProps<{ tasks: Array<Task> }>()
+
+const {t} = useI18n();
 
 const errorStore = useErrorStore();
 
@@ -64,18 +67,18 @@ const activities = ref<Array<Activity>>([]);
 const month = ref((new Date()).getMonth() + 1);
 
 const months = [
-  "Januar",
-  "Februar",
-  "März",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Dezember"
+  t('months[0]'),
+  t('months[1]'),
+  t('months[2]'),
+  t('months[3]'),
+  t('months[4]'),
+  t('months[5]'),
+  t('months[6]'),
+  t('months[7]'),
+  t('months[8]'),
+  t('months[9]'),
+  t('months[10]'),
+  t('months[11]'),
 ]
 const monthOptions = computed(() => months.map((val, index) => {
   return {value: index + 1, text: val}
@@ -114,7 +117,7 @@ function loadActivities() {
   }).catch(error => {
     activities.value = [];
     loaded.value = true;
-    errorStore.setError(new UiError("Aktivitäten konnten nicht geladen werden!", error));
+    errorStore.setError(new UiError(t('errors.act_failed'), error));
   });
 }
 

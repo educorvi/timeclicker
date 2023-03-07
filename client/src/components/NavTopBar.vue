@@ -1,39 +1,39 @@
 <template>
   <b-navbar id="navbar" variant="primary" class="navbar-dark">
     <b-navbar-brand to="/">
-        <clock-solid style="width: 35px;" /> TimeClicker
+      <clock-solid style="width: 35px;"/>
+      TimeClicker
     </b-navbar-brand>
     <!--      <h6 style="color: black">v{{version}}</h6>-->
     <b-navbar-nav class="ml-auto">
       <b-nav-item-dropdown right v-if="userdata && keycloak">
         <template #button-content>
-          <b-avatar :src="'data:image/png;base64, '+profilePicture" size="1.8rem"/> {{ userdata.firstName}} {{userdata.lastName }}
+          <b-avatar :src="'data:image/png;base64, '+profilePicture" size="1.8rem"/>
+          {{ userdata.firstName }} {{ userdata.lastName }}
         </template>
-        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/orga">Organisationsoberfläche</b-dropdown-item>
-        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/about">Über</b-dropdown-item>
-        <b-dropdown-item :href="keycloak?.createLogoutUrl()">Abmelden</b-dropdown-item>
+        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/orga">{{ t('orga_ui') }}</b-dropdown-item>
+        <b-dropdown-item v-if="keycloak.hasRealmRole('orga')" to="/about">{{t('about')}}</b-dropdown-item>
+        <b-dropdown-item :href="keycloak?.createLogoutUrl()">{{t('logout')}}</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
   </b-navbar>
 </template>
 
-<script>
+<script setup>
 import ClockSolid from "@/components/icons/clock-solid.vue";
-import {mapState} from "pinia";
+import {storeToRefs} from "pinia";
 import {useKeycloakStore} from "@/stores/keycloak";
 import {BNavbar, BNavbarBrand, BNavbarNav, BNavItemDropdown, BAvatar, BDropdownItem} from "bootstrap-vue";
+import {computed} from "vue";
+import {useI18n} from "vue-i18n";
 
-export default {
-  name: "NavTopBar",
-  components: {ClockSolid, BNavbar, BNavbarBrand, BNavbarNav, BNavItemDropdown, BAvatar, BDropdownItem},
-  computed: {
-    ...mapState(useKeycloakStore, ["authenticated", "userdata", "keycloak"]),
-    profilePicture() {
-      //@ts-ignore
-      return this.userdata['attributes']['profilePicture'][0];
-    },
-  }
-}
+const {t} = useI18n();
+
+const {keycloak, userdata, authenticated} = storeToRefs(useKeycloakStore());
+
+const profilePicture = computed(() => {
+  return userdata.value['attributes']['profilePicture'][0];
+});
 </script>
 
 <style scoped>

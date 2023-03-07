@@ -4,7 +4,7 @@
     <TransitionGroup name="list" class="alertlist">
       <b-alert :key="error" v-for="(error) in errorStore.errors" show variant="danger" class="m-2">
         <div style="display: flex; justify-content: space-between; align-items: center">
-          <p class="m-0" style="height: min-content">Fehler: {{ error.message }}</p>
+          <p class="m-0" style="height: min-content">{{ t('error') }}: {{ error.message }}</p>
           <BButton @click="errorStore.removeError(error)" variant="outline-light" style="width: 50px">
             <b-icon-x/>
           </BButton>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div id="login" v-else-if="kcStore.authenticated === unauthenticatedState">
-    <b-card header="Bitte melde dich an">
+    <b-card :header="t('login_prompt')">
       <b-button variant="primary" class="w-100" @click="login">Educorvi SSO</b-button>
     </b-card>
   </div>
@@ -34,6 +34,7 @@ import CustomSpinner from "@/components/CustomSpinner.vue";
 import {BCard, BButton, BAlert, BIconX} from "bootstrap-vue";
 import {computed} from "vue";
 import {useErrorStore} from "@/stores/error";
+import {useI18n} from "vue-i18n";
 
 const kcStore = useKeycloakStore();
 const errorStore = useErrorStore();
@@ -64,6 +65,8 @@ function login() {
 
 const authenticatedState = computed(() => authState.authenticated);
 const unauthenticatedState = computed(() => authState.unauthenticated);
+
+const {t} = useI18n();
 
 </script>
 
