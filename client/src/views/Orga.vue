@@ -31,12 +31,12 @@ import type {Ref} from "vue";
 import type {Task, User, Activity} from "../../../server/src/libindex";
 import axios from "axios";
 import TagDropdown from "@/components/tagDropdown.vue";
-import type {TagOption} from "@/components/tagDropdown.vue";
 import CustomSpinner from "@/App.vue";
 import humanizeDuration from "humanize-duration";
 import {saveAs} from "file-saver"
 import {UiError, useErrorStore} from "@/stores/error";
 import {useI18n} from "vue-i18n";
+import type {TagOption} from "@/additionalTypes";
 
 const errorStore = useErrorStore();
 

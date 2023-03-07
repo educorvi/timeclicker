@@ -18,7 +18,7 @@
     </b-card>
     <div v-if="loaded">
       <b-card v-for="(activity) in activities" ref="cards" :key="activity.id" class="mb-2">
-        <h5 class="mb-0">{{ d(activity.from, 'long') }}</h5>
+        <h5 class="mb-0">{{ activity.from ? d(activity.from, 'long') : "" }}</h5>
         <p class="mb-2">{{
             (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
               language: locale,

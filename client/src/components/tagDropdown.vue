@@ -66,10 +66,10 @@ import {
   BDropdownDivider
 } from "bootstrap-vue";
 import {useI18n} from "vue-i18n";
+import type {TagOption} from "@/additionalTypes";
 
 const {t} = useI18n();
 
-export type TagOption = { desc: string, id: string };
 const props = defineProps<{
   options: Array<TagOption>,
   label: string
