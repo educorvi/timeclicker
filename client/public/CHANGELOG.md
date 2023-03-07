@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.6.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.5.1...timeclicker_client-v1.6.0) (2023-03-07)
+
+
+### Features
+
+* i18n ([603b42a](https://github.com/educorvi/timeclicker/commit/603b42a31c0da8b8d7851ee6573236c2d9a8fe43)), closes [#14](https://github.com/educorvi/timeclicker/issues/14)
+
 # [timeclicker_client-v1.5.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.5.0...timeclicker_client-v1.5.1) (2023-03-05)
 
 
