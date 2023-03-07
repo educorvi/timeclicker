@@ -18,10 +18,10 @@
     </b-card>
     <div v-if="loaded">
       <b-card v-for="(activity) in activities" ref="cards" :key="activity.id" class="mb-2">
-        <h5 class="mb-0">{{ activity.from?.toLocaleDateString("de") }}</h5>
+        <h5 class="mb-0">{{ d(activity.from, 'long') }}</h5>
         <p class="mb-2">{{
             (activity.to && activity.from) ? humanizeDuration(activity.to?.getTime() - activity.from?.getTime(), {
-              language: "de",
+              language: locale,
               units: ["h", "m"]
             }) : "-"
           }}</p>
@@ -54,7 +54,7 @@ import {useI18n} from "vue-i18n";
 
 const props = defineProps<{ tasks: Array<Task> }>()
 
-const {t} = useI18n();
+const {t, d, locale} = useI18n();
 
 const errorStore = useErrorStore();
 
@@ -92,7 +92,7 @@ const hours = computed(() => {
       activities.value.reduce((prev: number, curr: Activity) => {
         return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
       }, 0),
-      {language: "de", units: ["h", "m"]}
+      {language: locale.value, units: ["h", "m"]}
   )
 });
 

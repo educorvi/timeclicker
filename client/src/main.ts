@@ -23,7 +23,27 @@ app.use(createI18n({
     legacy: false,
     locale: 'en',
     fallbackLocale: 'de',
-    messages
+    messages,
+    datetimeFormats: {
+        'en': {
+            short: {
+                year: 'numeric', month: 'short', day: 'numeric',
+            },
+            long: {
+                year: 'numeric', month: 'short', day: 'numeric',
+                weekday: 'short', hour: 'numeric', minute: 'numeric'
+            }
+        },
+        'de': {
+            short: {
+                year: 'numeric', month: 'short', day: 'numeric'
+            },
+            long: {
+                year: 'numeric', month: 'short', day: 'numeric',
+                weekday: 'short', hour: 'numeric', minute: 'numeric'
+            }
+        },
+    }
 }))
 
 app.mount('#app');

@@ -56,7 +56,7 @@ lastOfMonth.setMonth(lastOfMonth.getMonth() + 1, 0);
 const from = ref(firstOfMonth.toISOString().split("T")[0])
 const to = ref(lastOfMonth.toISOString().split("T")[0])
 
-const {t} = useI18n();
+const {t, locale} = useI18n();
 
 onMounted(() => {
   axios.get(import.meta.env.VITE_API_ENDPOINT + "tasks").then(res => {
@@ -110,7 +110,7 @@ const hours = computed(() => {
       activities.value.reduce((prev: number, curr: Activity) => {
         return prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
       }, 0),
-      {language: "de", units: ["h", "m"]}
+      {language: locale.value, units: ["h", "m"]}
   )
 });
 
@@ -119,7 +119,7 @@ const tableActivities = computed(() => activities.value.map(a => {
     ...a,
     to: a.to?.toLocaleString(),
     from: a.from?.toLocaleString(),
-    duration: humanizeDuration((a.to?.getTime() || 0) - (a.from?.getTime() || 0), {language: "de", units: ["h", "m"]})
+    duration: humanizeDuration((a.to?.getTime() || 0) - (a.from?.getTime() || 0), {language: locale.value, units: ["h", "m"]})
   }
 }));
 
