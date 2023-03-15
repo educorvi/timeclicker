@@ -1,3 +1,11 @@
+# [timeclicker_client-v1.6.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.1...timeclicker_client-v1.6.2) (2023-03-15)
+
+
+### Bug Fixes
+
+* improve overview card style ([d785bec](https://github.com/educorvi/timeclicker/commit/d785becbb05aaeaea3fffce8cf2435df7f4db27f))
+* improve styling of changelog view ([444cdfa](https://github.com/educorvi/timeclicker/commit/444cdfad8767d5f9cf8346b5da08fcb870869c7b))
+
 # [timeclicker_client-v1.6.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.0...timeclicker_client-v1.6.1) (2023-03-07)
 
 
