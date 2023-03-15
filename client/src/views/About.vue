@@ -2,7 +2,7 @@
   <div class="w-100 align-items-center d-flex flex-column text-center">
     <h1>TimeClicker v{{ version }}</h1>
     <p>{{t('developed_by')}}</p>
-    <div id="logo" class="rounded"><img style="max-width: 100%;" alt="educorvi logo" src="@/assets/educorvi_logo.png"/></div>
+    <div id="logo" class="rounded"><img style="max-width: 100%;" alt="educorvi logo" src="@/assets/educorvi_logo.svg"/></div>
   </div>
   <hr>
   <b-button-group class="w-100">
@@ -54,8 +54,15 @@ const licenseTexts = ref(new Map<string, string>());
 
 onMounted(() => {
   axios.get("/CHANGELOG.md").then(({data}) => {
+    const markdown = data
+        // insert Divider between versions
+        .replace(/\n(?=# \[timeclicker_client-)/g, "\n___\n\n")
+        // strip "timeclicker_client" from version name
+        .replace(/(?<=# \[)timeclicker_client-(?=v\d\.\d\.\d\])/g, "")
+        // replace link to GitHub compare with link to GitHub release
+        .replace(/https:\/\/github\.com\/educorvi\/timeclicker\/compare\/timeclicker_client-v\d\.\d\.\d\.\.\.(?=timeclicker_client-v\d\.\d\.\d)/g, "https://github.com/educorvi/timeclicker/releases/tag/");
     const converter = new Converter();
-    changelog.value = converter.makeHtml(data);
+    changelog.value = converter.makeHtml(markdown);
   });
   axios.get("/licenses.json").then(({data}) => {
     for (const datum of data) {
@@ -73,9 +80,9 @@ onMounted(() => {
 
 <style lang="scss">
 #logo {
+  width: 20rem;
   max-width: 90%;
   background-color: white;
-  width: fit-content;
   padding: 10px;
 }
 </style>
