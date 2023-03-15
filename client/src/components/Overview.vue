@@ -14,8 +14,8 @@
   <slot/>
 
   <div v-if="loaded">
-    <b-container fluid style="padding: 0">
-      <b-row align-v="stretch" id="row">
+    <b-container fluid id="overview_container">
+      <b-row align-v="stretch" id="row" align-h="start">
         <b-col v-if="loaded && activities.length===0">
           <b-card class="activity-card text-center">
             {{ t('no_entries') }}
@@ -182,11 +182,32 @@ defineExpose({
   height: 100%;
 }
 
+@media (max-width: 767px) {
+  .activity-card {
+    width: 100% !important;
+    height: 100%;
+  }
+  #row .col {
+    padding: 0;
+    width: 100%;
+  }
+  #row {
+    display: block;
+  }
+}
+
 #row {
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   padding-left: -30px;
   padding-right: -30px;
   margin: 0;
+}
+
+#overview_container {
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 #row .col {
