@@ -2,7 +2,7 @@
   <div class="w-100 align-items-center d-flex flex-column text-center">
     <h1>TimeClicker v{{ version }}</h1>
     <p>{{t('developed_by')}}</p>
-    <div id="logo" class="rounded"><img style="max-width: 100%;" alt="educorvi logo" src="@/assets/educorvi_logo.png"/></div>
+    <div id="logo" class="rounded"><img style="max-width: 100%;" alt="educorvi logo" src="@/assets/educorvi_logo.svg"/></div>
   </div>
   <hr>
   <b-button-group class="w-100">
@@ -80,9 +80,9 @@ onMounted(() => {
 
 <style lang="scss">
 #logo {
+  width: 20rem;
   max-width: 90%;
   background-color: white;
-  width: fit-content;
   padding: 10px;
 }
 </style>
