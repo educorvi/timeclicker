@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.6.3](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.2...timeclicker_client-v1.6.3) (2023-03-17)
+
+
+### Bug Fixes
+
+* style input elements to respect dark mode ([29a7e50](https://github.com/educorvi/timeclicker/commit/29a7e50fbd22af1759db04dda47bf5606e705700))
+
 # [timeclicker_client-v1.6.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.1...timeclicker_client-v1.6.2) (2023-03-15)
 
 
