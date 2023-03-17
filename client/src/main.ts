@@ -5,7 +5,7 @@ import {createI18n} from "vue-i18n";
 import App from './App.vue';
 import router from './router';
 
-import './assets/main.scss';
+import './main.scss';
 
 import {ModalPlugin, FormPlugin, FormInputPlugin, FormSelectPlugin, ToastPlugin} from "bootstrap-vue";
 import messages from "@/i18n/messages";
