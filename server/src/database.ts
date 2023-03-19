@@ -3,6 +3,7 @@ import type {FindManyOptions} from "typeorm"
 import User from "./classes/User";
 import Activity from "./classes/Activity";
 import Task from "./classes/Task";
+import {createDatabase} from "typeorm-extension";
 
 export default class Database {
     readonly host: string;
@@ -36,6 +37,8 @@ export default class Database {
             synchronize: true,
             logging: false,
         });
+
+        await createDatabase({ifNotExist: true, options: this.AppDataSource.options});
 
         await this.AppDataSource.initialize();
         this.userRepository = this.AppDataSource.getRepository(User);
