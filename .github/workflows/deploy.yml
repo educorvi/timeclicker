@@ -20,7 +20,7 @@ jobs:
             cd ${{vars.FOLDER}}
             git pull
             git checkout ${GITHUB_SHA}
-            docker compose --env-file client/.env build
+            docker compose pull
       - name: Restart
         uses: appleboy/ssh-action@master
         with:
