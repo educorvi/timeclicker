@@ -25,16 +25,6 @@ jobs:
       - run: yarn install --immutable
       - run: yarn workspaces foreach run build
 
-  docker:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - run: cp client/.env.template client/.env
-      - run: cp server/.env.template server/.env
-      - run: docker-compose build
-
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
@@ -78,6 +68,10 @@ jobs:
       - name: Push
         run: |
           git push
+  docker:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [ release ]
+    uses: ./.github/workflows/docker.yml
   rebase:
     needs: [ release ]
     runs-on: ubuntu-latest

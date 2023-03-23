@@ -13,11 +13,10 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
   server:
-    image: timeclicker-server:latest
+    image: timeclicker:latest
     depends_on:
       - db
     build:
-      context: ./
       dockerfile: Dockerfile
     container_name: timeclicker-server
     environment:
