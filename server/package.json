@@ -53,6 +53,7 @@
     "swagger-ui-express": "^4.6.0",
     "tslog": "^4.7.1",
     "tsoa": "^5.0.0",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.11",
+    "typeorm-extension": "^2.5.4"
   }
 }
