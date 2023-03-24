@@ -13,7 +13,7 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
   server:
-    image: timeclicker:latest
+    image: ghcr.io/educorvi/timeclicker:1-latest
     depends_on:
       - db
     build:
