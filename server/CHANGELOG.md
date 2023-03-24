@@ -1,3 +1,10 @@
+# [timeclicker_server-v1.5.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.4.0...timeclicker_server-v1.5.0) (2023-03-24)
+
+
+### Features
+
+* create database if it does not exist ([97df9a8](https://github.com/educorvi/timeclicker/commit/97df9a81dc2b0e6bf9849ebb5c471e3718786235))
+
 # [timeclicker_server-v1.4.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.3.0...timeclicker_server-v1.4.0) (2023-03-02)
 
 
