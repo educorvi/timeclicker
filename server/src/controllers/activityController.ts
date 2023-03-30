@@ -76,7 +76,7 @@ export class ActivityController extends Controller {
      * @param requestBody
      * @param req
      */
-    @SuccessResponse("201", "Created")
+    @SuccessResponse("201", "Saved")
     @Response(400, "Bad Request")
     @Post()
     public async saveActivity(
