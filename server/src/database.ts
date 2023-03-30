@@ -1,9 +1,54 @@
-import {DataSource, Repository} from "typeorm";
+import {DataSource, QueryRunner, Repository} from "typeorm";
 import type {FindManyOptions} from "typeorm"
 import User from "./classes/User";
 import Activity from "./classes/Activity";
 import Task from "./classes/Task";
 import {createDatabase} from "typeorm-extension";
+import {Logger} from "typeorm";
+import {logger} from "./globals";
+
+class TypeOrmLogger implements Logger {
+    // @ts-ignore
+    log(level: "log" | "info" | "warn", message: any, queryRunner?: QueryRunner): any {
+        switch (level) {
+            case "log":
+                logger.debug(message);
+                break;
+            case "info":
+                logger.info(message);
+                break;
+            case "warn":
+                logger.warn(message);
+                break;
+        }
+    }
+
+    // @ts-ignore
+    logMigration(message: string, queryRunner?: QueryRunner): any {
+        logger.info(message);
+    }
+
+    // @ts-ignore
+    logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner): any {
+        logger.debug(query, parameters);
+    }
+
+    // @ts-ignore
+    logQueryError(error: string | Error, query: string, parameters?: any[], queryRunner?: QueryRunner): any {
+        logger.error(error, query, parameters);
+    }
+
+    // @ts-ignore
+    logQuerySlow(time: number, query: string, parameters?: any[], queryRunner?: QueryRunner): any {
+        logger.debug("Slow query: "+query+`\n(${time}ms)`)
+    }
+
+    // @ts-ignore
+    logSchemaBuild(message: string, queryRunner?: QueryRunner): any {
+        logger.debug(message);
+    }
+
+}
 
 export default class Database {
     readonly host: string;
@@ -32,15 +77,20 @@ export default class Database {
             port: this.port,
             username: this.username,
             password: this.password,
-            database: "timeclicker",
+            database: this.database,
             entities: [User, Activity, Task],
-            synchronize: true,
-            logging: false,
+            migrations: [__dirname+"/../migrations/*.js"],
+            // migrationsRun: true,
+            migrationsTransactionMode: "all",
+            logging: "all",
+            logger: new TypeOrmLogger(),
         });
 
         await createDatabase({ifNotExist: true, options: this.AppDataSource.options});
 
         await this.AppDataSource.initialize();
+        logger.info("Run migrations...")
+        await this.AppDataSource.runMigrations();
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);

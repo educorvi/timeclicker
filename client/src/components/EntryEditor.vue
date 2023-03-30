@@ -14,6 +14,11 @@
       <label for="to-select" class="mt-3">{{t('to')}}:</label>
       <b-input v-model="newData.to" required id="to-select" type="time"></b-input>
       <b-form-invalid-feedback :state="validTimes">{{t('beg_of_entry_bef_end')}}</b-form-invalid-feedback>
+
+      <label class="mt-3" for="breakMins">{{t('break')}}:</label>
+      <b-input-group append="min">
+        <b-input id="breakMins" required type="number" v-model="newData.breakMins"></b-input>
+      </b-input-group>
       <hr>
       <label
           for="note-input">{{t('note')}}{{
@@ -27,14 +32,13 @@
       <b-form-textarea v-model="newData.private_note" id="private-note-input" rows="3"/>
 
       <hr>
-
       <b-button type="submit" variant="primary" class="w-100">{{t('save')}}</b-button>
     </b-form>
   </b-modal>
 </template>
 <script lang="ts" setup>
-import {BFormInput as BInput, BFormTextarea, BButton, BFormInvalidFeedback} from "bootstrap-vue";
-import {computed, onMounted, ref} from "vue";
+import {BFormInput as BInput, BFormTextarea, BButton, BFormInvalidFeedback, BInputGroup} from "bootstrap-vue";
+import {computed, onMounted, ref, watch} from "vue";
 import type {ComputedRef} from "vue";
 import type {saveActivityParams, Task, Activity} from "../../../server/src/libindex";
 import axios from "axios";
@@ -59,7 +63,8 @@ const newData = ref({
   from: "",
   to: "",
   note: "",
-  private_note: ""
+  private_note: "",
+  breakMins: 0
 })
 
 const validTimes = ref(true);
@@ -93,6 +98,7 @@ function initializeData() {
   newData.value.to = to;
   newData.value.note = props.initialData?.note || "";
   newData.value.private_note = props.initialData?.private_note || "";
+  newData.value.breakMins = props.initialData?.breakMins || 0;
 }
 
 const visibility = ref(false)
@@ -129,7 +135,8 @@ function onSubmit(event: Event) {
     to: to,
     note: newData.value.note,
     private_note: newData.value.private_note,
-    taskId: newData.value.task || ""
+    taskId: newData.value.task || "",
+    breakMins: newData.value.breakMins
   };
   axios.post(import.meta.env.VITE_API_ENDPOINT + "activities", {id: props.id, ...submitData}).then(() => {
     visibility.value = false
@@ -140,9 +147,10 @@ function onSubmit(event: Event) {
 
 function onClose() {
   emit("on-close");
-  initializeData();
+  // initializeData();
 }
 
+watch(props, initializeData);
 onMounted(initializeData)
 
 defineExpose({

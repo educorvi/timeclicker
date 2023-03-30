@@ -54,6 +54,8 @@ const de = {
     duration: "Dauer",
     language: "Sprache | Sprachen",
 
+    break: "Pause/Unterbrechung",
+
     download: "Herunterladen",
     search: "Suchen",
     edit: "Bearbeiten",
@@ -122,6 +124,8 @@ const en = {
     activity: "Activity | Activities",
     duration: "Duration",
     language: "Language | Languages",
+
+    break: "Break",
 
     download: "Download",
     search: "Search",
