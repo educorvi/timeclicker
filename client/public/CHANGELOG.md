@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.7.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.3...timeclicker_client-v1.7.0) (2023-03-30)
+
+
+### Features
+
+* add break time feature ([e406edc](https://github.com/educorvi/timeclicker/commit/e406edc65ad01ffae01e858309ebf83d3496535b))
+
 # [timeclicker_client-v1.6.3](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.2...timeclicker_client-v1.6.3) (2023-03-17)
 
 

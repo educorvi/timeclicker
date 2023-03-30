@@ -1,3 +1,15 @@
+# [timeclicker_server-v1.6.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.5.0...timeclicker_server-v1.6.0) (2023-03-30)
+
+
+### Bug Fixes
+
+* oder tasks alphabetically ([2cdf4fe](https://github.com/educorvi/timeclicker/commit/2cdf4fe19957258329c6b200b3d6909e650ed78d))
+
+
+### Features
+
+* add break time feature ([e406edc](https://github.com/educorvi/timeclicker/commit/e406edc65ad01ffae01e858309ebf83d3496535b))
+
 # [timeclicker_server-v1.5.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.4.0...timeclicker_server-v1.5.0) (2023-03-24)
 
 
