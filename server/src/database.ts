@@ -113,14 +113,14 @@ export default class Database {
     }
 
     async getAllTasks(): Promise<Array<Task>> {
-        return await this.tasksRepository.find();
+        return await this.tasksRepository.find({order: {title: "ASC"}});
     }
 
     async getOpenTasks(): Promise<Array<Task>> {
-        return await this.tasksRepository.find({where: {open: true}});
+        return await this.tasksRepository.find({where: {open: true}, order: {title: "ASC"}});
     }
     async getClosedTasks(): Promise<Array<Task>> {
-        return await this.tasksRepository.find({where: {open: false}});
+        return await this.tasksRepository.find({where: {open: false}, order: {title: "ASC"}});
     }
 
     async saveTask(id: string, details: Omit<Task, "id" | "activities">) {
