@@ -1,10 +1,11 @@
-import {DataSource, QueryRunner, Repository} from "typeorm";
+import {DataSource, Repository} from "typeorm";
+import type {QueryRunner} from "typeorm";
 import type {FindManyOptions} from "typeorm"
 import User from "./classes/User";
 import Activity from "./classes/Activity";
 import Task from "./classes/Task";
 import {createDatabase} from "typeorm-extension";
-import {Logger} from "typeorm";
+import type {Logger} from "typeorm";
 import {logger} from "./globals";
 
 class TypeOrmLogger implements Logger {
