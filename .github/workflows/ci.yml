@@ -65,7 +65,7 @@ jobs:
       - name: Commit
         run: |
           git add -A
-          git diff-index --quiet main || git commit -am "chore: version[skip-ci]"
+          git diff-index --quiet main || git commit -am "chore: version [skip ci]"
       - name: Push
         run: |
           git push
