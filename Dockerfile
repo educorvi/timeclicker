@@ -6,7 +6,7 @@ COPY server/package.json ./server/package.json
 COPY client/package.json ./client/package.json
 COPY .yarnrc.yml .
 COPY .yarn ./.yarn
-RUN yarn install
+RUN yarn install --immutable
 COPY . .
 RUN yarn run build
 CMD "./Dockerfiles/containerStart.sh"
