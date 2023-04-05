@@ -1,3 +1,10 @@
+# [timeclicker_server-v1.6.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.0...timeclicker_server-v1.6.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* don't log undefined ([301f9e4](https://github.com/educorvi/timeclicker/commit/301f9e485b675f1bb295afa0e364357c4f53b844))
+
 # [timeclicker_server-v1.6.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.5.0...timeclicker_server-v1.6.0) (2023-03-30)
 
 

@@ -1,3 +1,11 @@
+# [timeclicker_client-v1.7.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.7.0...timeclicker_client-v1.7.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* bug with entry editor when creating new activity ([4ad8bee](https://github.com/educorvi/timeclicker/commit/4ad8bee72fca375698a3c067daedbe8a61e67eb1))
+* set client unauthenticated when token refresh fails ([f7e6657](https://github.com/educorvi/timeclicker/commit/f7e6657183ddee878aa060d36773b247c18136d0))
+
 # [timeclicker_client-v1.7.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.6.3...timeclicker_client-v1.7.0) (2023-03-30)
 
 
