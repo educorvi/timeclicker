@@ -138,7 +138,7 @@ const en = {
     settings: 'Settings',
     save: 'Save',
 
-    mandatory: 'Verpflichtend',
+    mandatory: 'Mandatory',
 
     from: 'From',
     to: 'To',
