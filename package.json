@@ -7,7 +7,11 @@
   ],
   "scripts": {
     "release": "yarn workspaces foreach --verbose run semantic-release -e semantic-release-monorepo",
-    "build": "yarn workspaces foreach run build"
+    "build": "yarn workspaces foreach run build",
+    "prettier": "prettier --write server && prettier --write client"
   },
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@3.3.1",
+  "devDependencies": {
+    "prettier": "2.8.7"
+  }
 }

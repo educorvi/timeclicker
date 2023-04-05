@@ -1,19 +1,23 @@
 require('dotenv').config();
-import * as process from "process";
-import rateLimit from 'express-rate-limit'
-import express, {json, urlencoded, static as staticContent} from "express";
-import axios from "axios";
-import {db, logger} from "./globals";
-import {RegisterRoutes} from "../build/routes";
-import swaggerUi from "swagger-ui-express"
-import swaggerDocument from "../build/swagger.json"
-import cors from "cors"
-import {errorHandler} from "./errorHandler";
-import path from "path";
-import compression from "compression"
+import * as process from 'process';
+import rateLimit from 'express-rate-limit';
+import express, { json, urlencoded, static as staticContent } from 'express';
+import axios from 'axios';
+import { db, logger } from './globals';
+import { RegisterRoutes } from '../build/routes';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../build/swagger.json';
+import cors from 'cors';
+import { errorHandler } from './errorHandler';
+import path from 'path';
+import compression from 'compression';
 
-const projectRoot = path.resolve(__dirname).split('server').slice(0, -1).join("server");
-const vuePath = path.join(projectRoot, "client/dist");
+const projectRoot = path
+    .resolve(__dirname)
+    .split('server')
+    .slice(0, -1)
+    .join('server');
+const vuePath = path.join(projectRoot, 'client/dist');
 
 const app = express();
 
@@ -23,7 +27,7 @@ const rateLimiter = rateLimit({
     max: 1000, // Limit each IP to 1000 requests per `window`
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-})
+});
 
 app.use(rateLimiter);
 app.use(compression());
@@ -38,16 +42,17 @@ RegisterRoutes(app);
 
 app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use(staticContent(vuePath))
+app.use(staticContent(vuePath));
 
 app.use(errorHandler);
 
 app.get('*', (_req, res) => {
-    res.sendFile(path.join(vuePath, 'index.html'), e => {if(e)logger.error(e)});
+    res.sendFile(path.join(vuePath, 'index.html'), (e) => {
+        if (e) logger.error(e);
+    });
 });
 
 const port = process.env.PORT || 3000;
-
 
 async function synchronizeTasks() {
     if (process.env.TASKS_ENDPOINT) {
@@ -64,32 +69,37 @@ async function synchronizeTasks() {
 
             // update tasks
             for (const remoteTask of data) {
-                await db.saveTask(remoteTask.id, {title: remoteTask.title, note_mandatory: remoteTask.note, open: true})
+                await db.saveTask(remoteTask.id, {
+                    title: remoteTask.title,
+                    note_mandatory: remoteTask.note,
+                    open: true,
+                });
             }
 
-            logger.info("Synchronized tasks")
+            logger.info('Synchronized tasks');
         } catch (e: any) {
-            logger.error("Could not synchronize tasks: ", e?.message)
+            logger.error('Could not synchronize tasks: ', e?.message);
         }
     } else {
-        logger.warn("No tasks endpoint defined, so tasks could not be synchronized")
+        logger.warn(
+            'No tasks endpoint defined, so tasks could not be synchronized'
+        );
     }
 }
 
 async function start() {
     try {
         await db.init();
-        logger.info("Connected to database");
+        logger.info('Connected to database');
     } catch (e) {
-        logger.fatal("Could not connect to database: ", e);
+        logger.fatal('Could not connect to database: ', e);
         process.exit(-1);
     }
     await synchronizeTasks();
-    setInterval(synchronizeTasks, 1000 * 60 * 60)
+    setInterval(synchronizeTasks, 1000 * 60 * 60);
     app.listen(port, () =>
         logger.info(`App listening at http://localhost:${port}`)
     );
 }
 
 start();
-
