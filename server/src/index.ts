@@ -43,7 +43,7 @@ app.use(staticContent(vuePath))
 app.use(errorHandler);
 
 app.get('*', (_req, res) => {
-    res.sendFile(path.join(vuePath, 'index.html'), e => console.error(e));
+    res.sendFile(path.join(vuePath, 'index.html'), e => {if(e)logger.error(e)});
 });
 
 const port = process.env.PORT || 3000;

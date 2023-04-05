@@ -2,7 +2,11 @@ import {defineStore} from "pinia";
 import type Keycloak from "keycloak-js";
 import type {KeycloakProfile} from "keycloak-js";
 import axios from "axios";
+import {UiError, useErrorStore} from "@/stores/error";
+import {useI18n} from "vue-i18n"
 
+
+const {t} = useI18n();
 export enum authState {
     "checking",
     "authenticated",
@@ -37,6 +41,8 @@ export const useKeycloakStore = defineStore('keycloak', {
                         }
                     }).catch(() => {
                         console.error('Failed to refresh token');
+                        useErrorStore().setError(new UiError(t("errors.token_refresh")));
+                        this.setAuthenticated(authState.unauthenticated);
                     });
                 }, 6000)
             }

@@ -38,6 +38,7 @@ const de = {
         act_failed: "Aktivitäten konnten nicht geladen werden!",
         tasks_failed: "Aufgaben konnten nicht geladen werden!",
         users_failed: "Nutzer konnten nicht geladen werden!",
+        token_refresh: 'Anmeldetoken konnte nicht erneuert werden. Bitte melden Sie sich erneut an.'
     },
 
 
@@ -110,6 +111,7 @@ const en = {
         act_failed: "Activities could not be loaded!",
         tasks_failed: "Tasks could not be loaded!",
         users_failed: "Users could not be loaded!",
+        token_refresh: 'Failed to refresh token. Please login again...'
     },
 
     error: "Error | Errors",
@@ -143,7 +145,7 @@ const en = {
 
 }
 
-export default{
+export default {
     de,
     en
 };
