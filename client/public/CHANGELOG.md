@@ -1,3 +1,15 @@
+# [timeclicker_client-v1.7.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.7.1...timeclicker_client-v1.7.2) (2023-04-05)
+
+
+### Bug Fixes
+
+* fix ui bug that broke ui ([58c15c4](https://github.com/educorvi/timeclicker/commit/58c15c42e1bca4d11d25579c65cb80349da924c8))
+
+
+### Reverts
+
+* revert dependencies to fix build ([302536b](https://github.com/educorvi/timeclicker/commit/302536be9469005bb25c1ad3f2318cf061e2e8cf))
+
 # [timeclicker_client-v1.7.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.7.0...timeclicker_client-v1.7.1) (2023-04-05)
 
 
