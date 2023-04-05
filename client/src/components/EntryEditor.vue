@@ -198,6 +198,15 @@ function setVisibility(v: boolean) {
     visibility.value = v;
 }
 
+function setTask(id: string) {
+    newData.value.task = id;
+    if (props.tasks.filter((t) => t.id === id).length > 0) {
+        newData.value.task = id;
+    } else {
+        console.error('unknown task: ' + id);
+    }
+}
+
 function onSubmit(event: Event) {
     event.preventDefault();
     const from = new Date(newData.value.date);
@@ -249,5 +258,6 @@ onMounted(initializeData);
 defineExpose({
     setVisibility,
     id: props.id,
+    setTask,
 });
 </script>

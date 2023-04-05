@@ -55,3 +55,11 @@ yarn run build
 cd server
 node dist/src/index.js
 ```
+
+## Other relevant information
+### Create a link that opens the activity editor with a task already selected
+The link should have the following path:
+
+`/?action=createTask&taskID=yourID`
+
+e.g.: https://clicker.educorvi.de/?action=createTask&taskID=yourID
