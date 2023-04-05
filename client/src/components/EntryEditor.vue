@@ -147,7 +147,7 @@ function onSubmit(event: Event) {
 
 function onClose() {
   emit("on-close");
-  // initializeData();
+  initializeData();
 }
 
 watch(props, initializeData);
