@@ -62,7 +62,7 @@ onMounted(async () => {
     }
     await nextTick();
     const { action = '', taskID = '' } = route.query;
-    if (action === 'createTask') {
+    if (action === 'createTask' && taskID && !Array.isArray(taskID)) {
         entryModal.value?.setTask(taskID);
         showModal();
     }
