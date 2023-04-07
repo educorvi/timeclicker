@@ -1,7 +1,8 @@
 # Timeclicker
 [![CI](https://github.com/educorvi/timeclicker/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/educorvi/timeclicker/actions/workflows/ci.yml)
-[![Build Docker](https://github.com/educorvi/timeclicker/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/educorvi/timeclicker/actions/workflows/docker.yml)
+[![CodeQL](https://github.com/educorvi/timeclicker/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/educorvi/timeclicker/actions/workflows/github-code-scanning/codeql)
 [![Deploy to Server](https://github.com/educorvi/timeclicker/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/educorvi/timeclicker/actions/workflows/deploy.yml)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 Timeclicker is a tool to log how many hours are used on which project.
 
@@ -55,3 +56,11 @@ yarn run build
 cd server
 node dist/src/index.js
 ```
+
+## Other relevant information
+### Create a link that opens the activity editor with a task already selected
+The link should have the following path:
+
+`/?action=createTask&taskID=yourID`
+
+e.g.: https://clicker.educorvi.de/?action=createTask&taskID=yourID

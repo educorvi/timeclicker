@@ -1,24 +1,28 @@
-import {DataSource, Repository} from "typeorm";
-import type {QueryRunner} from "typeorm";
-import type {FindManyOptions} from "typeorm"
-import User from "./classes/User";
-import Activity from "./classes/Activity";
-import Task from "./classes/Task";
-import {createDatabase} from "typeorm-extension";
-import type {Logger} from "typeorm";
-import {logger} from "./globals";
+import { DataSource, Repository } from 'typeorm';
+import type { QueryRunner } from 'typeorm';
+import type { FindManyOptions } from 'typeorm';
+import User from './classes/User';
+import Activity from './classes/Activity';
+import Task from './classes/Task';
+import { createDatabase } from 'typeorm-extension';
+import type { Logger } from 'typeorm';
+import { logger } from './globals';
 
 class TypeOrmLogger implements Logger {
-    // @ts-ignore
-    log(level: "log" | "info" | "warn", message: any, queryRunner?: QueryRunner): any {
+    log(
+        level: 'log' | 'info' | 'warn',
+        message: any,
+        // @ts-ignore
+        queryRunner?: QueryRunner
+    ): any {
         switch (level) {
-            case "log":
+            case 'log':
                 logger.debug(message);
                 break;
-            case "info":
+            case 'info':
                 logger.info(message);
                 break;
-            case "warn":
+            case 'warn':
                 logger.warn(message);
                 break;
         }
@@ -30,25 +34,42 @@ class TypeOrmLogger implements Logger {
     }
 
     // @ts-ignore
-    logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner): any {
+    logQuery(
+        query: string,
+        parameters?: any[],
+        // @ts-ignore
+        queryRunner?: QueryRunner
+    ): any {
         logger.debug(query, parameters);
     }
 
     // @ts-ignore
-    logQueryError(error: string | Error, query: string, parameters?: any[], queryRunner?: QueryRunner): any {
+    logQueryError(
+        error: string | Error,
+        query: string,
+        parameters?: any[],
+        // @ts-ignore
+        queryRunner?: QueryRunner
+    ): any {
         logger.error(error, query, parameters);
     }
 
     // @ts-ignore
-    logQuerySlow(time: number, query: string, parameters?: any[], queryRunner?: QueryRunner): any {
-        logger.debug("Slow query: "+query+`\n(${time}ms)`)
+    logQuerySlow(
+        time: number,
+        query: string,
+        // @ts-ignore
+        parameters?: any[],
+        // @ts-ignore
+        queryRunner?: QueryRunner
+    ): any {
+        logger.debug('Slow query: ' + query + `\n(${time}ms)`);
     }
 
     // @ts-ignore
     logSchemaBuild(message: string, queryRunner?: QueryRunner): any {
         logger.debug(message);
     }
-
 }
 
 export default class Database {
@@ -62,8 +83,13 @@ export default class Database {
     private tasksRepository: Repository<Task>;
     private activityRepository: Repository<Activity>;
 
-
-    constructor(username: string, password: string, database: string = "timeclicker", host: string = "localhost", port: number = 5432) {
+    constructor(
+        username: string,
+        password: string,
+        database: string = 'timeclicker',
+        host: string = 'localhost',
+        port: number = 5432
+    ) {
         this.host = host;
         this.port = port;
         this.username = username;
@@ -73,24 +99,27 @@ export default class Database {
 
     async init() {
         this.AppDataSource = new DataSource({
-            type: "postgres",
+            type: 'postgres',
             host: this.host,
             port: this.port,
             username: this.username,
             password: this.password,
             database: this.database,
             entities: [User, Activity, Task],
-            migrations: [__dirname+"/../migrations/*.js"],
+            migrations: [__dirname + '/../migrations/*.js'],
             // migrationsRun: true,
-            migrationsTransactionMode: "all",
-            logging: "all",
+            migrationsTransactionMode: 'all',
+            logging: 'all',
             logger: new TypeOrmLogger(),
         });
 
-        await createDatabase({ifNotExist: true, options: this.AppDataSource.options});
+        await createDatabase({
+            ifNotExist: true,
+            options: this.AppDataSource.options,
+        });
 
         await this.AppDataSource.initialize();
-        logger.info("Run migrations...")
+        logger.info('Run migrations...');
         await this.AppDataSource.runMigrations();
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
@@ -98,7 +127,7 @@ export default class Database {
     }
 
     async getUser(id: string): Promise<User | null> {
-        return await this.userRepository.findOneBy({id})
+        return await this.userRepository.findOneBy({ id });
     }
 
     async getUsers(): Promise<Array<User>> {
@@ -110,26 +139,32 @@ export default class Database {
     }
 
     async getTask(id: string): Promise<Task | null> {
-        return await this.tasksRepository.findOneBy({id})
+        return await this.tasksRepository.findOneBy({ id });
     }
 
     async getAllTasks(): Promise<Array<Task>> {
-        return await this.tasksRepository.find({order: {title: "ASC"}});
+        return await this.tasksRepository.find({ order: { title: 'ASC' } });
     }
 
     async getOpenTasks(): Promise<Array<Task>> {
-        return await this.tasksRepository.find({where: {open: true}, order: {title: "ASC"}});
+        return await this.tasksRepository.find({
+            where: { open: true },
+            order: { title: 'ASC' },
+        });
     }
     async getClosedTasks(): Promise<Array<Task>> {
-        return await this.tasksRepository.find({where: {open: false}, order: {title: "ASC"}});
+        return await this.tasksRepository.find({
+            where: { open: false },
+            order: { title: 'ASC' },
+        });
     }
 
-    async saveTask(id: string, details: Omit<Task, "id" | "activities">) {
+    async saveTask(id: string, details: Omit<Task, 'id' | 'activities'>) {
         let existing = await this.getTask(id);
         if (existing) {
             existing = {
                 ...existing,
-                ...details
+                ...details,
             };
             await this.tasksRepository.save(existing);
         } else {
@@ -146,27 +181,26 @@ export default class Database {
         return this.activityRepository.find(options);
     }
 
-    async getActivity(id: string):Promise<Activity | null> {
+    async getActivity(id: string): Promise<Activity | null> {
         return await this.activityRepository.findOne({
-            where: {id},
+            where: { id },
             relations: {
                 user: true,
-                task: true
-            }
-        })
+                task: true,
+            },
+        });
     }
 
-    async createActivity(activityData: Omit<Activity, "id"> & {id?: string}) {
+    async createActivity(activityData: Omit<Activity, 'id'> & { id?: string }) {
         let activity = new Activity();
         activity = {
             ...activity,
-            ...activityData
+            ...activityData,
         };
         await this.activityRepository.save(activity);
     }
 
-
     async deleteActivity(activity: Activity) {
-        await this.activityRepository.delete({id: activity.id})
+        await this.activityRepository.delete({ id: activity.id });
     }
-};
+}

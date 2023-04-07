@@ -1,0 +1,12 @@
+.git
+.github
+.runConfigurations
+.yarn
+dist
+node_modules
+public
+postgres-data
+dev-dist
+migrations
+.rollup.cache
+build

@@ -14,3 +14,4 @@ build
 postgres-data
 docker-compose.env
 package-lock.json
+.rollup.cache

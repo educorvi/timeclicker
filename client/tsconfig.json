@@ -1,18 +1,18 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
+    "extends": "@vue/tsconfig/tsconfig.web.json",
+    "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue"],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false
     },
-    "allowJs": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false
-  },
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+    "references": [
+        {
+            "path": "./tsconfig.config.json"
+        }
+    ]
 }

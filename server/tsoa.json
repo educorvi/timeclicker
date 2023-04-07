@@ -1,29 +1,29 @@
 {
-  "entryFile": "src/index.ts",
-  "noImplicitAdditionalProperties": "silently-remove-extras",
-  "controllerPathGlobs": ["src/**/*Controller.ts"],
-  "spec": {
-    "outputDirectory": "build",
-    "specVersion": 3,
-    "securityDefinitions": {
-      "educorvi_sso": {
-        "type": "oauth2",
-        "authorizationUrl": "https://sso.educorvi.de/realms/educorvi/protocol/openid-connect/auth",
-        "flow": "implicit",
-        "name": "Authorization",
-        "in": "header",
-        "scopes": {
-          "openid": "default scope",
-          "profile": "profile scope",
-          "email": "email scope"
-        }
-      }
+    "entryFile": "src/index.ts",
+    "noImplicitAdditionalProperties": "silently-remove-extras",
+    "controllerPathGlobs": ["src/**/*Controller.ts"],
+    "spec": {
+        "outputDirectory": "build",
+        "specVersion": 3,
+        "securityDefinitions": {
+            "educorvi_sso": {
+                "type": "oauth2",
+                "authorizationUrl": "https://sso.educorvi.de/realms/educorvi/protocol/openid-connect/auth",
+                "flow": "implicit",
+                "name": "Authorization",
+                "in": "header",
+                "scopes": {
+                    "openid": "default scope",
+                    "profile": "profile scope",
+                    "email": "email scope"
+                }
+            }
+        },
+        "basePath": "/api"
     },
-    "basePath": "/api"
-  },
-  "routes": {
-    "routesDir": "build",
-    "authenticationModule": "./src/authentication.ts",
-    "basePath": "/api"
-  }
+    "routes": {
+        "routesDir": "build",
+        "authenticationModule": "./src/authentication.ts",
+        "basePath": "/api"
+    }
 }

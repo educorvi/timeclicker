@@ -1,1 +1,1 @@
-export type TagOption = { desc: string, id: string };
+export type TagOption = { desc: string; id: string };
