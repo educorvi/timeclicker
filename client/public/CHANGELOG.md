@@ -1,3 +1,15 @@
+# [timeclicker_client-v1.8.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.7.2...timeclicker_client-v1.8.0) (2023-04-07)
+
+
+### Bug Fixes
+
+* fix missing translation ([1a82929](https://github.com/educorvi/timeclicker/commit/1a82929c5e076865c780ae549281d45c926e4202))
+
+
+### Features
+
+* open activity editor with preselected task via link ([bbd83c1](https://github.com/educorvi/timeclicker/commit/bbd83c14806df228cbb46f5091aa2b71abdc3d74))
+
 # [timeclicker_client-v1.7.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.7.1...timeclicker_client-v1.7.2) (2023-04-05)
 
 
