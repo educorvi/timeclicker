@@ -1,3 +1,10 @@
+# [timeclicker_server-v1.6.2](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.1...timeclicker_server-v1.6.2) (2023-04-12)
+
+
+### Bug Fixes
+
+* fix CVE-2023-0842 ([0e7f577](https://github.com/educorvi/timeclicker/commit/0e7f577bfef23e818dcb784caf938b1cdc9a7797))
+
 # [timeclicker_server-v1.6.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.0...timeclicker_server-v1.6.1) (2023-04-05)
 
 ### Bug Fixes
