@@ -32,6 +32,8 @@ const de = {
         'Laden Sie die Seite neu, um die Änderungen zu aktivieren',
     orga_ui: 'Organisationsoberfläche',
     about: 'Über',
+    apidocs: 'API Dokumentation',
+    load_swaggerui: 'SwaggerUI wird geladen...',
 
     errors: {
         saving_failed: 'Speichern fehlgeschlagen!',
@@ -105,6 +107,8 @@ const en = {
     reload_to_activate: 'Reload the page to load the changes',
     orga_ui: 'Organization Panel',
     about: 'About',
+    apidocs: 'API Documentation',
+    load_swaggerui: 'Loading SwaggerUI...',
 
     errors: {
         saving_failed: 'Failed to save!',

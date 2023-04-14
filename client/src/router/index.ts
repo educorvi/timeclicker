@@ -23,6 +23,11 @@ const router = createRouter({
             name: 'settings',
             component: () => import('../views/Settings.vue'),
         },
+        {
+            path: '/apidocs',
+            name: 'apidocs',
+            component: () => import('../views/Apidocs.vue'),
+        },
     ],
 });
 

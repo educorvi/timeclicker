@@ -52,7 +52,13 @@ app.get(
     }
 );
 
-app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+    '/api',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument, {
+        swaggerOptions: { persistAuthorization: true },
+    })
+);
 
 app.use(staticContent(vuePath));
 

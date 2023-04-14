@@ -12,12 +12,15 @@
     </div>
     <hr />
     <b-button-group class="w-100">
-        <b-button variant="outline-light" v-b-modal.changelog-modal
-            >Changelog</b-button
-        >
-        <b-button variant="outline-light" v-b-modal.license-modal>{{
-            t('library', 2)
-        }}</b-button>
+        <b-button variant="outline-light" v-b-modal.changelog-modal>
+            Changelog
+        </b-button>
+        <b-button variant="outline-light" to="/apidocs">
+            {{ t('apidocs') }}
+        </b-button>
+        <b-button variant="outline-light" v-b-modal.license-modal>
+            {{ t('library', 2) }}
+        </b-button>
     </b-button-group>
     <b-modal
         id="changelog-modal"
