@@ -1,3 +1,11 @@
+# [timeclicker_client-v1.9.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.8.0...timeclicker_client-v1.9.0) (2023-04-14)
+
+
+### Features
+
+* serve modified swaggerUI in client with authentication ([a3deb6f](https://github.com/educorvi/timeclicker/commit/a3deb6f0c6cfd5612a7f85014dbb582a206f7a31))
+* server version in about page ([5f0fadf](https://github.com/educorvi/timeclicker/commit/5f0fadf3db1954147563138a6cf3bc19c574685f))
+
 # [timeclicker_client-v1.8.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.7.2...timeclicker_client-v1.8.0) (2023-04-07)
 
 
