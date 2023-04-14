@@ -11,7 +11,7 @@
         </div>
     </div>
     <hr />
-    <b-button-group class="w-100">
+    <b-button-group class="w-100" :vertical="bpStore.currentBP < Breakpoint.s">
         <b-button variant="outline-light" v-b-modal.changelog-modal>
             Changelog
         </b-button>
@@ -58,15 +58,20 @@
 </template>
 
 <script setup lang="ts">
-import { version } from '../../package.json';
-import { BCard, BButton, BButtonGroup, BModal } from 'bootstrap-vue';
+import { version as versionFromPJson } from '../../package.json';
+import { BButton, BButtonGroup, BCard, BModal } from 'bootstrap-vue';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import CustomSpinner from '@/components/CustomSpinner.vue';
 import { Converter } from 'showdown';
 import { useI18n } from 'vue-i18n';
+import { Breakpoint, useBreakpointStore } from '@/stores/breakpoints';
 
 const { t } = useI18n();
+
+const bpStore = useBreakpointStore();
+
+const version = ref(versionFromPJson);
 
 type License = {
     name: string;
