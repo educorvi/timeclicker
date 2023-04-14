@@ -1,7 +1,24 @@
 <template>
     <div class="w-100 align-items-center d-flex flex-column text-center">
-        <h1>TimeClicker v{{ version }}</h1>
-        <p>{{ t('developed_by') }}</p>
+        <h1>TimeClicker</h1>
+        <table class="text-muted">
+            <tr>
+                <td>Client</td>
+                <td>
+                    <b>v{{ version }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Server</td>
+                <td>
+                    <b>v{{ serverVersion }}</b>
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <p>
+            <b>{{ t('developed_by') }}</b>
+        </p>
         <div id="logo" class="rounded">
             <img
                 style="max-width: 100%"
@@ -72,6 +89,7 @@ const { t } = useI18n();
 const bpStore = useBreakpointStore();
 
 const version = ref(versionFromPJson);
+const serverVersion = ref('');
 
 type License = {
     name: string;
@@ -111,6 +129,9 @@ onMounted(() => {
                     licenseTexts.value.set(l.name, data);
                 });
         });
+    });
+    axios.get(import.meta.env.VITE_API_ENDPOINT).then(({ data }) => {
+        serverVersion.value = data.version;
     });
 });
 </script>
