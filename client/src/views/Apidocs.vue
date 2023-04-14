@@ -50,17 +50,17 @@ const auth = {
 onMounted(async () => {
     auth.educorvi_sso.token.access_token = kcStore.keycloak?.token;
     ls.setItem('authorized', JSON.stringify(auth));
-    const SwaggerUI: SwaggerUI = (await import('swagger-ui')).default;
+    const SwaggerUI: (opts: SwaggerUIOptions) => SwaggerUI = (
+        await import('swagger-ui')
+    ).default;
     const node = document.getElementById('swaggerUIDiv');
 
-    const swaggerOptions: SwaggerUIOptions = {
+    const ui = SwaggerUI({
         domNode: node,
         url: import.meta.env.VITE_API_ENDPOINT + 'swagger.json',
         oauth2RedirectUrl: window.location.toString(),
         persistAuthorization: true,
-    };
-
-    const ui: SwaggerUI = SwaggerUI(swaggerOptions);
+    });
     ui.initOAuth({
         clientId: 'timeclicker',
         scopes: ['openid', 'profile', 'email'],
