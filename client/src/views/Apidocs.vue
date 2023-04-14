@@ -82,6 +82,8 @@ onBeforeUnmount(() => {
     filter: invert(88%) hue-rotate(180deg);
     padding-top: 5px;
     padding-bottom: 5px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .swagger-ui .highlight-code {
