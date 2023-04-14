@@ -35,6 +35,9 @@ async function getOrCreateUser(req: express.Request): Promise<User> {
     return user;
 }
 
+/**
+ * The parameters for saving an activity
+ */
 export type saveActivityParams = Omit<Activity, 'id' | 'user' | 'task'> & {
     id?: string;
     taskId: string;
