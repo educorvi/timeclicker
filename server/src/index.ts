@@ -17,7 +17,7 @@ const projectRoot = path
     .split('server')
     .slice(0, -1)
     .join('server');
-const vuePath = path.join(projectRoot, 'client/dist');
+const vuePath = path.join(projectRoot, 'client', 'dist');
 
 const app = express();
 
@@ -40,7 +40,25 @@ app.use(
 app.use(json());
 RegisterRoutes(app);
 
-app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.get(
+    '/api/swagger.json',
+    (_req, res) => {
+        res.sendFile(
+            path.join(path.resolve(__dirname), '..', 'build', 'swagger.json')
+        );
+    },
+    (e) => {
+        if (e) logger.error(e);
+    }
+);
+
+app.use(
+    '/api',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument, {
+        swaggerOptions: { persistAuthorization: true },
+    })
+);
 
 app.use(staticContent(vuePath));
 

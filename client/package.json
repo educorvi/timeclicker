@@ -24,6 +24,7 @@
     "keycloak-js": "^20.0.5",
     "pinia": "^2.0.33",
     "showdown": "^2.1.0",
+    "swagger-ui": "^4.18.2",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"
@@ -38,6 +39,7 @@
     "@types/humanize-duration": "^3.27.1",
     "@types/node": "^18.15.11",
     "@types/showdown": "^2.0.0",
+    "@types/swagger-ui": "^3.52.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/compiler-sfc": "^3.2.47",
     "@vue/eslint-config-prettier": "^7.1.0",
@@ -60,7 +62,7 @@
   },
   "size-limit": [
     {
-      "limit": "10s",
+      "limit": "512kB",
       "path": [
         "dist/assets/index*",
         "dist/*"

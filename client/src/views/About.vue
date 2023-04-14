@@ -1,7 +1,24 @@
 <template>
     <div class="w-100 align-items-center d-flex flex-column text-center">
-        <h1>TimeClicker v{{ version }}</h1>
-        <p>{{ t('developed_by') }}</p>
+        <h1>TimeClicker</h1>
+        <table class="text-muted">
+            <tr>
+                <td>Client</td>
+                <td>
+                    <b>v{{ version }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Server</td>
+                <td>
+                    <b>v{{ serverVersion }}</b>
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <p>
+            <b>{{ t('developed_by') }}</b>
+        </p>
         <div id="logo" class="rounded">
             <img
                 style="max-width: 100%"
@@ -11,13 +28,16 @@
         </div>
     </div>
     <hr />
-    <b-button-group class="w-100">
-        <b-button variant="outline-light" v-b-modal.changelog-modal
-            >Changelog</b-button
-        >
-        <b-button variant="outline-light" v-b-modal.license-modal>{{
-            t('library', 2)
-        }}</b-button>
+    <b-button-group class="w-100" :vertical="bpStore.currentBP < Breakpoint.s">
+        <b-button variant="outline-light" v-b-modal.changelog-modal>
+            Changelog
+        </b-button>
+        <b-button variant="outline-light" to="/apidocs">
+            {{ t('apidocs') }}
+        </b-button>
+        <b-button variant="outline-light" v-b-modal.license-modal>
+            {{ t('library', 2) }}
+        </b-button>
     </b-button-group>
     <b-modal
         id="changelog-modal"
@@ -55,15 +75,21 @@
 </template>
 
 <script setup lang="ts">
-import { version } from '../../package.json';
-import { BCard, BButton, BButtonGroup, BModal } from 'bootstrap-vue';
+import { version as versionFromPJson } from '../../package.json';
+import { BButton, BButtonGroup, BCard, BModal } from 'bootstrap-vue';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import CustomSpinner from '@/components/CustomSpinner.vue';
 import { Converter } from 'showdown';
 import { useI18n } from 'vue-i18n';
+import { Breakpoint, useBreakpointStore } from '@/stores/breakpoints';
 
 const { t } = useI18n();
+
+const bpStore = useBreakpointStore();
+
+const version = ref(versionFromPJson);
+const serverVersion = ref('');
 
 type License = {
     name: string;
@@ -103,6 +129,9 @@ onMounted(() => {
                     licenseTexts.value.set(l.name, data);
                 });
         });
+    });
+    axios.get(import.meta.env.VITE_API_ENDPOINT).then(({ data }) => {
+        serverVersion.value = data.version;
     });
 });
 </script>
