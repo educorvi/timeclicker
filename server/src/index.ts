@@ -40,6 +40,18 @@ app.use(
 app.use(json());
 RegisterRoutes(app);
 
+app.get(
+    '/api/swagger.json',
+    (_req, res) => {
+        res.sendFile(
+            path.join(path.resolve(__dirname), '..', 'build/swagger.json')
+        );
+    },
+    (e) => {
+        if (e) logger.error(e);
+    }
+);
+
 app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(staticContent(vuePath));
