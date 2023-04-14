@@ -55,12 +55,14 @@ import Keycloak from 'keycloak-js';
 import { authState, useKeycloakStore } from '@/stores/keycloak';
 import CustomSpinner from '@/components/CustomSpinner.vue';
 import { BCard, BButton, BAlert, BIconX } from 'bootstrap-vue';
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
+import { useBreakpointStore } from '@/stores/breakpoints';
 
 const kcStore = useKeycloakStore();
 const errorStore = useErrorStore();
+const bpStore = useBreakpointStore();
 
 let keycloak = new Keycloak({
     url: import.meta.env.VITE_KC_URL,
@@ -91,6 +93,10 @@ const authenticatedState = computed(() => authState.authenticated);
 const unauthenticatedState = computed(() => authState.unauthenticated);
 
 const { t } = useI18n();
+
+const onWidthChange = () => bpStore.setWidth(window.innerWidth);
+onMounted(() => window.addEventListener('resize', onWidthChange));
+onUnmounted(() => window.removeEventListener('resize', onWidthChange));
 </script>
 
 <style scoped>
