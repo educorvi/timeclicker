@@ -51,14 +51,19 @@ export class OrgaController extends Controller {
         checkOrgaStatus(req);
 
         // const dbTask = task ? await db.getTask(task) : undefined
-        return db.getActivities({
-            where: {
-                from: from ? MoreThanOrEqual(from) : undefined,
-                to: to ? LessThanOrEqual(to) : undefined,
-                task: tasks?.length ? Any(tasks) : undefined,
-                user: users?.length ? Any(users) : undefined,
-            },
-            relations: { task: true, user: true },
+        return (
+            await db.getActivities({
+                where: {
+                    from: from ? MoreThanOrEqual(from) : undefined,
+                    to: to ? LessThanOrEqual(to) : undefined,
+                    task: tasks?.length ? Any(tasks) : undefined,
+                    user: users?.length ? Any(users) : undefined,
+                },
+                relations: { task: true, user: true },
+            })
+        ).map((a) => {
+            a.private_note = '';
+            return a;
         });
     }
 }
