@@ -48,15 +48,10 @@ const auth = {
 };
 
 onMounted(async () => {
-    console.log('a');
     auth.educorvi_sso.token.access_token = kcStore.keycloak?.token;
-    console.log('b');
     ls.setItem('authorized', JSON.stringify(auth));
-    console.log('c');
     const SwaggerUI = (await import('swagger-ui-dist')).SwaggerUIBundle;
-    console.log('d');
     const node = document.getElementById('swaggerUIDiv');
-    console.log(node);
 
     const ui = SwaggerUI({
         domNode: node,
