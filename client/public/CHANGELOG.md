@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.9.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.9.0...timeclicker_client-v1.9.1) (2023-04-21)
+
+
+### Bug Fixes
+
+* fix swagger ui in production ([e827f2a](https://github.com/educorvi/timeclicker/commit/e827f2a0aebcff6c61460ce56ec7f6334e8a7d5c))
+
 # [timeclicker_client-v1.9.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.8.0...timeclicker_client-v1.9.0) (2023-04-14)
 
 
