@@ -50,9 +50,7 @@ const auth = {
 onMounted(async () => {
     auth.educorvi_sso.token.access_token = kcStore.keycloak?.token;
     ls.setItem('authorized', JSON.stringify(auth));
-    const SwaggerUI: (opts: SwaggerUIOptions) => SwaggerUI = (
-        await import('swagger-ui')
-    ).default;
+    const SwaggerUI = (await import('swagger-ui-dist')).SwaggerUIBundle;
     const node = document.getElementById('swaggerUIDiv');
 
     const ui = SwaggerUI({
@@ -100,6 +98,10 @@ onBeforeUnmount(() => {
 
 .auth-wrapper,
 .authorization__btn {
+    display: none !important;
+}
+
+.scheme-container {
     display: none !important;
 }
 </style>
