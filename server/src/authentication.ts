@@ -54,6 +54,13 @@ export function expressAuthentication(
             if (token.isExpired()) {
                 reject(new UnauthorizedError('Token has expired'));
             }
+            if (request.rawHeaders.indexOf('token') !== -1) {
+                reject(
+                    new UnauthorizedError(
+                        'User has set disallowed Header "token"'
+                    )
+                );
+            }
             request.rawHeaders.push(
                 'token',
                 JSON.stringify({ ...token, isOrga: token.hasRealmRole('orga') })
