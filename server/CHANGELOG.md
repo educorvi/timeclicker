@@ -1,3 +1,10 @@
+# [timeclicker_server-v1.7.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.7.0...timeclicker_server-v1.7.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* fix vulnerability ([a0b5007](https://github.com/educorvi/timeclicker/commit/a0b5007d07d8296d4b8e7771d5b4a83e68e62ee0))
+
 # [timeclicker_server-v1.7.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.2...timeclicker_server-v1.7.0) (2023-04-14)
 
 
