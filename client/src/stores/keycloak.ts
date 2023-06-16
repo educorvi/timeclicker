@@ -14,8 +14,9 @@ export enum authState {
 export const useKeycloakStore = defineStore('keycloak', {
     state: () => {
         return {
-            keycloak: undefined as Keycloak | undefined,
             authenticated: authState.checking,
+            interval: undefined as any,
+            keycloak: undefined as Keycloak | undefined,
             userdata: undefined as KeycloakProfile | undefined,
         };
     },
@@ -36,7 +37,7 @@ export const useKeycloakStore = defineStore('keycloak', {
                 axios.defaults.headers.common[
                     'Authorization'
                 ] = `${keycloak.token}`;
-                setInterval(() => {
+                this.interval = setInterval(() => {
                     keycloak
                         .updateToken(70)
                         .then((refreshed) => {
@@ -57,6 +58,10 @@ export const useKeycloakStore = defineStore('keycloak', {
                             this.setAuthenticated(authState.unauthenticated);
                         });
                 }, 6000);
+            } else if (this.interval !== undefined) {
+                // clear refresh interval when unauthenticated to avoid toast spam
+                clearInterval(this.interval);
+                this.interval = undefined;
             }
         },
     },

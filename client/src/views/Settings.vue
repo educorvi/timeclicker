@@ -1,15 +1,21 @@
 <template>
     <div id="settings">
-        <h1 class="mb-3">{{ t('settings') }}</h1>
-        <b-input-group :prepend="t('language')">
-            <b-form-select
-                :options="Object.keys(messages)"
-                v-model="lang"
-            ></b-form-select>
-        </b-input-group>
-        <b-form-valid-feedback :state="langChanged">{{
-            t('reload_to_activate')
-        }}</b-form-valid-feedback>
+        <div id="settings-content">
+            <h1 class="mb-3">{{ t('settings') }}</h1>
+            <b-input-group :prepend="t('language')">
+                <b-form-select
+                    :options="
+                        Object.keys(messages).map((l) => {
+                            return { value: l, text: t('languages.' + l) };
+                        })
+                    "
+                    v-model="lang"
+                ></b-form-select>
+            </b-input-group>
+            <b-form-valid-feedback :state="langChanged"
+                >{{ t('reload_to_activate') }}
+            </b-form-valid-feedback>
+        </div>
     </div>
 </template>
 
@@ -32,8 +38,14 @@ watch(lang, (v) => {
 </script>
 
 <style scoped>
+#settings-content {
+    width: 500px;
+    max-width: 100%;
+}
+
 #settings {
     width: 100%;
-    max-width: 600px;
+    display: flex;
+    justify-content: center;
 }
 </style>

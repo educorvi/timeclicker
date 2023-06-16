@@ -57,7 +57,7 @@ const de = {
     duration: 'Dauer',
     language: 'Sprache | Sprachen',
 
-    break: 'Pause/Unterbrechung',
+    break: 'Pause',
 
     download: 'Herunterladen',
     search: 'Suchen',
@@ -72,6 +72,11 @@ const de = {
 
     from: 'Von',
     to: 'Bis',
+
+    languages: {
+        de: 'Deutsch',
+        en: 'Englisch',
+    },
 };
 
 const en = {
@@ -146,6 +151,11 @@ const en = {
 
     from: 'From',
     to: 'To',
+
+    languages: {
+        de: 'German',
+        en: 'English',
+    },
 };
 
 export default {
