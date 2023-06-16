@@ -195,7 +195,7 @@ function getHumanizedDuration(
     });
 }
 
-function getDurationOrDash(from: Date, to: Date) {
+function getDurationOrDash(from: Date | null, to: Date | null) {
     if (!from || !to) {
         return ' - ';
     }
