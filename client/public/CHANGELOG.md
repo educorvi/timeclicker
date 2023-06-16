@@ -1,3 +1,17 @@
+# [timeclicker_client-v1.10.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.9.1...timeclicker_client-v1.10.0) (2023-06-16)
+
+
+### Bug Fixes
+
+* do not show closed tasks in entryEditor dropdown ([2452e1b](https://github.com/educorvi/timeclicker/commit/2452e1b034814558fb4c91d0c63e68600046a4cf)), closes [#36](https://github.com/educorvi/timeclicker/issues/36)
+* do not show the "failed to refreshed token" error multiple times ([9c887df](https://github.com/educorvi/timeclicker/commit/9c887df9943befa28e8520f4ab6259a6a3575329)), closes [#34](https://github.com/educorvi/timeclicker/issues/34)
+* translate language setting values ([0743973](https://github.com/educorvi/timeclicker/commit/07439733dfa6ff2c1a3032021a1d8990cc85f6fe)), closes [#33](https://github.com/educorvi/timeclicker/issues/33)
+
+
+### Features
+
+* show break time in overview ([114fcf8](https://github.com/educorvi/timeclicker/commit/114fcf8cc027f1636615945b4ac055928310d93c)), closes [#35](https://github.com/educorvi/timeclicker/issues/35)
+
 # [timeclicker_client-v1.9.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.9.0...timeclicker_client-v1.9.1) (2023-04-21)
 
 
