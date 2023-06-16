@@ -53,7 +53,7 @@ const router = useRouter();
 onMounted(async () => {
     try {
         const res = await axios.get(
-            import.meta.env.VITE_API_ENDPOINT + 'tasks'
+            import.meta.env.VITE_API_ENDPOINT + 'tasks?open=true'
         );
         tasks.value = <Array<Task>>res.data;
     } catch (error) {

@@ -32,9 +32,9 @@
                 id="from-select"
                 type="time"
             ></b-input>
-            <b-form-invalid-feedback :state="validTimes">{{
-                t('beg_of_entry_bef_end')
-            }}</b-form-invalid-feedback>
+            <b-form-invalid-feedback :state="validTimes"
+                >{{ t('beg_of_entry_bef_end') }}
+            </b-form-invalid-feedback>
             <label for="to-select" class="mt-3">{{ t('to') }}:</label>
             <b-input
                 v-model="newData.to"
@@ -42,9 +42,9 @@
                 id="to-select"
                 type="time"
             ></b-input>
-            <b-form-invalid-feedback :state="validTimes">{{
-                t('beg_of_entry_bef_end')
-            }}</b-form-invalid-feedback>
+            <b-form-invalid-feedback :state="validTimes"
+                >{{ t('beg_of_entry_bef_end') }}
+            </b-form-invalid-feedback>
 
             <label class="mt-3" for="breakMins">{{ t('break') }}:</label>
             <b-input-group append="min">
@@ -91,9 +91,9 @@
             />
 
             <hr />
-            <b-button type="submit" variant="primary" class="w-100">{{
-                t('save')
-            }}</b-button>
+            <b-button type="submit" variant="primary" class="w-100"
+                >{{ t('save') }}
+            </b-button>
         </b-form>
     </b-modal>
 </template>
@@ -180,8 +180,8 @@ const visibility = ref(false);
 
 //Computed
 const taskOptions: ComputedRef<{ value: string | null; text: string }[]> =
-    computed(() =>
-        [
+    computed(() => {
+        const res = [
             {
                 value: null as string | null,
                 text: t('please_select_task'),
@@ -190,8 +190,22 @@ const taskOptions: ComputedRef<{ value: string | null; text: string }[]> =
             props.tasks.map((t) => {
                 return { value: t.id, text: t.title };
             })
-        )
-    );
+        );
+
+        // If initial data contains a task that is no longer active, add it to the dropdown
+        if (
+            props.initialData &&
+            res.filter((f) => f.value === props.initialData?.task.id).length ===
+                0
+        ) {
+            res.unshift({
+                value: props.initialData?.task.id,
+                text: props.initialData?.task.title,
+            });
+        }
+
+        return res;
+    });
 
 //Methods
 function setVisibility(v: boolean) {
