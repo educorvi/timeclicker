@@ -13,7 +13,13 @@
             </b-input-group>
         </div>
     </div>
-    <p class="w-100 text-center mt-2">{{ t('total') }}: {{ hours }}</p>
+    <p class="w-100 text-center mt-2">
+        {{ t('total') }}: {{ hours }}
+        <br />
+        <span v-if="breaks" class="text-muted">
+            (-{{ getHumanizedDuration(breaks) }} {{ t('break') }})
+        </span>
+    </p>
 
     <slot />
 
@@ -41,17 +47,23 @@
                             </h5>
                             <p class="mb-2">
                                 {{
-                                    activity.to && activity.from
-                                        ? humanizeDuration(
-                                              activity.to?.getTime() -
-                                                  activity.from?.getTime(),
-                                              {
-                                                  language: locale,
-                                                  units: ['h', 'm'],
-                                              }
-                                          )
-                                        : '-'
+                                    getDurationOrDash(
+                                        activity.from,
+                                        activity.to
+                                    )
                                 }}
+                                <span
+                                    v-if="activity.breakMins"
+                                    class="text-muted"
+                                >
+                                    (-{{
+                                        getHumanizedDuration(
+                                            activity.breakMins * 60 * 1000,
+                                            ['m']
+                                        )
+                                    }}
+                                    {{ t('break') }})
+                                </span>
                             </p>
                             <p class="mb-0 text-muted">
                                 {{ activity.task.title }}
@@ -62,13 +74,13 @@
                                 <b-button
                                     variant="outline-primary"
                                     @click="editActivity(activity)"
-                                    >{{ t('edit') }}</b-button
-                                >
+                                    >{{ t('edit') }}
+                                </b-button>
                                 <b-button
                                     variant="outline-danger"
                                     @click="askToDeleteActivity(activity)"
-                                    >{{ t('delete') }}</b-button
-                                >
+                                    >{{ t('delete') }}
+                                </b-button>
                             </b-button-group>
                         </b-card-footer>
                     </b-card>
@@ -159,15 +171,36 @@ const years = ref<Array<number>>([]);
 const year = ref(new Date().getFullYear());
 
 const hours = computed(() => {
-    return humanizeDuration(
+    return getHumanizedDuration(
         activities.value.reduce((prev: number, curr: Activity) => {
             return (
                 prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
             );
-        }, 0),
-        { language: locale.value, units: ['h', 'm'] }
+        }, 0)
     );
 });
+const breaks = computed(() => {
+    return activities.value.reduce((prev: number, curr: Activity) => {
+        return prev + curr.breakMins * 60 * 1000;
+    }, 0);
+});
+
+function getHumanizedDuration(
+    duration: number,
+    units: humanizeDuration.Unit[] = ['h', 'm']
+) {
+    return humanizeDuration(duration, {
+        language: locale.value,
+        units: units,
+    });
+}
+
+function getDurationOrDash(from: Date, to: Date) {
+    if (!from || !to) {
+        return ' - ';
+    }
+    return getHumanizedDuration(to.getTime() - from.getTime());
+}
 
 function loadActivities() {
     loaded.value = false;
@@ -256,10 +289,12 @@ defineExpose({
         width: 100% !important;
         height: 100%;
     }
+
     #row .col {
         padding: 0;
         width: 100%;
     }
+
     #row {
         display: block;
     }

@@ -57,7 +57,7 @@ const de = {
     duration: 'Dauer',
     language: 'Sprache | Sprachen',
 
-    break: 'Pause/Unterbrechung',
+    break: 'Pause',
 
     download: 'Herunterladen',
     search: 'Suchen',
