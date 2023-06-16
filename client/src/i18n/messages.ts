@@ -72,6 +72,11 @@ const de = {
 
     from: 'Von',
     to: 'Bis',
+
+    languages: {
+        de: 'Deutsch',
+        en: 'Englisch',
+    },
 };
 
 const en = {
@@ -146,6 +151,11 @@ const en = {
 
     from: 'From',
     to: 'To',
+
+    languages: {
+        de: 'German',
+        en: 'English',
+    },
 };
 
 export default {
