@@ -14,6 +14,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
   server:
     image: ghcr.io/educorvi/timeclicker:1-latest
+    restart: always
     depends_on:
       - db
     build:
