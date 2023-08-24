@@ -21,7 +21,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
               with:
-                  ref: ${{ github.ref_name }}
+                  ref: ${{ github.event_name != 'pull_request' && github.ref_name || '' }}
             - name: Get Versions
               run: '.github/exportVersions.sh server/package.json'
             - name: Set up QEMU
