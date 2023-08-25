@@ -12482,7 +12482,7 @@ __metadata:
     swagger-ui-express: ^4.6.3
     ts-node: ^10.9.1
     tslib: ^2.6.2
-    tslog: ^4.9.1
+    tslog: ^4.9.2
     tsoa: ^5.1.1
     typeorm: ^0.3.17
     typeorm-extension: ^3.0.1
@@ -12683,10 +12683,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslog@npm:^4.9.1":
-  version: 4.9.1
-  resolution: "tslog@npm:4.9.1"
-  checksum: 1791106b1ba3dfaae8543f1c37e1f5e15e027c13c6dc0b0d5f3b852dbcb367c7fa0260b55d309e42468d46dca999b0d6e10e4d7493114d7d7c4a1cf1cd595b28
+"tslog@npm:^4.9.2":
+  version: 4.9.2
+  resolution: "tslog@npm:4.9.2"
+  checksum: 702e45647a68b127d63c5eb63a0f322af8d01f17b689127d32238d6ca2ef76889648a00b88c040430e3126acedef070022b20ebd81823879ba3766cf5188c868
   languageName: node
   linkType: hard
 
