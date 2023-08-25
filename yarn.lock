@@ -7900,13 +7900,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keycloak-js@npm:^20.0.5":
-  version: 20.0.5
-  resolution: "keycloak-js@npm:20.0.5"
+"keycloak-js@npm:^22.0.1":
+  version: 22.0.1
+  resolution: "keycloak-js@npm:22.0.1"
   dependencies:
     base64-js: ^1.5.1
     js-sha256: ^0.9.0
-  checksum: 1712313c248139241cca881594ed408957df90703010a6f79bd5ab4dfc824f74c7067cc9ccc954357572cb07855f948ffe44e8aafb722ffd6c187419e211d7af
+  checksum: 09375a1790c428262143252a73de8ea25f390470daf282cc4c7f02832a6e6d3db87282d1c1d24a7e1f38ea7cc2f63c0fbabba14282af06f6e65ec7c9c459fcc8
   languageName: node
   linkType: hard
 
@@ -12415,7 +12415,7 @@ __metadata:
     eslint-plugin-vue: ^9.17.0
     file-saver: ^2.0.5
     humanize-duration: ^3.29.0
-    keycloak-js: ^20.0.5
+    keycloak-js: ^22.0.1
     license-downloader: ^1.0.8
     license-report: ^6.4.0
     npm-run-all: ^4.1.5
