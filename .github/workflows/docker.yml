@@ -3,6 +3,8 @@ name: Build Docker
 on:
     workflow_dispatch:
     workflow_call:
+    pull_request:
+      branches: [ main, develop ]
 #    schedule:
 #        - cron: '12 22 * * 1,2,3,4,5'
 
@@ -19,7 +21,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
               with:
-                  ref: ${{ github.ref_name }}
+                  ref: ${{ github.event_name != 'pull_request' && github.ref_name || '' }}
             - name: Get Versions
               run: '.github/exportVersions.sh server/package.json'
             - name: Set up QEMU
@@ -54,7 +56,7 @@ jobs:
               with:
                   context: .
                   #          platforms: linux/amd64,linux/arm64
-                  push: true
+                  push: ${{ github.event_name != 'pull_request' }}
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha

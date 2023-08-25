@@ -42,6 +42,8 @@ const de = {
         users_failed: 'Nutzer konnten nicht geladen werden!',
         token_refresh:
             'Anmeldetoken konnte nicht erneuert werden. Bitte melden Sie sich erneut an.',
+        auth_endpoint:
+            'Informationen zur Anmeldung konnten nicht geladen werden. Bitte laden Sie die Seite neu',
     },
 
     error: 'Fehler',
@@ -121,6 +123,8 @@ const en = {
         tasks_failed: 'Tasks could not be loaded!',
         users_failed: 'Users could not be loaded!',
         token_refresh: 'Failed to refresh token. Please login again...',
+        auth_endpoint:
+            'Information about the authentication endpoint could not be loaded. Please reload the page',
     },
 
     error: 'Error | Errors',

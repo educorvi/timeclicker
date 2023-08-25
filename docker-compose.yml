@@ -25,6 +25,5 @@ services:
       DB_PORT: 5432
     env_file:
       - server/.env
-      - client/.env
     ports:
       - "3000:3000"
