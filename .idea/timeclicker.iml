@@ -8,6 +8,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.yarn" />
       <excludeFolder url="file://$MODULE_DIR$/client/dist" />
       <excludeFolder url="file://$MODULE_DIR$/client/dev-dist" />
+      <excludeFolder url="file://$MODULE_DIR$/server/build" />
+      <excludeFolder url="file://$MODULE_DIR$/server/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
