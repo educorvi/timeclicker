@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@vue/compat": "^3.3.4",
-    "axios": "^1.4.0",
+    "axios": "^1.5.0",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
     "bootswatch": "^4.6.2",
