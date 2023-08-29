@@ -17,7 +17,7 @@
         {{ t('total') }}: {{ hours }}
         <br />
         <span v-if="breaks" class="text-muted">
-            (-{{ getHumanizedDuration(breaks) }} {{ t('break') }})
+            (+{{ getHumanizedDuration(breaks) }} {{ t('break') }})
         </span>
     </p>
 
@@ -49,14 +49,15 @@
                                 {{
                                     getDurationOrDash(
                                         activity.from,
-                                        activity.to
+                                        activity.to,
+                                        activity.breakMins * 60 * 1000
                                     )
                                 }}
                                 <span
                                     v-if="activity.breakMins"
                                     class="text-muted"
                                 >
-                                    (-{{
+                                    (+{{
                                         getHumanizedDuration(
                                             activity.breakMins * 60 * 1000,
                                             ['m']
@@ -170,19 +171,20 @@ const monthOptions = computed(() =>
 const years = ref<Array<number>>([]);
 const year = ref(new Date().getFullYear());
 
+const breaks = computed(() => {
+    return activities.value.reduce((prev: number, curr: Activity) => {
+        return prev + curr.breakMins * 60 * 1000;
+    }, 0);
+});
+
 const hours = computed(() => {
     return getHumanizedDuration(
         activities.value.reduce((prev: number, curr: Activity) => {
             return (
                 prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
             );
-        }, 0)
+        }, 0) - (breaks.value || 0)
     );
-});
-const breaks = computed(() => {
-    return activities.value.reduce((prev: number, curr: Activity) => {
-        return prev + curr.breakMins * 60 * 1000;
-    }, 0);
 });
 
 function getHumanizedDuration(
@@ -195,11 +197,17 @@ function getHumanizedDuration(
     });
 }
 
-function getDurationOrDash(from: Date | null, to: Date | null) {
+/**
+ * Returns duration between `from` and `to` (minus `sub`, if specified)
+ * @param from
+ * @param to
+ * @param sub
+ */
+function getDurationOrDash(from: Date | null, to: Date | null, sub = 0) {
     if (!from || !to) {
         return ' - ';
     }
-    return getHumanizedDuration(to.getTime() - from.getTime());
+    return getHumanizedDuration(to.getTime() - from.getTime() - sub);
 }
 
 function loadActivities() {
