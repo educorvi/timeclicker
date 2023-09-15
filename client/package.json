@@ -27,7 +27,7 @@
     "swagger-ui": "^4.19.1",
     "swagger-ui-dist": "^4.19.1",
     "vue": "^3.3.4",
-    "vue-i18n": "^9.3.0",
+    "vue-i18n": "^9.4.1",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
