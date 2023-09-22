@@ -54,6 +54,6 @@
         "tslog": "^4.9.2",
         "tsoa": "^5.1.1",
         "typeorm": "^0.3.17",
-        "typeorm-extension": "^3.0.1"
+        "typeorm-extension": "^3.0.2"
     }
 }
