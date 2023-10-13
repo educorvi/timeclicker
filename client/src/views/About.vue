@@ -109,10 +109,10 @@ onMounted(() => {
             // insert Divider between versions
             .replace(/\n(?=# \[timeclicker_client-)/g, '\n___\n\n')
             // strip "timeclicker_client" from version name
-            .replace(/(?<=# \[)timeclicker_client-(?=v\d\.\d\.\d\])/g, '')
+            .replace(/(?<=# \[)timeclicker_client-(?=v\d+\.\d+\.\d+\])/g, '')
             // replace link to GitHub compare with link to GitHub release
             .replace(
-                /https:\/\/github\.com\/educorvi\/timeclicker\/compare\/timeclicker_client-v\d\.\d\.\d\.\.\.(?=timeclicker_client-v\d\.\d\.\d)/g,
+                /https:\/\/github\.com\/educorvi\/timeclicker\/compare\/timeclicker_client-v\d+\.\d+\.\d+\.\.\.(?=timeclicker_client-v\d+\.\d+\.\d+)/g,
                 'https://github.com/educorvi/timeclicker/releases/tag/'
             );
         const converter = new Converter();
