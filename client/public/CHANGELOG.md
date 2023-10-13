@@ -1,3 +1,15 @@
+# [timeclicker_client-v1.12.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.11.0...timeclicker_client-v1.12.0) (2023-10-13)
+
+
+### Bug Fixes
+
+* fix changelog regex ([5121039](https://github.com/educorvi/timeclicker/commit/5121039cf255a570c6bff8e9ece5df6f18e0fc76))
+
+
+### Features
+
+* show break time extra and subtract from time in overview ([2b5887a](https://github.com/educorvi/timeclicker/commit/2b5887a80c0a539de0fc7126f06375c8f6f0e324))
+
 # [timeclicker_client-v1.10.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.9.1...timeclicker_client-v1.10.0) (2023-06-16)
 
 
