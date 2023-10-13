@@ -12691,7 +12691,6 @@ __metadata:
     swagger-ui: ^4.19.1
     swagger-ui-dist: ^4.19.1
     typescript: ~5.2.2
-    vite: ^4.4.9
     vite: ^4.4.11
     vite-plugin-pwa: ^0.16.5
     vue: ^3.3.4
@@ -12729,8 +12728,8 @@ __metadata:
     tslog: ^4.9.2
     tsoa: ^5.1.1
     typeorm: ^0.3.17
-    typescript: ^5.2.2
     typeorm-extension: ^3.0.2
+    typescript: ^5.2.2
   bin:
     timeclicker_server: dist/src/index.js
   languageName: unknown
