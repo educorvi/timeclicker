@@ -2802,15 +2802,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/time@npm:^8.2.6":
-  version: 8.2.6
-  resolution: "@size-limit/time@npm:8.2.6"
+"@size-limit/time@npm:^10.0.2":
+  version: 10.0.2
+  resolution: "@size-limit/time@npm:10.0.2"
   dependencies:
     estimo: ^2.3.6
-    react: ^17.0.2
   peerDependencies:
-    size-limit: 8.2.6
-  checksum: 4f7f3c48deebb329db549756ab2afa14a1debb715ee8a596a0ff0dc3f102bf5251b43a3534d834b873e5eaa4b9402eacb15dcaafe29f6b0dec6dcc2af9bda46b
+    size-limit: 10.0.2
+  checksum: 6fb6fe425da6b6a5f14b4a92176f92e4eec60db1c3cbed2b739f39c534af8a2dab8cddff07eff41f12d747f9016b90a79fdddcf9e13a6833b7e4f346390198e8
   languageName: node
   linkType: hard
 
@@ -12074,7 +12073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:=17.0.2, react@npm:^17.0.2":
+"react@npm:=17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -13850,7 +13849,7 @@ __metadata:
     "@semantic-release/npm": ^9.0.2
     "@semantic-release/release-notes-generator": ^9.0.3
     "@size-limit/file": ^8.2.6
-    "@size-limit/time": ^8.2.6
+    "@size-limit/time": ^10.0.2
     "@tsconfig/node-lts": ^18.12.5
     "@types/file-saver": ^2.0.6
     "@types/humanize-duration": ^3.27.2
