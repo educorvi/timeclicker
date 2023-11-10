@@ -16,7 +16,7 @@
   "dependencies": {
     "@tsconfig/node-lts": "^18.12.5",
     "@vue/compat": "^3.3.4",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
     "bootswatch": "^4.6.2",
