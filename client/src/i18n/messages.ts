@@ -35,6 +35,9 @@ const de = {
     apidocs: 'API Dokumentation',
     load_swaggerui: 'SwaggerUI wird geladen...',
 
+    show_note: 'Notiz anzeigen',
+    hide_note: 'Notiz verbergen',
+
     errors: {
         saving_failed: 'Speichern fehlgeschlagen!',
         act_failed: 'Aktivitäten konnten nicht geladen werden!',
@@ -116,6 +119,9 @@ const en = {
     about: 'About',
     apidocs: 'API Documentation',
     load_swaggerui: 'Loading SwaggerUI...',
+
+    show_note: 'Show note',
+    hide_note: 'Hide note',
 
     errors: {
         saving_failed: 'Failed to save!',

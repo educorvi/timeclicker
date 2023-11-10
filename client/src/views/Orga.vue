@@ -52,7 +52,36 @@
             :items="tableActivities"
             :fields="fields"
             primary-key="id"
-        ></b-table>
+        >
+            <template #cell(from)="row">
+                {{
+                    row.item.from
+                        ? new Date(row.item.from).toLocaleString()
+                        : '-'
+                }}
+            </template>
+            <template #cell(to)="row">
+                {{ row.item.to ? new Date(row.item.to).toLocaleString() : '-' }}
+            </template>
+            <template #cell(duration)="row">
+                {{
+                    humanizeDuration(
+                        (row.item.to || 0) - (row.item.from || 0),
+                        { language: i18Lang, units: ['h', 'm'] }
+                    )
+                }}
+            </template>
+            <template #cell(show_details)="row">
+                <b-button size="sm" @click="row.toggleDetails" class="mr-2">
+                    {{ row.detailsShowing ? t('hide_note') : t('show_note') }}
+                </b-button>
+            </template>
+            <template #row-details="row">
+                <b-card :header="t('note')">
+                    {{ row.item.note }}
+                </b-card>
+            </template>
+        </b-table>
     </div>
     <custom-spinner v-else />
 </template>
@@ -91,6 +120,8 @@ const to = ref(lastOfMonth.toISOString().split('T')[0]);
 
 const { t, locale } = useI18n();
 
+const i18Lang = ref(locale.value);
+
 onMounted(() => {
     axios
         .get(import.meta.env.VITE_API_ENDPOINT + 'tasks')
@@ -127,6 +158,7 @@ function userFilterChange(newUsers: TagOption[]) {
 function loadActivities() {
     const startDate = new Date(from.value);
     const endDate = new Date(to.value);
+    startDate.setHours(0, 0, 0, 0);
     endDate.setHours(23, 59, 59, 999);
     axios
         .get(import.meta.env.VITE_API_ENDPOINT + 'orga/activities', {
@@ -166,12 +198,8 @@ const tableActivities = computed(() =>
     activities.value.map((a) => {
         return {
             ...a,
-            to: a.to?.toLocaleString(),
-            from: a.from?.toLocaleString(),
-            duration: humanizeDuration(
-                (a.to?.getTime() || 0) - (a.from?.getTime() || 0),
-                { language: locale.value, units: ['h', 'm'] }
-            ),
+            to: a.to?.getTime(),
+            from: a.from?.getTime(),
         };
     })
 );
@@ -201,6 +229,11 @@ const fields = ref([
         key: 'to',
         label: t('to'),
         sortable: true,
+    },
+    {
+        label: t('note'),
+        key: 'show_details',
+        sortable: false,
     },
 ]);
 
