@@ -1,3 +1,10 @@
+# [timeclicker_client-v1.12.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.12.0...timeclicker_client-v1.12.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* improve orga table ([68c7c80](https://github.com/educorvi/timeclicker/commit/68c7c80ed315fd1545e7c4f874a9f3bb112aa83f))
+
 # [timeclicker_client-v1.12.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.11.0...timeclicker_client-v1.12.0) (2023-10-13)
 
 
