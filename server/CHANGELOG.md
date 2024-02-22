@@ -1,30 +1,26 @@
 # [timeclicker_server-v1.7.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.7.0...timeclicker_server-v1.7.1) (2023-04-24)
 
-
 ### Bug Fixes
 
-* fix vulnerability ([a0b5007](https://github.com/educorvi/timeclicker/commit/a0b5007d07d8296d4b8e7771d5b4a83e68e62ee0))
+-   fix vulnerability ([a0b5007](https://github.com/educorvi/timeclicker/commit/a0b5007d07d8296d4b8e7771d5b4a83e68e62ee0))
 
 # [timeclicker_server-v1.7.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.2...timeclicker_server-v1.7.0) (2023-04-14)
 
-
 ### Bug Fixes
 
-* remove private note on orga-endpoint ([503dd04](https://github.com/educorvi/timeclicker/commit/503dd0423f6c8268bb72569bfb8f3cb1439b3c7f))
-
+-   remove private note on orga-endpoint ([503dd04](https://github.com/educorvi/timeclicker/commit/503dd0423f6c8268bb72569bfb8f3cb1439b3c7f))
 
 ### Features
 
-* add unauthenticated api endpoint for pinging and version information ([8f76130](https://github.com/educorvi/timeclicker/commit/8f76130478fcc8f7c1dc34b56c608f14928c0ffe))
-* serve modified swaggerUI in client with authentication ([a3deb6f](https://github.com/educorvi/timeclicker/commit/a3deb6f0c6cfd5612a7f85014dbb582a206f7a31))
-* serve swaggerUI ([db54c31](https://github.com/educorvi/timeclicker/commit/db54c3153f48c104357cd331dead145f43afb452))
+-   add unauthenticated api endpoint for pinging and version information ([8f76130](https://github.com/educorvi/timeclicker/commit/8f76130478fcc8f7c1dc34b56c608f14928c0ffe))
+-   serve modified swaggerUI in client with authentication ([a3deb6f](https://github.com/educorvi/timeclicker/commit/a3deb6f0c6cfd5612a7f85014dbb582a206f7a31))
+-   serve swaggerUI ([db54c31](https://github.com/educorvi/timeclicker/commit/db54c3153f48c104357cd331dead145f43afb452))
 
 # [timeclicker_server-v1.6.2](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.1...timeclicker_server-v1.6.2) (2023-04-12)
 
-
 ### Bug Fixes
 
-* fix CVE-2023-0842 ([0e7f577](https://github.com/educorvi/timeclicker/commit/0e7f577bfef23e818dcb784caf938b1cdc9a7797))
+-   fix CVE-2023-0842 ([0e7f577](https://github.com/educorvi/timeclicker/commit/0e7f577bfef23e818dcb784caf938b1cdc9a7797))
 
 # [timeclicker_server-v1.6.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.6.0...timeclicker_server-v1.6.1) (2023-04-05)
 
