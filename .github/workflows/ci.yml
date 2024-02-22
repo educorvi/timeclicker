@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [ 16.x, 18.x ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,10 +26,25 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - run: yarn workspaces foreach run build
+  rebase:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: 'main'
+      - name: Rebase develop
+        run: |
+          git checkout develop
+          git rebase main
+          git push
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
+    needs: [ build, rebase ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -75,22 +90,8 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: [ release ]
     uses: ./.github/workflows/docker.yml
-  rebase:
-    needs: [ release ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: 'main'
-      - name: Rebase develop
-        run: |
-          git checkout develop
-          git rebase main
-          git push
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [release, docker]
+    needs: [ release, docker ]
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
