@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@tsconfig/node-lts": "^18.12.5",
-    "@vue/compat": "^3.4.19",
+    "@vue/compat": "^3.4.21",
     "axios": "^1.6.7",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
@@ -24,10 +24,10 @@
     "keycloak-js": "^20.0.5",
     "pinia": "^2.1.6",
     "showdown": "^2.1.0",
-    "swagger-ui": "^5.11.7",
+    "swagger-ui": "^5.11.8",
     "swagger-ui-dist": "^4.19.1",
-    "vue": "^3.4.19",
-    "vue-i18n": "^9.9.1",
+    "vue": "^3.4.21",
+    "vue-i18n": "^9.10.1",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
