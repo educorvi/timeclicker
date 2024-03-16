@@ -13424,10 +13424,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swagger-ui-dist@npm:^4.19.1":
-  version: 4.19.1
-  resolution: "swagger-ui-dist@npm:4.19.1"
-  checksum: ea3c2569e2710a36d2c240cc9159ccc2f4c39edfbbccc0ceedb868257bf2c1597aae6212dc6664572c2d39f3fa88629032373fccd2465aa137c08fb320afeccd
+"swagger-ui-dist@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "swagger-ui-dist@npm:5.12.0"
+  checksum: 4e850b3ace18e3819edee43aaaccc2155a8ed985551acce5eee2a5fad3300eeea41e25343c69ed5aa8790ae4e7b9db30913d3661b720a4088238aebaab29b2dd
   languageName: node
   linkType: hard
 
@@ -13725,7 +13725,7 @@ __metadata:
     semantic-release-monorepo: ^7.0.5
     showdown: ^2.1.0
     swagger-ui: ^5.11.8
-    swagger-ui-dist: ^4.19.1
+    swagger-ui-dist: ^5.12.0
     typescript: ~5.3.3
     vite: ^4.5.2
     vite-plugin-pwa: ^0.19.2
