@@ -58,7 +58,7 @@
     "semantic-release": "^22.0.12",
     "semantic-release-monorepo": "^7.0.5",
     "typescript": "~5.3.3",
-    "vite": "^4.5.2",
+    "vite": "^4.5.3",
     "vite-plugin-pwa": "^0.19.2",
     "vue-tsc": "~1.8.27"
   }
