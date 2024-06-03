@@ -2737,10 +2737,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/eslint-patch@npm:^1.10.2":
-  version: 1.10.2
-  resolution: "@rushstack/eslint-patch@npm:1.10.2"
-  checksum: 2bac46e0f662c6b9c1f1d2268e4165a779331b9229eaeeb360852feaecdc5cb4adf8e1a36ac510b3545a83f83de702811b984afe26ec7d4a79e1c0ea708e2bfe
+"@rushstack/eslint-patch@npm:^1.10.3":
+  version: 1.10.3
+  resolution: "@rushstack/eslint-patch@npm:1.10.3"
+  checksum: 1042779367ee102576a3c132f052d718d7111fee9f815758a72b21e8145620f7d3403c14fcde3b4cfa1cbc14b08b8519151ff77d0f353bf647f0a0a16eafdef5
   languageName: node
   linkType: hard
 
@@ -4092,19 +4092,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-core@npm:3.4.26":
-  version: 3.4.26
-  resolution: "@vue/compiler-core@npm:3.4.26"
-  dependencies:
-    "@babel/parser": ^7.24.4
-    "@vue/shared": 3.4.26
-    entities: ^4.5.0
-    estree-walker: ^2.0.2
-    source-map-js: ^1.2.0
-  checksum: fad7da0d370b46eb8e501297b56c50053e60c2b36f39ba1b032e7505aa9abca820cadca5b8a4fd4cc2e37a305c1d1f32d368caf523beac4a797e084ae84b9ece
-  languageName: node
-  linkType: hard
-
 "@vue/compiler-core@npm:3.4.27":
   version: 3.4.27
   resolution: "@vue/compiler-core@npm:3.4.27"
@@ -4115,16 +4102,6 @@ __metadata:
     estree-walker: ^2.0.2
     source-map-js: ^1.2.0
   checksum: 7e32dd5d6046be56226b8567ba425df48d67d652bb2ca30ca674955dd4ded546cb9bfefe6a3fca6b2e3294b3fcc2025311982293e9f703b18aded642833987f4
-  languageName: node
-  linkType: hard
-
-"@vue/compiler-dom@npm:3.4.26":
-  version: 3.4.26
-  resolution: "@vue/compiler-dom@npm:3.4.26"
-  dependencies:
-    "@vue/compiler-core": 3.4.26
-    "@vue/shared": 3.4.26
-  checksum: 7115b784333dac778ace54fb3a5d880774a1b7cc064fcb5cc5ef3d77565697156dc11d42e4baab330f3aafa264a4078fe1f52e755e0f99a4435e23b5f0319211
   languageName: node
   linkType: hard
 
@@ -4148,7 +4125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-sfc@npm:3.4.27":
+"@vue/compiler-sfc@npm:3.4.27, @vue/compiler-sfc@npm:^3.4.27":
   version: 3.4.27
   resolution: "@vue/compiler-sfc@npm:3.4.27"
   dependencies:
@@ -4162,33 +4139,6 @@ __metadata:
     postcss: ^8.4.38
     source-map-js: ^1.2.0
   checksum: 9f8a05eb715a4752a51a2715c14e0f5b6175ce967b8851438f4ea3ba392b74edda227a067dc1e85625340f653f43bf69fbb80683a7a6c97c4d7eb4fcd4888013
-  languageName: node
-  linkType: hard
-
-"@vue/compiler-sfc@npm:^3.4.26":
-  version: 3.4.26
-  resolution: "@vue/compiler-sfc@npm:3.4.26"
-  dependencies:
-    "@babel/parser": ^7.24.4
-    "@vue/compiler-core": 3.4.26
-    "@vue/compiler-dom": 3.4.26
-    "@vue/compiler-ssr": 3.4.26
-    "@vue/shared": 3.4.26
-    estree-walker: ^2.0.2
-    magic-string: ^0.30.10
-    postcss: ^8.4.38
-    source-map-js: ^1.2.0
-  checksum: 332b250d2f61aea487f5b4bce54b5c1d8c620fb2f5778edd5f148699cfb1e3d7a5d80d1746cb8571314578c5319f7ef4fadfdfe2294f90d7bb818c73af63e30e
-  languageName: node
-  linkType: hard
-
-"@vue/compiler-ssr@npm:3.4.26":
-  version: 3.4.26
-  resolution: "@vue/compiler-ssr@npm:3.4.26"
-  dependencies:
-    "@vue/compiler-dom": 3.4.26
-    "@vue/shared": 3.4.26
-  checksum: 0d674f07b6a9ef66b355d31a32e41122ca12f4e5aaf18d15bbf3af57a4554a5e89eec859bc97fa3b1d17bbd77bf196a639137a056cbabdf6ae792349af689c8a
   languageName: node
   linkType: hard
 
@@ -4315,13 +4265,6 @@ __metadata:
   version: 3.3.8
   resolution: "@vue/shared@npm:3.3.8"
   checksum: d5bd795977c885017498e839f5462bc2b046fb4a4c4bf925b82ac0eaf883c1cf9203d69f17160f7be7b3c1d9acb5513d57010b401407b63f3c36c7af87778fae
-  languageName: node
-  linkType: hard
-
-"@vue/shared@npm:3.4.26":
-  version: 3.4.26
-  resolution: "@vue/shared@npm:3.4.26"
-  checksum: 4f9c785d13b532473f99d5d950ab3887919b88c18510995d818a4a736c61878e5c738d228a9876285e73a156f9220422c6e9ac21cf655c33c846bda5a185f526
   languageName: node
   linkType: hard
 
@@ -6621,9 +6564,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:^9.25.0":
-  version: 9.25.0
-  resolution: "eslint-plugin-vue@npm:9.25.0"
+"eslint-plugin-vue@npm:^9.26.0":
+  version: 9.26.0
+  resolution: "eslint-plugin-vue@npm:9.26.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
     globals: ^13.24.0
@@ -6635,7 +6578,7 @@ __metadata:
     xml-name-validator: ^4.0.0
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
-  checksum: 4685ea8b3feaa4dd9bf81edf4bd15493504a67ef5ba83b095ed41117bc816d21c111f4c39b6a82024f7d5c6950a7f13457bada26453a3835989221ff68e34ad1
+  checksum: 407a35eb84101cc70f2a622ada1ee561bc63325806764809cd6fb2e9be230e5a8911b960fb2fd4b166d9dff1d202dd6a6cf82b80be52a0458fb422943f732f2c
   languageName: node
   linkType: hard
 
@@ -10250,9 +10193,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "nodemon@npm:3.1.0"
+"nodemon@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "nodemon@npm:3.1.2"
   dependencies:
     chokidar: ^3.5.2
     debug: ^4
@@ -10266,7 +10209,7 @@ __metadata:
     undefsafe: ^2.0.5
   bin:
     nodemon: bin/nodemon.js
-  checksum: 0b721f66ee60d9bf092f6101965bc65769698fa2921d0283d90bbf3f0906aa4f3ac77316682375bd7f09c91679fddb131aa39f9fc839fea57061bbc8e81b60e3
+  checksum: 8ab01dcf970c66d9910ede58db7c24afca4839eaaadbeebbfac4b5f755cc8ba9fa72e0e2c1f14ef5081514d3b9c37888426d896b356adbe0450ccb5b461de0b9
   languageName: node
   linkType: hard
 
@@ -11651,12 +11594,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.2.5, prettier@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "prettier@npm:3.2.5"
+"prettier@npm:3.3.0, prettier@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "prettier@npm:3.3.0"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 2ee4e1417572372afb7a13bb446b34f20f1bf1747db77cf6ccaf57a9be005f2f15c40f903d41a6b79eec3f57fff14d32a20fb6dee1f126da48908926fe43c311
+  checksum: 0d3a7fca9cab29828e189fefc10e8f6025d1208c84cd1e94def8a8f8a04eea341aa21d0af8c01253527632f8225b0b8482a62b64cafa26e9988cd6f9ff16a38b
   languageName: node
   linkType: hard
 
@@ -12681,16 +12624,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.76.0":
-  version: 1.76.0
-  resolution: "sass@npm:1.76.0"
+"sass@npm:^1.77.4":
+  version: 1.77.4
+  resolution: "sass@npm:1.77.4"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 5f3fa7e7a1be09b7cea842a397fb07b9413fa9903bf82ead2ea059aa56faea534c2a84ede5a140103ee18a1dec9162b2fa1413fe71bbe8f8074712bf3bd3a8c7
+  checksum: 415d76960e35d78310ffc33bc61fdb2b35a54bb2823dfc4eff50eee960096dacc210d7ef7ae6695120e1a4f005f269719c34d58c77c54ff7787516bda6a89e55
   languageName: node
   linkType: hard
 
@@ -13861,7 +13804,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "timeclicker@workspace:."
   dependencies:
-    prettier: 3.2.5
+    prettier: 3.3.0
   languageName: unknown
   linkType: soft
 
@@ -13869,7 +13812,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "timeclicker_client@workspace:client"
   dependencies:
-    "@rushstack/eslint-patch": ^1.10.2
+    "@rushstack/eslint-patch": ^1.10.3
     "@semantic-release/changelog": ^6.0.3
     "@semantic-release/commit-analyzer": ^9.0.2
     "@semantic-release/github": ^8.1.0
@@ -13884,7 +13827,7 @@ __metadata:
     "@types/swagger-ui-dist": ^3.30.1
     "@vitejs/plugin-vue": ^4.5.2
     "@vue/compat": ^3.4.27
-    "@vue/compiler-sfc": ^3.4.26
+    "@vue/compiler-sfc": ^3.4.27
     "@vue/eslint-config-prettier": ^8.0.0
     "@vue/eslint-config-typescript": ^11.0.3
     "@vue/tsconfig": ^0.4.0
@@ -13893,7 +13836,7 @@ __metadata:
     bootstrap-vue: ^2.23.1
     bootswatch: ^4.6.2
     eslint: ^8.57.0
-    eslint-plugin-vue: ^9.25.0
+    eslint-plugin-vue: ^9.26.0
     file-saver: ^2.0.5
     humanize-duration: ^3.32.1
     keycloak-js: ^20.0.5
@@ -13901,8 +13844,8 @@ __metadata:
     license-report: ^6.5.0
     npm-run-all: ^4.1.5
     pinia: ^2.1.6
-    prettier: ^3.2.5
-    sass: ^1.76.0
+    prettier: ^3.3.0
+    sass: ^1.77.4
     semantic-release: ^22.0.12
     semantic-release-monorepo: ^7.0.5
     showdown: ^2.1.0
@@ -13938,7 +13881,7 @@ __metadata:
     express: ^4.19.2
     express-rate-limit: ^6.11.1
     keycloak-backend: ^5.0.0
-    nodemon: ^3.1.0
+    nodemon: ^3.1.2
     pg: ^8.11.5
     reflect-metadata: ^0.2.2
     semantic-release: ^22.0.12
