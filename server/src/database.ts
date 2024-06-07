@@ -7,6 +7,7 @@ import Task from './classes/Task';
 import { createDatabase } from 'typeorm-extension';
 import type { Logger } from 'typeorm';
 import { logger } from './globals';
+import ContractData from './classes/ContractData';
 
 class TypeOrmLogger implements Logger {
     log(
@@ -105,8 +106,10 @@ export default class Database {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User, Activity, Task],
-            migrations: [__dirname + '/../migrations/*.js'],
+            entities: [ContractData, User, Activity, Task],
+            migrations: [
+                __dirname + '/../migrations/*.js'
+            ],
             migrationsTransactionMode: 'all',
             logging: 'all',
             logger: new TypeOrmLogger(),
