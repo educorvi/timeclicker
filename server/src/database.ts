@@ -107,7 +107,6 @@ export default class Database {
             database: this.database,
             entities: [User, Activity, Task],
             migrations: [__dirname + '/../migrations/*.js'],
-            // migrationsRun: true,
             migrationsTransactionMode: 'all',
             logging: 'all',
             logger: new TypeOrmLogger(),
