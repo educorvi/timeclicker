@@ -80,6 +80,7 @@ export default class Database {
     private userRepository: Repository<User>;
     private tasksRepository: Repository<Task>;
     private activityRepository: Repository<Activity>;
+    private hoursRepository: Repository<WorkingHours>;
 
     constructor(
         username: string,
@@ -123,6 +124,7 @@ export default class Database {
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);
+        this.hoursRepository = this.AppDataSource.getRepository(WorkingHours);
     }
 
     async getUser(id: string): Promise<User | null> {
@@ -179,6 +181,10 @@ export default class Database {
 
     async getActivities(options?: FindManyOptions<Activity>) {
         return this.activityRepository.find(options);
+    }
+
+    async getHours(options?: FindManyOptions<WorkingHours>) {
+        return this.hoursRepository.find(options);
     }
 
     async getActivity(id: string): Promise<Activity | null> {

@@ -4067,7 +4067,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compat@npm:^3.4.27":
+"@vue/compat@npm:3.4.27":
   version: 3.4.27
   resolution: "@vue/compat@npm:3.4.27"
   dependencies:
@@ -13883,7 +13883,7 @@ __metadata:
     "@types/swagger-ui": ^3.52.0
     "@types/swagger-ui-dist": ^3.30.1
     "@vitejs/plugin-vue": ^4.5.2
-    "@vue/compat": ^3.4.27
+    "@vue/compat": 3.4.27
     "@vue/compiler-sfc": ^3.4.26
     "@vue/eslint-config-prettier": ^8.0.0
     "@vue/eslint-config-typescript": ^11.0.3

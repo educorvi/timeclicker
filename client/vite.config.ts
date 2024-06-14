@@ -20,7 +20,7 @@ export default defineConfig({
             template: {
                 compilerOptions: {
                     compatConfig: {
-                        MODE: 2,
+                        MODE: 2
                     },
                 },
             },
@@ -29,6 +29,7 @@ export default defineConfig({
             registerType: 'autoUpdate',
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,txt,json}'],
+                navigateFallbackDenylist: [/^\/api\/*/],
             },
             devOptions: { enabled: true },
             manifest: {

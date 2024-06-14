@@ -15,7 +15,7 @@ export default class ContractData {
     /**
      * The user that this contract data belongs to
      */
-    @ManyToOne(() => User, (user) => user.contractData, { nullable: false, onDelete: 'CASCADE' })
+    @ManyToOne(() => User, { nullable: false, onDelete: 'CASCADE' })
     user: User;
 
     /**
