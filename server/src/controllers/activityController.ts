@@ -18,7 +18,7 @@ import type express from 'express';
 import { User } from '../classes';
 import { LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 
-async function getOrCreateUser(req: express.Request): Promise<User> {
+export async function getOrCreateUser(req: express.Request): Promise<User> {
     const tokStr = req.rawHeaders[req.rawHeaders.indexOf('token') + 1];
     if (!tokStr || req.rawHeaders.indexOf('token') === -1) {
         throw new Error('could not read token');

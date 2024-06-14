@@ -1,6 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
-import ContractData from './ContractData';
-
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 /**
  * A User of the tool
  */
@@ -23,10 +21,4 @@ export default class User {
      */
     @Column()
     name: string;
-
-    /**
-     * The contract data of the user
-     */
-    @OneToMany(() => ContractData, (contractData) => contractData.user)
-    contractData: ContractData[];
 }

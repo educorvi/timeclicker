@@ -27,6 +27,6 @@ export default class WorkingHours {
     /**
      * The user that worked the hours
      */
-    @ManyToOne(() => User, (user) => user.contractData, { nullable: false, onDelete: 'CASCADE' })
+    @ManyToOne(() => User, { nullable: false, onDelete: 'CASCADE' })
     user: User;
 }
