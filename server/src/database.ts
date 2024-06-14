@@ -1,21 +1,17 @@
 import { DataSource, Repository } from 'typeorm';
 import type { QueryRunner } from 'typeorm';
 import type { FindManyOptions } from 'typeorm';
-import User from './classes/User';
-import Activity from './classes/Activity';
-import Task from './classes/Task';
 import { createDatabase } from 'typeorm-extension';
 import type { Logger } from 'typeorm';
 import { logger } from './globals';
-import ContractData from './classes/ContractData';
-import WorkingHours from './classes/WorkingHours';
+import { User, Activity, Task, ContractData, WorkingHours, Vacation } from './classes';
 
 class TypeOrmLogger implements Logger {
     log(
         level: 'log' | 'info' | 'warn',
         message: any,
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         switch (level) {
             case 'log':
@@ -40,7 +36,7 @@ class TypeOrmLogger implements Logger {
         query: string,
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         logger.debug(query, parameters);
     }
@@ -51,7 +47,7 @@ class TypeOrmLogger implements Logger {
         query: string,
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         logger.error(error, query, parameters);
     }
@@ -63,7 +59,7 @@ class TypeOrmLogger implements Logger {
         // @ts-ignore
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         logger.debug('Slow query: ' + query + `\n(${time}ms)`);
     }
@@ -90,7 +86,7 @@ export default class Database {
         password: string,
         database: string = 'timeclicker',
         host: string = 'localhost',
-        port: number = 5432
+        port: number = 5432,
     ) {
         this.host = host;
         this.port = port;
@@ -107,9 +103,9 @@ export default class Database {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User, Activity, Task, ContractData, WorkingHours],
+            entities: [User, Activity, Task, ContractData, WorkingHours, Vacation],
             migrations: [
-                __dirname + '/../migrations/*.js'
+                __dirname + '/../migrations/*.js',
             ],
             migrationsTransactionMode: 'all',
             logging: 'all',
@@ -155,6 +151,7 @@ export default class Database {
             order: { title: 'ASC' },
         });
     }
+
     async getClosedTasks(): Promise<Array<Task>> {
         return await this.tasksRepository.find({
             where: { open: false },
