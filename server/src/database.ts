@@ -70,6 +70,8 @@ class TypeOrmLogger implements Logger {
     }
 }
 
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
 export default class Database {
     readonly host: string;
     readonly port: number;
@@ -183,10 +185,6 @@ export default class Database {
         return this.activityRepository.find(options);
     }
 
-    async getHours(options?: FindManyOptions<WorkingHours>) {
-        return this.hoursRepository.find(options);
-    }
-
     async getActivity(id: string): Promise<Activity | null> {
         return await this.activityRepository.findOne({
             where: { id },
@@ -197,7 +195,7 @@ export default class Database {
         });
     }
 
-    async createActivity(activityData: Omit<Activity, 'id'> & { id?: string }) {
+    async saveActivity(activityData: PartialBy<Activity, 'id'>) {
         let activity = new Activity();
         activity = {
             ...activity,
@@ -208,5 +206,28 @@ export default class Database {
 
     async deleteActivity(activity: Activity) {
         await this.activityRepository.delete({ id: activity.id });
+    }
+
+     async getMultipleHours(options?: FindManyOptions<WorkingHours>) {
+        return this.hoursRepository.find(options);
+    }
+
+    async getHours(id: string): Promise<WorkingHours | null> {
+        return await this.hoursRepository.findOne({
+            where: { id }
+        });
+    }
+
+    async deleteHour(hours: WorkingHours) {
+        await this.hoursRepository.delete({ id: hours.id });
+    }
+
+    async saveHour(hours: PartialBy<WorkingHours, 'id'>) {
+        let workingHour = new WorkingHours();
+        workingHour = {
+            ...workingHour,
+            ...hours,
+        };
+        await this.hoursRepository.save(workingHour);
     }
 }

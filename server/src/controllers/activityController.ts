@@ -118,7 +118,7 @@ export class ActivityController extends Controller {
             user,
             task,
         };
-        await db.createActivity(activityData);
+        await db.saveActivity(activityData);
         this.setStatus(201);
     }
 }
