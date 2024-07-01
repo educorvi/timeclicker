@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@tsconfig/node-lts": "^18.12.5",
-    "@vue/compat": "^3.4.27",
+    "@vue/compat": "^3.4.31",
     "axios": "^1.7.2",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
@@ -26,9 +26,9 @@
     "showdown": "^2.1.0",
     "swagger-ui": "^5.17.14",
     "swagger-ui-dist": "^5.17.14",
-    "vue": "^3.4.27",
+    "vue": "^3.4.31",
     "vue-i18n": "^9.13.1",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.2",
