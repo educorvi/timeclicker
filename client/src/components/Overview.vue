@@ -43,6 +43,10 @@
                                     activity.from
                                         ? d(activity.from, 'long')
                                         : ''
+                                }} - {{
+                                    activity.to
+                                        ? d(activity.to, 'time')
+                                        : ''
                                 }}
                             </h5>
                             <p class="mb-2">

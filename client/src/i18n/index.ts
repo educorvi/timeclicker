@@ -33,6 +33,10 @@ export default createI18n({
                 hour: 'numeric',
                 minute: 'numeric',
             },
+            time: {
+                hour: 'numeric',
+                minute: 'numeric',
+            }
         },
         de: {
             short: {
@@ -48,6 +52,10 @@ export default createI18n({
                 hour: 'numeric',
                 minute: 'numeric',
             },
+            time: {
+                hour: 'numeric',
+                minute: 'numeric',
+            }
         },
     },
 });
