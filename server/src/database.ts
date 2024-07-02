@@ -83,6 +83,7 @@ export default class Database {
     private tasksRepository: Repository<Task>;
     private activityRepository: Repository<Activity>;
     private hoursRepository: Repository<WorkingHours>;
+    private contractDataRepository: Repository<ContractData>;
 
     constructor(
         username: string,
@@ -127,6 +128,7 @@ export default class Database {
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);
         this.hoursRepository = this.AppDataSource.getRepository(WorkingHours);
+        this.contractDataRepository = this.AppDataSource.getRepository(ContractData);
     }
 
     async getUser(id: string): Promise<User | null> {
@@ -229,5 +231,13 @@ export default class Database {
             ...hours,
         };
         await this.hoursRepository.save(workingHour);
+    }
+
+    async getContractData(options?: FindManyOptions<ContractData>) {
+        return this.contractDataRepository.find(options);
+    }
+
+    async saveContractData(requestBody: PartialBy<ContractData, 'id'>) {
+        await this.contractDataRepository.save(requestBody);
     }
 }

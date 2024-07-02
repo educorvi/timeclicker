@@ -1,9 +1,15 @@
 import { Controller } from '@tsoa/runtime';
-import { Response, Route, Security, Request, Get, Query } from 'tsoa';
+import { Response, Route, Security, Request, Get, Query, Post, Body } from 'tsoa';
 import type express from 'express';
 import { UnauthorizedError } from '../authentication';
 import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
+import { ContractData } from '../classes';
+
+export type saveContractDataParams = Omit<ContractData, "id" | "user"> & {
+    id?: string;
+    userId: string;
+};
 
 function checkOrgaStatus(req: express.Request): void {
     const tokStr = req.rawHeaders[req.rawHeaders.indexOf('token') + 1];
@@ -64,6 +70,25 @@ export class OrgaController extends Controller {
         ).map((a) => {
             a.private_note = '';
             return a;
+        });
+    }
+
+    /**
+     * Create or update contractData. If `id` is passed in the body, the contractData with this id will be updated.
+     * @param requestBody
+     * @param req
+     */
+    @Post('contractData')
+    public async saveContractData(@Body() requestBody: saveContractDataParams, @Request() req: express.Request) {
+        checkOrgaStatus(req);
+        const user = await db.getUser(requestBody.userId);
+        if (!user) {
+            this.setStatus(400)
+            return;
+        }
+        return db.saveContractData({
+            ...requestBody,
+            user,
         });
     }
 }
