@@ -109,6 +109,13 @@ export class ActivityController extends Controller {
     ) {
         const user = await getOrCreateUser(req);
         const task = await db.getTask(requestBody.taskId);
+        if (requestBody.id) {
+            const activity = await db.getActivity(requestBody.id);
+            if (!activity || activity.user.id !== user.id) {
+                this.setStatus(401);
+                return;
+            }
+        }
         if (!(user && task)) {
             this.setStatus(400);
             return;
