@@ -43,11 +43,9 @@
                                     activity.from
                                         ? d(activity.from, 'long')
                                         : ''
-                                }} - {{
-                                    activity.to
-                                        ? d(activity.to, 'time')
-                                        : ''
                                 }}
+                                -
+                                {{ activity.to ? d(activity.to, 'time') : '' }}
                             </h5>
                             <p class="mb-2">
                                 {{
@@ -137,6 +135,7 @@ import EntryEditor from '@/components/EntryEditor.vue';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
+import { getMonthOptions, years } from '@/commons/DateUtils';
 
 const props = defineProps<{ tasks: Array<Task> }>();
 
@@ -150,29 +149,10 @@ const deleteModal = ref<InstanceType<typeof BModal> | null>(null);
 
 const loaded = ref(false);
 const activities = ref<Array<Activity>>([]);
+
+const monthOptions = getMonthOptions(t);
+
 const month = ref(new Date().getMonth() + 1);
-
-const months = [
-    t('months[0]'),
-    t('months[1]'),
-    t('months[2]'),
-    t('months[3]'),
-    t('months[4]'),
-    t('months[5]'),
-    t('months[6]'),
-    t('months[7]'),
-    t('months[8]'),
-    t('months[9]'),
-    t('months[10]'),
-    t('months[11]'),
-];
-const monthOptions = computed(() =>
-    months.map((val, index) => {
-        return { value: index + 1, text: val };
-    })
-);
-
-const years = ref<Array<number>>([]);
 const year = ref(new Date().getFullYear());
 
 const breaks = computed(() => {
@@ -278,10 +258,6 @@ watch(month, loadActivities);
 
 onMounted(() => {
     loadActivities();
-    const currYear = new Date().getFullYear();
-    for (let i = currYear; i > 2021; i--) {
-        years.value.push(i);
-    }
 });
 
 defineExpose({
