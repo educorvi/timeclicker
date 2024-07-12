@@ -19,7 +19,7 @@
                 menu-class="w-100"
             >
                 <template #button-content>
-                    <b-icon icon="tag-fill"></b-icon>
+                    <i-bi-tag-fill></i-bi-tag-fill>
                     {{ t('add_filter') }}
                 </template>
                 <b-dropdown-form @submit.stop.prevent="() => {}">
@@ -59,17 +59,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import type { Ref } from 'vue';
-import {
-    BFormGroup,
-    BFormInput,
-    BFormTags,
-    BFormTag,
-    BDropdown,
-    BDropdownForm,
-    BDropdownItemButton,
-    BDropdownText,
-    BDropdownDivider,
-} from 'bootstrap-vue';
 import { useI18n } from 'vue-i18n';
 import type { TagOption } from '@/additionalTypes';
 

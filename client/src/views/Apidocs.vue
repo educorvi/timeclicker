@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style>
+<style lang="scss">
 #swaggerUIDiv {
     /*background-color: white;*/
     /*padding: 5px;*/
@@ -77,7 +77,10 @@ onBeforeUnmount(() => {
 }
 
 .swagger-ui {
-    filter: invert(88%) hue-rotate(180deg);
+    @media (prefers-color-scheme: dark) {
+        filter: invert(88%) hue-rotate(180deg);
+    }
+
     padding-top: 5px;
     padding-bottom: 5px;
     max-width: 100%;

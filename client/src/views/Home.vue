@@ -6,7 +6,7 @@
         >
             <b-button
                 @click="showModal"
-                variant="secondary"
+                variant="primary"
                 style="max-width: 400px"
                 class="w-100"
             >
@@ -19,7 +19,6 @@
 </template>
 
 <script lang="ts" setup>
-import { BButton } from 'bootstrap-vue';
 import axios from 'axios';
 import type { Task } from 'timeclicker_server/src/libindex';
 import Overview from '@/components/Overview.vue';

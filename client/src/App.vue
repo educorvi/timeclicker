@@ -4,7 +4,7 @@
     <div id="alerts" class="alertlist">
         <TransitionGroup name="list">
             <b-alert
-                :key="error"
+                :key="error.toString()"
                 v-for="error in errorStore.errors"
                 show
                 variant="danger"
@@ -25,7 +25,7 @@
                         variant="outline-light"
                         style="width: 50px"
                     >
-                        <b-icon-x />
+                        <i-bi-x />
                     </BButton>
                 </div>
             </b-alert>
@@ -55,7 +55,6 @@ import NavTopBar from '@/components/NavTopBar.vue';
 import Keycloak from 'keycloak-js';
 import { authState, useKeycloakStore } from '@/stores/keycloak';
 import CustomSpinner from '@/components/CustomSpinner.vue';
-import { BCard, BButton, BAlert, BIconX } from 'bootstrap-vue';
 import { computed, onMounted, onUnmounted } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';

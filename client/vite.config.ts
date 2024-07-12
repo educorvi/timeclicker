@@ -3,6 +3,11 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
+import Components from 'unplugin-vue-components/vite';
+import { BootstrapVueNextResolver } from 'bootstrap-vue-next';
+import url from '@rollup/plugin-url';
+import Icons from "unplugin-icons/vite";
+import IconsResolve from 'unplugin-icons/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,14 +21,17 @@ export default defineConfig({
         },
     },
     plugins: [
-        vue({
-            template: {
-                compilerOptions: {
-                    compatConfig: {
-                        MODE: 2
-                    },
-                },
-            },
+        vue(),
+        Components({
+            resolvers: [BootstrapVueNextResolver(), IconsResolve()],
+            dts: true,
+        }),
+        url({
+            include: ['**/*.woff2'],
+        }),
+        Icons({
+            compiler: 'vue3',
+            autoInstall: true,
         }),
         VitePWA({
             registerType: 'autoUpdate',
@@ -68,7 +76,6 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
-            vue: '@vue/compat',
         },
     },
 });
