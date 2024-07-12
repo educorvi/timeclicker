@@ -1,6 +1,4 @@
-import type { Localization } from '@/i18n/messages/index';
-
-export const de: Localization = {
+export const de = {
     months: [
         'Januar',
         'Februar',

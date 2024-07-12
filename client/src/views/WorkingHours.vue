@@ -1,7 +1,7 @@
 <template>
     <div class="text-center" style="width: 100%">
         <h1 style="display: inline; width: max-content">
-            {{ t('workingHour', { count: 2 }) }}
+            {{ t('working_hour', {count: 2}) }}
         </h1>
         <div class="w-100 d-flex justify-content-center">
             <b-input-group style="max-width: 300px">
