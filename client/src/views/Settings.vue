@@ -21,7 +21,6 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { BInputGroup, BFormSelect, BFormValidFeedback } from 'bootstrap-vue';
 import messages from '@/i18n/messages';
 import { ref, watch } from 'vue';
 

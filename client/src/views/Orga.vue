@@ -87,7 +87,6 @@
 </template>
 
 <script setup lang="ts">
-import { BInputGroup, BFormInput, BCard, BTable, BButton } from 'bootstrap-vue';
 import { computed, onMounted, ref, watch } from 'vue';
 import type { Ref } from 'vue';
 import type { Task, User, Activity } from '../../../server/src/libindex';

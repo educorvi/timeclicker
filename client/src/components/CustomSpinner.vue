@@ -1,14 +1,12 @@
 <template>
     <div id="customSpinner">
-        <b-spinner />
+        <b-spinner variant="primary" />
     </div>
 </template>
 <script lang="ts">
-import { BSpinner } from 'bootstrap-vue';
 
 export default {
     name: 'customSpinner',
-    components: { BSpinner },
 };
 </script>
 

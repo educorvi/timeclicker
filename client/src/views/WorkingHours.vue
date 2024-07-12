@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { BInputGroup } from 'bootstrap-vue';
 import { getMonthOptions, years } from '@/commons/DateUtils';
 import { ref } from 'vue';
 

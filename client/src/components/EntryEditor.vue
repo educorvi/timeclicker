@@ -98,13 +98,6 @@
     </b-modal>
 </template>
 <script lang="ts" setup>
-import {
-    BFormInput as BInput,
-    BFormTextarea,
-    BButton,
-    BFormInvalidFeedback,
-    BInputGroup,
-} from 'bootstrap-vue';
 import { computed, onMounted, ref, watch } from 'vue';
 import type { ComputedRef } from 'vue';
 import type {
