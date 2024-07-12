@@ -33,7 +33,7 @@
                 type="time"
             ></b-input>
             <b-form-invalid-feedback :state="validTimes"
-                >{{ t('beg_of_entry_bef_end') }}
+            >{{ t('beg_of_entry_bef_end') }}
             </b-form-invalid-feedback>
             <label for="to-select" class="mt-3">{{ t('to') }}:</label>
             <b-input
@@ -43,7 +43,7 @@
                 type="time"
             ></b-input>
             <b-form-invalid-feedback :state="validTimes"
-                >{{ t('beg_of_entry_bef_end') }}
+            >{{ t('beg_of_entry_bef_end') }}
             </b-form-invalid-feedback>
 
             <label class="mt-3" for="breakMins">{{ t('break') }}:</label>
@@ -57,7 +57,7 @@
             </b-input-group>
             <hr />
             <label for="note-input"
-                >{{ t('note')
+            >{{ t('note')
                 }}{{
                     (
                         tasks.filter((ta) => ta.id === newData.task)[0] || {
@@ -82,7 +82,7 @@
             />
 
             <label for="private-note-input" class="mt-3"
-                >{{ t('private_note') }}:</label
+            >{{ t('private_note') }}:</label
             >
             <b-form-textarea
                 v-model="newData.private_note"
@@ -92,7 +92,7 @@
 
             <hr />
             <b-button type="submit" variant="primary" class="w-100"
-                >{{ t('save') }}
+            >{{ t('save') }}
             </b-button>
         </b-form>
     </b-modal>
@@ -104,12 +104,15 @@ import type {
     saveActivityParams,
     Task,
     Activity,
-} from '../../../server/src/libindex';
+} from 'timeclicker_server';
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
+import { useToast } from 'bootstrap-vue-next';
 
 const { t } = useI18n();
+
+const {show, remove} = useToast()
 
 const errorStore = useErrorStore();
 
@@ -182,14 +185,14 @@ const taskOptions: ComputedRef<{ value: string | null; text: string }[]> =
         ].concat(
             props.tasks.map((t) => {
                 return { value: t.id, text: t.title };
-            })
+            }),
         );
 
         // If initial data contains a task that is no longer active, add it to the dropdown
         if (
             props.initialData &&
             res.filter((f) => f.value === props.initialData?.task.id).length ===
-                0
+            0
         ) {
             res.unshift({
                 value: props.initialData?.task.id,
@@ -219,12 +222,12 @@ function onSubmit(event: Event) {
     const from = new Date(newData.value.date);
     from.setHours(
         Number.parseInt(newData.value.from.split(':')[0]),
-        Number.parseInt(newData.value.from.split(':')[1])
+        Number.parseInt(newData.value.from.split(':')[1]),
     );
     const to = new Date(newData.value.date);
     to.setHours(
         Number.parseInt(newData.value.to.split(':')[0]),
-        Number.parseInt(newData.value.to.split(':')[1])
+        Number.parseInt(newData.value.to.split(':')[1]),
     );
     if (to.getTime() < from.getTime()) {
         validTimes.value = false;
@@ -251,6 +254,15 @@ function onSubmit(event: Event) {
         })
         .catch((error) => {
             errorStore.setError(new UiError(t('errors.saving_failed'), error));
+            show?.( {
+                props: {
+                    title: t('errors.saving_failed'),
+                    variant: 'danger',
+                    value: true,
+                    pos: 'top-center'
+
+                }
+            })
         });
 }
 
@@ -268,3 +280,10 @@ defineExpose({
     setTask,
 });
 </script>
+
+<style>
+hr {
+    margin-left: calc(-1 * var(--bs-modal-padding));
+    margin-right: calc(-1 * var(--bs-modal-padding));
+}
+</style>

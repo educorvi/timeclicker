@@ -121,7 +121,7 @@ import type { Activity, Task } from 'timeclicker_server/src/libindex';
 import CustomSpinner from './CustomSpinner.vue';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
-import EntryEditor from '@/components/EntryEditor.vue';
+import EntryEditor from '@/components/ActivityEntryEditor.vue';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';

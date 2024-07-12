@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ActivityEntryEditor: typeof import('./src/components/ActivityEntryEditor.vue')['default']
     BAlert: typeof import('bootstrap-vue-next')['BAlert']
     BAvatar: typeof import('bootstrap-vue-next')['BAvatar']
     BButton: typeof import('bootstrap-vue-next')['BButton']
@@ -41,9 +42,11 @@ declare module 'vue' {
     BRow: typeof import('bootstrap-vue-next')['BRow']
     BSpinner: typeof import('bootstrap-vue-next')['BSpinner']
     BTable: typeof import('bootstrap-vue-next')['BTable']
+    BToastOrchestrator: typeof import('bootstrap-vue-next')['BToastOrchestrator']
     ClockSolid: typeof import('./src/components/icons/clock-solid.vue')['default']
     CustomSpinner: typeof import('./src/components/CustomSpinner.vue')['default']
     EntryEditor: typeof import('./src/components/EntryEditor.vue')['default']
+    HoursEntryModal: typeof import('./src/components/HoursEntryModal.vue')['default']
     IBiFill: typeof import('~icons/bi/fill')['default']
     IBiTagFill: typeof import('~icons/bi/tag-fill')['default']
     IBiX: typeof import('~icons/bi/x')['default']
