@@ -19,7 +19,7 @@ export default class WorkingHours {
     date: Date;
 
     /**
-     * The hours that were worked
+     * The minutes that were worked
      */
     @Column()
     duration: number;

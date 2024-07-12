@@ -35,6 +35,9 @@ export const en = {
     apidocs: 'API Documentation',
     load_swaggerui: 'Loading SwaggerUI...',
 
+    manage_activities: 'Manage Activities',
+    manage_working_hours: 'Manage Working Hours',
+
     show_note: 'Show note',
     hide_note: 'Hide note',
 
@@ -83,4 +86,7 @@ export const en = {
     },
 
     working_hour: 'Working Hours | Working Hours',
+
+    minute: 'Minute | Minutes',
+    hour: 'Hour | Hours',
 };

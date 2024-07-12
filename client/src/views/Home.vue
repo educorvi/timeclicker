@@ -1,70 +1,57 @@
-<template>
-    <overview ref="overview" :tasks="tasks">
-        <div
-            style="display: flex; width: 100%; justify-content: center"
-            class="mb-4"
-        >
-            <b-button
-                @click="showModal"
-                variant="primary"
-                style="max-width: 400px"
-                class="w-100"
-            >
-                {{ t('new_entry') }}
-            </b-button>
-        </div>
-    </overview>
-
-    <entry-editor ref="entryModal" @on-submit="refresh" :tasks="tasks" />
-</template>
-
-<script lang="ts" setup>
-import axios from 'axios';
-import type { Task } from 'timeclicker_server/src/libindex';
-import Overview from '@/components/Overview.vue';
-import EntryEditor from '@/components/EntryEditor.vue';
-import { type Ref, nextTick, onMounted, ref } from 'vue';
-import { UiError, useErrorStore } from '@/stores/error';
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const { t } = useI18n();
 
-const errorStore = useErrorStore();
-
-const tasks: Ref<Array<Task>> = ref([]);
-
-const entryModal = ref<InstanceType<typeof EntryEditor> | null>(null);
-const overview = ref<InstanceType<typeof Overview> | null>(null);
-
-function refresh() {
-    console.log(!!overview.value);
-    overview.value?.loadActivities();
-}
-
-function showModal() {
-    entryModal.value?.setVisibility(true);
-}
-
-const route = useRoute();
 const router = useRouter();
-
-onMounted(async () => {
-    try {
-        const res = await axios.get(
-            import.meta.env.VITE_API_ENDPOINT + 'tasks?open=true'
-        );
-        tasks.value = <Array<Task>>res.data;
-    } catch (error) {
-        tasks.value = [];
-        errorStore.setError(new UiError(t('errors.tasks_failed'), error));
-    }
-    await nextTick();
-    const { action = '', taskID = '' } = route.query;
-    if (action === 'createTask' && taskID && !Array.isArray(taskID)) {
-        entryModal.value?.setTask(taskID);
-        showModal();
-    }
-    router.replace('/');
-});
 </script>
+
+<template>
+    <div class="w-100 text-center mt-3">
+        <h1>Dashboard</h1>
+    </div>
+    <b-container fluid>
+        <b-row>
+            <b-col cols="12" md="6">
+                <div style="display: flex; justify-content: center">
+                    <b-card class="home-cards clickable" @click="router.push('/activities')">
+                        <h1>{{ t('manage_activities') }}</h1>
+                    </b-card>
+                </div>
+            </b-col>
+
+            <b-col cols="12" md="6">
+                <div style="display: flex; justify-content: center">
+                    <b-card class="home-cards clickable" @click="router.push('/hours')">
+                        <h1>{{ t('manage_working_hours') }}</h1>
+                    </b-card>
+                </div>
+            </b-col>
+        </b-row>
+    </b-container>
+</template>
+
+<style scoped lang="scss">
+.home-cards {
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    padding-top: 20%;
+    padding-bottom: 20%;
+
+    transition: all 0.3s;
+
+    &:hover {
+        box-shadow: 0 1rem 2rem 1px rgba(0, 0, 0, 0.175) !important;
+        transform: scale(1.05);
+        z-index: 1000;
+    }
+
+    h1 {
+        margin: 0;
+        text-align: center;
+    }
+}
+</style>
