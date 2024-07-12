@@ -29,4 +29,5 @@ export const years = computed(() => {
     for (let i = currYear; i > 2021; i--) {
         ys.push(i);
     }
+    return ys;
 });
