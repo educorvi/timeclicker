@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@tsconfig/node-lts": "^18.12.5",
-    "@vue/compat": "^3.4.27",
+    "@vue/compat": "^3.4.35",
     "axios": "^1.7.2",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
@@ -22,13 +22,13 @@
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.32.1",
     "keycloak-js": "^20.0.5",
-    "pinia": "^2.1.6",
+    "pinia": "^2.2.0",
     "showdown": "^2.1.0",
     "swagger-ui": "^5.17.14",
     "swagger-ui-dist": "^5.17.14",
-    "vue": "^3.4.27",
+    "vue": "^3.4.35",
     "vue-i18n": "^9.13.1",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.4.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.2",
