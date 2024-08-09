@@ -29,4 +29,10 @@ export default class WorkingHours {
      */
     @ManyToOne(() => User, { nullable: false, onDelete: 'CASCADE' })
     user: User;
+
+    /**
+     * Is this vacation time
+     */
+    @Column({ default: false})
+    vacation: boolean;
 }

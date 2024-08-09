@@ -6,7 +6,8 @@
         size="xl"
         scrollable
         no-close-on-backdrop
-        hide-footer>
+        hide-footer
+    @hidden="modelClosed">
         <b-form @submit="saveEntry">
             <div class="mb-2">
                 <label for="date-select">{{ t('date') }}:</label>
@@ -17,7 +18,7 @@
                     v-model="date"
                 ></b-input>
             </div>
-            <b-row>
+            <b-row class="mb-3">
                 <b-col cols="6">
                     <label for="duration-hours">{{ t('hour', { count: 2 }) }}:</label>
                     <b-input
@@ -36,11 +37,12 @@
                         required
                         type="number"
                         step="1"
-                        min="1"
+                        min="0"
                         v-model.number="minutes"
                     ></b-input>
                 </b-col>
             </b-row>
+            <b-form-checkbox v-model="vacation">{{t('vacation')}}</b-form-checkbox>
             <hr />
             <b-button type="submit" variant="primary" class="w-100"
             >{{ t('save') }}
@@ -49,10 +51,9 @@
     </b-modal>
 </template>
 <script setup lang="ts">
-import type { WorkingHours } from 'timeclicker_server';
+import type { WorkingHours, saveHourParams } from 'timeclicker_server';
 import { useI18n } from 'vue-i18n';
 import { ref } from 'vue';
-import type { saveHourParams } from 'timeclicker_server/dist/src/controllers/hoursController';
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useToast } from 'bootstrap-vue-next';
@@ -80,10 +81,17 @@ const emit = defineEmits<{
     (e: 'on-submit'): void;
 }>();
 
-
 const date = ref<string>('');
 const hours = ref<number>(0);
 const minutes = ref<number>(0);
+const vacation = ref<boolean>(false);
+
+function modelClosed() {
+   date.value = '';
+    hours.value = 0;
+    minutes.value = 0;
+    vacation.value = false;
+}
 
 function saveEntry(evt: Event) {
     evt.preventDefault()
@@ -91,7 +99,8 @@ function saveEntry(evt: Event) {
 
     const submitData: saveHourParams={
         date: dateVal,
-        duration: hours.value * 60 + minutes.value
+        duration: hours.value * 60 + minutes.value,
+        vacation: vacation.value
     }
 
     axios

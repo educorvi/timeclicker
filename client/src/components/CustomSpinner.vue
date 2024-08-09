@@ -1,6 +1,6 @@
 <template>
     <div id="customSpinner">
-        <b-spinner variant="primary" />
+        <b-spinner class="text-danger" />
     </div>
 </template>
 <script lang="ts">
