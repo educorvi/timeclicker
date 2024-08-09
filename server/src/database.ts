@@ -4,7 +4,7 @@ import type { FindManyOptions } from 'typeorm';
 import { createDatabase } from 'typeorm-extension';
 import type { Logger } from 'typeorm';
 import { logger } from './globals';
-import { User, Activity, Task, ContractData, WorkingHours, Vacation } from './classes';
+import { User, Activity, Task, ContractData, WorkingHours } from './classes';
 
 class TypeOrmLogger implements Logger {
     log(
@@ -107,7 +107,7 @@ export default class Database {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User, Activity, Task, ContractData, WorkingHours, Vacation],
+            entities: [User, Activity, Task, ContractData, WorkingHours],
             migrations: [
                 __dirname + '/../migrations/*.js',
             ],
@@ -216,7 +216,10 @@ export default class Database {
 
     async getHours(id: string): Promise<WorkingHours | null> {
         return await this.hoursRepository.findOne({
-            where: { id }
+            where: { id },
+            relations: {
+                user: true
+            }
         });
     }
 

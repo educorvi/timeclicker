@@ -90,4 +90,6 @@ export const de = {
 
     minute: 'Minute | Minuten',
     hour: 'Stunde | Stunden',
+
+    vacation: 'Urlaub',
 };

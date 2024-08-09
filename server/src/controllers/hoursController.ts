@@ -1,4 +1,17 @@
-import { Body, Controller, Delete, Get, Post, Query, Request, Response, Route, Security, SuccessResponse } from 'tsoa';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Path,
+    Post,
+    Query,
+    Request,
+    Response,
+    Route,
+    Security,
+    SuccessResponse,
+} from 'tsoa';
 import { WorkingHours } from '../classes';
 import { getOrCreateUser } from './activityController';
 import type express from 'express';
@@ -57,7 +70,7 @@ export class HoursController extends Controller {
     @Response(404, 'Not found')
     public async deleteHour(
         @Request() req: express.Request,
-        @Query() hourId: string
+        @Path() hourId: string
     ) {
         const user = await getOrCreateUser(req);
         const hour = await db.getHours(hourId);
@@ -65,6 +78,7 @@ export class HoursController extends Controller {
             this.setStatus(404);
             return;
         }
+        console.log(hour);
         if (hour.user.id !== user.id) {
             this.setStatus(401);
             return;

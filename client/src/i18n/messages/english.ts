@@ -89,4 +89,6 @@ export const en = {
 
     minute: 'Minute | Minutes',
     hour: 'Hour | Hours',
+
+    vacation: 'Vacation',
 };
