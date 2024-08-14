@@ -34,15 +34,20 @@
                         <b-card-body>
                             <h4>
                                 {{ d(hour.date, 'short') }}
-                                <span v-if="hour.vacation" class="text-success">
-                                    ({{ t('vacation') }})
-                                </span>
                             </h4>
                             <p class="mb-0">
-                                {{ t('duration') }}:
-                                {{
-                                    humanizeDuration(hour.duration * 60 * 1000)
-                                }}
+                                <span v-if="!hour.vacation">
+                                    <strong>{{ t('duration') }}:</strong>
+                                    {{
+                                        humanizeDuration(
+                                            hour.duration * 60 * 1000
+                                        )
+                                    }}
+                                </span>
+
+                                <span v-else class="text-success">
+                                    <strong>{{ t('vacation_day') }}</strong>
+                                </span>
                             </p>
                         </b-card-body>
                         <b-button

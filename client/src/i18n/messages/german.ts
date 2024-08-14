@@ -37,7 +37,7 @@ export const de = {
     load_swaggerui: 'SwaggerUI wird geladen...',
 
     manage_activities: 'Aktivitäten verwalten',
-    manage_working_hours: 'Arbeitsstunden verwalten',
+    manage_working_hours: 'Arbeitszeiten verwalten',
 
     show_note: 'Notiz anzeigen',
     hide_note: 'Notiz verbergen',
@@ -66,7 +66,7 @@ export const de = {
     activity: 'Aktivität | Aktivitäten',
     duration: 'Dauer',
     language: 'Sprache | Sprachen',
-    working_hour: 'Arbeitsstunde | Arbeitsstunden',
+    working_hour: 'Arbeitszeit | Arbeitszeiten',
 
     break: 'Pause',
 
@@ -93,6 +93,7 @@ export const de = {
     hour: 'Stunde | Stunden',
 
     vacation: 'Urlaub',
+    vacation_day: 'Urlaubstag | Urlaubstage',
 
     contract_data: 'Vertragsdaten',
     edit_contract_data: 'Vertragsdaten bearbeiten',

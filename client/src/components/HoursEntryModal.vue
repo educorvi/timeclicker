@@ -7,7 +7,8 @@
         scrollable
         no-close-on-backdrop
         hide-footer
-    @hidden="modelClosed">
+        @hidden="modelClosed"
+    >
         <b-form @submit="saveEntry">
             <div class="mb-2">
                 <label for="date-select">{{ t('date') }}:</label>
@@ -20,7 +21,9 @@
             </div>
             <b-row class="mb-3">
                 <b-col cols="6">
-                    <label for="duration-hours">{{ t('hour', { count: 2 }) }}:</label>
+                    <label for="duration-hours"
+                        >{{ t('hour', { count: 2 }) }}:</label
+                    >
                     <b-input
                         id="duration-hours"
                         required
@@ -28,10 +31,13 @@
                         step="1"
                         min="0"
                         v-model.number="hours"
+                        :disabled="vacation"
                     ></b-input>
                 </b-col>
                 <b-col cols="6">
-                    <label for="duration-min">{{ t('minute', { count: 2 }) }}:</label>
+                    <label for="duration-min"
+                        >{{ t('minute', { count: 2 }) }}:</label
+                    >
                     <b-input
                         id="duration-min"
                         required
@@ -39,13 +45,16 @@
                         step="1"
                         min="0"
                         v-model.number="minutes"
+                        :disabled="vacation"
                     ></b-input>
                 </b-col>
             </b-row>
-            <b-form-checkbox v-model="vacation">{{t('vacation')}}</b-form-checkbox>
+            <b-form-checkbox v-model="vacation">{{
+                t('vacation_day')
+            }}</b-form-checkbox>
             <hr />
             <b-button type="submit" variant="primary" class="w-100"
-            >{{ t('save') }}
+                >{{ t('save') }}
             </b-button>
         </b-form>
     </b-modal>
@@ -61,13 +70,13 @@ import { useToast } from 'bootstrap-vue-next';
 const { t } = useI18n();
 const errorStore = useErrorStore();
 
-const {show, remove} = useToast()
+const { show, remove } = useToast();
 
 const props = defineProps<{
     /**
      * Data to initialize the form with if an existing entry is edited
      */
-    initialData?: WorkingHours
+    initialData?: WorkingHours;
 }>();
 
 /**
@@ -87,21 +96,21 @@ const minutes = ref<number>(0);
 const vacation = ref<boolean>(false);
 
 function modelClosed() {
-   date.value = '';
+    date.value = '';
     hours.value = 0;
     minutes.value = 0;
     vacation.value = false;
 }
 
 function saveEntry(evt: Event) {
-    evt.preventDefault()
+    evt.preventDefault();
     const dateVal = new Date(date.value);
 
-    const submitData: saveHourParams={
+    const submitData: saveHourParams = {
         date: dateVal,
         duration: hours.value * 60 + minutes.value,
-        vacation: vacation.value
-    }
+        vacation: vacation.value,
+    };
 
     axios
         .post(import.meta.env.VITE_API_ENDPOINT + 'hours', {
@@ -114,15 +123,14 @@ function saveEntry(evt: Event) {
         })
         .catch((error) => {
             errorStore.setError(new UiError(t('errors.saving_failed'), error));
-            show?.( {
+            show?.({
                 props: {
                     title: t('errors.saving_failed'),
                     variant: 'danger',
                     value: true,
-                    pos: 'top-center'
-
-                }
-            })
+                    pos: 'top-center',
+                },
+            });
         });
 }
 </script>
