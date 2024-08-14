@@ -67,6 +67,7 @@ export const de = {
     duration: 'Dauer',
     language: 'Sprache | Sprachen',
     working_hour: 'Arbeitszeit | Arbeitszeiten',
+    action: 'Aktion | Aktionen',
 
     break: 'Pause',
 

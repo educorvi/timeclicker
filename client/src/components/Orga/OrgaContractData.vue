@@ -13,7 +13,7 @@
     </div>
     <div v-if="selectedUser" class="mt-3">
         <div v-if="contractData !== null">
-            <BTableSimple>
+            <BTableSimple striped>
                 <BThead>
                     <BTr>
                         <BTh>{{ t('start_year') }}</BTh>
@@ -21,6 +21,7 @@
                         <BTh>{{ t('hours_per_week') }}</BTh>
                         <BTh>{{ t('days_per_week') }}</BTh>
                         <BTh>{{ t('vacation_days') }}</BTh>
+                        <BTh>{{ t('action') }}</BTh>
                     </BTr>
                 </BThead>
                 <BTbody>
@@ -30,6 +31,15 @@
                         <BTd>{{ contract.hoursPerWeek }}</BTd>
                         <BTd>{{ contract.daysPerWeek }}</BTd>
                         <BTd>{{ contract.vacationDays }}</BTd>
+                        <BTd>
+                            <BButton
+                                variant="danger"
+                                class="contract-delete-button"
+                                @click="() => deleteContract(contract.id)"
+                            >
+                                <i-bi-trash3 />
+                            </BButton>
+                        </BTd>
                     </BTr>
                 </BTbody>
             </BTableSimple>
@@ -121,6 +131,19 @@ function loadContractData() {
         });
 }
 
+function deleteContract(id: string) {
+    axios
+        .delete(import.meta.env.VITE_API_ENDPOINT + 'orga/contract_data/' + id)
+        .then(() => {
+            loadContractData();
+        })
+        .catch((error) => {
+            errorStore.setError(
+                new UiError(t('errors.deleting_contract_failed'), error)
+            );
+        });
+}
+
 onMounted(() => {
     axios
         .get(import.meta.env.VITE_API_ENDPOINT + 'orga/users')
@@ -135,4 +158,14 @@ onMounted(() => {
 watch(selectedUser, loadContractData);
 </script>
 
-<style scoped></style>
+<style scoped>
+.contract-delete-button {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+
+    & > * {
+        height: 1.3rem;
+    }
+}
+</style>
