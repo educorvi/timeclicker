@@ -11,7 +11,7 @@ class TypeOrmLogger implements Logger {
         level: 'log' | 'info' | 'warn',
         message: any,
         // @ts-ignore
-        queryRunner?: QueryRunner,
+        queryRunner?: QueryRunner
     ): any {
         switch (level) {
             case 'log':
@@ -36,7 +36,7 @@ class TypeOrmLogger implements Logger {
         query: string,
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner,
+        queryRunner?: QueryRunner
     ): any {
         logger.debug(query, parameters);
     }
@@ -47,7 +47,7 @@ class TypeOrmLogger implements Logger {
         query: string,
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner,
+        queryRunner?: QueryRunner
     ): any {
         logger.error(error, query, parameters);
     }
@@ -59,7 +59,7 @@ class TypeOrmLogger implements Logger {
         // @ts-ignore
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner,
+        queryRunner?: QueryRunner
     ): any {
         logger.debug('Slow query: ' + query + `\n(${time}ms)`);
     }
@@ -70,7 +70,7 @@ class TypeOrmLogger implements Logger {
     }
 }
 
-export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export default class Database {
     readonly host: string;
@@ -90,7 +90,7 @@ export default class Database {
         password: string,
         database: string = 'timeclicker',
         host: string = 'localhost',
-        port: number = 5432,
+        port: number = 5432
     ) {
         this.host = host;
         this.port = port;
@@ -108,9 +108,7 @@ export default class Database {
             password: this.password,
             database: this.database,
             entities: [User, Activity, Task, ContractData, WorkingHours],
-            migrations: [
-                __dirname + '/../migrations/*.js',
-            ],
+            migrations: [__dirname + '/../migrations/*.js'],
             migrationsTransactionMode: 'all',
             logging: 'all',
             logger: new TypeOrmLogger(),
@@ -128,7 +126,8 @@ export default class Database {
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);
         this.hoursRepository = this.AppDataSource.getRepository(WorkingHours);
-        this.contractDataRepository = this.AppDataSource.getRepository(ContractData);
+        this.contractDataRepository =
+            this.AppDataSource.getRepository(ContractData);
     }
 
     async getUser(id: string): Promise<User | null> {
@@ -210,7 +209,7 @@ export default class Database {
         await this.activityRepository.delete({ id: activity.id });
     }
 
-     async getMultipleHours(options?: FindManyOptions<WorkingHours>) {
+    async getMultipleHours(options?: FindManyOptions<WorkingHours>) {
         return this.hoursRepository.find(options);
     }
 
@@ -218,8 +217,8 @@ export default class Database {
         return await this.hoursRepository.findOne({
             where: { id },
             relations: {
-                user: true
-            }
+                user: true,
+            },
         });
     }
 
@@ -240,7 +239,17 @@ export default class Database {
         return this.contractDataRepository.find(options);
     }
 
+    async getContractDataById(id: string): Promise<ContractData | null> {
+        return await this.contractDataRepository.findOne({
+            where: { id },
+        });
+    }
+
     async saveContractData(requestBody: PartialBy<ContractData, 'id'>) {
         await this.contractDataRepository.save(requestBody);
+    }
+
+    async deleteContractData(contractData: ContractData) {
+        await this.contractDataRepository.delete({ id: contractData.id });
     }
 }

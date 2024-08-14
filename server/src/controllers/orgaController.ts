@@ -8,6 +8,8 @@ import {
     Query,
     Post,
     Body,
+    Delete,
+    Path,
 } from 'tsoa';
 import type express from 'express';
 import { UnauthorizedError } from '../authentication';
@@ -126,5 +128,24 @@ export class OrgaController extends Controller {
             where: { user },
             order: { startYear: 'ASC', startMonth: 'ASC' },
         });
+    }
+
+    /**
+     * Deletes the contract data with the given id
+     * @param req
+     * @param contractId The id of the contract data
+     */
+    @Delete('contract_data/{contractId}')
+    public async deleteContractData(
+        @Request() req: express.Request,
+        @Path() contractId: string
+    ) {
+        checkOrgaStatus(req);
+        const contractData = await db.getContractDataById(contractId);
+        if (!contractData) {
+            this.setStatus(404);
+            return;
+        }
+        await db.deleteContractData(contractData);
     }
 }

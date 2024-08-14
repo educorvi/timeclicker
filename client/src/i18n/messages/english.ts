@@ -65,6 +65,7 @@ export const en = {
     duration: 'Duration',
     language: 'Language | Languages',
     working_hour: 'Working Hours | Working Hours',
+    action: 'Action | Actions',
 
     break: 'Break',
 
