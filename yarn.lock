@@ -5299,15 +5299,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap-vue-next@npm:^0.23.3":
-  version: 0.23.3
-  resolution: "bootstrap-vue-next@npm:0.23.3"
-  dependencies:
-    "@floating-ui/vue": ^1.1.1
-    "@vueuse/core": ^10.10.0
+"bootstrap-vue-next@npm:^0.24.7":
+  version: 0.24.7
+  resolution: "bootstrap-vue-next@npm:0.24.7"
   peerDependencies:
     vue: ^3.4.27
-  checksum: cda8a552fde06b24f864a4ecd635d529d5c04c0e4a70a17d4d01dea419036069635b269d896e04b811459929a8cc61e48923155939a44cb22f40db58a631677c
+  checksum: ea6c50abd2cda79c9fae6488177263f477a888a59e7484fe44e750e34a5458812559a25068459490a5f75cc67b24dec834a013cfad38719f60a29908afceb7d6
   languageName: node
   linkType: hard
 
@@ -14438,7 +14435,7 @@ __metadata:
     "@vue/tsconfig": ^0.4.0
     axios: ^1.7.2
     bootstrap: ^5.3.3
-    bootstrap-vue-next: ^0.23.3
+    bootstrap-vue-next: ^0.24.7
     bootswatch: ^4.6.2
     eslint: ^8.57.0
     eslint-plugin-vue: ^9.25.0

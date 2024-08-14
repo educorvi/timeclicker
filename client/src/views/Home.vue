@@ -15,16 +15,22 @@ const router = useRouter();
         <b-row>
             <b-col cols="12" md="6">
                 <div style="display: flex; justify-content: center">
-                    <b-card class="home-cards clickable" @click="router.push('/activities')">
-                        <h1>{{ t('manage_activities') }}</h1>
+                    <b-card
+                        class="home-cards clickable"
+                        @click="router.push('/activities')"
+                    >
+                        <h2>{{ t('manage_activities') }}</h2>
                     </b-card>
                 </div>
             </b-col>
 
             <b-col cols="12" md="6">
                 <div style="display: flex; justify-content: center">
-                    <b-card class="home-cards clickable" @click="router.push('/hours')">
-                        <h1>{{ t('manage_working_hours') }}</h1>
+                    <b-card
+                        class="home-cards clickable"
+                        @click="router.push('/hours')"
+                    >
+                        <h2>{{ t('manage_working_hours') }}</h2>
                     </b-card>
                 </div>
             </b-col>
@@ -33,13 +39,25 @@ const router = useRouter();
 </template>
 
 <style scoped lang="scss">
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
 .home-cards {
-    width: 90%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
-    padding-top: 20%;
-    padding-bottom: 20%;
+    text-align: center;
+
+    & h2 {
+        margin: 0;
+    }
+
+    @include media-breakpoint-up(md) {
+        width: 90%;
+        padding-top: 20%;
+        padding-bottom: 20%;
+    }
 
     transition: all 0.3s;
 

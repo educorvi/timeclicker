@@ -6,8 +6,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 import Components from 'unplugin-vue-components/vite';
 import { BootstrapVueNextResolver } from 'bootstrap-vue-next';
 import url from '@rollup/plugin-url';
-import Icons from "unplugin-icons/vite";
-import IconsResolve from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite';
+import IconsResolve from 'unplugin-icons/resolver';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -44,7 +44,7 @@ export default defineConfig({
                 name: 'Timeclicker',
                 short_name: 'Clicker',
                 description: 'An app to log your hours',
-                theme_color: '#375A7F',
+                theme_color: '#3080e2',
                 background_color: '#222222',
                 icons: [
                     {

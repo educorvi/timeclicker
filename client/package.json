@@ -11,14 +11,14 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
     "licenses": "license-report --only=prod > public/licenses.json && license-downloader --source ./public/licenses.json --licDir public/license-files --download",
-    "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
+    "generateIcons": "yarn dlx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
   },
   "dependencies": {
     "@educorvi/vue-json-form": "3.0.0-alpha.4",
     "@tsconfig/node-lts": "^18.12.5",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "bootstrap-vue-next": "^0.23.3",
+    "bootstrap-vue-next": "^0.24.7",
     "bootswatch": "^4.6.2",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.32.1",
