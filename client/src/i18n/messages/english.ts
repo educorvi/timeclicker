@@ -91,6 +91,7 @@ export const en = {
     hour: 'Hour | Hours',
 
     vacation: 'Vacation',
+    vacation_day: 'Vacation day | Vacation days',
 
     contract_data: 'Contract Data',
     edit_contract_data: 'Edit Contract Data',
