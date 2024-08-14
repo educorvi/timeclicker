@@ -28,6 +28,7 @@ export const de = {
     delete_prompt: 'Soll der Eintrag wirklich gelöscht werden?',
     beg_of_entry_bef_end: 'Der Beginn des Eintrags muss vor dem Ende liegen!',
     please_select_task: 'Bitte wähle eine Aufgabe',
+    please_select_user: 'Bitte wähle einen Nutzer',
     reload_to_activate:
         'Laden Sie die Seite neu, um die Änderungen zu aktivieren',
     orga_ui: 'Organisationsoberfläche',
@@ -46,6 +47,7 @@ export const de = {
         act_failed: 'Aktivitäten konnten nicht geladen werden!',
         tasks_failed: 'Aufgaben konnten nicht geladen werden!',
         users_failed: 'Nutzer konnten nicht geladen werden!',
+        contract_data_failed: 'Vertragsdaten konnten nicht geladen werden!',
         token_refresh:
             'Anmeldetoken konnte nicht erneuert werden. Bitte melden Sie sich erneut an.',
         auth_endpoint:
@@ -64,6 +66,7 @@ export const de = {
     activity: 'Aktivität | Aktivitäten',
     duration: 'Dauer',
     language: 'Sprache | Sprachen',
+    working_hour: 'Arbeitsstunde | Arbeitsstunden',
 
     break: 'Pause',
 
@@ -86,10 +89,21 @@ export const de = {
         en: 'Englisch',
     },
 
-    working_hour: 'Arbeitsstunde | Arbeitsstunden',
-
     minute: 'Minute | Minuten',
     hour: 'Stunde | Stunden',
 
     vacation: 'Urlaub',
+
+    contract_data: 'Vertragsdaten',
+    edit_contract_data: 'Vertragsdaten bearbeiten',
+    hours_per_week: 'Stunden pro Woche',
+    hours_per_week_desc: 'Stunden, die der Nutzer pro Woche arbeitet',
+    days_per_week: 'Tage pro Woche',
+    days_per_week_desc: 'Anzahl der Tage, die der Nutzer pro Woche arbeitet',
+    vacation_days: 'Urlaubstage',
+    vacation_days_desc: 'Urlaubstage pro Jahr',
+    start_month: 'Startmonat',
+    start_month_desc: 'Der Monat, in dem der Vertrag beginnt',
+    start_year: 'Startjahr',
+    start_year_desc: 'Das Jahr, in dem der Vertrag beginnt',
 };

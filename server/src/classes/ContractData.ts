@@ -1,6 +1,21 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import User from './User';
 
+export enum Month {
+    January = 1,
+    February = 2,
+    March = 3,
+    April = 4,
+    May = 5,
+    June = 6,
+    July = 7,
+    August = 8,
+    September = 9,
+    October = 10,
+    November = 11,
+    December = 12,
+}
+
 /**
  * Data about a user's contracts
  */
@@ -19,20 +34,32 @@ export default class ContractData {
     user: User;
 
     /**
-     * Hours that the user is supposed to work per month
+     * Hours that the user is supposed to work per week
      */
     @Column()
-    hoursPerMonth: number;
+    hoursPerWeek: number;
+
+    /**
+     * Number of days a week the user is supposed to work
+     */
+    @Column()
+    daysPerWeek: number;
+
+    /**
+     * vacation days per year
+     */
+    @Column()
+    vacationDays: number;
 
     /**
      * The month in which the contract starts
      */
-    @Column({type: 'int'})
-    startMonth: number;
+    @Column({ type: 'enum', enum: Month })
+    startMonth: Month;
 
     /**
      * The year in which the contract starts
      */
-    @Column({type: 'int'})
+    @Column({ type: 'int' })
     startYear: number;
 }

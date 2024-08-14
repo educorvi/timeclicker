@@ -1,4 +1,3 @@
-
 export const en = {
     months: [
         'January',
@@ -29,6 +28,7 @@ export const en = {
     delete_prompt: 'Do you really want to delete this entry?',
     beg_of_entry_bef_end: 'The beginning of an entry must be before its end!',
     please_select_task: 'Please select a task',
+    please_select_user: 'Please select a user',
     reload_to_activate: 'Reload the page to load the changes',
     orga_ui: 'Organization Panel',
     about: 'About',
@@ -46,6 +46,7 @@ export const en = {
         act_failed: 'Activities could not be loaded!',
         tasks_failed: 'Tasks could not be loaded!',
         users_failed: 'Users could not be loaded!',
+        contract_data_failed: 'Contract data could not be loaded!',
         token_refresh: 'Failed to refresh token. Please login again...',
         auth_endpoint:
             'Information about the authentication endpoint could not be loaded. Please reload the page',
@@ -63,6 +64,7 @@ export const en = {
     activity: 'Activity | Activities',
     duration: 'Duration',
     language: 'Language | Languages',
+    working_hour: 'Working Hours | Working Hours',
 
     break: 'Break',
 
@@ -85,10 +87,21 @@ export const en = {
         en: 'English',
     },
 
-    working_hour: 'Working Hours | Working Hours',
-
     minute: 'Minute | Minutes',
     hour: 'Hour | Hours',
 
     vacation: 'Vacation',
+
+    contract_data: 'Contract Data',
+    edit_contract_data: 'Edit Contract Data',
+    hours_per_week: 'Hours per week',
+    hours_per_week_desc: 'Hours that the user works per week',
+    days_per_week: 'Days per week',
+    days_per_week_desc: 'Number of days the user works per week',
+    vacation_days: 'Vacation days',
+    vacation_days_desc: 'Vacation days per year',
+    start_month: 'Starting month',
+    start_month_desc: 'Month in which the contract starts',
+    start_year: 'Starting year',
+    start_year_desc: 'Year in which the contract starts',
 };

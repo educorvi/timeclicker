@@ -6,6 +6,7 @@ import App from './App.vue';
 import router from './router';
 
 import './styles/main.scss';
+import '@educorvi/vue-json-form/dist/vue-json-form.css';
 
 import i18n from '@/i18n';
 

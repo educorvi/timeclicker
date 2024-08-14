@@ -14,30 +14,42 @@
         </div>
     </div>
     <div class="w-100 text-center mt-3 mb-3">
-        <b-button variant="primary" @click="modalVisible=true">
+        <b-button variant="primary" @click="modalVisible = true">
             {{ t('new_entry') }}
         </b-button>
     </div>
     <div class="d-flex justify-content-center">
         <div id="hours-container" class="w-100" v-if="hours">
-            <b-card v-if="hours.length === 0">
+            <b-card v-if="hours.length === 0" class="text-center">
                 {{ t('no_entries') }}
             </b-card>
             <div v-else>
-                <b-card v-for="hour in hours" class="mb-3" no-body :border-variant="hour.vacation?'success':undefined">
+                <b-card
+                    v-for="hour in hours"
+                    class="mb-3"
+                    no-body
+                    :border-variant="hour.vacation ? 'success' : undefined"
+                >
                     <div class="d-flex">
                         <b-card-body>
                             <h4>
                                 {{ d(hour.date, 'short') }}
                                 <span v-if="hour.vacation" class="text-success">
-                                    ({{t('vacation')}})
+                                    ({{ t('vacation') }})
                                 </span>
                             </h4>
                             <p class="mb-0">
-                                {{ t('duration') }}: {{ humanizeDuration(hour.duration * 60 * 1000) }}
+                                {{ t('duration') }}:
+                                {{
+                                    humanizeDuration(hour.duration * 60 * 1000)
+                                }}
                             </p>
                         </b-card-body>
-                        <b-button class="hours-delete-button" variant="danger" @click="() => onDelete(hour.id)">
+                        <b-button
+                            class="hours-delete-button"
+                            variant="danger"
+                            @click="() => onDelete(hour.id)"
+                        >
                             <IBiTrash3 />
                         </b-button>
                     </div>
@@ -56,7 +68,7 @@
         ok-variant="danger"
         :cancel-title="t('cancel')"
         centered
-    >{{ t('delete_prompt') }}
+        >{{ t('delete_prompt') }}
     </b-modal>
 </template>
 
@@ -87,14 +99,16 @@ function fetchHours() {
     hours.value = null;
     const fromDate = new Date(year.value, month.value - 1, 1);
     const toDate = new Date(year.value, month.value, 0);
-    axios.get(import.meta.env.VITE_API_ENDPOINT + 'hours', {
-        params: {
-            from: fromDate.toISOString(),
-            to: toDate.toISOString(),
-        },
-    }).then((response) => {
-        hours.value = response.data;
-    });
+    axios
+        .get(import.meta.env.VITE_API_ENDPOINT + 'hours', {
+            params: {
+                from: fromDate.toISOString(),
+                to: toDate.toISOString(),
+            },
+        })
+        .then((response) => {
+            hours.value = response.data;
+        });
 }
 
 function onDelete(id: string) {
@@ -104,14 +118,20 @@ function onDelete(id: string) {
 
 async function deleteHours() {
     console.log(deleteHoursId.value);
-    axios.delete(import.meta.env.VITE_API_ENDPOINT + 'hours' + '/' + deleteHoursId.value).then(() => {
-        deleteHoursId.value = null;
-        fetchHours();
-    });
+    axios
+        .delete(
+            import.meta.env.VITE_API_ENDPOINT +
+                'hours' +
+                '/' +
+                deleteHoursId.value
+        )
+        .then(() => {
+            deleteHoursId.value = null;
+            fetchHours();
+        });
 }
 
 onMounted(fetchHours);
-
 
 watch([month, year], fetchHours);
 </script>
