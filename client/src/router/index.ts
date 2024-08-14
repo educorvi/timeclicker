@@ -39,6 +39,7 @@ const router = createRouter({
             component: () => import('../views/Apidocs.vue'),
         },
     ],
+    linkActiveClass: 'active',
 });
 
 export default router;

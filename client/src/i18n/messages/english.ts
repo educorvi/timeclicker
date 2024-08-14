@@ -35,6 +35,8 @@ export const en = {
     apidocs: 'API Documentation',
     load_swaggerui: 'Loading SwaggerUI...',
 
+    dashboard: 'Dashboard',
+
     manage_activities: 'Manage Activities',
     manage_working_hours: 'Manage Working Hours',
 

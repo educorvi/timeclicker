@@ -39,6 +39,8 @@ export const de = {
     manage_activities: 'Aktivitäten verwalten',
     manage_working_hours: 'Arbeitszeiten verwalten',
 
+    dashboard: 'Dashboard',
+
     show_note: 'Notiz anzeigen',
     hide_note: 'Notiz verbergen',
 
