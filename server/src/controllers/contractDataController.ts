@@ -4,7 +4,7 @@ import { db } from '../globals';
 import { getOrCreateUser } from './activityController';
 import express from 'express';
 
-@Route('contractData')
+@Route('contract_data')
 @Security('educorvi_sso')
 @Response(401, 'Unauthorized')
 export class ContractDataController extends Controller {
@@ -13,9 +13,7 @@ export class ContractDataController extends Controller {
      * @param req
      **/
     @Get()
-    public async getContractData(
-        @Request() req: express.Request
-    ) {
+    public async getContractData(@Request() req: express.Request) {
         const user = await getOrCreateUser(req);
         return db.getContractData({ where: { user } });
     }

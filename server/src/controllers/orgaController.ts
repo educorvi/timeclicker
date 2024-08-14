@@ -1,12 +1,21 @@
 import { Controller } from '@tsoa/runtime';
-import { Response, Route, Security, Request, Get, Query, Post, Body } from 'tsoa';
+import {
+    Response,
+    Route,
+    Security,
+    Request,
+    Get,
+    Query,
+    Post,
+    Body,
+} from 'tsoa';
 import type express from 'express';
 import { UnauthorizedError } from '../authentication';
 import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
 
-export type saveContractDataParams = Omit<ContractData, "id" | "user"> & {
+export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;
     userId: string;
 };
@@ -78,17 +87,44 @@ export class OrgaController extends Controller {
      * @param requestBody
      * @param req
      */
-    @Post('contractData')
-    public async saveContractData(@Body() requestBody: saveContractDataParams, @Request() req: express.Request) {
+    @Post('contract_data')
+    @Response(404, 'User not found')
+    public async saveContractData(
+        @Body() requestBody: saveContractDataParams,
+        @Request() req: express.Request
+    ) {
         checkOrgaStatus(req);
         const user = await db.getUser(requestBody.userId);
         if (!user) {
-            this.setStatus(400)
+            this.setStatus(404);
             return;
         }
         return db.saveContractData({
             ...requestBody,
             user,
+        });
+    }
+
+    /**
+     * Returns a list of all contracts associated with the given user
+     * @param req
+     * @param userId The id of the user
+     **/
+    @Get('contract_data')
+    @Response(404, 'User not found')
+    public async getContractData(
+        @Query() userId: string,
+        @Request() req: express.Request
+    ) {
+        checkOrgaStatus(req);
+        const user = await db.getUser(userId);
+        if (!user) {
+            this.setStatus(404);
+            return;
+        }
+        return db.getContractData({
+            where: { user },
+            order: { startYear: 'ASC', startMonth: 'ASC' },
         });
     }
 }
