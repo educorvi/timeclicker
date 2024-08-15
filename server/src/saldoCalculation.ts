@@ -8,11 +8,11 @@ export type WeekIdentifier = {
     year: number;
 };
 
-function getSaldoMapKey(id: WeekIdentifier): string {
+function getTimeBalanceMapKey(id: WeekIdentifier): string {
     return id.week + ' ' + id.year;
 }
 
-export type WeekSaldoData = {
+export type WeekTimeBalanceData = {
     week: number;
     year: number;
     month: number;
@@ -21,16 +21,16 @@ export type WeekSaldoData = {
     workedHours: number;
     requiredHours: number;
     hoursPerDay: number;
-    saldo: number;
+    timeBalance: number;
 };
 
-export type SaldoMap = Map<string, WeekSaldoData>;
+export type TimeBalanceMap = Map<string, WeekTimeBalanceData>;
 
 function getAllWeeksBetweenDates(startDate: Date, endDate: Date = new Date()): {
-    map: SaldoMap,
+    map: TimeBalanceMap,
     order: WeekIdentifier[]
 } {
-    const weeks: SaldoMap = new Map();
+    const weeks: TimeBalanceMap = new Map();
     const order: WeekIdentifier[] = [];
     const currentDate = new Date(startDate);
     while (currentDate <= endDate) {
@@ -43,7 +43,7 @@ function getAllWeeksBetweenDates(startDate: Date, endDate: Date = new Date()): {
         const month = dt.month;
         const startDate = DateTime.fromObject({ weekNumber: week, weekYear: year }).toJSDate();
         const endDate = DateTime.fromObject({ weekNumber: week, weekYear: year }).plus({ weeks: 1 }).toJSDate();
-        const data: WeekSaldoData = {
+        const data: WeekTimeBalanceData = {
             week,
             year,
             month,
@@ -52,19 +52,19 @@ function getAllWeeksBetweenDates(startDate: Date, endDate: Date = new Date()): {
             workedHours: 0,
             requiredHours: 0,
             hoursPerDay: 0,
-            saldo: 0,
+            timeBalance: 0,
         };
 
         const id = { week, year };
         order.push(id);
-        weeks.set(getSaldoMapKey(id), data);
+        weeks.set(getTimeBalanceMapKey(id), data);
 
         currentDate.setDate(currentDate.getDate() + 7);
     }
     return { map: weeks, order };
 }
 
-async function setRequiredHours(weeks: SaldoMap, user: User) {
+async function setRequiredHours(weeks: TimeBalanceMap, user: User) {
     for (const [_, week] of weeks) {
         const contracts = await db.getContractData({
             where: [
@@ -82,7 +82,7 @@ async function setRequiredHours(weeks: SaldoMap, user: User) {
     }
 }
 
-async function setWorkedHours(weeks: SaldoMap, hours: WorkingHours[]) {
+async function setWorkedHours(weeks: TimeBalanceMap, hours: WorkingHours[]) {
     for (const hour of hours) {
         const dt = DateTime.fromJSDate(hour.date);
         if (!dt.isValid) {
@@ -90,7 +90,7 @@ async function setWorkedHours(weeks: SaldoMap, hours: WorkingHours[]) {
         }
         const week = dt.weekNumber;
         const year = dt.year;
-        const weekData = weeks.get(getSaldoMapKey({ week, year }));
+        const weekData = weeks.get(getTimeBalanceMapKey({ week, year }));
         if (!weekData) {
             console.log(weeks);
             throw new Error('Week not found: ' + week + ' ' + year);
@@ -105,20 +105,20 @@ async function setWorkedHours(weeks: SaldoMap, hours: WorkingHours[]) {
     }
 }
 
-function setSaldo(weeks: WeekSaldoData[]) {
+function setTimeBalance(weeks: WeekTimeBalanceData[]) {
     for (let i = 0; i < weeks.length; i++) {
-        weeks[i].saldo = (weeks[i - 1]?.saldo || 0) + weeks[i].workedHours - weeks[i].requiredHours;
+        weeks[i].timeBalance = (weeks[i - 1]?.timeBalance || 0) + weeks[i].workedHours - weeks[i].requiredHours;
     }
 }
 
-function roundValues(weeks: WeekSaldoData[]) {
+function roundValues(weeks: WeekTimeBalanceData[]) {
     weeks.forEach((week) => {
-        week.saldo = Math.round(week.saldo * 100) / 100;
+        week.timeBalance = Math.round(week.timeBalance * 100) / 100;
         week.workedHours = Math.round(week.workedHours * 100) / 100;
     });
 }
 
-function filterResults(weeks: WeekSaldoData[], displayFrom?: Date, displayTo?: Date) {
+function filterResults(weeks: WeekTimeBalanceData[], displayFrom?: Date, displayTo?: Date) {
         return weeks.filter((week) => {
             let include = true;
             if (displayFrom) {
@@ -133,7 +133,7 @@ function filterResults(weeks: WeekSaldoData[], displayFrom?: Date, displayTo?: D
 }
 
 
-export async function calculateSaldo(user: User, displayFrom?: Date, displayTo?: Date): Promise<WeekSaldoData[]> {
+export async function calculateTimeBalance(user: User, displayFrom?: Date, displayTo?: Date): Promise<WeekTimeBalanceData[]> {
     const contracts = await db.getContractData({ where: { user }, order: { startYear: 'ASC', startMonth: 'ASC' } });
     const hours = await db.getHours({ where: { user }, order: { date: 'ASC' } });
 
@@ -152,25 +152,25 @@ export async function calculateSaldo(user: User, displayFrom?: Date, displayTo?:
     await setRequiredHours(map, user);
     await setWorkedHours(map, hours);
     const orderedWeeks = order.map((id) => {
-        const week = map.get(getSaldoMapKey(id));
+        const week = map.get(getTimeBalanceMapKey(id));
         if (!week) {
             throw new Error('Week got lost: ' + id.week + ' ' + id.year);
         }
         return week;
     });
 
-    setSaldo(orderedWeeks);
+    setTimeBalance(orderedWeeks);
     roundValues(orderedWeeks);
     filterResults(orderedWeeks, displayFrom, displayTo);
 
     return orderedWeeks;
 }
 
-export async function calculateAllSaldi(displayFrom?: Date, displayTo?: Date): Promise<Record<string, WeekSaldoData[]>> {
+export async function calculateAllTimeBalances(displayFrom?: Date, displayTo?: Date): Promise<Record<string, WeekTimeBalanceData[]>> {
     const users = await db.getUsers();
-    const result: Record<string, WeekSaldoData[]> = {};
+    const result: Record<string, WeekTimeBalanceData[]> = {};
     for (const user of users) {
-        result[user.id] = await calculateSaldo(user, displayFrom, displayTo);
+        result[user.id] = await calculateTimeBalance(user, displayFrom, displayTo);
     }
     return result;
 }

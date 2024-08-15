@@ -56,7 +56,7 @@ function saveContract(data: Record<string, any>) {
     };
     axios
         .post(
-            import.meta.env.VITE_API_ENDPOINT + 'orga/contract_data',
+            import.meta.env.VITE_API_ENDPOINT + 'orga/contract-data',
             contractData
         )
         .then(() => {

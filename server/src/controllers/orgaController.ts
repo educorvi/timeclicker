@@ -16,7 +16,7 @@ import { UnauthorizedError } from '../authentication';
 import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
-import { calculateSaldo } from '../saldoCalculation';
+import { calculateTimeBalance } from '../saldoCalculation';
 
 export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;
@@ -90,7 +90,7 @@ export class OrgaController extends Controller {
      * @param requestBody
      * @param req
      */
-    @Post('contract_data')
+    @Post('contract-data')
     @Response(404, 'User not found')
     public async saveContractData(
         @Body() requestBody: saveContractDataParams,
@@ -113,7 +113,7 @@ export class OrgaController extends Controller {
      * @param req
      * @param userId The id of the user
      **/
-    @Get('contract_data')
+    @Get('contract-data')
     @Response(404, 'User not found')
     public async getContractData(
         @Query() userId: string,
@@ -136,7 +136,7 @@ export class OrgaController extends Controller {
      * @param req
      * @param contractId The id of the contract data
      */
-    @Delete('contract_data/{contractId}')
+    @Delete('contract-data/{contractId}')
     public async deleteContractData(
         @Request() req: express.Request,
         @Path() contractId: string,
@@ -156,15 +156,15 @@ export class OrgaController extends Controller {
      * @param req
      * @param userId The id of the user
      */
-    @Get('saldo')
+    @Get('time-balance')
     @Response(404, 'User not found')
-    public async getSaldo(@Request() req: express.Request, @Query() userId: string) {
+    public async getTimeBalance(@Request() req: express.Request, @Query() userId: string) {
         checkOrgaStatus(req);
         const user = await db.getUser(userId);
         if (!user) {
             this.setStatus(404);
             return;
         }
-        return await calculateSaldo(user);
+        return await calculateTimeBalance(user);
     }
 }

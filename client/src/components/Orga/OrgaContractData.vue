@@ -118,7 +118,7 @@ function loadContractData() {
     contractData.value = null;
 
     axios
-        .get(import.meta.env.VITE_API_ENDPOINT + 'orga/contract_data', {
+        .get(import.meta.env.VITE_API_ENDPOINT + 'orga/contract-data', {
             params: { userId: selectedUser.value },
         })
         .then((res) => {
@@ -133,7 +133,7 @@ function loadContractData() {
 
 function deleteContract(id: string) {
     axios
-        .delete(import.meta.env.VITE_API_ENDPOINT + 'orga/contract_data/' + id)
+        .delete(import.meta.env.VITE_API_ENDPOINT + 'orga/contract-data/' + id)
         .then(() => {
             loadContractData();
         })
