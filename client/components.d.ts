@@ -73,6 +73,7 @@ declare module 'vue' {
     Orga: typeof import('./src/components/Orga/Orga.vue')['default']
     OrgaActivities: typeof import('./src/components/Orga/OrgaActivities.vue')['default']
     OrgaContractData: typeof import('./src/components/Orga/OrgaContractData.vue')['default']
+    OrgaTimeBalance: typeof import('./src/components/Orga/OrgaTimeBalance.vue')['default']
     Overview: typeof import('./src/components/Overview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
