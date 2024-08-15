@@ -16,7 +16,7 @@ import { UnauthorizedError } from '../authentication';
 import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
-import { calculateTimeBalance } from '../saldoCalculation';
+import { calculateAllTimeBalances, calculateTimeBalance } from '../saldoCalculation';
 
 export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;
@@ -150,21 +150,35 @@ export class OrgaController extends Controller {
         await db.deleteContractData(contractData);
     }
 
-
     /**
-     * Calculates the working hour saldo for a user
+     * Calculate the time balance for all users
      * @param req
-     * @param userId The id of the user
+     * @param from Specifies from which date the time balance should be included in the response. This does not affect the calculation.
+     * @param to Specifies until which date the time balance should be included in the response. This does not affect the calculation.
      */
     @Get('time-balance')
+    public async getTimeBalance(@Request() req: express.Request, @Query() from?: Date, @Query() to?: Date){
+        checkOrgaStatus(req);
+        return await calculateAllTimeBalances(from, to);
+    }
+
+
+    /**
+     * Calculates the time balance for the given user
+     * @param req
+     * @param userId The id of the user
+     * @param from Specifies from which date the time balance should be included in the response. This does not affect the calculation.
+     * @param to Specifies until which date the time balance should be included in the response. This does not affect the calculation.
+     */
+    @Get('time-balance/{userId}')
     @Response(404, 'User not found')
-    public async getTimeBalance(@Request() req: express.Request, @Query() userId: string) {
+    public async getTimeBalanceForUser(@Request() req: express.Request, @Path() userId: string, @Query() from?: Date, @Query() to?: Date){
         checkOrgaStatus(req);
         const user = await db.getUser(userId);
         if (!user) {
             this.setStatus(404);
             return;
         }
-        return await calculateTimeBalance(user);
+        return await calculateTimeBalance(user, from, to);
     }
 }
