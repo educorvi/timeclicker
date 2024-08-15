@@ -16,7 +16,7 @@ import { UnauthorizedError } from '../authentication';
 import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
-import { calculateAllTimeBalances, calculateTimeBalance } from '../saldoCalculation';
+import { calculateAllTimeBalances, calculateTimeBalance } from '../timeBalanceCalculation';
 
 export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;

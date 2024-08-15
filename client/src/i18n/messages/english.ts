@@ -68,8 +68,10 @@ export const en = {
     language: 'Language | Languages',
     working_hour: 'Working Hours | Working Hours',
     action: 'Action | Actions',
+    name: 'Name | Names',
 
     break: 'Break',
+    time_balance: 'Time Balance',
 
     download: 'Download',
     search: 'Search',

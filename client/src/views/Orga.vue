@@ -9,7 +9,9 @@ const { t } = useI18n();
         <b-tab :title="t('activity', 2)">
             <orga-activities />
         </b-tab>
-        <b-tab :title="t('working_hour', 2)"></b-tab>
+        <b-tab :title="t('working_hour', 2)">
+            <orga-time-balance/>
+        </b-tab>
         <b-tab :title="t('contract_data', 2)">
             <orga-contract-data />
         </b-tab>

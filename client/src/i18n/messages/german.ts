@@ -70,8 +70,10 @@ export const de = {
     language: 'Sprache | Sprachen',
     working_hour: 'Arbeitszeit | Arbeitszeiten',
     action: 'Aktion | Aktionen',
+    name: 'Name | Namen',
 
     break: 'Pause',
+    time_balance: 'Zeitsaldo',
 
     download: 'Herunterladen',
     search: 'Suchen',
