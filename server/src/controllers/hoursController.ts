@@ -52,7 +52,7 @@ export class HoursController extends Controller {
             dateFindOprator = LessThanOrEqual(to);
 
         }
-        return db.getMultipleHours({
+        return db.getHours({
             where: {
                 user,
                 date: dateFindOprator
@@ -73,7 +73,7 @@ export class HoursController extends Controller {
         @Path() hourId: string
     ) {
         const user = await getOrCreateUser(req);
-        const hour = await db.getHours(hourId);
+        const hour = await db.getHoursById(hourId);
         if (!hour) {
             this.setStatus(404);
             return;
@@ -101,7 +101,7 @@ export class HoursController extends Controller {
     ) {
         const user = await getOrCreateUser(req);
         if (requestBody.id) {
-            const origHour = await db.getHours(requestBody.id);
+            const origHour = await db.getHoursById(requestBody.id);
             if(origHour && origHour.user.id !== user.id){
                 this.setStatus(401);
                 return;
