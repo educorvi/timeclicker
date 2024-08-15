@@ -22,7 +22,7 @@
                         >{{ t('working_hour', 2) }}
                     </RouterLink>
                 </li>
-                <li class="nav-item" v-if="keycloak.hasRealmRole('orga')">
+                <li class="nav-item" v-if="userdata && keycloak && keycloak.hasRealmRole('orga')">
                     <RouterLink class="nav-link" to="/orga">{{
                         t('orga_ui')
                     }}</RouterLink>

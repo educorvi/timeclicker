@@ -27,7 +27,7 @@
                 <BTbody>
                     <BTr v-for="contract in contractData">
                         <BTd>{{ contract.startYear }}</BTd>
-                        <BTd>{{ t(`months[${contract.startMonth}]`) }}</BTd>
+                        <BTd>{{ t(`months[${contract.startMonth - 1}]`) }}</BTd>
                         <BTd>{{ contract.hoursPerWeek }}</BTd>
                         <BTd>{{ contract.daysPerWeek }}</BTd>
                         <BTd>{{ contract.vacationDays }}</BTd>
