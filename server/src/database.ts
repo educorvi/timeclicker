@@ -209,11 +209,11 @@ export default class Database {
         await this.activityRepository.delete({ id: activity.id });
     }
 
-    async getMultipleHours(options?: FindManyOptions<WorkingHours>) {
+    async getHours(options?: FindManyOptions<WorkingHours>) {
         return this.hoursRepository.find(options);
     }
 
-    async getHours(id: string): Promise<WorkingHours | null> {
+    async getHoursById(id: string): Promise<WorkingHours | null> {
         return await this.hoursRepository.findOne({
             where: { id },
             relations: {

@@ -16,6 +16,7 @@ import { UnauthorizedError } from '../authentication';
 import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
+import { calculateSaldo } from '../saldoCalculation';
 
 export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;
@@ -30,7 +31,7 @@ function checkOrgaStatus(req: express.Request): void {
     const token = JSON.parse(tokStr);
     if (!token.isOrga) {
         throw new UnauthorizedError(
-            'User does not have access to organizational information'
+            'User does not have access to organizational information',
         );
     }
 }
@@ -63,7 +64,7 @@ export class OrgaController extends Controller {
         @Query() users?: Array<string>,
         @Query() from?: Date,
         @Query() to?: Date,
-        @Query() tasks?: Array<string>
+        @Query() tasks?: Array<string>,
     ) {
         checkOrgaStatus(req);
 
@@ -93,7 +94,7 @@ export class OrgaController extends Controller {
     @Response(404, 'User not found')
     public async saveContractData(
         @Body() requestBody: saveContractDataParams,
-        @Request() req: express.Request
+        @Request() req: express.Request,
     ) {
         checkOrgaStatus(req);
         const user = await db.getUser(requestBody.userId);
@@ -116,7 +117,7 @@ export class OrgaController extends Controller {
     @Response(404, 'User not found')
     public async getContractData(
         @Query() userId: string,
-        @Request() req: express.Request
+        @Request() req: express.Request,
     ) {
         checkOrgaStatus(req);
         const user = await db.getUser(userId);
@@ -138,7 +139,7 @@ export class OrgaController extends Controller {
     @Delete('contract_data/{contractId}')
     public async deleteContractData(
         @Request() req: express.Request,
-        @Path() contractId: string
+        @Path() contractId: string,
     ) {
         checkOrgaStatus(req);
         const contractData = await db.getContractDataById(contractId);
@@ -147,5 +148,23 @@ export class OrgaController extends Controller {
             return;
         }
         await db.deleteContractData(contractData);
+    }
+
+
+    /**
+     * Calculates the working hour saldo for a user
+     * @param req
+     * @param userId The id of the user
+     */
+    @Get('saldo')
+    @Response(404, 'User not found')
+    public async getSaldo(@Request() req: express.Request, @Query() userId: string) {
+        checkOrgaStatus(req);
+        const user = await db.getUser(userId);
+        if (!user) {
+            this.setStatus(404);
+            return;
+        }
+        return await calculateSaldo(user);
     }
 }
