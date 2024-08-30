@@ -1,3 +1,15 @@
+# [timeclicker_server-v2.0.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.8.1...timeclicker_server-v2.0.0) (2024-08-30)
+
+
+### Continuous Integration
+
+* fix release ([4a95a52](https://github.com/educorvi/timeclicker/commit/4a95a52970be16cad22a3d0dd1a45c7a272ad6de))
+
+
+### BREAKING CHANGES
+
+* Release v2. Major Changes to ui and api
+
 # [timeclicker_server-v1.7.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.7.0...timeclicker_server-v1.7.1) (2023-04-24)
 
 ### Bug Fixes
