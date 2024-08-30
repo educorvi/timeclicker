@@ -1,3 +1,10 @@
+# [timeclicker_server-v2.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.0...timeclicker_server-v2.0.1) (2024-08-30)
+
+
+### Bug Fixes
+
+* allow non Integers for hoursPerWeek ([9767f6d](https://github.com/educorvi/timeclicker/commit/9767f6d9e3190978488e7de56a1b5943a317d6ab))
+
 # [timeclicker_server-v2.0.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v1.8.1...timeclicker_server-v2.0.0) (2024-08-30)
 
 

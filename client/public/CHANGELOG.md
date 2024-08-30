@@ -1,3 +1,11 @@
+# [timeclicker_client-v2.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.0...timeclicker_client-v2.0.1) (2024-08-30)
+
+
+### Bug Fixes
+
+* allow non Integers for hoursPerWeek ([9767f6d](https://github.com/educorvi/timeclicker/commit/9767f6d9e3190978488e7de56a1b5943a317d6ab))
+* change pwa background color ([53c319f](https://github.com/educorvi/timeclicker/commit/53c319fbbeb6c1e980f271a7f4c55b1e5f07bb73))
+
 # [timeclicker_client-v2.0.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v1.12.1...timeclicker_client-v2.0.0) (2024-08-30)
 
 
