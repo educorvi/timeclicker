@@ -18,7 +18,7 @@ import type express from 'express';
 import { User } from '../classes';
 import { LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 
-async function getOrCreateUser(req: express.Request): Promise<User> {
+export async function getOrCreateUser(req: express.Request): Promise<User> {
     const tokStr = req.rawHeaders[req.rawHeaders.indexOf('token') + 1];
     if (!tokStr || req.rawHeaders.indexOf('token') === -1) {
         throw new Error('could not read token');
@@ -109,6 +109,13 @@ export class ActivityController extends Controller {
     ) {
         const user = await getOrCreateUser(req);
         const task = await db.getTask(requestBody.taskId);
+        if (requestBody.id) {
+            const activity = await db.getActivity(requestBody.id);
+            if (!activity || activity.user.id !== user.id) {
+                this.setStatus(401);
+                return;
+            }
+        }
         if (!(user && task)) {
             this.setStatus(400);
             return;
@@ -118,7 +125,7 @@ export class ActivityController extends Controller {
             user,
             task,
         };
-        await db.createActivity(activityData);
+        await db.saveActivity(activityData);
         this.setStatus(201);
     }
 }

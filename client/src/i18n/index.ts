@@ -1,5 +1,6 @@
 import { createI18n } from 'vue-i18n';
 import messages from '@/i18n/messages';
+import { en } from '@/i18n/messages/english';
 
 let lang = localStorage.getItem('language');
 if (!lang) {
@@ -33,6 +34,10 @@ export default createI18n({
                 hour: 'numeric',
                 minute: 'numeric',
             },
+            time: {
+                hour: 'numeric',
+                minute: 'numeric',
+            }
         },
         de: {
             short: {
@@ -48,6 +53,10 @@ export default createI18n({
                 hour: 'numeric',
                 minute: 'numeric',
             },
+            time: {
+                hour: 'numeric',
+                minute: 'numeric',
+            }
         },
     },
 });

@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.9'
 
 services:
 
@@ -6,6 +6,7 @@ services:
     image: postgres:15
     restart: always
     environment:
+      POSTGRES_USER: timeclicker
       POSTGRES_PASSWORD: superdupertest
       POSTGRES_DB: timeclicker
     ports:
@@ -16,5 +17,31 @@ services:
   adminer:
     image: adminer
     restart: always
+    environment:
+      ADMINER_DEFAULT_DRIVER: pgsql # server=mysql, pgsql, sqlite, sqlite2, oracle, mssql, mongo, elastic
+      ADMINER_DEFAULT_DB: timeclicker
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DEFAULT_USERNAME: timeclicker
+      ADMINER_DEFAULT_PASSWORD: superdupertest
+    depends_on:
+      - db
+    configs:
+      - source: adminer-index.php
+        target: /var/www/html/index.php
     ports:
       - "8080:8080"
+configs:
+    adminer-index.php:
+      content: |
+        <?php
+          if(!count($$_GET)) {
+            $$_POST['auth'] = [
+              'server' => $$_ENV['ADMINER_DEFAULT_SERVER'],
+              'username' => $$_ENV['ADMINER_DEFAULT_USERNAME'],
+              'password' => $$_ENV['ADMINER_DEFAULT_PASSWORD'],
+              'driver' => $$_ENV['ADMINER_DEFAULT_DRIVER'],
+              'db'    => $$_ENV['ADMINER_DEFAULT_DB'],
+            ];
+          }
+          include './adminer.php';
+        ?>

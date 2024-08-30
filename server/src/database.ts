@@ -1,12 +1,10 @@
 import { DataSource, Repository } from 'typeorm';
 import type { QueryRunner } from 'typeorm';
 import type { FindManyOptions } from 'typeorm';
-import User from './classes/User';
-import Activity from './classes/Activity';
-import Task from './classes/Task';
 import { createDatabase } from 'typeorm-extension';
 import type { Logger } from 'typeorm';
 import { logger } from './globals';
+import { User, Activity, Task, ContractData, WorkingHours } from './classes';
 
 class TypeOrmLogger implements Logger {
     log(
@@ -72,6 +70,8 @@ class TypeOrmLogger implements Logger {
     }
 }
 
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
 export default class Database {
     readonly host: string;
     readonly port: number;
@@ -82,6 +82,8 @@ export default class Database {
     private userRepository: Repository<User>;
     private tasksRepository: Repository<Task>;
     private activityRepository: Repository<Activity>;
+    private hoursRepository: Repository<WorkingHours>;
+    private contractDataRepository: Repository<ContractData>;
 
     constructor(
         username: string,
@@ -105,7 +107,7 @@ export default class Database {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User, Activity, Task],
+            entities: [User, Activity, Task, ContractData, WorkingHours],
             migrations: [__dirname + '/../migrations/*.js'],
             migrationsTransactionMode: 'all',
             logging: 'all',
@@ -123,6 +125,9 @@ export default class Database {
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);
+        this.hoursRepository = this.AppDataSource.getRepository(WorkingHours);
+        this.contractDataRepository =
+            this.AppDataSource.getRepository(ContractData);
     }
 
     async getUser(id: string): Promise<User | null> {
@@ -151,6 +156,7 @@ export default class Database {
             order: { title: 'ASC' },
         });
     }
+
     async getClosedTasks(): Promise<Array<Task>> {
         return await this.tasksRepository.find({
             where: { open: false },
@@ -190,7 +196,7 @@ export default class Database {
         });
     }
 
-    async createActivity(activityData: Omit<Activity, 'id'> & { id?: string }) {
+    async saveActivity(activityData: PartialBy<Activity, 'id'>) {
         let activity = new Activity();
         activity = {
             ...activity,
@@ -201,5 +207,49 @@ export default class Database {
 
     async deleteActivity(activity: Activity) {
         await this.activityRepository.delete({ id: activity.id });
+    }
+
+    async getHours(options?: FindManyOptions<WorkingHours>) {
+        return this.hoursRepository.find(options);
+    }
+
+    async getHoursById(id: string): Promise<WorkingHours | null> {
+        return await this.hoursRepository.findOne({
+            where: { id },
+            relations: {
+                user: true,
+            },
+        });
+    }
+
+    async deleteHour(hours: WorkingHours) {
+        await this.hoursRepository.delete({ id: hours.id });
+    }
+
+    async saveHour(hours: PartialBy<WorkingHours, 'id'>) {
+        let workingHour = new WorkingHours();
+        workingHour = {
+            ...workingHour,
+            ...hours,
+        };
+        await this.hoursRepository.save(workingHour);
+    }
+
+    async getContractData(options?: FindManyOptions<ContractData>) {
+        return this.contractDataRepository.find(options);
+    }
+
+    async getContractDataById(id: string): Promise<ContractData | null> {
+        return await this.contractDataRepository.findOne({
+            where: { id },
+        });
+    }
+
+    async saveContractData(requestBody: PartialBy<ContractData, 'id'>) {
+        await this.contractDataRepository.save(requestBody);
+    }
+
+    async deleteContractData(contractData: ContractData) {
+        await this.contractDataRepository.delete({ id: contractData.id });
     }
 }

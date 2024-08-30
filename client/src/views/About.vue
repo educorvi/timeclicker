@@ -16,7 +16,7 @@
             </tr>
         </table>
         <hr />
-        <p>
+        <p class="mb-0">
             <b>{{ t('developed_by') }}</b>
         </p>
         <div id="logo" class="rounded">
@@ -29,13 +29,13 @@
     </div>
     <hr />
     <b-button-group class="w-100" :vertical="bpStore.currentBP < Breakpoint.s">
-        <b-button variant="outline-light" v-b-modal.changelog-modal>
+        <b-button variant="outline-primary" v-b-modal.changelog-modal>
             Changelog
         </b-button>
-        <b-button variant="outline-light" to="/apidocs">
+        <b-button variant="outline-primary" to="/apidocs">
             {{ t('apidocs') }}
         </b-button>
-        <b-button variant="outline-light" v-b-modal.license-modal>
+        <b-button variant="outline-primary" v-b-modal.license-modal>
             {{ t('library', 2) }}
         </b-button>
     </b-button-group>
@@ -76,7 +76,6 @@
 
 <script setup lang="ts">
 import { version as versionFromPJson } from '../../package.json';
-import { BButton, BButtonGroup, BCard, BModal } from 'bootstrap-vue';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import CustomSpinner from '@/components/CustomSpinner.vue';

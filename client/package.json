@@ -2,6 +2,7 @@
   "name": "timeclicker_client",
   "version": "1.12.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "run-p type-check build-only",
@@ -10,14 +11,14 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
     "licenses": "license-report --only=prod > public/licenses.json && license-downloader --source ./public/licenses.json --licDir public/license-files --download",
-    "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
+    "generateIcons": "yarn dlx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
   },
   "dependencies": {
+    "@educorvi/vue-json-form": "3.0.0-alpha.4",
     "@tsconfig/node-lts": "^18.12.5",
-    "@vue/compat": "^3.4.27",
     "axios": "^1.7.2",
-    "bootstrap": "^4.6.2",
-    "bootstrap-vue": "^2.23.1",
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.24.7",
     "bootswatch": "^4.6.2",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.32.1",
@@ -26,11 +27,14 @@
     "showdown": "^2.1.0",
     "swagger-ui": "^5.17.14",
     "swagger-ui-dist": "^5.17.14",
+    "timeclicker_server": "workspace:^",
     "vue": "^3.4.27",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
+    "@iconify-json/bi": "^1.1.23",
+    "@rollup/plugin-url": "^8.0.2",
     "@rushstack/eslint-patch": "^1.10.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^9.0.2",
@@ -58,6 +62,8 @@
     "semantic-release": "^22.0.12",
     "semantic-release-monorepo": "^7.0.5",
     "typescript": "~5.4.5",
+    "unplugin-icons": "^0.19.0",
+    "unplugin-vue-components": "^0.27.2",
     "vite": "^4.5.3",
     "vite-plugin-pwa": "^0.20.0",
     "vue-tsc": "~1.8.27"

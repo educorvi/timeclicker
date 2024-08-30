@@ -8,7 +8,7 @@ import Task from './Task';
 @Entity()
 export default class Activity {
     /**
-     * The users ID
+     * The activities ID
      */
     @PrimaryGeneratedColumn('uuid')
     id: string;
