@@ -1,6 +1,6 @@
 <template>
     <div class="text-center" style="width: 100%">
-        <h1 style="display: inline; width: max-content">
+        <h1 class="w-100 mb-2 mt-2">
             {{ t('overview_for') }}
         </h1>
         <div class="w-100 d-flex justify-content-center">
@@ -13,7 +13,7 @@
             </b-input-group>
         </div>
     </div>
-    <p class="w-100 text-center mt-2">
+    <p class="w-100 text-center mt-2 mb-3">
         {{ t('total') }}: {{ hours }}
         <br />
         <span v-if="breaks" class="text-muted">
@@ -44,6 +44,8 @@
                                         ? d(activity.from, 'long')
                                         : ''
                                 }}
+                                -
+                                {{ activity.to ? d(activity.to, 'time') : '' }}
                             </h5>
                             <p class="mb-2">
                                 {{
@@ -71,13 +73,15 @@
                             </p>
                         </b-card-body>
                         <b-card-footer>
-                            <b-button-group class="mt-2 w-100">
+                            <b-button-group class="mt-2 mb-2 w-100">
                                 <b-button
-                                    variant="outline-primary"
+                                    class="w-50"
+                                    variant="outline-secondary"
                                     @click="editActivity(activity)"
                                     >{{ t('edit') }}
                                 </b-button>
                                 <b-button
+                                    class="w-50"
                                     variant="outline-danger"
                                     @click="askToDeleteActivity(activity)"
                                     >{{ t('delete') }}
@@ -115,24 +119,14 @@
 <script lang="ts" setup>
 import type { Activity, Task } from 'timeclicker_server/src/libindex';
 import CustomSpinner from './CustomSpinner.vue';
-import {
-    BCard,
-    BInputGroup,
-    BButtonGroup,
-    BButton,
-    BModal,
-    BRow,
-    BCol,
-    BContainer,
-    BCardBody,
-    BCardFooter,
-} from 'bootstrap-vue';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
-import EntryEditor from '@/components/EntryEditor.vue';
+import EntryEditor from '@/components/ActivityEntryEditor.vue';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
+import { getMonthOptions, years } from '@/commons/DateUtils';
+import type { BModal } from 'bootstrap-vue-next';
 
 const props = defineProps<{ tasks: Array<Task> }>();
 
@@ -146,29 +140,10 @@ const deleteModal = ref<InstanceType<typeof BModal> | null>(null);
 
 const loaded = ref(false);
 const activities = ref<Array<Activity>>([]);
+
+const monthOptions = getMonthOptions(t);
+
 const month = ref(new Date().getMonth() + 1);
-
-const months = [
-    t('months[0]'),
-    t('months[1]'),
-    t('months[2]'),
-    t('months[3]'),
-    t('months[4]'),
-    t('months[5]'),
-    t('months[6]'),
-    t('months[7]'),
-    t('months[8]'),
-    t('months[9]'),
-    t('months[10]'),
-    t('months[11]'),
-];
-const monthOptions = computed(() =>
-    months.map((val, index) => {
-        return { value: index + 1, text: val };
-    })
-);
-
-const years = ref<Array<number>>([]);
 const year = ref(new Date().getFullYear());
 
 const breaks = computed(() => {
@@ -274,10 +249,6 @@ watch(month, loadActivities);
 
 onMounted(() => {
     loadActivities();
-    const currYear = new Date().getFullYear();
-    for (let i = currYear; i > 2021; i--) {
-        years.value.push(i);
-    }
 });
 
 defineExpose({
@@ -292,15 +263,15 @@ defineExpose({
     height: 100%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 420px) {
     .activity-card {
         width: 100% !important;
         height: 100%;
     }
 
-    #row .col {
+    #row, #row .col {
         padding: 0;
-        width: 100%;
+        width: 100% !important;
     }
 
     #row {

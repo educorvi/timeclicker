@@ -1,36 +1,37 @@
 <!--suppress CssUnusedSymbol -->
 <template>
     <NavTopBar />
-    <div id="alerts" class="alertlist">
-        <TransitionGroup name="list">
-            <b-alert
-                :key="error"
-                v-for="error in errorStore.errors"
-                show
-                variant="danger"
-                class="m-2"
-            >
-                <div
-                    style="
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    "
-                >
-                    <p class="m-0" style="height: min-content">
-                        {{ t('error') }}: {{ error.message }}
-                    </p>
-                    <BButton
-                        @click="errorStore.removeError(error)"
-                        variant="outline-light"
-                        style="width: 50px"
-                    >
-                        <b-icon-x />
-                    </BButton>
-                </div>
-            </b-alert>
-        </TransitionGroup>
-    </div>
+    <BToastOrchestrator />
+    <!--    <div id="alerts" class="alertlist">-->
+    <!--        <TransitionGroup name="list">-->
+    <!--            <b-alert-->
+    <!--                :key="error.toString()"-->
+    <!--                v-for="error in errorStore.errors"-->
+    <!--                show-->
+    <!--                variant="danger"-->
+    <!--                class="m-2"-->
+    <!--            >-->
+    <!--                <div-->
+    <!--                    style="-->
+    <!--                        display: flex;-->
+    <!--                        justify-content: space-between;-->
+    <!--                        align-items: center;-->
+    <!--                    "-->
+    <!--                >-->
+    <!--                    <p class="m-0" style="height: min-content">-->
+    <!--                        {{ t('error') }}: {{ error.message }}-->
+    <!--                    </p>-->
+    <!--                    <BButton-->
+    <!--                        @click="errorStore.removeError(error)"-->
+    <!--                        variant="outline-light"-->
+    <!--                        style="width: 50px"-->
+    <!--                    >-->
+    <!--                        <i-bi-x />-->
+    <!--                    </BButton>-->
+    <!--                </div>-->
+    <!--            </b-alert>-->
+    <!--        </TransitionGroup>-->
+    <!--    </div>-->
     <div
         id="content-container"
         v-if="kcStore.authenticated === authenticatedState"
@@ -55,7 +56,6 @@ import NavTopBar from '@/components/NavTopBar.vue';
 import Keycloak from 'keycloak-js';
 import { authState, useKeycloakStore } from '@/stores/keycloak';
 import CustomSpinner from '@/components/CustomSpinner.vue';
-import { BCard, BButton, BAlert, BIconX } from 'bootstrap-vue';
 import { computed, onMounted, onUnmounted } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
@@ -145,7 +145,7 @@ onUnmounted(() => window.removeEventListener('resize', onWidthChange));
     left: 50%;
     margin-top: -100px;
     margin-left: -100px;
-    width: 200px;
+    width: fit-content;
     height: 200px;
 }
 </style>

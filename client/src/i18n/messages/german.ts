@@ -1,4 +1,4 @@
-const de = {
+export const de = {
     months: [
         'Januar',
         'Februar',
@@ -28,12 +28,18 @@ const de = {
     delete_prompt: 'Soll der Eintrag wirklich gelöscht werden?',
     beg_of_entry_bef_end: 'Der Beginn des Eintrags muss vor dem Ende liegen!',
     please_select_task: 'Bitte wähle eine Aufgabe',
+    please_select_user: 'Bitte wähle einen Nutzer',
     reload_to_activate:
         'Laden Sie die Seite neu, um die Änderungen zu aktivieren',
     orga_ui: 'Organisationsoberfläche',
     about: 'Über',
     apidocs: 'API Dokumentation',
     load_swaggerui: 'SwaggerUI wird geladen...',
+
+    manage_activities: 'Aktivitäten verwalten',
+    manage_working_hours: 'Arbeitszeiten verwalten',
+
+    dashboard: 'Dashboard',
 
     show_note: 'Notiz anzeigen',
     hide_note: 'Notiz verbergen',
@@ -43,6 +49,7 @@ const de = {
         act_failed: 'Aktivitäten konnten nicht geladen werden!',
         tasks_failed: 'Aufgaben konnten nicht geladen werden!',
         users_failed: 'Nutzer konnten nicht geladen werden!',
+        contract_data_failed: 'Vertragsdaten konnten nicht geladen werden!',
         token_refresh:
             'Anmeldetoken konnte nicht erneuert werden. Bitte melden Sie sich erneut an.',
         auth_endpoint:
@@ -61,8 +68,12 @@ const de = {
     activity: 'Aktivität | Aktivitäten',
     duration: 'Dauer',
     language: 'Sprache | Sprachen',
+    working_hour: 'Arbeitszeit | Arbeitszeiten',
+    action: 'Aktion | Aktionen',
+    name: 'Name | Namen',
 
     break: 'Pause',
+    time_balance: 'Zeitsaldo',
 
     download: 'Herunterladen',
     search: 'Suchen',
@@ -82,93 +93,25 @@ const de = {
         de: 'Deutsch',
         en: 'Englisch',
     },
-};
 
-const en = {
-    months: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ],
+    minute: 'Minute | Minuten',
+    hour: 'Stunde | Stunden',
 
-    login_prompt: 'Please log in',
-    developed_by: 'Developed by',
-    libraries_modal_header: 'Used libraries',
-    total_time: 'Total time',
-    add_filter: 'Add filter',
-    no_option_fits_this_search: 'There is no option that fits this search',
-    new_entry: 'New entry',
-    overview_for: 'Overview for',
-    no_entries: 'There are no entries for this month',
-    delete_entry: 'Delete Entry',
-    edit_entry: 'Edit entry',
-    delete_prompt: 'Do you really want to delete this entry?',
-    beg_of_entry_bef_end: 'The beginning of an entry must be before its end!',
-    please_select_task: 'Please select a task',
-    reload_to_activate: 'Reload the page to load the changes',
-    orga_ui: 'Organization Panel',
-    about: 'About',
-    apidocs: 'API Documentation',
-    load_swaggerui: 'Loading SwaggerUI...',
+    vacation: 'Urlaub',
+    vacation_day: 'Urlaubstag | Urlaubstage',
 
-    show_note: 'Show note',
-    hide_note: 'Hide note',
+    vacation_days_left: 'Verbleibende Urlaubstage',
 
-    errors: {
-        saving_failed: 'Failed to save!',
-        act_failed: 'Activities could not be loaded!',
-        tasks_failed: 'Tasks could not be loaded!',
-        users_failed: 'Users could not be loaded!',
-        token_refresh: 'Failed to refresh token. Please login again...',
-        auth_endpoint:
-            'Information about the authentication endpoint could not be loaded. Please reload the page',
-    },
-
-    error: 'Error | Errors',
-    library: 'Library | Libraries',
-    filter: 'Filter | Filters',
-    task: 'Task | Tasks',
-    user: 'User | Users',
-    total: 'Total',
-    date: 'Date',
-    note: 'Note | Notes',
-    private_note: 'Private Note | Private Notes',
-    activity: 'Activity | Activities',
-    duration: 'Duration',
-    language: 'Language | Languages',
-
-    break: 'Break',
-
-    download: 'Download',
-    search: 'Search',
-    edit: 'Edit',
-    delete: 'Delete',
-    cancel: 'Cancel',
-    logout: 'Logout',
-    settings: 'Settings',
-    save: 'Save',
-
-    mandatory: 'Mandatory',
-
-    from: 'From',
-    to: 'To',
-
-    languages: {
-        de: 'German',
-        en: 'English',
-    },
-};
-
-export default {
-    de,
-    en,
+    contract_data: 'Vertragsdaten',
+    edit_contract_data: 'Vertragsdaten bearbeiten',
+    hours_per_week: 'Stunden pro Woche',
+    hours_per_week_desc: 'Stunden, die der Nutzer pro Woche arbeitet',
+    days_per_week: 'Tage pro Woche',
+    days_per_week_desc: 'Anzahl der Tage, die der Nutzer pro Woche arbeitet',
+    vacation_days: 'Urlaubstage',
+    vacation_days_desc: 'Urlaubstage pro Jahr',
+    start_month: 'Startmonat',
+    start_month_desc: 'Der Monat, in dem der Vertrag beginnt',
+    start_year: 'Startjahr',
+    start_year_desc: 'Das Jahr, in dem der Vertrag beginnt',
 };

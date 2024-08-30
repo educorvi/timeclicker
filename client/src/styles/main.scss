@@ -1,0 +1,63 @@
+$web-font-path: false;
+$color-mode-type: media-query;
+
+
+//@import '../../node_modules/bootswatch/dist/darkly/variables';
+@import "educorvi/vars";
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+@import '../../../node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.css';
+@import "educorvi/theme";
+//@import '../../node_modules/bootswatch/dist/darkly/bootswatch';
+
+input[type=checkbox]{
+    accent-color: $primary;
+}
+.form-check-input:checked
+{
+  background-color: $primary;
+  border-color: $primary;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: white;
+    background: $primary !important;
+}
+
+::selection {
+    color: white;
+    background: $primary !important;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.vjf_form button {
+    width: 100%;
+}
