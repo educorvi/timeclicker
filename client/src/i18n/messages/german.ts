@@ -100,6 +100,8 @@ export const de = {
     vacation: 'Urlaub',
     vacation_day: 'Urlaubstag | Urlaubstage',
 
+    vacation_days_left: 'Verbleibende Urlaubstage',
+
     contract_data: 'Vertragsdaten',
     edit_contract_data: 'Vertragsdaten bearbeiten',
     hours_per_week: 'Stunden pro Woche',

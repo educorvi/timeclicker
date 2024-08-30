@@ -17,9 +17,16 @@ import { getOrCreateUser } from './activityController';
 import type express from 'express';
 import { db } from '../globals';
 import { And, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
+import { calculateTimeBalance } from '../timeBalanceCalculation';
+import { getVacationDayData } from '../vacationDayCalculation';
 
 export type saveHourParams = Omit<WorkingHours, 'id' | 'user'> & {
     id?: string;
+};
+
+export type TimeBalanceData = {
+    saldo: number;
+    vacationDaysLeft: number;
 };
 
 
@@ -37,28 +44,28 @@ export class HoursController extends Controller {
     public async getHours(
         @Request() req: express.Request,
         @Query() from?: Date,
-        @Query() to?: Date
+        @Query() to?: Date,
     ): Promise<WorkingHours[]> {
         const user = await getOrCreateUser(req);
         let dateFindOprator = undefined;
-        if(from && to){
+        if (from && to) {
             dateFindOprator = And(
                 MoreThanOrEqual(from),
-                LessThanOrEqual(to)
+                LessThanOrEqual(to),
             );
-        }else if(from){
+        } else if (from) {
             dateFindOprator = MoreThanOrEqual(from);
-        }else if(to){
+        } else if (to) {
             dateFindOprator = LessThanOrEqual(to);
 
         }
         return db.getHours({
             where: {
                 user,
-                date: dateFindOprator
+                date: dateFindOprator,
             },
             order: { date: 'ASC' },
-        })
+        });
     }
 
     /**
@@ -70,7 +77,7 @@ export class HoursController extends Controller {
     @Response(404, 'Not found')
     public async deleteHour(
         @Request() req: express.Request,
-        @Path() hourId: string
+        @Path() hourId: string,
     ) {
         const user = await getOrCreateUser(req);
         const hour = await db.getHoursById(hourId);
@@ -97,12 +104,12 @@ export class HoursController extends Controller {
     @Post()
     public async saveHour(
         @Body() requestBody: saveHourParams,
-        @Request() req: express.Request
+        @Request() req: express.Request,
     ) {
         const user = await getOrCreateUser(req);
         if (requestBody.id) {
             const origHour = await db.getHoursById(requestBody.id);
-            if(origHour && origHour.user.id !== user.id){
+            if (origHour && origHour.user.id !== user.id) {
                 this.setStatus(401);
                 return;
             }
@@ -114,5 +121,23 @@ export class HoursController extends Controller {
         await db.saveHour(hour);
         this.setStatus(201);
     }
+
+    /**
+     * Get users time and vacation balance
+     */
+    @Get('balance')
+    public async getBalance(
+        @Request() req: express.Request,
+    ): Promise<TimeBalanceData> {
+        const user = await getOrCreateUser(req);
+        const timeBalanceData = (await calculateTimeBalance(user));
+        const saldo = timeBalanceData[timeBalanceData.length - 1].timeBalance;
+        const vacationDaysLeft = (await getVacationDayData(user)).vacationDaysLeft;
+        return {
+            saldo,
+            vacationDaysLeft,
+        };
+    }
+
 
 }

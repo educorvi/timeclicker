@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import type { WorkingHours, saveHourParams } from 'timeclicker_server';
 import { useI18n } from 'vue-i18n';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useToast } from 'bootstrap-vue-next';
@@ -94,6 +94,13 @@ const date = ref<string>('');
 const hours = ref<number>(0);
 const minutes = ref<number>(0);
 const vacation = ref<boolean>(false);
+
+watch(vacation, (newVal) => {
+    if (newVal) {
+        hours.value = 0;
+        minutes.value = 0;
+    }
+});
 
 function modelClosed() {
     date.value = '';
