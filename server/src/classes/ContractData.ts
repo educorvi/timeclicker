@@ -36,7 +36,7 @@ export default class ContractData {
     /**
      * Hours that the user is supposed to work per week
      */
-    @Column()
+    @Column("decimal")
     hoursPerWeek: number;
 
     /**

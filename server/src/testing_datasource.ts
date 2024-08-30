@@ -4,7 +4,7 @@ import { User, Activity, Task, ContractData, WorkingHours } from './classes';
 export const AppDataSource = new DataSource({
     type: 'postgres',
     host: 'localhost',
-    username: 'postgres',
+    username: 'timeclicker',
     password: 'superdupertest',
     database: 'timeclicker',
     entities: [User, Activity, Task, ContractData, WorkingHours],
