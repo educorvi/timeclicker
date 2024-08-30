@@ -21,7 +21,7 @@ export default class WorkingHours {
     /**
      * The minutes that were worked
      */
-    @Column()
+    @Column("decimal")
     duration: number;
 
     /**
