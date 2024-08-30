@@ -17,6 +17,7 @@ import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
 import { calculateAllTimeBalances, calculateTimeBalance } from '../timeBalanceCalculation';
+import { getAllVacationDayData, VacationDayData } from '../vacationDayCalculation';
 
 export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;
@@ -180,5 +181,14 @@ export class OrgaController extends Controller {
             return;
         }
         return await calculateTimeBalance(user, from, to);
+    }
+
+    /**
+     * Get vacation day data for all users
+     */
+    @Get('vacation-days')
+    public async getVacationDays(@Request() req: express.Request): Promise<Record<string, VacationDayData>> {
+        checkOrgaStatus(req);
+        return await getAllVacationDayData();
     }
 }

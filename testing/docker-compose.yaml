@@ -6,6 +6,7 @@ services:
     image: postgres:15
     restart: always
     environment:
+      POSTGRES_USER: timeclicker
       POSTGRES_PASSWORD: superdupertest
       POSTGRES_DB: timeclicker
     ports:
@@ -20,7 +21,7 @@ services:
       ADMINER_DEFAULT_DRIVER: pgsql # server=mysql, pgsql, sqlite, sqlite2, oracle, mssql, mongo, elastic
       ADMINER_DEFAULT_DB: timeclicker
       ADMINER_DEFAULT_SERVER: db
-      ADMINER_DEFAULT_USERNAME: postgres
+      ADMINER_DEFAULT_USERNAME: timeclicker
       ADMINER_DEFAULT_PASSWORD: superdupertest
     depends_on:
       - db

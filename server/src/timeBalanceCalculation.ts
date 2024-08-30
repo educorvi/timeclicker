@@ -74,11 +74,13 @@ async function setRequiredHours(weeks: TimeBalanceMap, user: User) {
             order: { startYear: 'DESC', startMonth: 'DESC' },
         });
         const newestContract = contracts[0];
-        if (!newestContract) {
-            throw new Error('No contract found');
+        if (newestContract) {
+            week.requiredHours = newestContract.hoursPerWeek;
+            week.hoursPerDay = newestContract.hoursPerWeek / newestContract.daysPerWeek;
+        } else {
+            week.requiredHours = 0;
+            week.hoursPerDay = 0;
         }
-        week.requiredHours = newestContract.hoursPerWeek;
-        week.hoursPerDay = newestContract.hoursPerWeek / newestContract.daysPerWeek;
     }
 }
 
@@ -119,16 +121,16 @@ function roundValues(weeks: WeekTimeBalanceData[]) {
 }
 
 function filterResults(weeks: WeekTimeBalanceData[], displayFrom?: Date, displayTo?: Date) {
-        return weeks.filter((week) => {
-            let include = true;
-            if (displayFrom) {
-                include = include && week.endDate >= displayFrom;
-            }
-            if (displayTo) {
-                include = include && week.startDate <= displayTo;
-            }
-            return include;
-        });
+    return weeks.filter((week) => {
+        let include = true;
+        if (displayFrom) {
+            include = include && week.endDate >= displayFrom;
+        }
+        if (displayTo) {
+            include = include && week.startDate <= displayTo;
+        }
+        return include;
+    });
 
 }
 

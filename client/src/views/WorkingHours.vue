@@ -13,6 +13,45 @@
             </b-input-group>
         </div>
     </div>
+
+    <div id="balances-div" v-if="timeBalanceData">
+
+        <!--        <p>-->
+        <!--            <strong>-->
+        <!--                {{ t('time_balance') }}:-->
+        <!--            </strong>-->
+        <!--            <span :class="timeBalanceData.saldo<0?'text-danger':'text-success'">-->
+        <!--                {{ timeBalanceData.saldo }}-->
+        <!--            </span>-->
+        <!--        </p>-->
+        <!--        <p>-->
+        <!--            <strong>{{ t('vacation_days_left') }}: </strong>-->
+        <!--            <span :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">-->
+        <!--                {{ timeBalanceData.vacationDaysLeft }}-->
+        <!--            </span>-->
+        <!--        </p>-->
+        <b-table-simple borderless>
+            <b-tbody>
+                <b-tr>
+                    <b-td>{{ t('time_balance') }}</b-td>
+                    <b-td class="text-center">
+                        <span :class="timeBalanceData.saldo<0?'text-danger':'text-success'">
+                            {{ timeBalanceData.saldo }}
+                        </span>
+                    </b-td>
+                </b-tr>
+                <b-tr>
+                    <b-td>{{ t('vacation_days_left') }}</b-td>
+                    <b-td class="text-center">
+                        <span :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">
+                            {{ timeBalanceData.vacationDaysLeft }}
+                        </span>
+                    </b-td>
+                </b-tr>
+            </b-tbody>
+        </b-table-simple>
+    </div>
+
     <div class="w-100 text-center mt-3 mb-3">
         <b-button variant="primary" @click="modalVisible = true">
             {{ t('new_entry') }}
@@ -40,7 +79,7 @@
                                     <strong>{{ t('duration') }}:</strong>
                                     {{
                                         humanizeDuration(
-                                            hour.duration * 60 * 1000
+                                            hour.duration * 60 * 1000,
                                         )
                                     }}
                                 </span>
@@ -73,7 +112,7 @@
         ok-variant="danger"
         :cancel-title="t('cancel')"
         centered
-        >{{ t('delete_prompt') }}
+    >{{ t('delete_prompt') }}
     </b-modal>
 </template>
 
@@ -81,7 +120,7 @@
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
 import { onMounted, ref, watch } from 'vue';
-import type { WorkingHours } from 'timeclicker_server';
+import type { TimeBalanceData, WorkingHours } from 'timeclicker_server';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
 import type { BModal } from 'bootstrap-vue-next';
@@ -96,6 +135,7 @@ const year = ref(new Date().getFullYear());
 const modalVisible = ref(false);
 
 const hours = ref<WorkingHours[] | null>(null);
+const timeBalanceData = ref<TimeBalanceData | null>(null);
 
 const deleteHoursModal = ref<InstanceType<typeof BModal> | null>(null);
 const deleteHoursId = ref<string | null>(null);
@@ -116,6 +156,15 @@ function fetchHours() {
         });
 }
 
+function fetchTimeBalance() {
+    timeBalanceData.value = null;
+    axios
+        .get(import.meta.env.VITE_API_ENDPOINT + 'hours/balance')
+        .then((response) => {
+            timeBalanceData.value = response.data;
+        });
+}
+
 function onDelete(id: string) {
     deleteHoursId.value = id;
     deleteHoursModal.value?.show();
@@ -126,9 +175,9 @@ async function deleteHours() {
     axios
         .delete(
             import.meta.env.VITE_API_ENDPOINT +
-                'hours' +
-                '/' +
-                deleteHoursId.value
+            'hours' +
+            '/' +
+            deleteHoursId.value,
         )
         .then(() => {
             deleteHoursId.value = null;
@@ -137,13 +186,32 @@ async function deleteHours() {
 }
 
 onMounted(fetchHours);
+onMounted(fetchTimeBalance);
 
-watch([month, year], fetchHours);
+watch([month, year], () => {
+    fetchHours();
+    fetchTimeBalance();
+});
 </script>
 
 <style scoped lang="scss">
 #hours-container {
     max-width: 500px;
+}
+
+#balances-div {
+    * {
+        width: fit-content;
+    }
+
+    display: flex;
+    justify-content: center;
+
+    p {
+        margin: 0;
+    }
+
+    margin-top: 20px;
 }
 
 .hours-delete-button {
