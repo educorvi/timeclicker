@@ -27,6 +27,7 @@
     "showdown": "^2.1.0",
     "swagger-ui": "^5.17.14",
     "swagger-ui-dist": "^5.17.14",
+    "timeclicker_server": "workspace:^",
     "vue": "^3.4.27",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.2"

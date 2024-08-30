@@ -14453,6 +14453,7 @@ __metadata:
     showdown: ^2.1.0
     swagger-ui: ^5.17.14
     swagger-ui-dist: ^5.17.14
+    timeclicker_server: "workspace:^"
     typescript: ~5.4.5
     unplugin-icons: ^0.19.0
     unplugin-vue-components: ^0.27.2
@@ -14465,7 +14466,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"timeclicker_server@workspace:server":
+"timeclicker_server@workspace:^, timeclicker_server@workspace:server":
   version: 0.0.0-use.local
   resolution: "timeclicker_server@workspace:server"
   dependencies:

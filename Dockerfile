@@ -10,9 +10,9 @@ RUN yarn install --immutable
 COPY . .
 
 FROM prebuild as buildfrontend
-WORKDIR /app/client
+WORKDIR /app
 ENV VITE_API_ENDPOINT=/api/
-RUN yarn run build
+RUN yarn workspaces foreach -Rpt --from timeclicker_client run build
 
 FROM prebuild as buildbackend
 WORKDIR /app/server
