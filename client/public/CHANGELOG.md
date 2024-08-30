@@ -1,3 +1,10 @@
+# [timeclicker_client-v2.0.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.1...timeclicker_client-v2.0.2) (2024-08-30)
+
+
+### Bug Fixes
+
+* fetch timeBalance when hours changed ([a616cba](https://github.com/educorvi/timeclicker/commit/a616cba9a546fdfd12b9a3752e2c54fe502a1e2a))
+
 # [timeclicker_client-v2.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.0...timeclicker_client-v2.0.1) (2024-08-30)
 
 
