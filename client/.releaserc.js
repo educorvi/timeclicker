@@ -10,7 +10,7 @@ module.exports = {
             },
         ],
         [
-            '@semantic-release/npm',
+            'semantic-release-yarn',
             {
                 publish: false,
             },
