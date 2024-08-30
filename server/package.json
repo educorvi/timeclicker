@@ -41,6 +41,7 @@
         "nodemon": "^3.1.0",
         "semantic-release": "^22.0.12",
         "semantic-release-monorepo": "^7.0.5",
+        "semantic-release-yarn": "^3.0.2",
         "ts-node": "^10.9.2",
         "tslib": "^2.6.2",
         "typescript": "^5.4.5"
