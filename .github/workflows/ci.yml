@@ -41,7 +41,6 @@ jobs:
           git checkout develop
           git rebase main
           git push
-
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [ build, rebase ]
@@ -85,6 +84,21 @@ jobs:
           git diff-index --quiet main || git commit -am "chore: version [skip ci]"
       - name: Push
         run: |
+          git push
+  final_rebase:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ release ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: 'main'
+      - name: Rebase develop
+        run: |
+          git checkout develop
+          git rebase main
           git push
   docker:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
