@@ -17,7 +17,8 @@ import { db } from '../globals';
 import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { ContractData } from '../classes';
 import { calculateAllTimeBalances, calculateTimeBalance } from '../timeBalanceCalculation';
-import { getAllVacationDayData, VacationDayData } from '../vacationDayCalculation';
+import { getAllVacationDayData } from '../vacationDayCalculation';
+import type { VacationDayData } from '../vacationDayCalculation';
 
 export type saveContractDataParams = Omit<ContractData, 'id' | 'user'> & {
     id?: string;
