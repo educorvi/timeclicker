@@ -103,7 +103,7 @@
         <custom-spinner v-else />
     </div>
 
-    <HoursEntryModal v-model:visible="modalVisible" @on-submit="fetchHours" />
+    <HoursEntryModal v-model:visible="modalVisible" @on-submit="() =>{fetchHours(); fetchTimeBalance()}" />
     <b-modal
         @ok="deleteHours"
         ref="deleteHoursModal"
@@ -182,6 +182,7 @@ async function deleteHours() {
         .then(() => {
             deleteHoursId.value = null;
             fetchHours();
+            fetchTimeBalance();
         });
 }
 
