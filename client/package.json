@@ -16,7 +16,7 @@
   "dependencies": {
     "@educorvi/vue-json-form": "3.0.0-alpha.4",
     "@tsconfig/node-lts": "^18.12.5",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
     "bootstrap-vue-next": "^0.24.7",
     "bootswatch": "^4.6.2",
