@@ -1,8 +1,32 @@
 <template>
     <div class="text-center" style="width: 100%">
         <h1 class="w-100 mb-2 mt-2">
-            {{ t('overview_for') }}
+            {{ t('working_hour', 2) }}
         </h1>
+        <div id="balances-div" class="text-start">
+            <b-table-simple borderless>
+                <b-tbody>
+                    <b-tr>
+                        <b-td>{{ t('time_balance') }}</b-td>
+                        <b-td class="text-center">
+                        <span v-if="timeBalanceData" :class="timeBalanceData.saldo<0?'text-danger':'text-success'">
+                            {{ timeBalanceData.saldo }}
+                        </span>
+                        </b-td>
+                    </b-tr>
+                    <b-tr>
+                        <b-td>{{ t('vacation_days_left') }}</b-td>
+                        <b-td class="text-center">
+                        <span v-if="timeBalanceData"
+                              :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">
+                            {{ timeBalanceData.vacationDaysLeft }}
+                        </span>
+                        </b-td>
+                    </b-tr>
+                </b-tbody>
+            </b-table-simple>
+        </div>
+        <h2 class="mb-1">{{ t('manage_entries_for') }}</h2>
         <div class="w-100 d-flex justify-content-center">
             <b-input-group style="max-width: 300px">
                 <b-form-select
@@ -12,44 +36,6 @@
                 <b-form-select :options="years" v-model="year"></b-form-select>
             </b-input-group>
         </div>
-    </div>
-
-    <div id="balances-div" v-if="timeBalanceData">
-
-        <!--        <p>-->
-        <!--            <strong>-->
-        <!--                {{ t('time_balance') }}:-->
-        <!--            </strong>-->
-        <!--            <span :class="timeBalanceData.saldo<0?'text-danger':'text-success'">-->
-        <!--                {{ timeBalanceData.saldo }}-->
-        <!--            </span>-->
-        <!--        </p>-->
-        <!--        <p>-->
-        <!--            <strong>{{ t('vacation_days_left') }}: </strong>-->
-        <!--            <span :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">-->
-        <!--                {{ timeBalanceData.vacationDaysLeft }}-->
-        <!--            </span>-->
-        <!--        </p>-->
-        <b-table-simple borderless>
-            <b-tbody>
-                <b-tr>
-                    <b-td>{{ t('time_balance') }}</b-td>
-                    <b-td class="text-center">
-                        <span :class="timeBalanceData.saldo<0?'text-danger':'text-success'">
-                            {{ timeBalanceData.saldo }}
-                        </span>
-                    </b-td>
-                </b-tr>
-                <b-tr>
-                    <b-td>{{ t('vacation_days_left') }}</b-td>
-                    <b-td class="text-center">
-                        <span :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">
-                            {{ timeBalanceData.vacationDaysLeft }}
-                        </span>
-                    </b-td>
-                </b-tr>
-            </b-tbody>
-        </b-table-simple>
     </div>
 
     <div class="w-100 text-center mt-3 mb-3">
@@ -103,7 +89,7 @@
         <custom-spinner v-else />
     </div>
 
-    <HoursEntryModal v-model:visible="modalVisible" @on-submit="() =>{fetchHours(); fetchTimeBalance()}" />
+    <HoursEntryModal v-model:visible="modalVisible" @on-submit="() =>{fetchHours(); fetchTimeBalance()}" :vacationAvailable="vacationAvailable"/>
     <b-modal
         @ok="deleteHours"
         ref="deleteHoursModal"
@@ -119,13 +105,15 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
-import { onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import type { TimeBalanceData, WorkingHours } from 'timeclicker_server';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
 import type { BModal } from 'bootstrap-vue-next';
+import { UiError, useErrorStore } from '@/stores/error';
 
 const { t, d } = useI18n();
+const errorStore = useErrorStore();
 
 const monthOptions = getMonthOptions(t);
 
@@ -140,6 +128,11 @@ const timeBalanceData = ref<TimeBalanceData | null>(null);
 const deleteHoursModal = ref<InstanceType<typeof BModal> | null>(null);
 const deleteHoursId = ref<string | null>(null);
 
+const vacationAvailable = computed(() => {
+    if(!timeBalanceData.value) return false;
+    return timeBalanceData.value?.vacationDaysLeft > 0;
+});
+
 function fetchHours() {
     hours.value = null;
     const fromDate = new Date(year.value, month.value - 1, 1);
@@ -153,6 +146,10 @@ function fetchHours() {
         })
         .then((response) => {
             hours.value = response.data;
+        })
+        .catch((error) => {
+             errorStore.setError(new UiError(t('errors.hours_failed'), error));
+            hours.value = [];
         });
 }
 
@@ -162,6 +159,8 @@ function fetchTimeBalance() {
         .get(import.meta.env.VITE_API_ENDPOINT + 'hours/balance')
         .then((response) => {
             timeBalanceData.value = response.data;
+        }).catch((error) => {
+             errorStore.setError(new UiError(t('errors.time_balance_failed'), error));
         });
 }
 
@@ -183,6 +182,8 @@ async function deleteHours() {
             deleteHoursId.value = null;
             fetchHours();
             fetchTimeBalance();
+        }).catch((error) => {
+             errorStore.setError(new UiError(t('errors.deletion_failed'), error));
         });
 }
 

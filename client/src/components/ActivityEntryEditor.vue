@@ -254,15 +254,6 @@ function onSubmit(event: Event) {
         })
         .catch((error) => {
             errorStore.setError(new UiError(t('errors.saving_failed'), error));
-            show?.( {
-                props: {
-                    title: t('errors.saving_failed'),
-                    variant: 'danger',
-                    value: true,
-                    pos: 'top-center'
-
-                }
-            })
         });
 }
 

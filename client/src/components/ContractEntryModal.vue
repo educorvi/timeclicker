@@ -6,8 +6,11 @@
         hide-footer
         no-close-on-backdrop
         :title="t('edit_contract_data')"
+        @hidden="()=>{modalHidden = true}"
+        @show="()=>{modalHidden = false}"
     >
         <vue-json-form
+            v-if="!modalHidden"
             class="w-100"
             :jsonSchema="jsonSchema"
             :uiSchema="uiSchema"
@@ -34,6 +37,8 @@ const { t } = useI18n();
 
 const jsonSchema = getContractEntryJsonSchema(t);
 const uiSchema = getContractEntryUiSchema(t);
+
+const modalHidden = ref(false);
 
 const props = defineProps<{
     initialData?: saveContractDataParams;

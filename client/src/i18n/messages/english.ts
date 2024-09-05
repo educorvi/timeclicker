@@ -40,13 +40,18 @@ export const en = {
     manage_activities: 'Manage Activities',
     manage_working_hours: 'Manage Working Hours',
 
+    manage_entries_for: 'Entries for',
+
     show_note: 'Show note',
     hide_note: 'Hide note',
 
     errors: {
         saving_failed: 'Failed to save!',
+        deletion_failed: 'Failed to delete!',
         act_failed: 'Activities could not be loaded!',
         tasks_failed: 'Tasks could not be loaded!',
+        hours_failed: 'Hours could not be loaded!',
+        time_balance_failed: 'Time balance could not be loaded!',
         users_failed: 'Users could not be loaded!',
         contract_data_failed: 'Contract data could not be loaded!',
         token_refresh: 'Failed to refresh token. Please login again...',

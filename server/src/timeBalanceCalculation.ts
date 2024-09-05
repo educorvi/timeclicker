@@ -94,8 +94,8 @@ async function setWorkedHours(weeks: TimeBalanceMap, hours: WorkingHours[]) {
         const year = dt.year;
         const weekData = weeks.get(getTimeBalanceMapKey({ week, year }));
         if (!weekData) {
-            console.log(weeks);
-            throw new Error('Week not found: ' + week + ' ' + year);
+            // Week is not in the saldo range, i.e. vacation in the future
+            continue;
         }
 
         let duration = hour.duration / 60;

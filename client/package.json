@@ -14,23 +14,23 @@
     "generateIcons": "yarn dlx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
   },
   "dependencies": {
-    "@educorvi/vue-json-form": "3.0.0-alpha.5",
+    "@educorvi/vue-json-form": "3.0.0-alpha.6",
     "@tsconfig/node-lts": "^18.12.5",
-    "axios": "^1.7.5",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
-    "bootstrap-vue-next": "^0.24.7",
+    "bootstrap-vue-next": "^0.24.11",
     "bootswatch": "^4.6.2",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.32.1",
     "keycloak-js": "^20.0.5",
-    "pinia": "^2.1.6",
+    "pinia": "^2.2.2",
     "showdown": "^2.1.0",
     "swagger-ui": "^5.17.14",
     "swagger-ui-dist": "^5.17.14",
     "timeclicker_server": "workspace:^",
-    "vue": "^3.4.27",
-    "vue-i18n": "^9.13.1",
-    "vue-router": "^4.3.2"
+    "vue": "^3.4.38",
+    "vue-i18n": "^9.14.0",
+    "vue-router": "^4.4.3"
   },
   "devDependencies": {
     "@iconify-json/bi": "^1.1.23",

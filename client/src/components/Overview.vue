@@ -52,7 +52,7 @@
                                     getDurationOrDash(
                                         activity.from,
                                         activity.to,
-                                        activity.breakMins * 60 * 1000
+                                        activity.breakMins * 60 * 1000,
                                     )
                                 }}
                                 <span
@@ -62,7 +62,7 @@
                                     (+{{
                                         getHumanizedDuration(
                                             activity.breakMins * 60 * 1000,
-                                            ['m']
+                                            ['m'],
                                         )
                                     }}
                                     {{ t('break') }})
@@ -78,13 +78,13 @@
                                     class="w-50"
                                     variant="outline-secondary"
                                     @click="editActivity(activity)"
-                                    >{{ t('edit') }}
+                                >{{ t('edit') }}
                                 </b-button>
                                 <b-button
                                     class="w-50"
                                     variant="outline-danger"
                                     @click="askToDeleteActivity(activity)"
-                                    >{{ t('delete') }}
+                                >{{ t('delete') }}
                                 </b-button>
                             </b-button-group>
                         </b-card-footer>
@@ -110,7 +110,7 @@
             ok-variant="danger"
             :cancel-title="t('cancel')"
             centered
-            >{{ t('delete_prompt') }}
+        >{{ t('delete_prompt') }}
         </b-modal>
     </div>
     <custom-spinner v-else />
@@ -158,13 +158,13 @@ const hours = computed(() => {
             return (
                 prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
             );
-        }, 0) - (breaks.value || 0)
+        }, 0) - (breaks.value || 0),
     );
 });
 
 function getHumanizedDuration(
     duration: number,
-    units: humanizeDuration.Unit[] = ['h', 'm']
+    units: humanizeDuration.Unit[] = ['h', 'm'],
 ) {
     return humanizeDuration(duration, {
         language: locale.value,
@@ -223,10 +223,13 @@ function deleteActivity() {
         axios
             .delete(
                 import.meta.env.VITE_API_ENDPOINT +
-                    'activities/' +
-                    editableActivity.value.id
+                'activities/' +
+                editableActivity.value.id,
             )
-            .then(loadActivities);
+            .then(loadActivities)
+            .catch((error) => {
+                errorStore.setError(new UiError(t('errors.deletion_failed'), error));
+            });
     }
 }
 
