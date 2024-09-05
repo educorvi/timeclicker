@@ -1,3 +1,14 @@
+# [timeclicker_client-v2.0.3](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.2...timeclicker_client-v2.0.3) (2024-09-05)
+
+
+### Bug Fixes
+
+* contract entry modal not resetting after closing ([a1acc6e](https://github.com/educorvi/timeclicker/commit/a1acc6e91d5e1fadd1f6f3eaa2e7df221e0cebe6)), closes [#TIM-5](https://github.com/educorvi/timeclicker/issues/TIM-5)
+* don't allow users without remaining vacation days to create a vacation entry ([31384f9](https://github.com/educorvi/timeclicker/commit/31384f94dd6ff18e99bb142b5bde9bf2eedfa9d1)), closes [#TIM-7](https://github.com/educorvi/timeclicker/issues/TIM-7)
+* improve error handling ([355eac8](https://github.com/educorvi/timeclicker/commit/355eac8cd9a54a3b655d96c45b6d70656dbaa456)), closes [#TIM-4](https://github.com/educorvi/timeclicker/issues/TIM-4)
+* improve ui for working hours ([951e20a](https://github.com/educorvi/timeclicker/commit/951e20a60edf2cb9c331bb2509c805e1caedb577)), closes [#TIM-8](https://github.com/educorvi/timeclicker/issues/TIM-8)
+* time balance calculation bug, where entries in the future break the balance calculation ([396e5a1](https://github.com/educorvi/timeclicker/commit/396e5a16b80f303c5ced2b4de2b2a8dbf4d1456f)), closes [#TIM-6](https://github.com/educorvi/timeclicker/issues/TIM-6)
+
 # [timeclicker_client-v2.0.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.1...timeclicker_client-v2.0.2) (2024-08-30)
 
 

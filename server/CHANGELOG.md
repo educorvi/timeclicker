@@ -1,3 +1,11 @@
+# [timeclicker_server-v2.0.2](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.1...timeclicker_server-v2.0.2) (2024-09-05)
+
+
+### Bug Fixes
+
+* don't allow users without remaining vacation days to create a vacation entry ([31384f9](https://github.com/educorvi/timeclicker/commit/31384f94dd6ff18e99bb142b5bde9bf2eedfa9d1)), closes [#TIM-7](https://github.com/educorvi/timeclicker/issues/TIM-7)
+* time balance calculation bug, where entries in the future break the balance calculation ([396e5a1](https://github.com/educorvi/timeclicker/commit/396e5a16b80f303c5ced2b4de2b2a8dbf4d1456f)), closes [#TIM-6](https://github.com/educorvi/timeclicker/issues/TIM-6)
+
 # [timeclicker_server-v2.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.0...timeclicker_server-v2.0.1) (2024-08-30)
 
 
