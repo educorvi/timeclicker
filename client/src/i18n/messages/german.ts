@@ -47,10 +47,13 @@ export const de = {
 
     errors: {
         saving_failed: 'Speichern fehlgeschlagen!',
+        deletion_failed: 'Löschen fehlgeschlagen!',
         act_failed: 'Aktivitäten konnten nicht geladen werden!',
         tasks_failed: 'Aufgaben konnten nicht geladen werden!',
         users_failed: 'Nutzer konnten nicht geladen werden!',
         contract_data_failed: 'Vertragsdaten konnten nicht geladen werden!',
+        hours_failed: 'Arbeitszeiten konnten nicht geladen werden!',
+        time_balance_failed: 'Zeitsaldo konnte nicht geladen werden!',
         token_refresh:
             'Anmeldetoken konnte nicht erneuert werden. Bitte melden Sie sich erneut an.',
         auth_endpoint:

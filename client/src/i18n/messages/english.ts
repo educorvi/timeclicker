@@ -47,8 +47,11 @@ export const en = {
 
     errors: {
         saving_failed: 'Failed to save!',
+        deletion_failed: 'Failed to delete!',
         act_failed: 'Activities could not be loaded!',
         tasks_failed: 'Tasks could not be loaded!',
+        hours_failed: 'Hours could not be loaded!',
+        time_balance_failed: 'Time balance could not be loaded!',
         users_failed: 'Users could not be loaded!',
         contract_data_failed: 'Contract data could not be loaded!',
         token_refresh: 'Failed to refresh token. Please login again...',

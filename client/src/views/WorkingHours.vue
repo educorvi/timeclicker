@@ -110,8 +110,10 @@ import type { TimeBalanceData, WorkingHours } from 'timeclicker_server';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
 import type { BModal } from 'bootstrap-vue-next';
+import { UiError, useErrorStore } from '@/stores/error';
 
 const { t, d } = useI18n();
+const errorStore = useErrorStore();
 
 const monthOptions = getMonthOptions(t);
 
@@ -144,6 +146,10 @@ function fetchHours() {
         })
         .then((response) => {
             hours.value = response.data;
+        })
+        .catch((error) => {
+             errorStore.setError(new UiError(t('errors.hours_failed'), error));
+            hours.value = [];
         });
 }
 
@@ -153,6 +159,8 @@ function fetchTimeBalance() {
         .get(import.meta.env.VITE_API_ENDPOINT + 'hours/balance')
         .then((response) => {
             timeBalanceData.value = response.data;
+        }).catch((error) => {
+             errorStore.setError(new UiError(t('errors.time_balance_failed'), error));
         });
 }
 
@@ -174,6 +182,8 @@ async function deleteHours() {
             deleteHoursId.value = null;
             fetchHours();
             fetchTimeBalance();
+        }).catch((error) => {
+             errorStore.setError(new UiError(t('errors.deletion_failed'), error));
         });
 }
 
