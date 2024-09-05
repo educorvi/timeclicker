@@ -89,7 +89,7 @@
         <custom-spinner v-else />
     </div>
 
-    <HoursEntryModal v-model:visible="modalVisible" @on-submit="() =>{fetchHours(); fetchTimeBalance()}" />
+    <HoursEntryModal v-model:visible="modalVisible" @on-submit="() =>{fetchHours(); fetchTimeBalance()}" :vacationAvailable="vacationAvailable"/>
     <b-modal
         @ok="deleteHours"
         ref="deleteHoursModal"
@@ -105,7 +105,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
-import { onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import type { TimeBalanceData, WorkingHours } from 'timeclicker_server';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
@@ -125,6 +125,11 @@ const timeBalanceData = ref<TimeBalanceData | null>(null);
 
 const deleteHoursModal = ref<InstanceType<typeof BModal> | null>(null);
 const deleteHoursId = ref<string | null>(null);
+
+const vacationAvailable = computed(() => {
+    if(!timeBalanceData.value) return false;
+    return timeBalanceData.value?.vacationDaysLeft > 0;
+});
 
 function fetchHours() {
     hours.value = null;

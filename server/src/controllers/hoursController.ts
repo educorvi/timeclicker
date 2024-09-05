@@ -107,12 +107,18 @@ export class HoursController extends Controller {
         @Request() req: express.Request,
     ) {
         const user = await getOrCreateUser(req);
+        let origHour = null;
         if (requestBody.id) {
-            const origHour = await db.getHoursById(requestBody.id);
+            origHour = await db.getHoursById(requestBody.id);
             if (origHour && origHour.user.id !== user.id) {
                 this.setStatus(401);
                 return;
             }
+        }
+        const vacationDayData = await getVacationDayData(user);
+        if (!origHour && requestBody.vacation && vacationDayData.vacationDaysLeft <= 0) {
+            this.setStatus(400);
+            return;
         }
         const hour = {
             ...requestBody,

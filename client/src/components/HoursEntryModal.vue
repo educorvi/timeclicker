@@ -49,7 +49,7 @@
                     ></b-input>
                 </b-col>
             </b-row>
-            <b-form-checkbox v-model="vacation">{{
+            <b-form-checkbox v-model="vacation" :disabled="!vacationAvailable">{{
                 t('vacation_day')
             }}</b-form-checkbox>
             <hr />
@@ -77,6 +77,11 @@ const props = defineProps<{
      * Data to initialize the form with if an existing entry is edited
      */
     initialData?: WorkingHours;
+
+    /**
+     * Are vacation days available
+     */
+    vacationAvailable: boolean;
 }>();
 
 /**
