@@ -1,8 +1,32 @@
 <template>
     <div class="text-center" style="width: 100%">
         <h1 class="w-100 mb-2 mt-2">
-            {{ t('overview_for') }}
+            {{ t('working_hour', 2) }}
         </h1>
+        <div id="balances-div" class="text-start">
+            <b-table-simple borderless>
+                <b-tbody>
+                    <b-tr>
+                        <b-td>{{ t('time_balance') }}</b-td>
+                        <b-td class="text-center">
+                        <span v-if="timeBalanceData" :class="timeBalanceData.saldo<0?'text-danger':'text-success'">
+                            {{ timeBalanceData.saldo }}
+                        </span>
+                        </b-td>
+                    </b-tr>
+                    <b-tr>
+                        <b-td>{{ t('vacation_days_left') }}</b-td>
+                        <b-td class="text-center">
+                        <span v-if="timeBalanceData"
+                              :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">
+                            {{ timeBalanceData.vacationDaysLeft }}
+                        </span>
+                        </b-td>
+                    </b-tr>
+                </b-tbody>
+            </b-table-simple>
+        </div>
+        <h2 class="mb-1">{{ t('manage_entries_for') }}</h2>
         <div class="w-100 d-flex justify-content-center">
             <b-input-group style="max-width: 300px">
                 <b-form-select
@@ -12,44 +36,6 @@
                 <b-form-select :options="years" v-model="year"></b-form-select>
             </b-input-group>
         </div>
-    </div>
-
-    <div id="balances-div" v-if="timeBalanceData">
-
-        <!--        <p>-->
-        <!--            <strong>-->
-        <!--                {{ t('time_balance') }}:-->
-        <!--            </strong>-->
-        <!--            <span :class="timeBalanceData.saldo<0?'text-danger':'text-success'">-->
-        <!--                {{ timeBalanceData.saldo }}-->
-        <!--            </span>-->
-        <!--        </p>-->
-        <!--        <p>-->
-        <!--            <strong>{{ t('vacation_days_left') }}: </strong>-->
-        <!--            <span :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">-->
-        <!--                {{ timeBalanceData.vacationDaysLeft }}-->
-        <!--            </span>-->
-        <!--        </p>-->
-        <b-table-simple borderless>
-            <b-tbody>
-                <b-tr>
-                    <b-td>{{ t('time_balance') }}</b-td>
-                    <b-td class="text-center">
-                        <span :class="timeBalanceData.saldo<0?'text-danger':'text-success'">
-                            {{ timeBalanceData.saldo }}
-                        </span>
-                    </b-td>
-                </b-tr>
-                <b-tr>
-                    <b-td>{{ t('vacation_days_left') }}</b-td>
-                    <b-td class="text-center">
-                        <span :class="timeBalanceData.vacationDaysLeft<=0?'text-danger':'text-success'">
-                            {{ timeBalanceData.vacationDaysLeft }}
-                        </span>
-                    </b-td>
-                </b-tr>
-            </b-tbody>
-        </b-table-simple>
     </div>
 
     <div class="w-100 text-center mt-3 mb-3">

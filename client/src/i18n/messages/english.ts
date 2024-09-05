@@ -40,6 +40,8 @@ export const en = {
     manage_activities: 'Manage Activities',
     manage_working_hours: 'Manage Working Hours',
 
+    manage_entries_for: 'Entries for',
+
     show_note: 'Show note',
     hide_note: 'Hide note',
 

@@ -38,6 +38,7 @@ export const de = {
 
     manage_activities: 'Aktivitäten verwalten',
     manage_working_hours: 'Arbeitszeiten verwalten',
+    manage_entries_for: 'Einträge für',
 
     dashboard: 'Dashboard',
 
