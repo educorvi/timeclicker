@@ -1625,9 +1625,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@educorvi/vue-json-form@npm:3.0.0-alpha.5":
-  version: 3.0.0-alpha.5
-  resolution: "@educorvi/vue-json-form@npm:3.0.0-alpha.5"
+"@educorvi/vue-json-form@npm:3.0.0-alpha.6":
+  version: 3.0.0-alpha.6
+  resolution: "@educorvi/vue-json-form@npm:3.0.0-alpha.6"
   dependencies:
     "@apidevtools/json-schema-ref-parser": ^11.6.1
     "@educorvi/rita": ^5.1.2
@@ -1641,7 +1641,7 @@ __metadata:
     uuid: ^10.0.0
     vue: ^3.4.32
     vuedraggable: ^4.1.0
-  checksum: 5c786cf2f223ac6aec004fee09506e3f3d60118e82994c1ef1fa4b53d79842e969a40c87477dd0816dc1896c824de26aae991e09cec4b3c798c7441e955820e7
+  checksum: 3595ba6611a32f651087f9990855bf2160a341428eebb7fd3da3b9a7d548151c6765f93b39fffe2024e11cd17b1c819f127981dcd88515c0856e8b0594e37479
   languageName: node
   linkType: hard
 
@@ -13166,7 +13166,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "timeclicker_client@workspace:client"
   dependencies:
-    "@educorvi/vue-json-form": 3.0.0-alpha.5
+    "@educorvi/vue-json-form": 3.0.0-alpha.6
     "@iconify-json/bi": ^1.1.23
     "@rollup/plugin-url": ^8.0.2
     "@rushstack/eslint-patch": ^1.10.2
