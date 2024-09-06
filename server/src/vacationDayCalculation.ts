@@ -22,9 +22,10 @@ async function getTotalVacationDays(user: User) {
 
         const contractDuration = (nextContractStartYear - contract.startYear) * 12 + nextContractStartMonth - contract.startMonth;
 
-        vacationDays += Math.ceil(contract.vacationDays * contractDuration / 12);
+        vacationDays += contract.vacationDays * contractDuration / 12
     }
 
+    vacationDays = Math.ceil(vacationDays);
     return vacationDays;
 
 }
