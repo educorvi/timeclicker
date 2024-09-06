@@ -1,3 +1,11 @@
+# [timeclicker_client-v2.0.4](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.3...timeclicker_client-v2.0.4) (2024-09-06)
+
+
+### Bug Fixes
+
+* fix activity orga view not reloading after filter change ([ed76e58](https://github.com/educorvi/timeclicker/commit/ed76e58ff15119dca1ccf958c9be26bd76fa2922))
+* remove unnecessary console.log ([ea4bb45](https://github.com/educorvi/timeclicker/commit/ea4bb45bb053309d23bba167405a49f9e1092951))
+
 # [timeclicker_client-v2.0.3](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.2...timeclicker_client-v2.0.3) (2024-09-05)
 
 
