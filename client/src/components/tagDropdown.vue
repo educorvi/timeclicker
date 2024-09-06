@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, type ModelRef, ref, watch } from 'vue';
 import type { Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { TagOption } from '@/additionalTypes';
@@ -70,7 +70,7 @@ const props = defineProps<{
 }>();
 
 const search = ref('');
-const tags: Ref<TagOption[]> = ref([]);
+const tags = defineModel<TagOption[]>({ required: true });
 
 const criteria = computed(() => {
     return search.value.trim().toLowerCase();
@@ -78,12 +78,12 @@ const criteria = computed(() => {
 
 const availableOptions = computed(() => {
     const options = props.options.filter(
-        (opt) => tags.value.indexOf(opt) === -1
+        (opt) => tags.value.indexOf(opt) === -1,
     );
     if (criteria.value) {
         // Show only options that match criteria
         return options.filter(
-            (opt) => opt.desc.toLowerCase().indexOf(criteria.value) > -1
+            (opt) => opt.desc.toLowerCase().indexOf(criteria.value) > -1,
         );
     }
     // Show all options available
@@ -100,17 +100,16 @@ const searchDesc = computed(() => {
 function onOptionClick(option: TagOption) {
     tags.value.push(option);
     search.value = '';
+    emit('change', tags.value);
 }
 
 function removeTag(option: TagOption) {
     tags.value.splice(tags.value.indexOf(option), 1);
+    emit('change', tags.value);
 }
 
 const emit = defineEmits<{ (e: 'change', newValue: TagOption[]): void }>();
 
-watch(tags, () => {
-    emit('change', tags.value);
-});
 </script>
 
 <style>

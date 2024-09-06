@@ -38,7 +38,6 @@ const entryModal = ref<InstanceType<typeof EntryEditor> | null>(null);
 const overview = ref<InstanceType<typeof Overview> | null>(null);
 
 function refresh() {
-    console.log(!!overview.value);
     overview.value?.loadActivities();
 }
 

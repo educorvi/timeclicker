@@ -17,7 +17,8 @@
             </b-input-group>
             <hr />
             <tag-dropdown
-                @change="taskFilterChange"
+                v-model="selectedTasks"
+                @change="loadActivities"
                 :label="t('task', 2)"
                 :options="
                     tasks.map((u) => {
@@ -27,7 +28,8 @@
             ></tag-dropdown>
             <hr />
             <tag-dropdown
-                @change="userFilterChange"
+                v-model="selectedUsers"
+                @change="loadActivities"
                 :options="
                     users.map((u) => {
                         return { desc: u.name, id: u.id };
@@ -104,8 +106,8 @@ const errorStore = useErrorStore();
 const tasks: Ref<Array<Task>> = ref([]);
 const users: Ref<Array<User>> = ref([]);
 
-const selectedTasks: Ref<Array<Task>> = ref([]);
-const selectedUsers: Ref<Array<User>> = ref([]);
+const selectedTasks: Ref<TagOption[]> = ref([]);
+const selectedUsers: Ref<TagOption[]> = ref([]);
 
 const activities: Ref<Activity[]> = ref([]);
 
@@ -141,18 +143,6 @@ onMounted(() => {
         });
     loadActivities();
 });
-
-function taskFilterChange(newTasks: TagOption[]) {
-    selectedTasks.value = newTasks.map(
-        (nt) => tasks.value.filter((t) => t.id === nt.id)[0]
-    );
-}
-
-function userFilterChange(newUsers: TagOption[]) {
-    selectedUsers.value = newUsers.map(
-        (nu) => users.value.filter((u) => u.id === nu.id)[0]
-    );
-}
 
 function loadActivities() {
     const startDate = new Date(from.value);
@@ -245,8 +235,6 @@ function downloadJSON() {
 
 watch(from, loadActivities);
 watch(to, loadActivities);
-watch(selectedTasks, loadActivities);
-watch(selectedUsers, loadActivities);
 </script>
 
 <style>
