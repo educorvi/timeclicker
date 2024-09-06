@@ -1,3 +1,10 @@
+# [timeclicker_server-v2.0.3](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.2...timeclicker_server-v2.0.3) (2024-09-06)
+
+
+### Bug Fixes
+
+* vacation day calculation ([818e4a2](https://github.com/educorvi/timeclicker/commit/818e4a24564eebb85cc0d2a394116b932d1f4347))
+
 # [timeclicker_server-v2.0.2](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.1...timeclicker_server-v2.0.2) (2024-09-05)
 
 
