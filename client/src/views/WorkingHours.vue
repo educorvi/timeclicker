@@ -10,7 +10,10 @@
                         <b-td>{{ t('time_balance') }}</b-td>
                         <b-td class="text-center">
                         <span v-if="timeBalanceData" :class="timeBalanceData.saldo<0?'text-danger':'text-success'">
-                            {{ timeBalanceData.saldo }}
+                            <span v-if="timeBalanceData.saldo<0">
+                                -
+                            </span>
+                            {{ humanizeDuration(timeBalanceData.saldo*60*60*1000, {units: ['h', 'm'], language: locale}) }}
                         </span>
                         </b-td>
                     </b-tr>
@@ -112,7 +115,7 @@ import humanizeDuration from 'humanize-duration';
 import type { BModal } from 'bootstrap-vue-next';
 import { UiError, useErrorStore } from '@/stores/error';
 
-const { t, d } = useI18n();
+const { t, d, locale } = useI18n();
 const errorStore = useErrorStore();
 
 const monthOptions = getMonthOptions(t);
