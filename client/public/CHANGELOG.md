@@ -1,3 +1,10 @@
+# [timeclicker_client-v2.0.5](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.4...timeclicker_client-v2.0.5) (2024-11-26)
+
+
+### Bug Fixes
+
+* humanize duration in WorkingHoursView ([f79ebdf](https://github.com/educorvi/timeclicker/commit/f79ebdf335a2f86018300feb1c44adbd0687232e))
+
 # [timeclicker_client-v2.0.4](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.3...timeclicker_client-v2.0.4) (2024-09-06)
 
 
