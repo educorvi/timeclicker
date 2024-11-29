@@ -13,7 +13,7 @@
                             <span v-if="timeBalanceData.saldo<0">
                                 -
                             </span>
-                            {{ humanizeDuration(timeBalanceData.saldo*60*60*1000, {units: ['h', 'm'], language: locale}) }}
+                            {{ humanizeDuration(timeBalanceData.saldo*60*60*1000, {units: ['h', 'm'], language: locale, round: true}) }}
                         </span>
                         </b-td>
                     </b-tr>
