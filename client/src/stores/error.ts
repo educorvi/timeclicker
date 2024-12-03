@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useToast } from 'bootstrap-vue-next';
+import type { useToastController } from 'bootstrap-vue-next';
 import { useI18n } from 'vue-i18n';
 
 export class UiError {
@@ -20,8 +20,8 @@ export const useErrorStore = defineStore('error', {
     state: () => {
         return {
             errors: [] as UiError[],
-            show: undefined as ReturnType<typeof useToast>['show'],
-            t: undefined as ReturnType<typeof useI18n>['t'] | undefined
+            show: undefined as ReturnType<typeof useToastController>['show'],
+            t: undefined as ReturnType<typeof useI18n>['t'] | undefined,
         };
     },
     actions: {
