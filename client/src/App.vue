@@ -61,7 +61,7 @@ import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import { useBreakpointStore } from '@/stores/breakpoints';
 import axios from 'axios';
-import { useToast } from 'bootstrap-vue-next';
+import { useToastController } from 'bootstrap-vue-next';
 
 const { t } = useI18n();
 
@@ -69,7 +69,7 @@ const kcStore = useKeycloakStore();
 const errorStore = useErrorStore();
 const bpStore = useBreakpointStore();
 
-errorStore.show = useToast().show;
+errorStore.show = useToastController().show;
 errorStore.t = t;
 
 let keycloak: Keycloak;
