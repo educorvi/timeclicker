@@ -13,7 +13,7 @@
                             <span v-if="timeBalanceData.saldo<0">
                                 -
                             </span>
-                            {{ humanizeDuration(timeBalanceData.saldo*60*60*1000, {units: ['h', 'm'], language: locale, round: true}) }}
+                            {{ humanizeDuration(timeBalanceData.saldo*60*60*1000, {units: ['h', 'm'], round: true, ...humanizeDurationShortLangConfig}) }}
                         </span>
                         </b-td>
                     </b-tr>
@@ -114,6 +114,7 @@ import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
 import type { BModal } from 'bootstrap-vue-next';
 import { UiError, useErrorStore } from '@/stores/error';
+import { humanizeDurationShortLangConfig } from 'timeclicker_client/src/i18n';
 
 const { t, d, locale } = useI18n();
 const errorStore = useErrorStore();
