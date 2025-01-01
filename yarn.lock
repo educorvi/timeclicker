@@ -4831,7 +4831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.4, axios@npm:^1.7.8":
+"axios@npm:^1.7.4":
   version: 1.7.8
   resolution: "axios@npm:1.7.8"
   dependencies:
@@ -4839,6 +4839,17 @@ __metadata:
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
   checksum: 3d21652faf8e29fb36c47517d2872bb5e2285127a24f5c53ce23082c4eac7f5a88de84dd49d4a1a83068e5301dcfd9067b41e5fbd00b0d20ab7b0a843559273d
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.7.9":
+  version: 1.7.9
+  resolution: "axios@npm:1.7.9"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: cb8ce291818effda09240cb60f114d5625909b345e10f389a945320e06acf0bc949d0f8422d25720f5dd421362abee302c99f5e97edec4c156c8939814b23d19
   languageName: node
   linkType: hard
 
@@ -4971,12 +4982,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap-vue-next@npm:^0.26.7":
-  version: 0.26.7
-  resolution: "bootstrap-vue-next@npm:0.26.7"
+"bootstrap-vue-next@npm:^0.26.18":
+  version: 0.26.18
+  resolution: "bootstrap-vue-next@npm:0.26.18"
   peerDependencies:
+    "@floating-ui/vue": "*"
+    "@vueuse/core": "*"
     vue: ^3.5.13
-  checksum: 169ad0bc82ebd323357f05541a52d249a7018bb0d2f1d926fd5e3e35c35c9d50925538e1b1fdef4e1f09bda0a36a589384795f7b84b16f184e9b14c2f554fa1b
+    vue-router: "*"
+  peerDependenciesMeta:
+    "@floating-ui/vue":
+      optional: true
+    "@vueuse/core":
+      optional: true
+    vue-router:
+      optional: true
+  checksum: 8ac067ca416320d761adef65c83682378cce0362fb8c523a81c0130bda25848ce0e60ed01e5a92b4efcfe49fa0a7f6bd9dd61777b9fe8d0f5e71eed53be5a3b9
   languageName: node
   linkType: hard
 
@@ -6798,9 +6819,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.21.1":
-  version: 4.21.1
-  resolution: "express@npm:4.21.1"
+"express@npm:^4.21.2":
+  version: 4.21.2
+  resolution: "express@npm:4.21.2"
   dependencies:
     accepts: ~1.3.8
     array-flatten: 1.1.1
@@ -6821,7 +6842,7 @@ __metadata:
     methods: ~1.1.2
     on-finished: 2.4.1
     parseurl: ~1.3.3
-    path-to-regexp: 0.1.10
+    path-to-regexp: 0.1.12
     proxy-addr: ~2.0.7
     qs: 6.13.0
     range-parser: ~1.2.1
@@ -6833,7 +6854,7 @@ __metadata:
     type-is: ~1.6.18
     utils-merge: 1.0.1
     vary: ~1.1.2
-  checksum: 5ac2b26d8aeddda5564fc0907227d29c100f90c0ead2ead9d474dc5108e8fb306c2de2083c4e3ba326e0906466f2b73417dbac16961f4075ff9f03785fd940fe
+  checksum: 3aef1d355622732e20b8f3a7c112d4391d44e2131f4f449e1f273a309752a41abfad714e881f177645517cbe29b3ccdc10b35e7e25c13506114244a5b72f549d
   languageName: node
   linkType: hard
 
@@ -10786,10 +10807,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:0.1.10":
-  version: 0.1.10
-  resolution: "path-to-regexp@npm:0.1.10"
-  checksum: ab7a3b7a0b914476d44030340b0a65d69851af2a0f33427df1476100ccb87d409c39e2182837a96b98fb38c4ef2ba6b87bdad62bb70a2c153876b8061760583c
+"path-to-regexp@npm:0.1.12":
+  version: 0.1.12
+  resolution: "path-to-regexp@npm:0.1.12"
+  checksum: ab237858bee7b25ecd885189f175ab5b5161e7b712b360d44f5c4516b8d271da3e4bf7bf0a7b9153ecb04c7d90ce8ff5158614e1208819cf62bac2b08452722e
   languageName: node
   linkType: hard
 
@@ -10967,22 +10988,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia@npm:^2.2.8":
-  version: 2.2.8
-  resolution: "pinia@npm:2.2.8"
+"pinia@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "pinia@npm:2.3.0"
   dependencies:
     "@vue/devtools-api": ^6.6.3
     vue-demi: ^0.14.10
   peerDependencies:
-    "@vue/composition-api": ^1.4.0
     typescript: ">=4.4.4"
-    vue: ^2.6.14 || ^3.5.11
+    vue: ^2.7.0 || ^3.5.11
   peerDependenciesMeta:
-    "@vue/composition-api":
-      optional: true
     typescript:
       optional: true
-  checksum: 8bc01b5440433c5a97c9e57b6a45e2c423e24a3e7e687ab007a6615aa8f83bde6b2bcddda245bca9a9eaf9911b277f5798f61c91cfd81f33464519356cee8050
+  checksum: 556dd718563c535e21f35576750afc2abfde0ab60f40b1e31e6cf2ecceee17489549d0c6ffc445a168a84505e9117cfa8d8ae859fc47332db00f88d1db480f56
   languageName: node
   linkType: hard
 
@@ -13233,9 +13251,9 @@ __metadata:
     "@vue/eslint-config-prettier": ^8.0.0
     "@vue/eslint-config-typescript": ^11.0.3
     "@vue/tsconfig": ^0.4.0
-    axios: ^1.7.8
+    axios: ^1.7.9
     bootstrap: ^5.3.3
-    bootstrap-vue-next: ^0.26.7
+    bootstrap-vue-next: ^0.26.18
     bootswatch: ^4.6.2
     eslint: ^8.57.0
     eslint-plugin-vue: ^9.25.0
@@ -13245,7 +13263,7 @@ __metadata:
     license-downloader: ^1.1.0
     license-report: ^6.5.0
     npm-run-all: ^4.1.5
-    pinia: ^2.2.8
+    pinia: ^2.3.0
     prettier: ^3.2.5
     sass: ^1.76.0
     semantic-release: ^24.1.0
@@ -13281,10 +13299,10 @@ __metadata:
     "@types/luxon": ^3.4.2
     "@types/node": ^18.17.7
     "@types/swagger-ui-express": ^4.1.3
-    axios: ^1.7.8
+    axios: ^1.7.9
     compression: ^1.7.5
     cors: ^2.8.5
-    express: ^4.21.1
+    express: ^4.21.2
     express-rate-limit: ^6.11.1
     keycloak-backend: ^5.0.0
     luxon: ^3.5.0
