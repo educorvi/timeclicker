@@ -1,3 +1,12 @@
+# [timeclicker_client-v2.0.7](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.6...timeclicker_client-v2.0.7) (2025-01-07)
+
+
+### Bug Fixes
+
+* do not display loading spinner forever if request failed in libraries modal ([d3f9199](https://github.com/educorvi/timeclicker/commit/d3f9199e0e3b00039b52418de37e1df206576821))
+* use short units in time balance view so it does not overflow ([6ed0927](https://github.com/educorvi/timeclicker/commit/6ed09279233792f282b97bb69a95b1a411404987))
+* WorkingHour entries on the last day of a month not displayed in ui ([9186ffb](https://github.com/educorvi/timeclicker/commit/9186ffba24a5beaeef17c3573a14b3cbefc5c388)), closes [#Tim-10](https://github.com/educorvi/timeclicker/issues/Tim-10)
+
 # [timeclicker_client-v2.0.6](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.5...timeclicker_client-v2.0.6) (2024-11-29)
 
 
