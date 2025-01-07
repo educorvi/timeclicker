@@ -118,4 +118,6 @@ export const de = {
     start_month_desc: 'Der Monat, in dem der Vertrag beginnt',
     start_year: 'Startjahr',
     start_year_desc: 'Das Jahr, in dem der Vertrag beginnt',
+
+    not_found: 'Nicht gefunden',
 };

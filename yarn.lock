@@ -2926,17 +2926,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/is@npm:^5.2.0":
-  version: 5.6.0
-  resolution: "@sindresorhus/is@npm:5.6.0"
-  checksum: 2e6e0c3acf188dcd9aea0f324ac1b6ad04c9fc672392a7b5a1218512fcde066965797eba8b9fe2108657a504388bd4a6664e6e6602555168e828a6df08b9f10e
-  languageName: node
-  linkType: hard
-
-"@sindresorhus/is@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@sindresorhus/is@npm:7.0.0"
-  checksum: a94eef429495ad37ddf441fa24fcdbca891d6362339dc1dea4a8a650d8cf262ac82061164134d0608372fcb1da619dac106afdefbfce902118da387d6e754bc3
+"@sindresorhus/is@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "@sindresorhus/is@npm:7.0.1"
+  checksum: 490b66ead3b368ab3a216c97fc339b17daed0a5f097a595eba39101a9bd76b6da59bacc0799a5e972b7d3b7aca871e61297eaede5d6fd00dc691ce85126a8f43
   languageName: node
   linkType: hard
 
@@ -3668,7 +3661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/http-cache-semantics@npm:^4.0.2, @types/http-cache-semantics@npm:^4.0.4":
+"@types/http-cache-semantics@npm:^4.0.4":
   version: 4.0.4
   resolution: "@types/http-cache-semantics@npm:4.0.4"
   checksum: 7f4dd832e618bc1e271be49717d7b4066d77c2d4eed5b81198eb987e532bb3e1c7e02f45d77918185bad936f884b700c10cebe06305f50400f382ab75055f9e8
@@ -5192,21 +5185,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacheable-request@npm:^10.2.8":
-  version: 10.2.14
-  resolution: "cacheable-request@npm:10.2.14"
-  dependencies:
-    "@types/http-cache-semantics": ^4.0.2
-    get-stream: ^6.0.1
-    http-cache-semantics: ^4.1.1
-    keyv: ^4.5.3
-    mimic-response: ^4.0.0
-    normalize-url: ^8.0.0
-    responselike: ^3.0.0
-  checksum: 56f2b8e1c497c91f8391f0b099d19907a7dde25e71087e622b23e45fc8061736c2a6964ef121b16f377c3c61079cf8dc17320ab54004209d1343e4d26aba7015
-  languageName: node
-  linkType: hard
-
 "cacheable-request@npm:^12.0.1":
   version: 12.0.1
   resolution: "cacheable-request@npm:12.0.1"
@@ -5909,6 +5887,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:^4.3.7, debug@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "debug@npm:4.4.0"
+  dependencies:
+    ms: ^2.1.3
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: fb42df878dd0e22816fc56e1fdca9da73caa85212fbe40c868b1295a6878f9101ae684f4eeef516c13acfc700f5ea07f1136954f43d4cd2d477a811144136479
+  languageName: node
+  linkType: hard
+
 "decompress-response@npm:^6.0.0":
   version: 6.0.0
   resolution: "decompress-response@npm:6.0.0"
@@ -6278,10 +6268,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eol@npm:^0.9.1":
-  version: 0.9.1
-  resolution: "eol@npm:0.9.1"
-  checksum: ba9fa998bc8148b935dcf85585eacf049eeaf18d2ab6196710d4d1f59e7dfd0e87b18508dc67144ff8ba12f835a4a4989aeea64c98b13cca77b74b9d4b33bce5
+"eol@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "eol@npm:0.10.0"
+  checksum: 48425c1e553385480145073edb0e1d3ecbde4ef7873a3290d15482b08623557c9a0421e3938ef682dd5ac229c025319854dc16235798fe4b1cdab4435782850e
   languageName: node
   linkType: hard
 
@@ -7129,13 +7119,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data-encoder@npm:^2.1.2":
-  version: 2.1.4
-  resolution: "form-data-encoder@npm:2.1.4"
-  checksum: e0b3e5950fb69b3f32c273944620f9861f1933df9d3e42066e038e26dfb343d0f4465de9f27e0ead1a09d9df20bc2eed06a63c2ca2f8f00949e7202bae9e29dd
-  languageName: node
-  linkType: hard
-
 "form-data-encoder@npm:^4.0.2":
   version: 4.0.2
   resolution: "form-data-encoder@npm:4.0.2"
@@ -7562,30 +7545,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "got@npm:13.0.0"
+"got@npm:^14.4.2, got@npm:^14.4.5":
+  version: 14.4.5
+  resolution: "got@npm:14.4.5"
   dependencies:
-    "@sindresorhus/is": ^5.2.0
-    "@szmarczak/http-timer": ^5.0.1
-    cacheable-lookup: ^7.0.0
-    cacheable-request: ^10.2.8
-    decompress-response: ^6.0.0
-    form-data-encoder: ^2.1.2
-    get-stream: ^6.0.1
-    http2-wrapper: ^2.1.10
-    lowercase-keys: ^3.0.0
-    p-cancelable: ^3.0.0
-    responselike: ^3.0.0
-  checksum: bcae6601efd710bc6c5b454c5e44bcb16fcfe57a1065e2d61ff918c1d69c3cf124984ebf509ca64ed10f0da2d2b5531b77da05aa786e75849d084fb8fbea711b
-  languageName: node
-  linkType: hard
-
-"got@npm:^14.4.1":
-  version: 14.4.2
-  resolution: "got@npm:14.4.2"
-  dependencies:
-    "@sindresorhus/is": ^7.0.0
+    "@sindresorhus/is": ^7.0.1
     "@szmarczak/http-timer": ^5.0.1
     cacheable-lookup: ^7.0.0
     cacheable-request: ^12.0.1
@@ -7595,8 +7559,8 @@ __metadata:
     lowercase-keys: ^3.0.0
     p-cancelable: ^4.0.1
     responselike: ^3.0.0
-    type-fest: ^4.19.0
-  checksum: b0c189f161f8e8d3b27e73f7f2a7f061e819eaa7d413a0a146b5238aa830d8d087cdca5bf766dcb104d0c34de3eb9fdbcbefea827540baeea946201da3807780
+    type-fest: ^4.26.1
+  checksum: 873f20d9d7c0a432d2361abc9ed706a747bdba0299a70349895dcb988f9bc0b03ef276a2b96f25c81b90d6352496835fa2aeb8692541b9dd21c25919b48b0692
   languageName: node
   linkType: hard
 
@@ -7805,16 +7769,6 @@ __metadata:
     agent-base: ^7.1.0
     debug: ^4.3.4
   checksum: 48d4fac997917e15f45094852b63b62a46d0c8a4f0b9c6c23ca26d27b8df8d178bed88389e604745e748bd9a01f5023e25093722777f0593c3f052009ff438b6
-  languageName: node
-  linkType: hard
-
-"http2-wrapper@npm:^2.1.10":
-  version: 2.2.0
-  resolution: "http2-wrapper@npm:2.2.0"
-  dependencies:
-    quick-lru: ^5.1.1
-    resolve-alpn: ^1.2.0
-  checksum: 6fd20e5cb6a58151715b3581e06a62a47df943187d2d1f69e538a50cccb7175dd334ecfde7900a37d18f3e13a1a199518a2c211f39860e81e9a16210c199cfaa
   languageName: node
   linkType: hard
 
@@ -8988,36 +8942,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"license-downloader@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "license-downloader@npm:1.1.0"
+"license-downloader@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "license-downloader@npm:1.3.0"
   dependencies:
-    debug: ^4.3.5
-    got: ^14.4.1
+    debug: ^4.3.7
+    got: ^14.4.2
     jsonfile: ^6.1.0
     rc: ^1.2.8
   bin:
     license-downloader: index.js
-  checksum: 126336bc156591c3ec84b2440d5df3ca2cc325db44cc23cc27de0d1c9c4b1232c3dc29fdaf2c588415255f42d1bde603f3e8b8af3cd3791f6073a94b96adc675
+  checksum: 72ba9fc482fa9cf6b7a3c37eb631e513fcd687a8cfc3bce190fab76d48b6d505edcf7021e6ea51de950d0eb4f13ff783bd954834610b799f1a4991ec8d1c0a44
   languageName: node
   linkType: hard
 
-"license-report@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "license-report@npm:6.5.0"
+"license-report@npm:^6.7.1":
+  version: 6.7.1
+  resolution: "license-report@npm:6.7.1"
   dependencies:
     "@kessler/tableify": ^1.0.2
-    debug: ^4.3.4
-    eol: ^0.9.1
-    got: ^13.0.0
+    debug: ^4.4.0
+    eol: ^0.10.0
+    got: ^14.4.5
     rc: ^1.2.8
-    semver: ^7.5.4
-    tablemark: ^3.0.0
+    semver: ^7.6.3
+    tablemark: ^3.1.0
     text-table: ^0.2.0
     visit-values: ^2.0.0
   bin:
     license-report: index.js
-  checksum: 6528a3a47e9b7b7568210633440956961a06ecd47b23ede5d38de70d72721b08f577e464ac6646fc2011dcff0f74d176ab0fe0a0d0329dcf218d2197104c56d8
+  checksum: f112c170208f76b2bb11b5c7df32a10b6f914ba71b5c83886691209767a66f2c1415017c57b9ba0baba3ad01afc4141b1eced1c83aeea8eed445a76f030dd950
   languageName: node
   linkType: hard
 
@@ -9730,7 +9684,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ms@npm:2.1.3, ms@npm:^2.1.1, ms@npm:^2.1.2":
+"ms@npm:2.1.3, ms@npm:^2.1.1, ms@npm:^2.1.2, ms@npm:^2.1.3":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
@@ -10431,13 +10385,6 @@ __metadata:
     prelude-ls: ^1.2.1
     type-check: ^0.4.0
   checksum: 09281999441f2fe9c33a5eeab76700795365a061563d66b098923eb719251a42bdbe432790d35064d0816ead9296dbeb1ad51a733edf4167c96bd5d0882e428a
-  languageName: node
-  linkType: hard
-
-"p-cancelable@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "p-cancelable@npm:3.0.0"
-  checksum: 2b5ae34218f9c2cf7a7c18e5d9a726ef9b165ef07e6c959f6738371509e747334b5f78f3bcdeb03d8a12dcb978faf641fd87eb21486ed7d36fb823b8ddef3219
   languageName: node
   linkType: hard
 
@@ -13086,13 +13033,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tablemark@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "tablemark@npm:3.0.0"
+"tablemark@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "tablemark@npm:3.1.0"
   dependencies:
     sentence-case: ^3.0.4
     split-text-to-chunks: ^1.0.0
-  checksum: 9195af70c032ef2efbf05b40ca73df88054dace9102628fab9ed57a025a8f285225c5f6074c8a35ddfeed5dc4ecc1eba8d9f9080ec208170ec4ff0aadeaa0e20
+  checksum: c8984663eb3be1404b33f52dc72c1af0cb3c4d18a01d737754457511c437a74787835a1969b4d450ada86f1d02822f385619987c30557cc90407e8630ccf5bb6
   languageName: node
   linkType: hard
 
@@ -13260,8 +13207,8 @@ __metadata:
     file-saver: ^2.0.5
     humanize-duration: ^3.32.1
     keycloak-js: ^20.0.5
-    license-downloader: ^1.1.0
-    license-report: ^6.5.0
+    license-downloader: ^1.3.0
+    license-report: ^6.7.1
     npm-run-all: ^4.1.5
     pinia: ^2.3.0
     prettier: ^3.2.5
@@ -13602,10 +13549,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^4.19.0, type-fest@npm:^4.2.0":
+"type-fest@npm:^4.2.0":
   version: 4.26.0
   resolution: "type-fest@npm:4.26.0"
   checksum: f8073dc59a4a5bd897eecb3dfbf9d7716031fc161062ef572c402252a0375cc692c9ae1f50c75c80722964f1eda4011d1edbab36af63a130a53b3c1aab4ed1c5
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^4.26.1":
+  version: 4.31.0
+  resolution: "type-fest@npm:4.31.0"
+  checksum: 2e054436aaf9a9abfd33108d21781ec840f48f1813a58a166aa68bbe31804d06ba45927eb02106af0e7da92c4dc4d66309cf76d3a28cc1f6981e826381771f1f
   languageName: node
   linkType: hard
 
