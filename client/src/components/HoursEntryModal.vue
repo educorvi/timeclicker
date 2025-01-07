@@ -6,7 +6,7 @@
         size="xl"
         scrollable
         no-close-on-backdrop
-        hide-footer
+        no-footer
         @hidden="modelClosed"
     >
         <b-form @submit="saveEntry">

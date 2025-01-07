@@ -6,7 +6,7 @@
         size="xl"
         scrollable
         @hidden="onClose"
-        hide-footer
+        no-footer
         no-close-on-backdrop
     >
         <b-form @submit="onSubmit">
