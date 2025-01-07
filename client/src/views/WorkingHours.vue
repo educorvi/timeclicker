@@ -140,7 +140,7 @@ const vacationAvailable = computed(() => {
 function fetchHours() {
     hours.value = null;
     const fromDate = new Date(year.value, month.value - 1, 1);
-    const toDate = new Date(year.value, month.value, 0);
+    const toDate = new Date(year.value, month.value, 0,23,59,59,999);
     axios
         .get(import.meta.env.VITE_API_ENDPOINT + 'hours', {
             params: {
