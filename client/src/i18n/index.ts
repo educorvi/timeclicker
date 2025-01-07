@@ -14,6 +14,22 @@ if (!lang) {
     localStorage.setItem('language', lang);
 }
 
+export const humanizeDurationShortLangConfig = {
+    language: "shortLang",
+    languages: {
+        shortLang: {
+            y: () => "y",
+            mo: () => "mo",
+            w: () => "w",
+            d: () => "d",
+            h: () => "h",
+            m: () => "m",
+            s: () => "s",
+            ms: () => "ms",
+        },
+    },
+}
+
 export default createI18n({
     locale: lang,
     legacy: false,

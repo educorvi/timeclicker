@@ -3,7 +3,7 @@
         centered
         size="xl"
         scrollable
-        hide-footer
+        no-footer
         no-close-on-backdrop
         :title="t('edit_contract_data')"
         @hidden="()=>{modalHidden = true}"

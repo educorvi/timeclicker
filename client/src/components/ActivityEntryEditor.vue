@@ -6,7 +6,7 @@
         size="xl"
         scrollable
         @hidden="onClose"
-        hide-footer
+        no-footer
         no-close-on-backdrop
     >
         <b-form @submit="onSubmit">
@@ -108,11 +108,11 @@ import type {
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
-import { useToast } from 'bootstrap-vue-next';
+import { useToastController } from 'bootstrap-vue-next';
 
 const { t } = useI18n();
 
-const {show, remove} = useToast()
+const { show } = useToastController();
 
 const errorStore = useErrorStore();
 

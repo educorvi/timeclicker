@@ -44,7 +44,7 @@
         title="Changelog"
         size="xl"
         centered
-        hide-footer
+        no-footer
         scrollable
     >
         <span v-if="changelog.length" v-html="changelog"> </span>
@@ -55,7 +55,7 @@
         :title="t('libraries_modal_header')"
         size="xl"
         centered
-        hide-footer
+        no-footer
         scrollable
     >
         <b-card
@@ -65,9 +65,12 @@
         >
             <b>Source Code:</b> {{ license.link }}
             <hr />
+            <b>License text:</b><br />
             <div v-if="licenseTexts.get(license.name)">
-                <b>License text:</b><br />
                 {{ licenseTexts.get(license.name) }}
+            </div>
+            <div v-else-if="licenseTexts.get(license.name) === null">
+                {{t('not_found')}}
             </div>
             <custom-spinner v-else />
         </b-card>
@@ -100,7 +103,7 @@ type License = {
 
 const changelog = ref('');
 const licenses = ref<License[]>([]);
-const licenseTexts = ref(new Map<string, string>());
+const licenseTexts = ref(new Map<string, string|null>());
 
 onMounted(() => {
     axios.get('/CHANGELOG.md').then(({ data }) => {
@@ -126,7 +129,10 @@ onMounted(() => {
                 .get('/license-files/' + l.name + '.LICENSE.txt')
                 .then(({ data }) => {
                     licenseTexts.value.set(l.name, data);
-                });
+                }).catch((err) => {
+                    console.error(err);
+                    licenseTexts.value.set(l.name, null);
+            });
         });
     });
     axios.get(import.meta.env.VITE_API_ENDPOINT).then(({ data }) => {

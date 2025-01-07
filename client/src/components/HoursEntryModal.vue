@@ -6,7 +6,7 @@
         size="xl"
         scrollable
         no-close-on-backdrop
-        hide-footer
+        no-footer
         @hidden="modelClosed"
     >
         <b-form @submit="saveEntry">
@@ -65,12 +65,9 @@ import { useI18n } from 'vue-i18n';
 import { ref, watch } from 'vue';
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
-import { useToast } from 'bootstrap-vue-next';
 
 const { t } = useI18n();
 const errorStore = useErrorStore();
-
-const { show, remove } = useToast();
 
 const props = defineProps<{
     /**

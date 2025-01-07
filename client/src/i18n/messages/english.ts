@@ -117,4 +117,6 @@ export const en = {
     start_month_desc: 'Month in which the contract starts',
     start_year: 'Starting year',
     start_year_desc: 'Year in which the contract starts',
+
+    not_found: 'Not found',
 };
