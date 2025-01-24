@@ -18,7 +18,7 @@
     "@tsconfig/node-lts": "^18.12.5",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
-    "bootstrap-vue-next": "^0.26.18",
+    "bootstrap-vue-next": "^0.26.21",
     "bootswatch": "^4.6.2",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.32.1",
