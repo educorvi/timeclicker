@@ -15,7 +15,6 @@ function getTimeBalanceMapKey(id: WeekIdentifier): string {
 export type WeekTimeBalanceData = {
     week: number;
     year: number;
-    month: number;
     startDate: Date;
     endDate: Date;
     workedHours: number;
@@ -39,14 +38,12 @@ function getAllWeeksBetweenDates(startDate: Date, endDate: Date = new Date()): {
             throw new Error('Invalid date');
         }
         const week = dt.weekNumber;
-        const year = dt.year;
-        const month = dt.month;
+        const year = dt.weekYear;
         const startDate = DateTime.fromObject({ weekNumber: week, weekYear: year }).toJSDate();
         const endDate = DateTime.fromObject({ weekNumber: week, weekYear: year }).plus({ weeks: 1 }).toJSDate();
         const data: WeekTimeBalanceData = {
             week,
             year,
-            month,
             startDate,
             endDate,
             workedHours: 0,
@@ -68,8 +65,8 @@ async function setRequiredHours(weeks: TimeBalanceMap, user: User) {
     for (const [_, week] of weeks) {
         const contracts = await db.getContractData({
             where: [
-                { user, startYear: week.year, startMonth: LessThanOrEqual(week.month) },
-                { user, startYear: LessThan(week.year) },
+                { user, startYear: week.endDate.getFullYear(), startMonth: LessThanOrEqual(week.endDate.getMonth()+1) },
+                { user, startYear: LessThan(week.endDate.getFullYear()) },
             ],
             order: { startYear: 'DESC', startMonth: 'DESC' },
         });
