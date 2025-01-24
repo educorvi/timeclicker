@@ -16,6 +16,17 @@ export enum Month {
     December = 12,
 }
 
+export class ColumnNumericTransformer {
+    to(data: number): number {
+        return data;
+    }
+    from(data: string): number {
+        return parseFloat(data);
+    }
+}
+
+
+
 /**
  * Data about a user's contracts
  */
@@ -36,7 +47,9 @@ export default class ContractData {
     /**
      * Hours that the user is supposed to work per week
      */
-    @Column("decimal")
+    @Column("decimal" ,{
+        transformer: new ColumnNumericTransformer(),
+    })
     hoursPerWeek: number;
 
     /**

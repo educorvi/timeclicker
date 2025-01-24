@@ -65,7 +65,7 @@ async function setRequiredHours(weeks: TimeBalanceMap, user: User) {
     for (const [_, week] of weeks) {
         const contracts = await db.getContractData({
             where: [
-                { user, startYear: week.endDate.getFullYear(), startMonth: LessThanOrEqual(week.endDate.getMonth()+1) },
+                { user, startYear: week.year, startMonth: LessThanOrEqual(week.startDate.getMonth()+1) },
                 { user, startYear: LessThan(week.endDate.getFullYear()) },
             ],
             order: { startYear: 'DESC', startMonth: 'DESC' },
