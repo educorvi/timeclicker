@@ -65,15 +65,27 @@ async function setRequiredHours(weeks: TimeBalanceMap, user: User) {
     for (const [_, week] of weeks) {
         const contracts = await db.getContractData({
             where: [
-                { user, startYear: week.year, startMonth: LessThanOrEqual(week.startDate.getMonth()+1) },
+                { user, startYear: week.year, startMonth: LessThanOrEqual(week.endDate.getMonth() + 1) },
                 { user, startYear: LessThan(week.endDate.getFullYear()) },
             ],
             order: { startYear: 'DESC', startMonth: 'DESC' },
         });
         const newestContract = contracts[0];
         if (newestContract) {
-            week.requiredHours = newestContract.hoursPerWeek;
-            week.hoursPerDay = newestContract.hoursPerWeek / newestContract.daysPerWeek;
+            let contractStartDate: Date = new Date(newestContract.startYear, newestContract.startMonth - 1);
+            // If contract starts in the middle of this week, adjust weekly hours accordingly
+            if (contractStartDate <= week.endDate && contractStartDate >= week.startDate) {
+                const weekDuration = week.endDate.getTime() - week.startDate.getTime();
+                const oldContractDuration = contractStartDate.getTime() - week.startDate.getTime();
+                const newContractDuration = week.endDate.getTime() - contractStartDate.getTime();
+
+                week.requiredHours = (oldContractDuration / weekDuration) * (contracts[1]?.hoursPerWeek || 0) + (newContractDuration / weekDuration) * newestContract.hoursPerWeek;
+                week.requiredHours = Math.round(week.requiredHours * 100) / 100;
+                week.hoursPerDay = week.requiredHours / newestContract.daysPerWeek;
+            } else {
+                week.requiredHours = newestContract.hoursPerWeek;
+                week.hoursPerDay = newestContract.hoursPerWeek / newestContract.daysPerWeek;
+            }
         } else {
             week.requiredHours = 0;
             week.hoursPerDay = 0;
