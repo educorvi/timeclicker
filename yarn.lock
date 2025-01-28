@@ -4975,9 +4975,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap-vue-next@npm:^0.26.18":
-  version: 0.26.18
-  resolution: "bootstrap-vue-next@npm:0.26.18"
+"bootstrap-vue-next@npm:^0.26.21":
+  version: 0.26.21
+  resolution: "bootstrap-vue-next@npm:0.26.21"
   peerDependencies:
     "@floating-ui/vue": "*"
     "@vueuse/core": "*"
@@ -4990,7 +4990,7 @@ __metadata:
       optional: true
     vue-router:
       optional: true
-  checksum: 8ac067ca416320d761adef65c83682378cce0362fb8c523a81c0130bda25848ce0e60ed01e5a92b4efcfe49fa0a7f6bd9dd61777b9fe8d0f5e71eed53be5a3b9
+  checksum: a5ff5bf86cda76fdde6a7464d8205d54d6f90113f9098193baced5138f6a6bf7a501061da0b7ccde029b4fc433108e5cec1a7adef142a9c5ccb1111eee58818a
   languageName: node
   linkType: hard
 
@@ -13200,7 +13200,7 @@ __metadata:
     "@vue/tsconfig": ^0.4.0
     axios: ^1.7.9
     bootstrap: ^5.3.3
-    bootstrap-vue-next: ^0.26.18
+    bootstrap-vue-next: ^0.26.21
     bootswatch: ^4.6.2
     eslint: ^8.57.0
     eslint-plugin-vue: ^9.25.0
@@ -13223,7 +13223,7 @@ __metadata:
     typescript: ~5.4.5
     unplugin-icons: ^0.19.0
     unplugin-vue-components: ^0.27.2
-    vite: ^4.5.5
+    vite: ^4.5.6
     vite-plugin-pwa: ^0.20.0
     vue: ^3.5.13
     vue-i18n: ^9.14.2
@@ -14179,9 +14179,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.5.5":
-  version: 4.5.5
-  resolution: "vite@npm:4.5.5"
+"vite@npm:^4.5.6":
+  version: 4.5.9
+  resolution: "vite@npm:4.5.9"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -14215,7 +14215,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 300c5f39c83b22413dfdc84f72e9ba979bf4004e4d939409eea1470b116626294495b09e2bd73fae387a254b79988c8d54ceb281f9515120a0eda179c33b216e
+  checksum: ebe21bd4aab9e4dac38e77971c9c506f1df28dbf1afb7962894edeeac3a8a57fdc547708fa977ba798c4666f3204ec36a164110a9377fe78b7efa894b7b6c5ff
   languageName: node
   linkType: hard
 

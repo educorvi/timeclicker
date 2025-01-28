@@ -17,7 +17,7 @@ import { getOrCreateUser } from './activityController';
 import type express from 'express';
 import { db } from '../globals';
 import { And, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
-import { calculateTimeBalance } from '../timeBalanceCalculation';
+import { calculateTimeBalance, type WeekTimeBalanceData } from '../timeBalanceCalculation';
 import { getVacationDayData } from '../vacationDayCalculation';
 
 export type saveHourParams = Omit<WorkingHours, 'id' | 'user'> & {
@@ -145,5 +145,25 @@ export class HoursController extends Controller {
         };
     }
 
+    /**
+     * Get working hour sums
+     */
+    @Get('sums')
+    public async getSums(
+        @Request() req: express.Request,
+    ) {
+        const user = await getOrCreateUser(req);
+        const timeBalanceData = (await calculateTimeBalance(user));
+        const workedHours = timeBalanceData.reduce((p: number, c: WeekTimeBalanceData) => {
+            return p + c.workedHours;
+        }, 0);
+        const requiredHours = timeBalanceData.reduce((p: number, c: WeekTimeBalanceData) => {
+            return p + c.requiredHours;
+        }, 0);
+        return {
+            workedHours,
+            requiredHours,
+        }
+    }
 
 }
