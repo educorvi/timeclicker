@@ -1,3 +1,10 @@
+# [timeclicker_server-v2.0.4](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.3...timeclicker_server-v2.0.4) (2025-01-28)
+
+
+### Bug Fixes
+
+* fix bugs in balance calculation ([5cd92ae](https://github.com/educorvi/timeclicker/commit/5cd92ae837104d0d78b3a3210f610596473d8eb7)), closes [#Tim-16](https://github.com/educorvi/timeclicker/issues/Tim-16)
+
 # [timeclicker_server-v2.0.3](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.2...timeclicker_server-v2.0.3) (2024-09-06)
 
 

@@ -1,3 +1,15 @@
+# [timeclicker_client-v2.1.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.7...timeclicker_client-v2.1.0) (2025-01-28)
+
+
+### Bug Fixes
+
+* fix account dropdown not showing if no avatar is set ([dbe18d1](https://github.com/educorvi/timeclicker/commit/dbe18d1db68a79ffa3f15ea4d3a9ce347d8693f5)), closes [#Tim-11](https://github.com/educorvi/timeclicker/issues/Tim-11)
+
+
+### Features
+
+* set today as default date in entry modals ([d9235e1](https://github.com/educorvi/timeclicker/commit/d9235e1f29249e209f4d1f6463f0c07e7ecc3d74)), closes [#TIM-13](https://github.com/educorvi/timeclicker/issues/TIM-13)
+
 # [timeclicker_client-v2.0.7](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.6...timeclicker_client-v2.0.7) (2025-01-07)
 
 
