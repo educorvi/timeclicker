@@ -163,6 +163,9 @@ function initializeData() {
             date = props.initialData.to.toISOString().split('T')[0];
         }
     }
+    if (!date) {
+        date = (new Date()).toISOString().split('T')[0]
+    }
     newData.value.task = props.initialData?.task.id || null;
     newData.value.date = date;
     newData.value.from = from;

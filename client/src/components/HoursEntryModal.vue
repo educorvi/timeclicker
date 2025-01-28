@@ -92,7 +92,7 @@ const emit = defineEmits<{
     (e: 'on-submit'): void;
 }>();
 
-const date = ref<string>('');
+const date = ref<string>((new Date()).toISOString().split('T')[0]);
 const hours = ref<number>(0);
 const minutes = ref<number>(0);
 const vacation = ref<boolean>(false);
