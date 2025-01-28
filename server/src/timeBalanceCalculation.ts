@@ -2,6 +2,7 @@ import { User, WorkingHours } from './classes';
 import { db } from './globals';
 import { DateTime } from 'luxon';
 import { LessThan, LessThanOrEqual } from 'typeorm';
+import { HoursType } from './enums';
 
 export type WeekIdentifier = {
     week: number;
@@ -108,7 +109,7 @@ async function setWorkedHours(weeks: TimeBalanceMap, hours: WorkingHours[]) {
         }
 
         let duration = hour.duration / 60;
-        if (hour.vacation) {
+        if (hour.type === HoursType.VACATION || hour.type === HoursType.HOLIDAY || hour.type === HoursType.SICK) {
             duration = weekData.hoursPerDay;
         }
 

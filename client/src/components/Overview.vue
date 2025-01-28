@@ -117,7 +117,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Activity, Task } from 'timeclicker_server/src/libindex';
+import type { Activity, Task } from 'timeclicker_server';
 import CustomSpinner from './CustomSpinner.vue';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';

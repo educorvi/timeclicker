@@ -19,6 +19,7 @@ import { db } from '../globals';
 import { And, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { calculateTimeBalance, type WeekTimeBalanceData } from '../timeBalanceCalculation';
 import { getVacationDayData } from '../vacationDayCalculation';
+import { HoursType } from '../enums';
 
 export type saveHourParams = Omit<WorkingHours, 'id' | 'user'> & {
     id?: string;
@@ -116,7 +117,7 @@ export class HoursController extends Controller {
             }
         }
         const vacationDayData = await getVacationDayData(user);
-        if (!origHour && requestBody.vacation && vacationDayData.vacationDaysLeft <= 0) {
+        if (!origHour && requestBody.type === HoursType.VACATION && vacationDayData.vacationDaysLeft <= 0) {
             this.setStatus(400);
             return;
         }

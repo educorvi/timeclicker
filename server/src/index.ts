@@ -1,3 +1,4 @@
+import "reflect-metadata"
 require('dotenv').config();
 import * as process from 'process';
 import rateLimit from 'express-rate-limit';

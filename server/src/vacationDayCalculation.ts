@@ -1,5 +1,6 @@
 import { User } from './classes';
 import { db } from './globals';
+import { HoursType } from './enums';
 
 export type VacationDayData = {
     vacationDays: number;
@@ -31,7 +32,7 @@ async function getTotalVacationDays(user: User) {
 }
 
 async function getUsedVacationDays(user: User) {
-    const vacationDays = await db.getHours({ where: { user, vacation: true}, order: { date: 'ASC' } });
+    const vacationDays = await db.getHours({ where: { user, type: HoursType.VACATION}, order: { date: 'ASC' } });
     return vacationDays.length;
 }
 

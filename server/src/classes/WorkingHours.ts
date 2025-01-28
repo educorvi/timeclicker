@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { HoursType } from '../enums';
 import User from './User';
 
 /**
@@ -31,8 +32,12 @@ export default class WorkingHours {
     user: User;
 
     /**
-     * Is this vacation time
+     * Is this time worked/vacation/...
      */
-    @Column({ default: false})
-    vacation: boolean;
+    @Column({ type: 'enum', enum: HoursType, default: HoursType.WORK })
+    type: HoursType;
+
+
+    @Column({ default: '' })
+    note: string;
 }

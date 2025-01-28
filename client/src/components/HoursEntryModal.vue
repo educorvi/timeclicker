@@ -60,7 +60,7 @@
     </b-modal>
 </template>
 <script setup lang="ts">
-import type { WorkingHours, saveHourParams } from 'timeclicker_server';
+import { HoursType, type saveHourParams, type WorkingHours } from 'timeclicker_server';
 import { useI18n } from 'vue-i18n';
 import { ref, watch } from 'vue';
 import axios from 'axios';
@@ -118,7 +118,9 @@ function saveEntry(evt: Event) {
     const submitData: saveHourParams = {
         date: dateVal,
         duration: hours.value * 60 + minutes.value,
-        vacation: vacation.value,
+        type: vacation.value ? HoursType.VACATION : HoursType.WORK,
+        //@TODO
+        note: '',
     };
 
     axios

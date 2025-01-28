@@ -56,7 +56,7 @@
                     v-for="hour in hours"
                     class="mb-3"
                     no-body
-                    :border-variant="hour.vacation ? 'success' : undefined"
+                    :border-variant="hour.type === HoursType.VACATION ? 'success' : undefined"
                 >
                     <div class="d-flex">
                         <b-card-body>
@@ -64,7 +64,7 @@
                                 {{ d(hour.date, 'short') }}
                             </h4>
                             <p class="mb-0">
-                                <span v-if="!hour.vacation">
+                                <span v-if="hour.type !== HoursType.VACATION">
                                     <strong>{{ t('duration') }}:</strong>
                                     {{
                                         humanizeDuration(
@@ -109,12 +109,12 @@
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
 import { computed, onMounted, ref, watch } from 'vue';
-import type { TimeBalanceData, WorkingHours } from 'timeclicker_server';
+import { HoursType, type TimeBalanceData, type WorkingHours } from 'timeclicker_server';
 import axios from 'axios';
 import humanizeDuration from 'humanize-duration';
 import type { BModal } from 'bootstrap-vue-next';
 import { UiError, useErrorStore } from '@/stores/error';
-import { humanizeDurationShortLangConfig } from 'timeclicker_client/src/i18n';
+import { humanizeDurationShortLangConfig } from '@/i18n';
 
 const { t, d, locale } = useI18n();
 const errorStore = useErrorStore();

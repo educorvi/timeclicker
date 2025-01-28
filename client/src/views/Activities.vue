@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import axios from 'axios';
-import type { Task } from 'timeclicker_server/src/libindex';
+import type { Task } from 'timeclicker_server';
 import Overview from '@/components/Overview.vue';
 import EntryEditor from '@/components/ActivityEntryEditor.vue';
 import { type Ref, nextTick, onMounted, ref } from 'vue';

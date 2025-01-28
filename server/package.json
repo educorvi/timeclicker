@@ -3,14 +3,19 @@
     "version": "2.0.3",
     "private": true,
     "description": "Server for the timeclicker App",
-    "main": "dist/src/libindex.js",
+    "files": [
+        "dist",
+        "lib-dist"
+    ],
+    "main": "lib-dist/lib.umd.js",
+    "module": "lib-dist/lib.mjs",
     "types": "dist/src/libindex.d.ts",
     "bin": "dist/src/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon src/index.ts",
         "tsoa": "tsoa spec && tsoa routes",
-        "build": "yarn run tsoa && tsc"
+        "build": "yarn run tsoa && tsc && vite build"
     },
     "repository": {
         "type": "git",
@@ -43,7 +48,8 @@
         "semantic-release-yarn": "^3.0.2",
         "ts-node": "^10.9.2",
         "tslib": "^2.6.2",
-        "typescript": "^5.4.5"
+        "typescript": "^5.4.5",
+        "vite": "^6.0.11"
     },
     "dependencies": {
         "axios": "^1.7.9",
