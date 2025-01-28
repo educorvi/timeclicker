@@ -32,7 +32,7 @@
                 <b-nav-item-dropdown right v-if="userdata && keycloak">
                     <template #button-content>
                         <b-avatar
-                            :src="'data:image/png;base64, ' + profilePicture"
+                            :src="profilePicture"
                             size="1.8rem"
                             rounded
                         />
@@ -68,7 +68,12 @@ const { t } = useI18n();
 const { keycloak, userdata, authenticated } = storeToRefs(useKeycloakStore());
 
 const profilePicture = computed(() => {
-    return userdata.value['attributes']['profilePicture'][0];
+    if (userdata.value?.attributes?.profilePicture) {
+        return 'data:image/png;base64, ' + userdata.value?.attributes?.profilePicture?.[0];
+    } else {
+        return undefined;
+    }
+
 });
 </script>
 
