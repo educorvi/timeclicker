@@ -17,7 +17,7 @@ import { getOrCreateUser } from './activityController';
 import type express from 'express';
 import { db } from '../globals';
 import { And, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
-import { calculateTimeBalance, WeekTimeBalanceData } from '../timeBalanceCalculation';
+import { calculateTimeBalance, type WeekTimeBalanceData } from '../timeBalanceCalculation';
 import { getVacationDayData } from '../vacationDayCalculation';
 
 export type saveHourParams = Omit<WorkingHours, 'id' | 'user'> & {
