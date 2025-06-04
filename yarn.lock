@@ -13461,7 +13461,7 @@ __metadata:
     typescript: ~5.4.5
     unplugin-icons: ^0.19.0
     unplugin-vue-components: ^0.27.2
-    vite: ^4.5.6
+    vite: ^4.5.14
     vite-plugin-pwa: ^0.20.0
     vue: ^3.5.13
     vue-i18n: ^9.14.3
@@ -14417,9 +14417,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.5.6":
-  version: 4.5.9
-  resolution: "vite@npm:4.5.9"
+"vite@npm:^4.5.14":
+  version: 4.5.14
+  resolution: "vite@npm:4.5.14"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -14453,7 +14453,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: ebe21bd4aab9e4dac38e77971c9c506f1df28dbf1afb7962894edeeac3a8a57fdc547708fa977ba798c4666f3204ec36a164110a9377fe78b7efa894b7b6c5ff
+  checksum: ed61e2bc284968c5f514eae1f0b040ad6aa1b6591575c102d4967da5e34f8e52cd1a7048800bc3154ece0c11b4f11e1be1d0ef382c92993fd2dc6f7feca110ba
   languageName: node
   linkType: hard
 
