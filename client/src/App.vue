@@ -109,7 +109,7 @@ let keycloak: Keycloak;
             } else {
                 kcStore.setAuthenticated(authState.unauthenticated);
             }
-        });
+        }).catch(console.error);
 })();
 
 function login() {
