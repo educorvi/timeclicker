@@ -1,3 +1,11 @@
+# [timeclicker_client-v2.1.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.1.0...timeclicker_client-v2.1.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* update keycloak-js version ([26c0185](https://github.com/educorvi/timeclicker/commit/26c01856a476c57915f061c2137373ab4e57d8d0))
+* update VueJsonForm ([d6d7426](https://github.com/educorvi/timeclicker/commit/d6d7426b988cb5496bf2d1aac139babe2f794c12))
+
 # [timeclicker_client-v2.1.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.0.7...timeclicker_client-v2.1.0) (2025-01-28)
 
 
