@@ -27,7 +27,7 @@ import {
     getContractEntryJsonSchema,
     getContractEntryUiSchema,
 } from '@/formSchemas/ContractEntry';
-import { VueJsonForm } from '@educorvi/vue-json-form';
+import { type SubmitOptions, VueJsonForm } from '@educorvi/vue-json-form';
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 
@@ -50,7 +50,7 @@ const emit = defineEmits<{
     (e: 'on-submit'): void;
 }>();
 
-function saveContract(data: Record<string, any>) {
+async function saveContract(data: Record<string, any>, _customSubmitOptions: SubmitOptions, _evt: SubmitEvent) {
     const contractData: saveContractDataParams = {
         hoursPerWeek: data.hoursPerWeek,
         daysPerWeek: data.daysPerWeek,
