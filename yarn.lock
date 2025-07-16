@@ -3640,10 +3640,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node-lts@npm:^18.12.5":
-  version: 18.12.5
-  resolution: "@tsconfig/node-lts@npm:18.12.5"
-  checksum: c51c35dbd1e68f824dd32436b6134b124c1c2277f15a786037ad52552697cbc0ad965535a95fada8307a24990c1e692b2df39e1b2ab9f4f3ff8c0d3887de5a3a
+"@tsconfig/node-lts@npm:^22.0.2":
+  version: 22.0.2
+  resolution: "@tsconfig/node-lts@npm:22.0.2"
+  checksum: 90312d0b19102769058af4db82a591b0855bd13aaf7179e265e3af7a6657e319cb7a2d58085b5b0a5e0eb78ff8b0d924bd5a6656764a2539d881408241c93d6d
   languageName: node
   linkType: hard
 
@@ -13424,7 +13424,7 @@ __metadata:
     "@semantic-release/commit-analyzer": ^13.0.0
     "@semantic-release/github": ^10.1.7
     "@semantic-release/release-notes-generator": ^14.0.1
-    "@tsconfig/node-lts": ^18.12.5
+    "@tsconfig/node-lts": ^22.0.2
     "@types/file-saver": ^2.0.6
     "@types/humanize-duration": ^3.27.4
     "@types/node": ^18.17.7
