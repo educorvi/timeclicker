@@ -18,7 +18,7 @@
     "@tsconfig/node-lts": "^22.0.2",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
-    "bootstrap-vue-next": "^0.27.0",
+    "bootstrap-vue-next": "^0.30.5",
     "bootswatch": "^5.3.7",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.33.0",
@@ -28,7 +28,7 @@
     "swagger-ui": "^5.27.1",
     "swagger-ui-dist": "^5.27.1",
     "timeclicker_server": "workspace:^",
-    "vue": "^3.5.18",
+    "vue": "^3.5.19",
     "vue-i18n": "^11.1.11",
     "vue-router": "^4.5.1"
   },
