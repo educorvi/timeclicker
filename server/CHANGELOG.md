@@ -1,3 +1,10 @@
+# [timeclicker_server-v2.0.5](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.4...timeclicker_server-v2.0.5) (2025-08-22)
+
+
+### Bug Fixes
+
+* update bug in saldo calculation on contract switch ([6047065](https://github.com/educorvi/timeclicker/commit/6047065e8d5a43dbcf27d72477c9d336158aa964))
+
 # [timeclicker_server-v2.0.4](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.3...timeclicker_server-v2.0.4) (2025-01-28)
 
 
