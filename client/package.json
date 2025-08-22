@@ -14,7 +14,7 @@
     "generateIcons": "yarn dlx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
   },
   "dependencies": {
-    "@educorvi/vue-json-form": "3.0.0-beta.7",
+    "@educorvi/vue-json-form": "3.0.0-beta.9",
     "@tsconfig/node-lts": "^22.0.2",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",

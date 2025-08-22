@@ -61,17 +61,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apidevtools/json-schema-ref-parser@npm:^11.6.1":
-  version: 11.7.0
-  resolution: "@apidevtools/json-schema-ref-parser@npm:11.7.0"
-  dependencies:
-    "@jsdevtools/ono": ^7.1.3
-    "@types/json-schema": ^7.0.15
-    js-yaml: ^4.1.0
-  checksum: ee1c9e7c1bbf0b8d935522f9407c382e20a54464414fa65326fa8f56239e5a6f2b911f48c65fe2888a94d3445dced46ba36c286da435d47cefc8699d4a5b0ae2
-  languageName: node
-  linkType: hard
-
 "@apidevtools/json-schema-ref-parser@npm:^14.1.0":
   version: 14.1.1
   resolution: "@apidevtools/json-schema-ref-parser@npm:14.1.1"
@@ -1633,22 +1622,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@educorvi/vue-json-form-schemas@npm:2.0.0-beta.2":
-  version: 2.0.0-beta.2
-  resolution: "@educorvi/vue-json-form-schemas@npm:2.0.0-beta.2"
+"@educorvi/vue-json-form-schemas@npm:2.0.0-beta.4":
+  version: 2.0.0-beta.4
+  resolution: "@educorvi/vue-json-form-schemas@npm:2.0.0-beta.4"
   dependencies:
     "@apidevtools/json-schema-ref-parser": ^14.1.0
-  checksum: deb5a806df0881375a19b8567f03dea167e36725f16f4e24eb75126e7e3fe284e79f9e3765a190f2d43f3252caddb2c2bb03603972d45100edb615acd12143d6
+  checksum: e044d80eacbf77df8b59b45c7aec52f3a0882fb839081a9e253fda27dd076a4c5c0c94c69ab7de3ff8d7be297e1a47a39865ba3ae5883e91d9653a5290194d28
   languageName: node
   linkType: hard
 
-"@educorvi/vue-json-form@npm:3.0.0-beta.7":
-  version: 3.0.0-beta.7
-  resolution: "@educorvi/vue-json-form@npm:3.0.0-beta.7"
+"@educorvi/vue-json-form@npm:3.0.0-beta.9":
+  version: 3.0.0-beta.9
+  resolution: "@educorvi/vue-json-form@npm:3.0.0-beta.9"
   dependencies:
-    "@apidevtools/json-schema-ref-parser": ^11.6.1
     "@educorvi/rita": ^5.4.3
-    "@educorvi/vue-json-form-schemas": 2.0.0-beta.2
+    "@educorvi/vue-json-form-schemas": 2.0.0-beta.4
     "@vueuse/core": ^10.9.0
     bootstrap: ^5.3.3
     bootstrap-vue-next: 0.28.5
@@ -1660,7 +1648,7 @@ __metadata:
     uuid: ^10.0.0
     vue: ^3.5.17
     vuedraggable: ^4.1.0
-  checksum: 526898a0127c1ebf69ef203ed2e5aa968b6d07ece9fc0f9c0fdd098ffd682014fe1451dfc1b9acf3a78c024861d66d3d2012426e3c92f36a1f568380334051ea
+  checksum: b990b675f02b857e27f3202908b9b1b707c43db70135cb2a83c09acb4a4fdeb3c6ae694aac68043830d250981f5959f85c6f2d345bf91c8c303100f7092e9665
   languageName: node
   linkType: hard
 
@@ -2413,13 +2401,6 @@ __metadata:
     string-argv: ^0.3.1
     type-detect: ^4.0.8
   checksum: 3f105f4dfb2d809ab058c7b71ae950a90211b17827c83d674f616e1a4d99c10707d9bf15eeba5ac3e3121cc0b309768b72f0088e48b42c779b005511544933dd
-  languageName: node
-  linkType: hard
-
-"@jsdevtools/ono@npm:^7.1.3":
-  version: 7.1.3
-  resolution: "@jsdevtools/ono@npm:7.1.3"
-  checksum: 2297fcd472ba810bffe8519d2249171132844c7174f3a16634f9260761c8c78bc0428a4190b5b6d72d45673c13918ab9844d706c3ed4ef8f62ab11a2627a08ad
   languageName: node
   linkType: hard
 
@@ -13956,7 +13937,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "timeclicker_client@workspace:client"
   dependencies:
-    "@educorvi/vue-json-form": 3.0.0-beta.7
+    "@educorvi/vue-json-form": 3.0.0-beta.9
     "@iconify-json/bi": ^1.1.23
     "@rollup/plugin-url": ^8.0.2
     "@rushstack/eslint-patch": ^1.10.2
