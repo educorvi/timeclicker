@@ -75,13 +75,29 @@ async function setRequiredHours(weeks: TimeBalanceMap, user: User) {
             let contractStartDate: Date = new Date(newestContract.startYear, newestContract.startMonth - 1);
             // If contract starts in the middle of this week, adjust weekly hours accordingly
             if (contractStartDate <= week.endDate && contractStartDate >= week.startDate) {
-                const weekDuration = week.endDate.getTime() - week.startDate.getTime();
-                const oldContractDuration = contractStartDate.getTime() - week.startDate.getTime();
-                const newContractDuration = week.endDate.getTime() - contractStartDate.getTime();
-
-                week.requiredHours = (oldContractDuration / weekDuration) * (contracts[1]?.hoursPerWeek || 0) + (newContractDuration / weekDuration) * newestContract.hoursPerWeek;
+                // const weekDuration = week.endDate.getTime() - week.startDate.getTime();
+                // const oldContractDuration = contractStartDate.getTime() - week.startDate.getTime();
+                // const newContractDuration = week.endDate.getTime() - contractStartDate.getTime();
+                //
+                // week.requiredHours = (oldContractDuration / weekDuration) * (contracts[1]?.hoursPerWeek || 0) + (newContractDuration / weekDuration) * newestContract.hoursPerWeek;
+                // week.requiredHours = Math.round(week.requiredHours * 100) / 100;
+                // week.hoursPerDay = week.requiredHours / newestContract.daysPerWeek;
+                let daysInOldContract = 0;
+                let daysInNewContract = 0;
+                for (let day = DateTime.fromJSDate(week.startDate); day < DateTime.fromJSDate(week.endDate); day = day.plus({ days: 1 })) {
+                    if (day.isWeekend) {
+                        continue;
+                    }
+                    if (day >= DateTime.fromJSDate(contractStartDate)) {
+                        daysInNewContract++
+                    } else {
+                        daysInOldContract++;
+                    }
+                }
+                week.requiredHours = (daysInOldContract / 5) * (contracts[1]?.hoursPerWeek || 0) + (daysInNewContract / 5) * newestContract.hoursPerWeek;
                 week.requiredHours = Math.round(week.requiredHours * 100) / 100;
-                week.hoursPerDay = week.requiredHours / newestContract.daysPerWeek;
+                week.hoursPerDay = week.requiredHours / Math.max(newestContract.daysPerWeek, contracts[1]?.daysPerWeek || 1);
+                week.hoursPerDay = Math.round(week.hoursPerDay * 100) / 100;
             } else {
                 week.requiredHours = newestContract.hoursPerWeek;
                 week.hoursPerDay = newestContract.hoursPerWeek / newestContract.daysPerWeek;

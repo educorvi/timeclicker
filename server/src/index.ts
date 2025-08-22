@@ -1,4 +1,5 @@
-require('dotenv').config();
+import {config} from 'dotenv';
+config()
 import * as process from 'process';
 import rateLimit from 'express-rate-limit';
 import express, { json, urlencoded, static as staticContent } from 'express';
@@ -11,6 +12,7 @@ import cors from 'cors';
 import { errorHandler } from './errorHandler';
 import path from 'path';
 import compression from 'compression';
+
 
 const projectRoot = path
     .resolve(__dirname)

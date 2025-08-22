@@ -1,6 +1,9 @@
 import { Logger } from 'tslog';
 import Database from './database';
 import process from 'process';
+import {config} from 'dotenv';
+
+config()
 
 export const logger = new Logger({
     hideLogPositionForProduction: true,
