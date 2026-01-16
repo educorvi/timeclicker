@@ -74,24 +74,4 @@ export class OrgaController extends Controller {
             return a;
         });
     }
-
-
-    /**
-     * Returns a list of all contracts associated with the given user
-     * @param req
-     * @param userId The id of the user
-     **/
-    @Get('contract-data')
-    @Response(404, 'User not found')
-    public async getContractData(
-        @Query() userId: string,
-        @Request() req: express.Request,
-    ) {
-        checkOrgaStatus(req);
-        const user = await db.getUser(userId);
-        if (!user) {
-            this.setStatus(404);
-            return;
-        }
-    }
 }
