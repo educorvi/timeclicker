@@ -1,9 +1,9 @@
-import type { CoreSchemaMetaSchema, UISchema } from '@educorvi/vue-json-form';
+import type { JSONSchema, UISchema } from '@educorvi/vue-json-form';
 import { type ComposerTranslation } from 'vue-i18n';
 
 export function getContractEntryJsonSchema(
     t: ComposerTranslation
-): CoreSchemaMetaSchema {
+): JSONSchema {
     return {
         type: 'object',
         properties: {
