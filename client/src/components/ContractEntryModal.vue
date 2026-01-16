@@ -15,6 +15,7 @@
             :jsonSchema="jsonSchema"
             :uiSchema="uiSchema"
             :on-submit-form="saveContract"
+            :render-interface="bootstrapComponents"
         />
     </b-modal>
 </template>
@@ -27,7 +28,7 @@ import {
     getContractEntryJsonSchema,
     getContractEntryUiSchema,
 } from '@/formSchemas/ContractEntry';
-import { type SubmitOptions, VueJsonForm } from '@educorvi/vue-json-form';
+import { bootstrapComponents, type SubmitOptions, VueJsonForm } from '@educorvi/vue-json-form';
 import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 

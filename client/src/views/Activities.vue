@@ -60,10 +60,13 @@ onMounted(async () => {
     }
     await nextTick();
     const { action = '', taskID = '' } = route.query;
+    if (!action) {
+        return;
+    }
     if (action === 'createTask' && taskID && !Array.isArray(taskID)) {
         entryModal.value?.setTask(taskID);
         showModal();
     }
-    router.replace('/activities');
+    await router.replace('/');
 });
 </script>
