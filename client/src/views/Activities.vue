@@ -67,6 +67,7 @@ onMounted(async () => {
         entryModal.value?.setTask(taskID);
         showModal();
     }
-    await router.replace('/');
+    // Remove query
+    await router.replace({ path: route.path, query: {} });
 });
 </script>
