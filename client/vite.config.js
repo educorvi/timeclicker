@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url';
-
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -8,7 +7,6 @@ import { BootstrapVueNextResolver } from 'bootstrap-vue-next/resolvers';
 import url from '@rollup/plugin-url';
 import Icons from 'unplugin-icons/vite';
 import IconsResolve from 'unplugin-icons/resolver';
-
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {

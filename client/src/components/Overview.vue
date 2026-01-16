@@ -25,72 +25,112 @@
 
     <div v-if="loaded">
         <b-container fluid id="overview_container">
-            <b-row align-v="stretch" id="row" align-h="start">
-                <b-col v-if="loaded && activities.length === 0">
-                    <b-card class="activity-card text-center">
-                        {{ t('no_entries') }}
-                    </b-card>
-                </b-col>
-                <b-col
-                    v-for="activity in activities"
-                    :key="activity.id"
-                    class="mb-4"
-                >
-                    <b-card no-body class="activity-card">
-                        <b-card-body>
-                            <h5 class="mb-0">
-                                {{
-                                    activity.from
-                                        ? d(activity.from, 'long')
-                                        : ''
-                                }}
-                                -
-                                {{ activity.to ? d(activity.to, 'time') : '' }}
-                            </h5>
-                            <p class="mb-2">
-                                {{
-                                    getDurationOrDash(
-                                        activity.from,
-                                        activity.to,
-                                        activity.breakMins * 60 * 1000,
-                                    )
-                                }}
-                                <span
-                                    v-if="activity.breakMins"
-                                    class="text-muted"
-                                >
-                                    (+{{
-                                        getHumanizedDuration(
-                                            activity.breakMins * 60 * 1000,
-                                            ['m'],
-                                        )
-                                    }}
-                                    {{ t('break') }})
-                                </span>
-                            </p>
-                            <p class="mb-0 text-muted">
-                                {{ activity.task.title }}
-                            </p>
-                        </b-card-body>
-                        <b-card-footer>
-                            <b-button-group class="mt-2 mb-2 w-100">
-                                <b-button
-                                    class="w-50"
-                                    variant="outline-secondary"
-                                    @click="editActivity(activity)"
-                                >{{ t('edit') }}
-                                </b-button>
-                                <b-button
-                                    class="w-50"
-                                    variant="outline-danger"
-                                    @click="askToDeleteActivity(activity)"
-                                >{{ t('delete') }}
-                                </b-button>
-                            </b-button-group>
-                        </b-card-footer>
-                    </b-card>
-                </b-col>
-            </b-row>
+            <BTable
+                striped
+                hover
+                :items="activities"
+                :fields="tableFields"
+                responsive="sm">
+                <template #cell(task)="data">
+                    {{ data.item.task.title }}
+                </template>
+                <template #cell(date)="data">
+                    {{ data.item.from ? d(data.item.from, 'short') : '' }}
+                </template>
+                <template #cell(from)="data">
+                    {{ data.item.from ? d(data.item.from, 'time') : '' }}
+                </template>
+                <template #cell(to)="data">
+                    {{ data.item.to ? d(data.item.to, 'time') : '' }}
+                </template>
+                <template #cell(duration)="data">
+                    {{ getDurationOrDash(data.item.from, data.item.to) }}
+                </template>
+                <template #cell(edit)="data">
+                    <b-button-group class="mt-2 mb-2 w-100">
+                        <b-button
+                            class="w-50"
+                            variant="outline-secondary"
+                            @click="editActivity(data.item)"
+                        >
+                            <IBiPencil :aria-label="t('edit')" />
+                        </b-button>
+                        <b-button
+                            class="w-50"
+                            variant="outline-danger"
+                            @click="askToDeleteActivity(data.item)"
+                        >
+                            <IBiTrash3 :aria-label="t('delete')" />
+                        </b-button>
+                    </b-button-group>
+                </template>
+            </BTable>
+            <!--            <b-row align-v="stretch" id="row" align-h="start">-->
+            <!--                <b-col v-if="loaded && activities.length === 0">-->
+            <!--                    <b-card class="activity-card text-center">-->
+            <!--                        {{ t('no_entries') }}-->
+            <!--                    </b-card>-->
+            <!--                </b-col>-->
+            <!--                <b-col-->
+            <!--                    v-for="activity in activities"-->
+            <!--                    :key="activity.id"-->
+            <!--                    class="mb-4"-->
+            <!--                >-->
+            <!--                    <b-card no-body class="activity-card">-->
+            <!--                        <b-card-body>-->
+            <!--                            <h5 class="mb-0">-->
+            <!--                                {{-->
+            <!--                                    activity.from-->
+            <!--                                        ? d(activity.from, 'long')-->
+            <!--                                        : ''-->
+            <!--                                }}-->
+            <!--                                - -->
+            <!--                                {{ activity.to ? d(activity.to, 'time') : '' }}-->
+            <!--                            </h5>-->
+            <!--                            <p class="mb-2">-->
+            <!--                                {{-->
+            <!--                                    getDurationOrDash(-->
+            <!--                                        activity.from,-->
+            <!--                                        activity.to,-->
+            <!--                                        activity.breakMins * 60 * 1000,-->
+            <!--                                    )-->
+            <!--                                }}-->
+            <!--                                <span-->
+            <!--                                    v-if="activity.breakMins"-->
+            <!--                                    class="text-muted"-->
+            <!--                                >-->
+            <!--                                    (+{{-->
+            <!--                                        getHumanizedDuration(-->
+            <!--                                            activity.breakMins * 60 * 1000,-->
+            <!--                                            ['m'],-->
+            <!--                                        )-->
+            <!--                                    }}-->
+            <!--                                    {{ t('break') }})-->
+            <!--                                </span>-->
+            <!--                            </p>-->
+            <!--                            <p class="mb-0 text-muted">-->
+            <!--                                {{ activity.task.title }}-->
+            <!--                            </p>-->
+            <!--                        </b-card-body>-->
+            <!--                        <b-card-footer>-->
+            <!--                            <b-button-group class="mt-2 mb-2 w-100">-->
+            <!--                                <b-button-->
+            <!--                                    class="w-50"-->
+            <!--                                    variant="outline-secondary"-->
+            <!--                                    @click="editActivity(activity)"-->
+            <!--                                >{{ t('edit') }}-->
+            <!--                                </b-button>-->
+            <!--                                <b-button-->
+            <!--                                    class="w-50"-->
+            <!--                                    variant="outline-danger"-->
+            <!--                                    @click="askToDeleteActivity(activity)"-->
+            <!--                                >{{ t('delete') }}-->
+            <!--                                </b-button>-->
+            <!--                            </b-button-group>-->
+            <!--                        </b-card-footer>-->
+            <!--                    </b-card>-->
+            <!--                </b-col>-->
+            <!--            </b-row>-->
         </b-container>
 
         <entry-editor
@@ -126,7 +166,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
-import type { BModal } from 'bootstrap-vue-next';
+import type { BModal, TableFieldRaw } from 'bootstrap-vue-next';
 
 const props = defineProps<{ tasks: Array<Task> }>();
 
@@ -145,6 +185,21 @@ const monthOptions = getMonthOptions(t);
 
 const month = ref(new Date().getMonth() + 1);
 const year = ref(new Date().getFullYear());
+
+const tableFields: TableFieldRaw<Activity>[] = [
+    'date',
+    {
+        key: 'from',
+        sortable: true,
+    },
+    {
+        key: 'to',
+        sortable: true,
+    },
+    'duration',
+    'task',
+    'edit',
+];
 
 const breaks = computed(() => {
     return activities.value.reduce((prev: number, curr: Activity) => {
