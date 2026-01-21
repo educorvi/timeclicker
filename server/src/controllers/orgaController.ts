@@ -14,12 +14,8 @@ import { Any, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 
 
 function checkOrgaStatus(req: express.Request): void {
-    const tokStr = req.rawHeaders[req.rawHeaders.indexOf('token') + 1];
-    if (!tokStr || req.rawHeaders.indexOf('token') === -1) {
-        throw new Error('could not read token');
-    }
-    const token = JSON.parse(tokStr);
-    if (!token.isOrga) {
+   const {isOrga} = req.authToken;
+    if (!isOrga) {
         throw new UnauthorizedError(
             'User does not have access to organizational information',
         );
