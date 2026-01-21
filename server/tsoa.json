@@ -3,7 +3,7 @@
     "noImplicitAdditionalProperties": "silently-remove-extras",
     "controllerPathGlobs": ["src/**/*Controller.ts"],
     "spec": {
-        "outputDirectory": "build",
+        "outputDirectory": "src/generated",
         "specVersion": 3,
         "securityDefinitions": {
             "educorvi_sso": {
@@ -22,7 +22,7 @@
         "basePath": "/api"
     },
     "routes": {
-        "routesDir": "build",
+        "routesDir": "src/generated",
         "authenticationModule": "./src/authentication.ts",
         "basePath": "/api"
     }

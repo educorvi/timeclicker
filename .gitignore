@@ -17,3 +17,5 @@ package-lock.json
 .rollup.cache
 */dist
 */lib-dist
+tsconfig.tsbuildinfo
+src/generated
