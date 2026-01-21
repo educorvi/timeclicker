@@ -11,7 +11,6 @@ import swaggerDocument from './generated/swagger.json';
 import cors from 'cors';
 import { errorHandler } from './errorHandler';
 import path from 'path';
-import compression from 'compression';
 export type * from './types';
 
 
@@ -33,7 +32,6 @@ const rateLimiter = rateLimit({
 });
 
 app.use(rateLimiter);
-app.use(compression());
 app.use(cors());
 app.use(
     urlencoded({
