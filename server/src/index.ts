@@ -12,6 +12,7 @@ import cors from 'cors';
 import { errorHandler } from './errorHandler';
 import path from 'path';
 import compression from 'compression';
+export type * from './types';
 
 
 const projectRoot = path

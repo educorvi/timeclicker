@@ -18,4 +18,4 @@ package-lock.json
 */dist
 */lib-dist
 tsconfig.tsbuildinfo
-src/generated
+server/src/generated
