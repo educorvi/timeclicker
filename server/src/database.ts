@@ -119,7 +119,12 @@ export default class Database {
 
         await this.AppDataSource.initialize();
         logger.info('Run migrations...');
-        await this.AppDataSource.runMigrations();
+        const runMigrations = await this.AppDataSource.runMigrations();
+        if (runMigrations.length > 0) {
+            logger.info(`Migrations applied: ${runMigrations.map(m => m.name).join(', ')}`);
+        } else {
+            logger.info('No migrations applied');
+        }
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);
