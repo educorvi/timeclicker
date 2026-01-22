@@ -1,5 +1,10 @@
 <template>
-    <div id="swaggerUIDiv">{{ t('load_swaggerui') }}</div>
+    <div id="swaggerUIDiv" class="w-100">
+        <div class="mx-auto mt-4 d-flex flex-column align-items-center" style="width: fit-content">
+            <custom-spinner variant="primary"/>
+            <p class="text-muted">{{ t('load_swaggerui') }}</p>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -9,6 +14,7 @@ import { useI18n } from 'vue-i18n';
 import type { SwaggerUIOptions } from 'swagger-ui';
 import type SwaggerUI from 'swagger-ui';
 import { useKeycloakStore } from '@/stores/keycloak';
+import customSpinner from '@/components/CustomSpinner.vue';
 
 const { t } = useI18n();
 
