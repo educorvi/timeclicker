@@ -1,3 +1,20 @@
+# [timeclicker_client-v3.0.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.1.1...timeclicker_client-v3.0.0) (2026-01-22)
+
+
+### Bug Fixes
+
+* update dependencies ([3678fbd](https://github.com/educorvi/timeclicker/commit/3678fbde880045ee6c7def206b09b0d4b3c71bfd))
+
+
+### Features
+
+* remove working hours from client ([550f85c](https://github.com/educorvi/timeclicker/commit/550f85c897c39462e77d6f15e7d2f87ecfb9a01f))
+
+
+### BREAKING CHANGES
+
+* Removed working hours
+
 # [timeclicker_client-v2.1.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.1.0...timeclicker_client-v2.1.1) (2025-06-04)
 
 
