@@ -29,6 +29,8 @@ const rateLimiter = rateLimit({
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
+app.set('trust proxy', true);
+
 app.use(rateLimiter);
 app.use(cors());
 app.use(
