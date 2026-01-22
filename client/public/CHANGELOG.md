@@ -1,3 +1,10 @@
+# [timeclicker_client-v3.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.0.0...timeclicker_client-v3.0.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* improve license view ([597295e](https://github.com/educorvi/timeclicker/commit/597295ecad342b3ac0b6263fd0271849cee09361))
+
 # [timeclicker_client-v3.0.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v2.1.1...timeclicker_client-v3.0.0) (2026-01-22)
 
 

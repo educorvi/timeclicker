@@ -1,3 +1,10 @@
+# [timeclicker_server-v3.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v3.0.0...timeclicker_server-v3.0.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* enable proxy trust in Express app ([8c7e9f0](https://github.com/educorvi/timeclicker/commit/8c7e9f01a77e78164d220e2dd02ebc99c9e1fcdf))
+
 # [timeclicker_server-v3.0.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v2.0.5...timeclicker_server-v3.0.0) (2026-01-22)
 
 
