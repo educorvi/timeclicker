@@ -13,3 +13,4 @@
 dev-dist
 .tsbuildinfo
 Dockerfile
+**/*.tsbuildinfo
