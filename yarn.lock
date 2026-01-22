@@ -13951,7 +13951,7 @@ __metadata:
     typeorm-extension: ^3.7.3
     typescript: ^5.9.3
   bin:
-    timeclicker_server: dist/src/index.js
+    timeclicker_server: dist/index.js
   languageName: unknown
   linkType: soft
 
