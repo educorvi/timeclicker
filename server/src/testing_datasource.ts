@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { User, Activity, Task, ContractData, WorkingHours } from './classes';
+import { User, Activity, Task} from './classes';
 
 export const AppDataSource = new DataSource({
     type: 'postgres',
@@ -7,5 +7,5 @@ export const AppDataSource = new DataSource({
     username: 'timeclicker',
     password: 'superdupertest',
     database: 'timeclicker',
-    entities: [User, Activity, Task, ContractData, WorkingHours],
+    entities: [User, Activity, Task],
 });

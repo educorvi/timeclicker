@@ -5,18 +5,8 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: () => import('../views/Home.vue'),
-        },
-        {
-            path: '/activities',
             name: 'activities',
             component: () => import('../views/Activities.vue'),
-        },
-        {
-            path: '/hours',
-            name: 'hours',
-            component: () => import('../views/WorkingHours.vue'),
         },
         {
             path: '/orga',

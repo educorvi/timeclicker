@@ -19,11 +19,7 @@ import { User } from '../classes';
 import { LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 
 export async function getOrCreateUser(req: express.Request): Promise<User> {
-    const tokStr = req.rawHeaders[req.rawHeaders.indexOf('token') + 1];
-    if (!tokStr || req.rawHeaders.indexOf('token') === -1) {
-        throw new Error('could not read token');
-    }
-    const token = JSON.parse(tokStr);
+    const { token } = req.authToken;
     let user: User | null = await db.getUser(token.content.sub);
     if (!user) {
         user = new User();
@@ -57,7 +53,7 @@ export class ActivityController extends Controller {
     public async getActivities(
         @Request() req: express.Request,
         @Query() from?: Date,
-        @Query() to?: Date
+        @Query() to?: Date,
     ): Promise<Array<Activity>> {
         const user = await getOrCreateUser(req);
         return db.getActivities({
@@ -80,7 +76,7 @@ export class ActivityController extends Controller {
     @Response(404, 'Not found')
     public async deleteActivity(
         @Request() req: express.Request,
-        @Path() activityId: string
+        @Path() activityId: string,
     ) {
         const user = await getOrCreateUser(req);
         const activity = await db.getActivity(activityId);
@@ -105,7 +101,7 @@ export class ActivityController extends Controller {
     @Post()
     public async saveActivity(
         @Body() requestBody: saveActivityParams,
-        @Request() req: express.Request
+        @Request() req: express.Request,
     ) {
         const user = await getOrCreateUser(req);
         const task = await db.getTask(requestBody.taskId);

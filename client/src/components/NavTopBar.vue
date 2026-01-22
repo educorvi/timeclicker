@@ -9,17 +9,7 @@
             <BNavbarNav>
                 <li class="nav-item">
                     <RouterLink class="nav-link" to="/"
-                        >{{ t('dashboard') }}
-                    </RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink class="nav-link" to="/activities"
                         >{{ t('activity', 2) }}
-                    </RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink class="nav-link" to="/hours"
-                        >{{ t('working_hour', 2) }}
                     </RouterLink>
                 </li>
                 <li class="nav-item" v-if="userdata && keycloak && keycloak.hasRealmRole('orga')">

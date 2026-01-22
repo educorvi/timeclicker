@@ -4,7 +4,7 @@ import type { FindManyOptions } from 'typeorm';
 import { createDatabase } from 'typeorm-extension';
 import type { Logger } from 'typeorm';
 import { logger } from './globals';
-import { User, Activity, Task, ContractData, WorkingHours } from './classes';
+import { User, Activity, Task} from './classes';
 
 class TypeOrmLogger implements Logger {
     log(
@@ -82,8 +82,6 @@ export default class Database {
     private userRepository: Repository<User>;
     private tasksRepository: Repository<Task>;
     private activityRepository: Repository<Activity>;
-    private hoursRepository: Repository<WorkingHours>;
-    private contractDataRepository: Repository<ContractData>;
 
     constructor(
         username: string,
@@ -107,7 +105,7 @@ export default class Database {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User, Activity, Task, ContractData, WorkingHours],
+            entities: [User, Activity, Task],
             migrations: [__dirname + '/../migrations/*.js'],
             migrationsTransactionMode: 'all',
             logging: 'all',
@@ -121,13 +119,15 @@ export default class Database {
 
         await this.AppDataSource.initialize();
         logger.info('Run migrations...');
-        await this.AppDataSource.runMigrations();
+        const runMigrations = await this.AppDataSource.runMigrations();
+        if (runMigrations.length > 0) {
+            logger.info(`Migrations applied: ${runMigrations.map(m => m.name).join(', ')}`);
+        } else {
+            logger.info('No migrations applied');
+        }
         this.userRepository = this.AppDataSource.getRepository(User);
         this.tasksRepository = this.AppDataSource.getRepository(Task);
         this.activityRepository = this.AppDataSource.getRepository(Activity);
-        this.hoursRepository = this.AppDataSource.getRepository(WorkingHours);
-        this.contractDataRepository =
-            this.AppDataSource.getRepository(ContractData);
     }
 
     async getUser(id: string): Promise<User | null> {
@@ -207,49 +207,5 @@ export default class Database {
 
     async deleteActivity(activity: Activity) {
         await this.activityRepository.delete({ id: activity.id });
-    }
-
-    async getHours(options?: FindManyOptions<WorkingHours>) {
-        return this.hoursRepository.find(options);
-    }
-
-    async getHoursById(id: string): Promise<WorkingHours | null> {
-        return await this.hoursRepository.findOne({
-            where: { id },
-            relations: {
-                user: true,
-            },
-        });
-    }
-
-    async deleteHour(hours: WorkingHours) {
-        await this.hoursRepository.delete({ id: hours.id });
-    }
-
-    async saveHour(hours: PartialBy<WorkingHours, 'id'>) {
-        let workingHour = new WorkingHours();
-        workingHour = {
-            ...workingHour,
-            ...hours,
-        };
-        await this.hoursRepository.save(workingHour);
-    }
-
-    async getContractData(options?: FindManyOptions<ContractData>) {
-        return this.contractDataRepository.find(options);
-    }
-
-    async getContractDataById(id: string): Promise<ContractData | null> {
-        return await this.contractDataRepository.findOne({
-            where: { id },
-        });
-    }
-
-    async saveContractData(requestBody: PartialBy<ContractData, 'id'>) {
-        await this.contractDataRepository.save(requestBody);
-    }
-
-    async deleteContractData(contractData: ContractData) {
-        await this.contractDataRepository.delete({ id: contractData.id });
     }
 }

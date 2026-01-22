@@ -30,8 +30,7 @@ export class UnauthorizedError extends Error {
 export function expressAuthentication(
     request: express.Request,
     securityName: string,
-    // @ts-ignore
-    scopes?: string[]
+    _?: string[]
 ): Promise<any> {
     return new Promise(async (resolve, reject) => {
         if (securityName === 'educorvi_sso') {
@@ -54,17 +53,7 @@ export function expressAuthentication(
             if (token.isExpired()) {
                 reject(new UnauthorizedError('Token has expired'));
             }
-            if (request.rawHeaders.indexOf('token') !== -1) {
-                reject(
-                    new UnauthorizedError(
-                        'User has set disallowed Header "token"'
-                    )
-                );
-            }
-            request.rawHeaders.push(
-                'token',
-                JSON.stringify({ ...token, isOrga: token.hasRealmRole('orga') })
-            );
+            request.authToken = { token, isOrga: token.hasRealmRole('orga') }
             resolve(null);
         } else {
             reject();

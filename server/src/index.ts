@@ -5,13 +5,12 @@ import rateLimit from 'express-rate-limit';
 import express, { json, urlencoded, static as staticContent } from 'express';
 import axios from 'axios';
 import { db, logger } from './globals';
-import { RegisterRoutes } from '../build/routes';
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from '../build/swagger.json';
+import { RegisterRoutes } from './generated/routes';
+import swaggerDocument from './generated/swagger.json';
 import cors from 'cors';
 import { errorHandler } from './errorHandler';
 import path from 'path';
-import compression from 'compression';
+export type * from './types';
 
 
 const projectRoot = path
@@ -23,7 +22,6 @@ const vuePath = path.join(projectRoot, 'client', 'dist');
 
 const app = express();
 
-// @ts-ignore
 const rateLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 1000, // Limit each IP to 1000 requests per `window`
@@ -32,7 +30,6 @@ const rateLimiter = rateLimit({
 });
 
 app.use(rateLimiter);
-app.use(compression());
 app.use(cors());
 app.use(
     urlencoded({
@@ -45,28 +42,18 @@ RegisterRoutes(app);
 app.get(
     '/api/swagger.json',
     (_req, res) => {
-        res.sendFile(
-            path.join(path.resolve(__dirname), '..', 'build', 'swagger.json')
-        );
+        res.send(swaggerDocument);
     },
     (e) => {
         if (e) logger.error(e);
     }
 );
 
-app.use(
-    '/api',
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerDocument, {
-        swaggerOptions: { persistAuthorization: true },
-    })
-);
-
 app.use(staticContent(vuePath));
 
 app.use(errorHandler);
 
-app.get('*', (_req, res) => {
+app.get(/.*/, (_req, res) => {
     res.sendFile(path.join(vuePath, 'index.html'), (e) => {
         if (e) logger.error(e);
     });
