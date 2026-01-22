@@ -67,7 +67,9 @@
             <hr />
             <b>License text:</b><br />
             <div v-if="licenseTexts.get(license.name)">
-                {{ licenseTexts.get(license.name) }}
+               <pre>
+                    {{ licenseTexts.get(license.name) }}
+               </pre>
             </div>
             <div v-else-if="licenseTexts.get(license.name) === null">
                 {{t('not_found')}}
