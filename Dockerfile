@@ -31,4 +31,4 @@ WORKDIR /app/server
 RUN chown -R node:node /app
 USER node
 
-CMD ["node", "/app/server/dist/src/index.js"]
+CMD ["node", "/app/server/dist/index.js"]
