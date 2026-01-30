@@ -4,14 +4,14 @@ import type { FindManyOptions } from 'typeorm';
 import { createDatabase } from 'typeorm-extension';
 import type { Logger } from 'typeorm';
 import { logger } from './globals';
-import { User, Activity, Task} from './classes';
+import { User, Activity, Task } from './classes';
 
 class TypeOrmLogger implements Logger {
     log(
         level: 'log' | 'info' | 'warn',
         message: any,
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         switch (level) {
             case 'log':
@@ -36,7 +36,7 @@ class TypeOrmLogger implements Logger {
         query: string,
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         logger.debug(query, parameters);
     }
@@ -47,7 +47,7 @@ class TypeOrmLogger implements Logger {
         query: string,
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         logger.error(error, query, parameters);
     }
@@ -59,7 +59,7 @@ class TypeOrmLogger implements Logger {
         // @ts-ignore
         parameters?: any[],
         // @ts-ignore
-        queryRunner?: QueryRunner
+        queryRunner?: QueryRunner,
     ): any {
         logger.debug('Slow query: ' + query + `\n(${time}ms)`);
     }
@@ -88,7 +88,7 @@ export default class Database {
         password: string,
         database: string = 'timeclicker',
         host: string = 'localhost',
-        port: number = 5432
+        port: number = 5432,
     ) {
         this.host = host;
         this.port = port;
@@ -106,7 +106,7 @@ export default class Database {
             password: this.password,
             database: this.database,
             entities: [User, Activity, Task],
-            migrations: [__dirname + '/../migrations/*.js'],
+            migrations: [__dirname + '/migrations/*.js', __dirname + '/migrations/**/!(*.d).ts'],
             migrationsTransactionMode: 'all',
             logging: 'all',
             logger: new TypeOrmLogger(),
@@ -207,5 +207,23 @@ export default class Database {
 
     async deleteActivity(activity: Activity) {
         await this.activityRepository.delete({ id: activity.id });
+    }
+
+    async getHoursPerTask(user: User) {
+        return await this.activityRepository
+            .createQueryBuilder('activity')
+            .select('task.id', 'taskId')
+            .addSelect('task.title', 'taskTitle')
+            .addSelect(
+                'SUM(EXTRACT(EPOCH FROM (activity.to - activity.from)) / 3600 - activity.breakMins / 60)',
+                'hours',
+            )
+            .innerJoin('activity.task', 'task')
+            .where('activity.userId = :userId', { userId: user.id })
+            .andWhere('activity.from IS NOT NULL')
+            .andWhere('activity.to IS NOT NULL')
+            .groupBy('task.id')
+            .addGroupBy('task.title')
+            .getRawMany<{ taskId: string; taskTitle: string; hours: number }>();
     }
 }
