@@ -5,7 +5,7 @@ import {
     Security,
     Request,
     Get,
-    Query,
+    Query, Tags,
 } from 'tsoa';
 import type express from 'express';
 import { UnauthorizedError } from '../authentication';
@@ -23,6 +23,7 @@ function checkOrgaStatus(req: express.Request): void {
 }
 
 @Route('orga')
+@Tags("Management Endpoints")
 @Security('educorvi_sso')
 @Response(401, 'Unauthorized')
 export class OrgaController extends Controller {

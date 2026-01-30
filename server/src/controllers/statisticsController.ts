@@ -1,9 +1,10 @@
-import { Controller, Get, Request, Response, Route, Security } from 'tsoa';
+import { Controller, Get, Request, Response, Route, Security, Tags } from 'tsoa';
 import { getOrCreateUser } from './activityController';
 import type express from 'express';
 import { db } from '../globals';
 
 @Route('statistics')
+@Tags('Statistics')
 @Security('educorvi_sso')
 @Response(401, 'Unauthorized')
 export class StatisticsController extends Controller {
