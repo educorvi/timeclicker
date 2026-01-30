@@ -226,4 +226,28 @@ export default class Database {
             .addGroupBy('task.title')
             .getRawMany<{ taskId: string; taskTitle: string; hours: number }>();
     }
+
+    async getTimeHeatmap(user: User) {
+        const oneYearAgo = new Date();
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+        return await this.activityRepository
+            .createQueryBuilder('activity')
+            .select('DATE(activity.from)', 'date')
+            .addSelect(
+                'SUM(EXTRACT(EPOCH FROM (activity.to - activity.from)) / 3600 - activity.breakMins / 60)',
+                'totalHours',
+            )
+            .addSelect('COUNT(*)', 'activityCount')
+            .where('activity.userId = :userId', { userId: user.id })
+            .andWhere('activity.from IS NOT NULL')
+            .andWhere('activity.to IS NOT NULL')
+            .andWhere('activity.from >= :oneYearAgo', { oneYearAgo })
+            .groupBy('DATE(activity.from)')
+            .orderBy('DATE(activity.from)', 'ASC')
+            .getRawMany<{
+                date: string;
+                totalHours: number;
+                activityCount: number;
+            }>();
+    }
 }
