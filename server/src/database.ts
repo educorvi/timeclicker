@@ -224,7 +224,7 @@ export default class Database {
             .andWhere('activity.to IS NOT NULL')
             .groupBy('task.id')
             .addGroupBy('task.title')
-            .getRawMany<{ taskId: string; taskTitle: string; hours: number }>();
+            .getRawMany<{ taskId: string; taskTitle: string; hours: string }>();
     }
 
     async getTimeHeatmap(user: User) {
@@ -246,8 +246,8 @@ export default class Database {
             .orderBy('DATE(activity.from)', 'ASC')
             .getRawMany<{
                 date: string;
-                totalHours: number;
-                activityCount: number;
+                totalHours: string;
+                activityCount: string;
             }>();
     }
 }
