@@ -36,6 +36,8 @@ export const en = {
     load_swaggerui: 'Loading SwaggerUI...',
 
     dashboard: 'Dashboard',
+    statistic: 'Statistic | Statistics',
+
 
     manage_activities: 'Manage Activities',
     manage_working_hours: 'Manage Working Hours',
@@ -57,6 +59,7 @@ export const en = {
         token_refresh: 'Failed to refresh token. Please login again...',
         auth_endpoint:
             'Information about the authentication endpoint could not be loaded. Please reload the page',
+        data_failed: 'Data could not be loaded!'
     },
 
     error: 'Error | Errors',
@@ -119,4 +122,7 @@ export const en = {
     start_year_desc: 'Year in which the contract starts',
 
     not_found: 'Not found',
+    statistics: 'Statistics',
+    hours_per_task: 'Hours per Task',
+    activity_over_the_last_year: 'Activity over the last year',
 };

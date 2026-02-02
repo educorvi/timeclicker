@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@educorvi/vue-json-form": "3.0.0",
+    "@observablehq/plot": "^0.6.17",
     "@tsconfig/node-lts": "^22.0.4",
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
     "bootstrap-vue-next": "^0.42.0",
     "bootswatch": "^5.3.8",
+    "d3": "^7.9.0",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.33.2",
     "keycloak-js": "^26.2.2",
