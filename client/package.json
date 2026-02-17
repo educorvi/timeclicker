@@ -47,7 +47,7 @@
     "@types/swagger-ui": "^3.52.4",
     "@types/swagger-ui-dist": "^3.30.6",
     "@vitejs/plugin-vue": "^4.6.2",
-    "@vue/compiler-sfc": "^3.5.26",
+    "@vue/compiler-sfc": "^3.5.28",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.4.0",
@@ -61,11 +61,11 @@
     "semantic-release": "^24.2.9",
     "semantic-release-monorepo": "^8.0.2",
     "semantic-release-yarn": "^3.0.2",
-    "typescript": "~5.4.5",
+    "typescript": "~5.9.3",
     "unplugin-icons": "^23.0.1",
     "unplugin-vue-components": "^31.0.0",
     "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.2.0",
-    "vue-tsc": "~3.2.2"
+    "vue-tsc": "~3.2.4"
   }
 }
