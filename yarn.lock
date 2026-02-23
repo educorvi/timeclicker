@@ -1187,7 +1187,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@educorvi/vue-json-form@npm:^3.0.0":
+"@educorvi/vue-json-form@npm:3.0.0":
   version: 3.0.0
   resolution: "@educorvi/vue-json-form@npm:3.0.0"
   dependencies:
@@ -14283,7 +14283,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "timeclicker_client@workspace:client"
   dependencies:
-    "@educorvi/vue-json-form": ^3.0.0
+    "@educorvi/vue-json-form": 3.0.0
     "@iconify-json/bi": ^1.2.7
     "@observablehq/plot": ^0.6.17
     "@rollup/plugin-url": ^8.0.2
