@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
 import Components from 'unplugin-vue-components/vite';
@@ -11,6 +11,21 @@ import IconsResolve from 'unplugin-icons/resolver';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    test: {
+        globals: true,
+        environment: 'happy-dom',
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'json', 'html'],
+            exclude: [
+                'node_modules/**',
+                'dist/**',
+                '**/*.d.ts',
+                '**/*.config.*',
+                'src/main.ts',
+            ],
+        },
+    },
     build: {
         rollupOptions: {
             output: {
