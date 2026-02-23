@@ -119,4 +119,6 @@ export const en = {
     start_year_desc: 'Year in which the contract starts',
 
     not_found: 'Not found',
+
+    press_enter_to_select: 'Press enter to select',
 };

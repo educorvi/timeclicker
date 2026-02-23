@@ -120,4 +120,6 @@ export const de = {
     start_year_desc: 'Das Jahr, in dem der Vertrag beginnt',
 
     not_found: 'Nicht gefunden',
+
+    press_enter_to_select: 'Mit Enter auswählen',
 };

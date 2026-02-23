@@ -1187,7 +1187,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@educorvi/vue-json-form@npm:3.0.0":
+"@educorvi/vue-json-form@npm:^3.0.0":
   version: 3.0.0
   resolution: "@educorvi/vue-json-form@npm:3.0.0"
   dependencies:
@@ -5176,7 +5176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap-vue-next@npm:0.42.0, bootstrap-vue-next@npm:^0.42.0":
+"bootstrap-vue-next@npm:0.42.0":
   version: 0.42.0
   resolution: "bootstrap-vue-next@npm:0.42.0"
   peerDependencies:
@@ -5192,6 +5192,25 @@ __metadata:
     vue-router:
       optional: true
   checksum: a538947c406ed2c48d750d3449ba5edd53bd6f110ddd8cf078faed4abc12caef594b56874e8b847df181004acb40a93bf3777053a137624c217c0ca94fd8feeb
+  languageName: node
+  linkType: hard
+
+"bootstrap-vue-next@npm:^0.43.6":
+  version: 0.43.6
+  resolution: "bootstrap-vue-next@npm:0.43.6"
+  peerDependencies:
+    "@floating-ui/vue": "*"
+    "@vueuse/core": "*"
+    vue: ^3.5.13
+    vue-router: "*"
+  peerDependenciesMeta:
+    "@floating-ui/vue":
+      optional: true
+    "@vueuse/core":
+      optional: true
+    vue-router:
+      optional: true
+  checksum: 8b98f58bd42e543ee16db18bcd0cd8297a68e6bf6abcbd39839cfb562467bbf33ce6535637adb460e91baaa6e58a1552b9d6443277716ffae1478ef993a2617c
   languageName: node
   linkType: hard
 
@@ -13875,7 +13894,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "timeclicker_client@workspace:client"
   dependencies:
-    "@educorvi/vue-json-form": 3.0.0
+    "@educorvi/vue-json-form": ^3.0.0
     "@iconify-json/bi": ^1.2.7
     "@rollup/plugin-url": ^8.0.2
     "@rushstack/eslint-patch": ^1.15.0
@@ -13897,7 +13916,7 @@ __metadata:
     "@vue/tsconfig": ^0.4.0
     axios: ^1.13.5
     bootstrap: ^5.3.8
-    bootstrap-vue-next: ^0.42.0
+    bootstrap-vue-next: ^0.43.6
     bootswatch: ^5.3.8
     eslint: ^8.57.1
     eslint-plugin-vue: ^9.33.0
@@ -13924,6 +13943,7 @@ __metadata:
     vite-plugin-pwa: ^1.2.0
     vue: ^3.5.27
     vue-i18n: ^11.2.8
+    vue-multiselect: ^3.4.0
     vue-router: ^4.6.4
     vue-tsc: ~3.2.2
   languageName: unknown
@@ -14982,6 +15002,13 @@ __metadata:
   peerDependencies:
     vue: ^3.0.0
   checksum: 1e4432491a1c02ac11391d4ae2c8d802a4035b4b779d0d59bfd92881e5f135ee092e4b36cb2b74060af4674a1dabba6b2c9c485baf341f289cb368931e7ce17b
+  languageName: node
+  linkType: hard
+
+"vue-multiselect@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "vue-multiselect@npm:3.4.0"
+  checksum: 4d073dd488be7b6c9b53d7416aa7c014af83357219299e95bec367014ae1a3e2158248a9ef730c9fb58c701eca60517d55de68343c48194dc722fd91bd83dd76
   languageName: node
   linkType: hard
 

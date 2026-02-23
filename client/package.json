@@ -14,11 +14,11 @@
     "generateIcons": "yarn dlx vue-pwa-asset-generator --no-manifest -a src/assets/appIcon.png -o public/icons -b \"#FFFFFF\""
   },
   "dependencies": {
-    "@educorvi/vue-json-form": "3.0.0",
+    "@educorvi/vue-json-form": "^3.0.0",
     "@tsconfig/node-lts": "^22.0.4",
     "axios": "^1.13.5",
     "bootstrap": "^5.3.8",
-    "bootstrap-vue-next": "^0.42.0",
+    "bootstrap-vue-next": "^0.43.6",
     "bootswatch": "^5.3.8",
     "file-saver": "^2.0.5",
     "humanize-duration": "^3.33.2",
@@ -30,6 +30,7 @@
     "timeclicker_server": "workspace:^",
     "vue": "^3.5.27",
     "vue-i18n": "^11.2.8",
+    "vue-multiselect": "^3.4.0",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
