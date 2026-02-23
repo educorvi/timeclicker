@@ -8,10 +8,16 @@
   "scripts": {
     "release": "yarn workspaces foreach --verbose run semantic-release -e semantic-release-monorepo",
     "build": "yarn workspaces foreach -Atvv run build",
-    "prettier": "prettier --write server && prettier --write client"
+    "prettier": "prettier --write server && prettier --write client",
+    "test": "yarn workspaces foreach -Atvv run test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report"
   },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "playwright": "^1.58.2",
     "prettier": "3.8.1"
   }
 }

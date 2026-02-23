@@ -19,3 +19,9 @@ package-lock.json
 */lib-dist
 tsconfig.tsbuildinfo
 server/src/generated
+# Test artifacts
+coverage
+playwright-report
+test-results
+.nyc_output
+*.lcov

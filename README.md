@@ -57,6 +57,68 @@ cd server
 node dist/src/index.js
 ```
 
+## Testing
+Timeclicker includes comprehensive test suites for both frontend and backend code.
+
+### Running Tests
+
+#### Unit Tests
+Run all unit tests (frontend and backend):
+```bash
+yarn test
+```
+
+Run backend tests only:
+```bash
+cd server
+yarn test
+```
+
+Run frontend tests only:
+```bash
+cd client
+yarn test
+```
+
+Run tests in watch mode:
+```bash
+cd server  # or cd client
+yarn test:watch
+```
+
+Run tests with coverage:
+```bash
+cd server  # or cd client
+yarn test:coverage
+```
+
+#### E2E Tests
+Run end-to-end tests with Playwright:
+```bash
+yarn test:e2e
+```
+
+Run E2E tests in UI mode:
+```bash
+yarn test:e2e:ui
+```
+
+View test report:
+```bash
+yarn test:e2e:report
+```
+
+### Test Structure
+- **Backend tests**: Located in `server/src/__tests__/`
+  - Unit tests for controllers, models, and utilities
+  - Uses Vitest for testing
+- **Frontend tests**: Located in `client/src/__tests__/`
+  - Unit tests for Vue components, stores, and utilities
+  - Uses Vitest and Vue Test Utils
+- **E2E tests**: Located in `e2e/`
+  - End-to-end tests using Playwright
+  - Tests navigation, API endpoints, and user workflows
+
 ## Other relevant information
 ### Create a link that opens the activity editor with a task already selected
 The link should have the following path:
