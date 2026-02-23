@@ -7145,21 +7145,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:^9.33.0":
-  version: 9.33.0
-  resolution: "eslint-plugin-vue@npm:9.33.0"
+"eslint-plugin-vue@npm:^10.8.0":
+  version: 10.8.0
+  resolution: "eslint-plugin-vue@npm:10.8.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
-    globals: ^13.24.0
     natural-compare: ^1.4.0
     nth-check: ^2.1.1
-    postcss-selector-parser: ^6.0.15
+    postcss-selector-parser: ^7.1.0
     semver: ^7.6.3
-    vue-eslint-parser: ^9.4.3
     xml-name-validator: ^4.0.0
   peerDependencies:
-    eslint: ^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
-  checksum: b0dbbbe234f24037f8b0684a9fa2d54eaa42c03bff973b301aefe56b755849fade4521efdca2795d63ef6b6514bbfeb212985c9e9306cf0c96548a27a3f8be81
+    "@stylistic/eslint-plugin": ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
+    "@typescript-eslint/parser": ^7.0.0 || ^8.0.0
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+    vue-eslint-parser: ^10.0.0
+  peerDependenciesMeta:
+    "@stylistic/eslint-plugin":
+      optional: true
+    "@typescript-eslint/parser":
+      optional: true
+  checksum: 78efb954532ef4eb21f8a7a2c8abbe652280a7d2f4f09969c4e63a55152707b1a3a128cd6721d1806a74760c85f8279d0a43d57eeabaa6900abe13336d1a2249
   languageName: node
   linkType: hard
 
@@ -8133,7 +8139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^13.19.0, globals@npm:^13.24.0":
+"globals@npm:^13.19.0":
   version: 13.24.0
   resolution: "globals@npm:13.24.0"
   dependencies:
@@ -11718,17 +11724,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.15":
-  version: 6.1.2
-  resolution: "postcss-selector-parser@npm:6.1.2"
-  dependencies:
-    cssesc: ^3.0.0
-    util-deprecate: ^1.0.2
-  checksum: ce9440fc42a5419d103f4c7c1847cb75488f3ac9cbe81093b408ee9701193a509f664b4d10a2b4d82c694ee7495e022f8f482d254f92b7ffd9ed9dea696c6f84
-  languageName: node
-  linkType: hard
-
-"postcss-selector-parser@npm:^7.0.0":
+"postcss-selector-parser@npm:^7.0.0, postcss-selector-parser@npm:^7.1.0":
   version: 7.1.1
   resolution: "postcss-selector-parser@npm:7.1.1"
   dependencies:
@@ -14310,7 +14306,7 @@ __metadata:
     bootswatch: ^5.3.8
     d3: ^7.9.0
     eslint: ^8.57.1
-    eslint-plugin-vue: ^9.33.0
+    eslint-plugin-vue: ^10.8.0
     file-saver: ^2.0.5
     humanize-duration: ^3.33.2
     keycloak-js: ^26.2.2
@@ -15366,7 +15362,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-eslint-parser@npm:^9.1.1, vue-eslint-parser@npm:^9.4.3":
+"vue-eslint-parser@npm:^9.1.1":
   version: 9.4.3
   resolution: "vue-eslint-parser@npm:9.4.3"
   dependencies:
