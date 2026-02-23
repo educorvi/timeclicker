@@ -151,7 +151,7 @@ const renderCharts = () => {
                 label: null
             },
             color: {
-                scheme: "Greens",
+                scheme: "Blues",
                 domain: [0, Math.max(...heatmapData.value.map(d => d.totalHours))],
                 label: t('hour', 2),
                 legend: true
