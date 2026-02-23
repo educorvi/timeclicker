@@ -67,7 +67,7 @@
             >{{ t('note')
                 }}{{
                     (
-                        tasks.filter((ta) => ta.id === newData.task)[0] || {
+                        tasks.filter((ta) => ta.id === newData.task?.value)[0] || {
                             note_mandatory: false,
                         }
                     ).note_mandatory
@@ -79,7 +79,7 @@
                 v-model="newData.note"
                 :required="
                     (
-                        tasks.filter((ta) => ta.id === newData.task)[0] || {
+                        tasks.filter((ta) => ta.id === newData.task?.value)[0] || {
                             note_mandatory: false,
                         }
                     ).note_mandatory
@@ -125,6 +125,17 @@ const { show } = useToastController();
 
 const errorStore = useErrorStore();
 
+type TaskOption = { value: string | null; text: string }
+function taskToTaskOption(task?: Task): TaskOption | null {
+    if (!task) {
+        return null;
+    }
+    return {
+        value: task.id,
+        text: task.title,
+    };
+}
+
 //Props
 const props = defineProps<{
     tasks: Array<Task>;
@@ -134,7 +145,7 @@ const props = defineProps<{
 
 //Data
 const newData = ref({
-    task: null as string | null,
+    task: null as TaskOption | null,
     date: '',
     from: '',
     to: '',
@@ -175,7 +186,7 @@ function initializeData() {
     if (!date) {
         date = (new Date()).toISOString().split('T')[0]
     }
-    newData.value.task = props.initialData?.task.id || null;
+    newData.value.task = taskToTaskOption(props.initialData?.task) || null;
     newData.value.date = date;
     newData.value.from = from;
     newData.value.to = to;
@@ -189,9 +200,7 @@ const visibility = ref(false);
 //Computed
 const taskOptions: ComputedRef<{ value: string | null; text: string }[]> =
     computed(() => {
-        const res = props.tasks.map((t) => {
-                return { value: t.id, text: t.title };
-            })
+        const res = props.tasks.map(taskToTaskOption).filter((t) => t !== null);
 
         // If initial data contains a task that is no longer active, add it to the dropdown
         if (
@@ -214,9 +223,9 @@ function setVisibility(v: boolean) {
 }
 
 function setTask(id: string) {
-    newData.value.task = id;
-    if (props.tasks.filter((t) => t.id === id).length > 0) {
-        newData.value.task = id;
+    const task = props.tasks.find((t) => t.id === id);
+    if (task) {
+        newData.value.task = taskToTaskOption(task);
     } else {
         console.error('unknown task: ' + id);
     }
@@ -245,7 +254,7 @@ function onSubmit(event: Event) {
         to: to,
         note: newData.value.note,
         private_note: newData.value.private_note,
-        taskId: newData.value.task || '',
+        taskId: newData.value.task?.value || '',
         breakMins: newData.value.breakMins,
     };
     axios
