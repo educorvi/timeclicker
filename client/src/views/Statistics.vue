@@ -178,6 +178,7 @@ onMounted(async () => {
             axios.get(import.meta.env.VITE_API_ENDPOINT + 'statistics/time-heatmap')
         ]);
         barChartData.value = (<HoursPerTask>hoursRes.data).map((item) => ({ ...item, hours: parseFloat(item.hours) }))
+        heatmapData.value = (<TimeHeatmap>heatmapRes.data).map((item) => ({ ...item, totalHours: parseFloat(item.totalHours), activityCount: parseInt(item.activityCount) }))
         renderCharts();
 
         // Re-render on resize
