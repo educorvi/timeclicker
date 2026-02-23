@@ -96,12 +96,13 @@ const renderCharts = () => {
         barChartContainer.value.innerHTML = '';
         const barChart = Plot.plot({
             title: t('hours_per_task'),
-            marginBottom: 60,
+            marginBottom: 100,
             width: barChartContainer.value.clientWidth - 40,
             x: {
                 label: t('task', 2),
                 domain: barChartData.value.slice().sort((a, b) => b.hours - a.hours).map(d => d.taskTitle),
-                tickFormat: (d) => d.length > 15 ? d.slice(0, 12) + '…' : d
+                tickFormat: (d) => d.length > 15 ? d.slice(0, 12) + '…' : d,
+                tickRotate: 45
             },
             y: {
                 label: t('hour', 2),
