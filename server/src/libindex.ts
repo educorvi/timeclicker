@@ -1,4 +1,4 @@
-import Database from './database';
+import type Database from './database';
 
 export * from './classes';
 export * from './controllers';
