@@ -125,4 +125,6 @@ export const en = {
     statistics: 'Statistics',
     hours_per_task: 'Hours per Task',
     activity_over_the_last_year: 'Activity over the last year',
+
+    press_enter_to_select: 'Press enter to select',
 };

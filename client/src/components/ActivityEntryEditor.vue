@@ -11,12 +11,19 @@
     >
         <b-form @submit="onSubmit">
             <label for="project-select">{{ t('task') }}:</label>
-            <b-form-select
-                id="project-select"
-                required
-                v-model="newData.task"
+            <multiselect
                 :options="taskOptions"
-            />
+                v-model="newData.task"
+                :searchable="true"
+                :allow-empty="false"
+                :close-on-select="true"
+                :placeholder="t('please_select_task')"
+                :selectLabel="t('press_enter_to_select')"
+                track-by="value"
+                label="text"
+                required
+            >
+            </multiselect>
             <hr />
             <label for="date-select">{{ t('date') }}:</label>
             <b-input
@@ -109,6 +116,8 @@ import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import { useToastController } from 'bootstrap-vue-next';
+import Multiselect from 'vue-multiselect'
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 const { t } = useI18n();
 
@@ -180,16 +189,9 @@ const visibility = ref(false);
 //Computed
 const taskOptions: ComputedRef<{ value: string | null; text: string }[]> =
     computed(() => {
-        const res = [
-            {
-                value: null as string | null,
-                text: t('please_select_task'),
-            },
-        ].concat(
-            props.tasks.map((t) => {
+        const res = props.tasks.map((t) => {
                 return { value: t.id, text: t.title };
-            }),
-        );
+            })
 
         // If initial data contains a task that is no longer active, add it to the dropdown
         if (
@@ -275,9 +277,17 @@ defineExpose({
 });
 </script>
 
-<style>
+<style lang="scss">
 hr {
     margin-left: calc(-1 * var(--bs-modal-padding));
     margin-right: calc(-1 * var(--bs-modal-padding));
+}
+
+.multiselect__option.multiselect__option--highlight {
+    background-color: var(--bs-primary);
+
+    &::after{
+        background-color: var(--bs-primary);
+    }
 }
 </style>

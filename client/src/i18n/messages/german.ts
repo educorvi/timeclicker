@@ -125,4 +125,6 @@ export const de = {
     statistics: 'Statistiken',
     hours_per_task: 'Stunden pro Aufgabe',
     activity_over_the_last_year: 'Aktivität im letzten Jahr',
+
+    press_enter_to_select: 'Mit Enter auswählen',
 };

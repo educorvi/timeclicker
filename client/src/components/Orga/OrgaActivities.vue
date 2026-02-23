@@ -74,11 +74,11 @@
                 }}
             </template>
             <template #cell(show_details)="row">
-                <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-                    {{ row.detailsShowing ? t('hide_note') : t('show_note') }}
+                <b-button size="sm" @click="row.toggleExpansion" class="mr-2">
+                    {{ row.expansionShowing ? t('hide_note') : t('show_note') }}
                 </b-button>
             </template>
-            <template #row-details="row">
+            <template #row-expansion="row">
                 <b-card :header="t('note')">
                     {{ row.item.note }}
                 </b-card>
