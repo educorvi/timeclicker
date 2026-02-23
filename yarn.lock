@@ -4203,6 +4203,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/sanitize-html@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@types/sanitize-html@npm:2.16.0"
+  dependencies:
+    htmlparser2: ^8.0.0
+  checksum: 988cbdecce06b858fc5c92ed5573eb984852234be4ea4001ad703a9f0a00a491d788cfb0e3002b2cc01180e2598e7c8f9e5836fbe795601740aa91df3345d564
+  languageName: node
+  linkType: hard
+
 "@types/semver@npm:^7.3.12":
   version: 7.7.1
   resolution: "@types/semver@npm:7.7.1"
@@ -14439,6 +14448,7 @@ __metadata:
     "@types/file-saver": ^2.0.7
     "@types/humanize-duration": ^3.27.4
     "@types/node": ^18.19.130
+    "@types/sanitize-html": ^2.16.0
     "@types/showdown": ^2.0.6
     "@types/swagger-ui": ^5.21.1
     "@types/swagger-ui-dist": ^3.30.6

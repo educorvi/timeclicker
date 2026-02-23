@@ -47,6 +47,7 @@
     "@types/file-saver": "^2.0.7",
     "@types/humanize-duration": "^3.27.4",
     "@types/node": "^18.19.130",
+    "@types/sanitize-html": "^2.16.0",
     "@types/showdown": "^2.0.6",
     "@types/swagger-ui": "^5.21.1",
     "@types/swagger-ui-dist": "^3.30.6",
