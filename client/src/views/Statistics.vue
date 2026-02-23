@@ -48,16 +48,16 @@ const setupBarChartInteractivity = () => {
 
     const bars = barChartContainer.value.querySelectorAll('rect');
     bars.forEach((bar, index) => {
-        const data = barChartData.value.slice().sort((a, b) => b.hours - a.hours)[index];
+        const data = barChartData.value[index];
         if (!data) return;
 
         bar.addEventListener('mouseover', (e) => {
             bar.style.stroke = '#333';
             bar.style.strokeWidth = '2px';
-            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours)}`);
+            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours===1?1:2)}`);
         });
         bar.addEventListener('mousemove', (e) => {
-            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours)}`);
+            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours===1?1:2)}`);
         });
         bar.addEventListener('mouseout', () => {
             bar.style.stroke = 'none';
@@ -161,7 +161,7 @@ const renderCharts = () => {
                     x: (d) => getWeekOfYear(new Date(d.date)),
                     y: (d) => new Date(d.date).getDay(),
                     fill: "totalHours",
-                    title: (d) => `${(new Date(d.date)).toLocaleDateString()}: ${d.totalHours.toFixed(1)} ${t('hour', d.totalHours)}`,
+                    title: (d) => `${(new Date(d.date)).toLocaleDateString()}: ${d.totalHours.toFixed(1)} ${t('hour', d.totalHours===1?1:2)}`,
                     inset: 0.5
                 })
             ]
