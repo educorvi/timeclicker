@@ -12950,6 +12950,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sanitize-html@npm:^2.17.1":
+  version: 2.17.1
+  resolution: "sanitize-html@npm:2.17.1"
+  dependencies:
+    deepmerge: ^4.2.2
+    escape-string-regexp: ^4.0.0
+    htmlparser2: ^8.0.0
+    is-plain-object: ^5.0.0
+    parse-srcset: ^1.0.2
+    postcss: ^8.3.11
+  checksum: 415564705191abc19a6a70a834be8f514bacdbccd40b97d5ef708aa346a319266e863da2ee8ae3d1ec3aa5b6bbca7c6470f77bc5c9253b9337ae1af77b882c23
+  languageName: node
+  linkType: hard
+
 "sass-embedded-all-unknown@npm:1.97.2":
   version: 1.97.2
   resolution: "sass-embedded-all-unknown@npm:1.97.2"
@@ -14448,6 +14462,7 @@ __metadata:
     npm-run-all: ^4.1.5
     pinia: ^3.0.4
     prettier: ^3.8.1
+    sanitize-html: ^2.17.1
     sass: ^1.97.3
     semantic-release: ^24.2.9
     semantic-release-monorepo: ^8.0.2

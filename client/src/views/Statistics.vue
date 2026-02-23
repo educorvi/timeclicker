@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import * as Plot from "@observablehq/plot";
+import * as Plot from '@observablehq/plot';
 import { onMounted, onUnmounted, ref } from 'vue';
-
-let resizeObserver: ResizeObserver | null = null;
-
 import axios from 'axios';
 import type { HoursPerTask, TimeHeatmap } from 'timeclicker_server';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
+import sanitizeHtml from 'sanitize-html';
+
+let resizeObserver: ResizeObserver | null = null;
 
 const errorStore = useErrorStore();
 const { t } = useI18n();
@@ -32,7 +32,7 @@ const getWeekOfYear = (date: Date): number => {
 
 const showTooltip = (event: MouseEvent, content: string) => {
     if (!tooltip.value) return;
-    tooltip.value.innerHTML = content;
+    tooltip.value.innerHTML = sanitizeHtml(content);
     tooltip.value.style.opacity = '1';
     tooltip.value.style.left = event.pageX + 10 + 'px';
     tooltip.value.style.top = event.pageY - 10 + 'px';
