@@ -1,3 +1,12 @@
+# [timeclicker_client-v3.1.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.1.0...timeclicker_client-v3.1.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* fix incorrect tooltips for statistics ([d20e66f](https://github.com/educorvi/timeclicker/commit/d20e66f8499229e63cf5f29f2e4254e1b6019f03))
+* fix user and task missing in orga table ([4b2662d](https://github.com/educorvi/timeclicker/commit/4b2662d526125390d14c333d07ff1f4ae1436322))
+* rotate x-axis ticks in bar chart ([89c7d66](https://github.com/educorvi/timeclicker/commit/89c7d66958157f00a5d81b53b3e550cf61a992f5))
+
 # [timeclicker_client-v3.1.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.0.1...timeclicker_client-v3.1.0) (2026-02-23)
 
 
