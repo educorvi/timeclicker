@@ -89,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, type ComputedRef, onMounted, ref, watch } from 'vue';
 import type { Ref } from 'vue';
 import type { Task, User, Activity } from 'timeclicker_server';
 import axios from 'axios';
@@ -183,7 +183,12 @@ const hours = computed(() => {
     );
 });
 
-const tableActivities = computed(() =>
+type TableActivity = Omit<Activity, 'to' | 'from'> & {
+    to: number | undefined,
+    from: number | undefined
+}
+
+const tableActivities: ComputedRef<TableActivity[]> = computed(() =>
     activities.value.map((a) => {
         return {
             ...a,
@@ -195,14 +200,16 @@ const tableActivities = computed(() =>
 
 const fields = ref([
     {
-        key: 'user.name',
+        key: 'user',
         label: t('user'),
         sortable: true,
+        accessor: (item: TableActivity) => item.user.name,
     },
     {
-        key: 'task.title',
+        key: 'task',
         label: t('task'),
         sortable: true,
+        accessor: (item: TableActivity) => item.task.title,
     },
     {
         key: 'duration',

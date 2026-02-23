@@ -48,16 +48,16 @@ const setupBarChartInteractivity = () => {
 
     const bars = barChartContainer.value.querySelectorAll('rect');
     bars.forEach((bar, index) => {
-        const data = barChartData.value.slice().sort((a, b) => b.hours - a.hours)[index];
+        const data = barChartData.value[index];
         if (!data) return;
 
         bar.addEventListener('mouseover', (e) => {
             bar.style.stroke = '#333';
             bar.style.strokeWidth = '2px';
-            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours)}`);
+            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours===1?1:2)}`);
         });
         bar.addEventListener('mousemove', (e) => {
-            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours)}`);
+            showTooltip(e as MouseEvent, `<strong>${data.taskTitle}</strong><br>${data.hours.toFixed(1)} ${t('hour', data.hours===1?1:2)}`);
         });
         bar.addEventListener('mouseout', () => {
             bar.style.stroke = 'none';
@@ -96,12 +96,13 @@ const renderCharts = () => {
         barChartContainer.value.innerHTML = '';
         const barChart = Plot.plot({
             title: t('hours_per_task'),
-            marginBottom: 60,
+            marginBottom: 100,
             width: barChartContainer.value.clientWidth - 40,
             x: {
                 label: t('task', 2),
                 domain: barChartData.value.slice().sort((a, b) => b.hours - a.hours).map(d => d.taskTitle),
-                tickFormat: (d) => d.length > 15 ? d.slice(0, 12) + '…' : d
+                tickFormat: (d) => d.length > 15 ? d.slice(0, 12) + '…' : d,
+                tickRotate: 45
             },
             y: {
                 label: t('hour', 2),
@@ -161,7 +162,7 @@ const renderCharts = () => {
                     x: (d) => getWeekOfYear(new Date(d.date)),
                     y: (d) => new Date(d.date).getDay(),
                     fill: "totalHours",
-                    title: (d) => `${(new Date(d.date)).toLocaleDateString()}: ${d.totalHours.toFixed(1)} ${t('hour', d.totalHours)}`,
+                    title: (d) => `${(new Date(d.date)).toLocaleDateString()}: ${d.totalHours.toFixed(1)} ${t('hour', d.totalHours===1?1:2)}`,
                     inset: 0.5
                 })
             ]
