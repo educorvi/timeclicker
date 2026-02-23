@@ -1,8 +1,9 @@
-import { Controller, Get, Path, Query, Route, Response, Security } from 'tsoa';
+import { Controller, Get, Path, Query, Route, Response, Security, Tags } from 'tsoa';
 import type Task from '../classes/Task';
 import { db } from '../globals';
 
 @Route('tasks')
+@Tags("Tasks")
 @Security('educorvi_sso')
 @Response(401, 'Unauthorized')
 export class TaskController extends Controller {

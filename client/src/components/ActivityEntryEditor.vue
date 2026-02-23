@@ -11,12 +11,19 @@
     >
         <b-form @submit="onSubmit">
             <label for="project-select">{{ t('task') }}:</label>
-            <b-form-select
-                id="project-select"
-                required
-                v-model="newData.task"
+            <multiselect
                 :options="taskOptions"
-            />
+                v-model="newData.task"
+                :searchable="true"
+                :allow-empty="false"
+                :close-on-select="true"
+                :placeholder="t('please_select_task')"
+                :selectLabel="t('press_enter_to_select')"
+                track-by="value"
+                label="text"
+                required
+            >
+            </multiselect>
             <hr />
             <label for="date-select">{{ t('date') }}:</label>
             <b-input
@@ -60,7 +67,7 @@
             >{{ t('note')
                 }}{{
                     (
-                        tasks.filter((ta) => ta.id === newData.task)[0] || {
+                        tasks.filter((ta) => ta.id === newData.task?.value)[0] || {
                             note_mandatory: false,
                         }
                     ).note_mandatory
@@ -72,7 +79,7 @@
                 v-model="newData.note"
                 :required="
                     (
-                        tasks.filter((ta) => ta.id === newData.task)[0] || {
+                        tasks.filter((ta) => ta.id === newData.task?.value)[0] || {
                             note_mandatory: false,
                         }
                     ).note_mandatory
@@ -109,12 +116,25 @@ import axios from 'axios';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import { useToastController } from 'bootstrap-vue-next';
+import Multiselect from 'vue-multiselect'
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 const { t } = useI18n();
 
 const { show } = useToastController();
 
 const errorStore = useErrorStore();
+
+type TaskOption = { value: string | null; text: string }
+function taskToTaskOption(task?: Task): TaskOption | null {
+    if (!task) {
+        return null;
+    }
+    return {
+        value: task.id,
+        text: task.title,
+    };
+}
 
 //Props
 const props = defineProps<{
@@ -125,7 +145,7 @@ const props = defineProps<{
 
 //Data
 const newData = ref({
-    task: null as string | null,
+    task: null as TaskOption | null,
     date: '',
     from: '',
     to: '',
@@ -166,7 +186,7 @@ function initializeData() {
     if (!date) {
         date = (new Date()).toISOString().split('T')[0]
     }
-    newData.value.task = props.initialData?.task.id || null;
+    newData.value.task = taskToTaskOption(props.initialData?.task) || null;
     newData.value.date = date;
     newData.value.from = from;
     newData.value.to = to;
@@ -180,16 +200,7 @@ const visibility = ref(false);
 //Computed
 const taskOptions: ComputedRef<{ value: string | null; text: string }[]> =
     computed(() => {
-        const res = [
-            {
-                value: null as string | null,
-                text: t('please_select_task'),
-            },
-        ].concat(
-            props.tasks.map((t) => {
-                return { value: t.id, text: t.title };
-            }),
-        );
+        const res = props.tasks.map(taskToTaskOption).filter((t) => t !== null);
 
         // If initial data contains a task that is no longer active, add it to the dropdown
         if (
@@ -212,9 +223,9 @@ function setVisibility(v: boolean) {
 }
 
 function setTask(id: string) {
-    newData.value.task = id;
-    if (props.tasks.filter((t) => t.id === id).length > 0) {
-        newData.value.task = id;
+    const task = props.tasks.find((t) => t.id === id);
+    if (task) {
+        newData.value.task = taskToTaskOption(task);
     } else {
         console.error('unknown task: ' + id);
     }
@@ -243,7 +254,7 @@ function onSubmit(event: Event) {
         to: to,
         note: newData.value.note,
         private_note: newData.value.private_note,
-        taskId: newData.value.task || '',
+        taskId: newData.value.task?.value || '',
         breakMins: newData.value.breakMins,
     };
     axios
@@ -275,9 +286,17 @@ defineExpose({
 });
 </script>
 
-<style>
+<style lang="scss">
 hr {
     margin-left: calc(-1 * var(--bs-modal-padding));
     margin-right: calc(-1 * var(--bs-modal-padding));
+}
+
+.multiselect__option.multiselect__option--highlight {
+    background-color: var(--bs-primary);
+
+    &::after{
+        background-color: var(--bs-primary);
+    }
 }
 </style>

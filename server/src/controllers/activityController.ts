@@ -9,7 +9,7 @@ import {
     Response,
     Delete,
     Path,
-    Query,
+    Query, Tags,
 } from 'tsoa';
 import type Activity from '../classes/Activity';
 import { db } from '../globals';
@@ -40,6 +40,7 @@ export type saveActivityParams = Omit<Activity, 'id' | 'user' | 'task'> & {
 };
 
 @Route('activities')
+@Tags("Activities")
 @Security('educorvi_sso')
 @Response(401, 'Unauthorized')
 export class ActivityController extends Controller {

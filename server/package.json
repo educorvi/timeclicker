@@ -38,7 +38,7 @@
         "@types/express": "^5.0.6",
         "@types/luxon": "^3.7.1",
         "@types/node": "^18.19.130",
-        "nodemon": "^3.1.11",
+        "nodemon": "^3.1.14",
         "semantic-release": "^24.2.9",
         "semantic-release-monorepo": "^8.0.2",
         "semantic-release-yarn": "^3.0.2",
@@ -47,18 +47,18 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "@faker-js/faker": "^10.2.0",
-        "axios": "^1.13.2",
-        "cors": "^2.8.5",
+        "@faker-js/faker": "^10.3.0",
+        "axios": "^1.13.5",
+        "cors": "^2.8.6",
         "express": "^5.2.1",
         "express-rate-limit": "^8.2.1",
         "keycloak-backend": "^5.1.0",
         "luxon": "^3.7.2",
-        "pg": "^8.17.2",
+        "pg": "^8.18.0",
         "reflect-metadata": "^0.2.2",
         "tslog": "^4.10.2",
         "tsoa": "^6.6.0",
         "typeorm": "^0.3.28",
-        "typeorm-extension": "^3.7.3"
+        "typeorm-extension": "^3.8.0"
     }
 }

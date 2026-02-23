@@ -41,6 +41,7 @@ export const de = {
     manage_entries_for: 'Einträge für',
 
     dashboard: 'Dashboard',
+    statistic: 'Statistik | Statistiken',
 
     show_note: 'Notiz anzeigen',
     hide_note: 'Notiz verbergen',
@@ -58,6 +59,7 @@ export const de = {
             'Anmeldetoken konnte nicht erneuert werden. Bitte melden Sie sich erneut an.',
         auth_endpoint:
             'Informationen zur Anmeldung konnten nicht geladen werden. Bitte laden Sie die Seite neu',
+        data_failed: 'Daten konnten nicht geladen werden!'
     },
 
     error: 'Fehler',
@@ -120,4 +122,9 @@ export const de = {
     start_year_desc: 'Das Jahr, in dem der Vertrag beginnt',
 
     not_found: 'Nicht gefunden',
+    statistics: 'Statistiken',
+    hours_per_task: 'Stunden pro Aufgabe',
+    activity_over_the_last_year: 'Aktivität im letzten Jahr',
+
+    press_enter_to_select: 'Mit Enter auswählen',
 };

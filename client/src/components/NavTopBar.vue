@@ -12,6 +12,11 @@
                         >{{ t('activity', 2) }}
                     </RouterLink>
                 </li>
+                <li class="nav-item">
+                    <RouterLink class="nav-link" to="/statistics"
+                        >{{ t('statistic', 2) }}
+                    </RouterLink>
+                </li>
                 <li class="nav-item" v-if="userdata && keycloak && keycloak.hasRealmRole('orga')">
                     <RouterLink class="nav-link" to="/orga">{{
                         t('orga_ui')
