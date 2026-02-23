@@ -1,3 +1,15 @@
+# [timeclicker_server-v3.1.0](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v3.0.1...timeclicker_server-v3.1.0) (2026-02-23)
+
+
+### Bug Fixes
+
+* tag endpoints ([84c5a35](https://github.com/educorvi/timeclicker/commit/84c5a35e0472a423a0b663276005c1ffad7f6236))
+
+
+### Features
+
+* statistics api endpoints ([fdfd89f](https://github.com/educorvi/timeclicker/commit/fdfd89f416db0a75ef4e486f05fa4e391b2c956e))
+
 # [timeclicker_server-v3.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_server-v3.0.0...timeclicker_server-v3.0.1) (2026-01-22)
 
 

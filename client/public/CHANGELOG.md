@@ -1,3 +1,11 @@
+# [timeclicker_client-v3.1.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.0.1...timeclicker_client-v3.1.0) (2026-02-23)
+
+
+### Features
+
+* add statistics page ([24dbc09](https://github.com/educorvi/timeclicker/commit/24dbc0956a58235aa98ba2892adbf4f9fb653bb3))
+* searchable task selection dropdown ([a64722e](https://github.com/educorvi/timeclicker/commit/a64722eaacee17a07950ceaf23318c53aa97796b))
+
 # [timeclicker_client-v3.0.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.0.0...timeclicker_client-v3.0.1) (2026-01-22)
 
 
