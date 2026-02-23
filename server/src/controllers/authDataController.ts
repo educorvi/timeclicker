@@ -1,6 +1,7 @@
-import { Controller, Get, Route } from 'tsoa';
+import { Controller, Get, Route, Tags } from 'tsoa';
 
 @Route('auth')
+@Tags("Backend Information")
 export class AuthDataController extends Controller {
     @Get()
     public auth() {

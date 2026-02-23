@@ -1,7 +1,8 @@
-import { Controller, Get, Route } from 'tsoa';
+import { Controller, Get, Route, Tags } from 'tsoa';
 import { version } from '../../package.json';
 
 @Route('/')
+@Tags("Backend Information")
 export class PingController extends Controller {
     @Get()
     public hello() {
