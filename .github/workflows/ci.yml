@@ -103,6 +103,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: 'main'
+          token: ${{secrets.EDUCORVI_DEV_PAT}}
       - name: Rebase develop
         run: |
           git checkout develop
