@@ -1,3 +1,10 @@
+# [timeclicker_client-v3.1.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.1.1...timeclicker_client-v3.1.2) (2026-03-02)
+
+
+### Bug Fixes
+
+* fix filter not working on orga page ([9cad8ea](https://github.com/educorvi/timeclicker/commit/9cad8ea8cf229809f7ceaf7611b4e53f5c5180c7))
+
 # [timeclicker_client-v3.1.1](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.1.0...timeclicker_client-v3.1.1) (2026-02-23)
 
 
