@@ -157,6 +157,7 @@ function loadActivities() {
                 from: startDate.toISOString(),
                 to: endDate.toISOString(),
             },
+            paramsSerializer: { indexes: null }
         })
         .then((res) => {
             activities.value = <Array<Activity>>res.data.map((a: any) => {
