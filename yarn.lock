@@ -14484,7 +14484,7 @@ __metadata:
     typescript: ~5.9.3
     unplugin-icons: ^23.0.1
     unplugin-vue-components: ^31.0.0
-    vite: ^7.3.1
+    vite: ^7.3.2
     vite-plugin-pwa: ^1.2.0
     vue: ^3.5.28
     vue-i18n: ^11.2.8
@@ -15449,9 +15449,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "vite@npm:7.3.1"
+"vite@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "vite@npm:7.3.2"
   dependencies:
     esbuild: ^0.27.0
     fdir: ^6.5.0
@@ -15500,7 +15500,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 256465ea7e6d372fc85a747704c77bd657e71eb592e6ea67532f4be0544476dc6b73360073dad4462d6a74574f383e044283a9ab98295a39b46207ddd4139a74
+  checksum: f98bf7feb114794ae4b1ccbb2363f0417fd7a8c7e493e8cbc988b39313401db15d2ff64737eb8f10d805458c028a67b81395afcbff5b5fa70a70ffa2ec70aa52
   languageName: node
   linkType: hard
 
