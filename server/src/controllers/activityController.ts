@@ -60,8 +60,8 @@ export class ActivityController extends Controller {
         return db.getActivities({
             where: {
                 user,
-                from: from ? MoreThanOrEqual(from) : undefined,
-                to: to ? LessThanOrEqual(to) : undefined,
+                ...(from && { from: MoreThanOrEqual(from) }),
+                ...(to && { to: LessThanOrEqual(to) }),
             },
             relations: { task: true, user: true },
             order: { from: 'ASC' },

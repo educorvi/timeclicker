@@ -67,9 +67,8 @@
             </template>
             <template #cell(duration)="row">
                 {{
-                    humanizeDuration(
+                    getHumanizedDuration(
                         (row.item.to || 0) - (row.item.from || 0),
-                        { language: i18Lang, units: ['h', 'm'] }
                     )
                 }}
             </template>
@@ -100,6 +99,7 @@ import { saveAs } from 'file-saver';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import type { TagOption } from '@/additionalTypes';
+import { getHumanizedDuration } from '@/Commons.ts';
 
 const errorStore = useErrorStore();
 

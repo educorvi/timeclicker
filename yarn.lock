@@ -8847,13 +8847,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"humanize-duration@npm:^3.34.0":
-  version: 3.34.0
-  resolution: "humanize-duration@npm:3.34.0"
-  checksum: c9c11f68d35984ea09a6ccc1f82548f86a3be9f66f424d3adf8e74b4c3f6860567631032f99be6d5a5792f3338698d3d3e3d7007681ea40f8423a1f188de07f6
-  languageName: node
-  linkType: hard
-
 "iconv-lite@npm:0.6, iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
@@ -15107,7 +15100,6 @@ __metadata:
     eslint: ^10.8.0
     eslint-plugin-vue: ^10.10.0
     file-saver: ^2.0.5
-    humanize-duration: ^3.34.0
     keycloak-js: ^26.2.4
     license-downloader: ^2.0.0
     license-report: ^6.8.5

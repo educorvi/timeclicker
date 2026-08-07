@@ -79,4 +79,13 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                loadPaths: ['node_modules'],
+                quietDeps: true,
+                silenceDeprecations: ['import']
+            },
+        },
+    },
 });
