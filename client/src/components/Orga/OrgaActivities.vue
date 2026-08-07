@@ -67,9 +67,8 @@
             </template>
             <template #cell(duration)="row">
                 {{
-                    humanizeDuration(
+                    getHumanizedDuration(
                         (row.item.to || 0) - (row.item.from || 0),
-                        { language: i18Lang, units: ['h', 'm'] }
                     )
                 }}
             </template>
@@ -95,11 +94,11 @@ import type { Task, User, Activity } from 'timeclicker_server';
 import axios from 'axios';
 import TagDropdown from '@/components/tagDropdown.vue';
 import CustomSpinner from '@/App.vue';
-import humanizeDuration from 'humanize-duration';
 import { saveAs } from 'file-saver';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import type { TagOption } from '@/additionalTypes';
+import { getHumanizedDuration } from '@/Commons.ts';
 
 const errorStore = useErrorStore();
 
@@ -174,13 +173,12 @@ function loadActivities() {
 }
 
 const hours = computed(() => {
-    return humanizeDuration(
+    return getHumanizedDuration(
         activities.value.reduce((prev: number, curr: Activity) => {
             return (
                 prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
             );
-        }, 0),
-        { language: locale.value, units: ['h', 'm'] }
+        }, 0)
     );
 });
 

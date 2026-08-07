@@ -26,46 +26,37 @@ class TypeOrmLogger implements Logger {
         }
     }
 
-    // @ts-ignore
-    logMigration(message: string, queryRunner?: QueryRunner): any {
+    logMigration(message: string, _queryRunner?: QueryRunner): any {
         logger.info(message);
     }
 
-    // @ts-ignore
     logQuery(
         query: string,
         parameters?: any[],
-        // @ts-ignore
-        queryRunner?: QueryRunner,
+        _queryRunner?: QueryRunner,
     ): any {
         logger.debug(query, parameters);
     }
 
-    // @ts-ignore
     logQueryError(
         error: string | Error,
         query: string,
         parameters?: any[],
-        // @ts-ignore
-        queryRunner?: QueryRunner,
+        _queryRunner?: QueryRunner,
     ): any {
-        logger.error(error, query, parameters);
+        logger.error(query, parameters, error);
     }
 
-    // @ts-ignore
     logQuerySlow(
         time: number,
         query: string,
-        // @ts-ignore
-        parameters?: any[],
-        // @ts-ignore
-        queryRunner?: QueryRunner,
+        _parameters?: any[],
+        _queryRunner?: QueryRunner,
     ): any {
         logger.debug('Slow query: ' + query + `\n(${time}ms)`);
     }
 
-    // @ts-ignore
-    logSchemaBuild(message: string, queryRunner?: QueryRunner): any {
+    logSchemaBuild(message: string, _queryRunner?: QueryRunner): any {
         logger.debug(message);
     }
 }

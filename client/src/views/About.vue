@@ -2,6 +2,7 @@
     <div class="w-100 align-items-center d-flex flex-column text-center">
         <h1>TimeClicker</h1>
         <table class="text-muted">
+            <tbody>
             <tr>
                 <td>Client</td>
                 <td>
@@ -14,6 +15,7 @@
                     <b>v{{ serverVersion }}</b>
                 </td>
             </tr>
+            </tbody>
         </table>
         <hr />
         <p class="mb-0">
@@ -72,7 +74,7 @@
                </pre>
             </div>
             <div v-else-if="licenseTexts.get(license.name) === null">
-                {{t('not_found')}}
+                {{ t('not_found') }}
             </div>
             <custom-spinner v-else />
         </b-card>
@@ -84,9 +86,9 @@ import { version as versionFromPJson } from '../../package.json';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import CustomSpinner from '@/components/CustomSpinner.vue';
-import { Converter } from 'showdown';
 import { useI18n } from 'vue-i18n';
 import { Breakpoint, useBreakpointStore } from '@/stores/breakpoints';
+import MarkdownIt from 'markdown-it';
 
 const { t } = useI18n();
 
@@ -105,7 +107,9 @@ type License = {
 
 const changelog = ref('');
 const licenses = ref<License[]>([]);
-const licenseTexts = ref(new Map<string, string|null>());
+const licenseTexts = ref(new Map<string, string | null>());
+
+const md = new MarkdownIt();
 
 onMounted(() => {
     axios.get('/CHANGELOG.md').then(({ data }) => {
@@ -117,10 +121,9 @@ onMounted(() => {
             // replace link to GitHub compare with link to GitHub release
             .replace(
                 /https:\/\/github\.com\/educorvi\/timeclicker\/compare\/timeclicker_client-v\d+\.\d+\.\d+\.\.\.(?=timeclicker_client-v\d+\.\d+\.\d+)/g,
-                'https://github.com/educorvi/timeclicker/releases/tag/'
+                'https://github.com/educorvi/timeclicker/releases/tag/',
             );
-        const converter = new Converter();
-        changelog.value = converter.makeHtml(markdown);
+        changelog.value = md.render(markdown);
     });
     axios.get('/licenses.json').then(({ data }) => {
         for (const datum of data) {
@@ -132,8 +135,8 @@ onMounted(() => {
                 .then(({ data }) => {
                     licenseTexts.value.set(l.name, data);
                 }).catch((err) => {
-                    console.error(err);
-                    licenseTexts.value.set(l.name, null);
+                console.error(err);
+                licenseTexts.value.set(l.name, null);
             });
         });
     });

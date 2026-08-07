@@ -25,72 +25,11 @@
 
     <div v-if="loaded">
         <b-container fluid id="overview_container">
-            <b-row align-v="stretch" id="row" align-h="start">
-                <b-col v-if="loaded && activities.length === 0">
-                    <b-card class="activity-card text-center">
-                        {{ t('no_entries') }}
-                    </b-card>
-                </b-col>
-                <b-col
-                    v-for="activity in activities"
-                    :key="activity.id"
-                    class="mb-4"
-                >
-                    <b-card no-body class="activity-card">
-                        <b-card-body>
-                            <h5 class="mb-0">
-                                {{
-                                    activity.from
-                                        ? d(activity.from, 'long')
-                                        : ''
-                                }}
-                                -
-                                {{ activity.to ? d(activity.to, 'time') : '' }}
-                            </h5>
-                            <p class="mb-2">
-                                {{
-                                    getDurationOrDash(
-                                        activity.from,
-                                        activity.to,
-                                        activity.breakMins * 60 * 1000,
-                                    )
-                                }}
-                                <span
-                                    v-if="activity.breakMins"
-                                    class="text-muted"
-                                >
-                                    (+{{
-                                        getHumanizedDuration(
-                                            activity.breakMins * 60 * 1000,
-                                            ['m'],
-                                        )
-                                    }}
-                                    {{ t('break') }})
-                                </span>
-                            </p>
-                            <p class="mb-0 text-muted">
-                                {{ activity.task.title }}
-                            </p>
-                        </b-card-body>
-                        <b-card-footer>
-                            <b-button-group class="mt-2 mb-2 w-100">
-                                <b-button
-                                    class="w-50"
-                                    variant="outline-secondary"
-                                    @click="editActivity(activity)"
-                                >{{ t('edit') }}
-                                </b-button>
-                                <b-button
-                                    class="w-50"
-                                    variant="outline-danger"
-                                    @click="askToDeleteActivity(activity)"
-                                >{{ t('delete') }}
-                                </b-button>
-                            </b-button-group>
-                        </b-card-footer>
-                    </b-card>
-                </b-col>
-            </b-row>
+
+            <CardOverview v-if="cardOverview" :activities="activities" :ask-to-delete-activity="askToDeleteActivity"
+                           :edit-activity="editActivity"/>
+            <TableOverview v-else :activities="activities" :ask-to-delete-activity="askToDeleteActivity"
+                          :edit-activity="editActivity"/>
         </b-container>
 
         <entry-editor
@@ -120,13 +59,15 @@
 import type { Activity, Task } from 'timeclicker_server/src/libindex';
 import CustomSpinner from './CustomSpinner.vue';
 import axios from 'axios';
-import humanizeDuration from 'humanize-duration';
 import EntryEditor from '@/components/ActivityEntryEditor.vue';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
-import type { BModal } from 'bootstrap-vue-next';
+import type { BModal, TableFieldRaw } from 'bootstrap-vue-next';
+import { getHumanizedDuration } from '@/Commons.ts';
+import CardOverview from './Overview/CardOverview.vue';
+import { useWindowSize } from '@vueuse/core';
 
 const props = defineProps<{ tasks: Array<Task> }>();
 
@@ -146,6 +87,13 @@ const monthOptions = getMonthOptions(t);
 const month = ref(new Date().getMonth() + 1);
 const year = ref(new Date().getFullYear());
 
+
+const {width} = useWindowSize();
+
+const cardOverview = computed(() => {
+    return width.value < 768;
+})
+
 const breaks = computed(() => {
     return activities.value.reduce((prev: number, curr: Activity) => {
         return prev + curr.breakMins * 60 * 1000;
@@ -162,28 +110,7 @@ const hours = computed(() => {
     );
 });
 
-function getHumanizedDuration(
-    duration: number,
-    units: humanizeDuration.Unit[] = ['h', 'm'],
-) {
-    return humanizeDuration(duration, {
-        language: locale.value,
-        units: units,
-    });
-}
 
-/**
- * Returns duration between `from` and `to` (minus `sub`, if specified)
- * @param from
- * @param to
- * @param sub
- */
-function getDurationOrDash(from: Date | null, to: Date | null, sub = 0) {
-    if (!from || !to) {
-        return ' - ';
-    }
-    return getHumanizedDuration(to.getTime() - from.getTime() - sub);
-}
 
 function loadActivities() {
     loaded.value = false;
@@ -259,18 +186,21 @@ defineExpose({
 });
 </script>
 
-<style>
-.activity-card {
-    width: 23rem;
-    max-width: 100%;
-    height: 100%;
+<style lang="scss">
+.activities-table td {
+    button{
+        height: 100%;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+        svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            display: block;
+        }
+    }
 }
 
 @media (max-width: 420px) {
-    .activity-card {
-        width: 100% !important;
-        height: 100%;
-    }
 
     #row, #row .col {
         padding: 0;
