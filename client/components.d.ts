@@ -43,6 +43,7 @@ declare module 'vue' {
     BNavItemDropdown: typeof import('bootstrap-vue-next/components/BNav')['BNavItemDropdown']
     BSpinner: typeof import('bootstrap-vue-next/components/BSpinner')['BSpinner']
     BTable: typeof import('bootstrap-vue-next/components/BTable')['BTable']
+    CardOverview: typeof import('./src/components/Overview/CardOverview.vue')['default']
     ClockSolid: typeof import('./src/components/icons/clock-solid.vue')['default']
     CustomSpinner: typeof import('./src/components/CustomSpinner.vue')['default']
     IBiPencil: typeof import('~icons/bi/pencil')['default']
@@ -53,6 +54,7 @@ declare module 'vue' {
     Overview: typeof import('./src/components/Overview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TableOverview: typeof import('./src/components/Overview/TableOverview.vue')['default']
     TagDropdown: typeof import('./src/components/tagDropdown.vue')['default']
   }
   export interface GlobalDirectives {

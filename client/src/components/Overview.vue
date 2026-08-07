@@ -25,54 +25,11 @@
 
     <div v-if="loaded">
         <b-container fluid id="overview_container">
-            <b-card class="activity-card text-center" v-if="!activities.length">
-                {{ t('no_entries') }}
-            </b-card>
-            <BTable
-                v-else
-                class="activities-table"
-                align="middle"
-                hover
-                :items="activities"
-                :fields="tableFields"
-                responsive="sm">
-                <template #cell(task)="data">
-                    {{ data.item.task.title }}
-                </template>
-                <template #cell(date)="data">
-                    {{ data.item.from ? d(data.item.from, 'short') : '' }}
-                </template>
-                <template #cell(from)="data">
-                    {{ data.item.from ? d(data.item.from, 'time') : '' }}
-                </template>
-                <template #cell(to)="data">
-                    {{ data.item.to ? d(data.item.to, 'time') : '' }}
-                </template>
-                <template #cell(duration)="data">
-                    {{ getDurationOrDash(data.item.from, data.item.to) }}
-                </template>
-                <template #cell(break)="data">
-                    {{ getHumanizedDuration(data.item.breakMins * 60 * 1000)}}
-                </template>
-                <template #cell(edit)="data">
-                    <b-button-group class="w-100">
-                        <b-button
-                            class="w-50"
-                            variant="outline-secondary"
-                            @click="editActivity(data.item)"
-                        >
-                            <IBiPencil :aria-label="t('edit')" />
-                        </b-button>
-                        <b-button
-                            class="w-50"
-                            variant="outline-danger"
-                            @click="askToDeleteActivity(data.item)"
-                        >
-                            <IBiTrash3 :aria-label="t('delete')" />
-                        </b-button>
-                    </b-button-group>
-                </template>
-            </BTable>
+
+            <CardOverview v-if="cardOverview" :activities="activities" :ask-to-delete-activity="askToDeleteActivity"
+                           :edit-activity="editActivity"/>
+            <TableOverview v-else :activities="activities" :ask-to-delete-activity="askToDeleteActivity"
+                          :edit-activity="editActivity"/>
         </b-container>
 
         <entry-editor
@@ -108,7 +65,9 @@ import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
 import { getMonthOptions, years } from '@/commons/DateUtils';
 import type { BModal, TableFieldRaw } from 'bootstrap-vue-next';
-import { getDurationOrDash, getHumanizedDuration } from '@/Commons.ts';
+import { getHumanizedDuration } from '@/Commons.ts';
+import CardOverview from './Overview/CardOverview.vue';
+import { useWindowSize } from '@vueuse/core';
 
 const props = defineProps<{ tasks: Array<Task> }>();
 
@@ -128,22 +87,12 @@ const monthOptions = getMonthOptions(t);
 const month = ref(new Date().getMonth() + 1);
 const year = ref(new Date().getFullYear());
 
-const tableFields: TableFieldRaw<Activity>[] = [
-    'date',
-    {
-        key: 'from',
-        sortable: true,
-        initialSortDirection: 'asc'
-    },
-    {
-        key: 'to',
-        sortable: true,
-    },
-    'duration',
-    'break',
-    'task',
-    'edit',
-];
+
+const {width} = useWindowSize();
+
+const cardOverview = computed(() => {
+    return width.value < 768;
+})
 
 const breaks = computed(() => {
     return activities.value.reduce((prev: number, curr: Activity) => {
@@ -251,17 +200,7 @@ defineExpose({
     }
 }
 
-.activity-card {
-    width: 23rem;
-    max-width: 100%;
-    height: 100%;
-}
-
 @media (max-width: 420px) {
-    .activity-card {
-        width: 100% !important;
-        height: 100%;
-    }
 
     #row, #row .col {
         padding: 0;

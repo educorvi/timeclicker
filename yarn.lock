@@ -4929,7 +4929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^14.2.1":
+"@vueuse/core@npm:^14.2.1, @vueuse/core@npm:^14.4.0":
   version: 14.4.0
   resolution: "@vueuse/core@npm:14.4.0"
   dependencies:
@@ -15092,6 +15092,7 @@ __metadata:
     "@vue/eslint-config-prettier": ^10.2.0
     "@vue/eslint-config-typescript": ^14.9.0
     "@vue/tsconfig": ^0.9.1
+    "@vueuse/core": ^14.4.0
     axios: ^1.19.0
     bootstrap: ^5.3.8
     bootstrap-vue-next: ^0.45.10
