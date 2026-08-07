@@ -1,65 +1,10 @@
-import {config} from 'dotenv';
-config()
+import { config } from 'dotenv';
+config();
 import * as process from 'process';
-import rateLimit from 'express-rate-limit';
-import express, { json, urlencoded, static as staticContent } from 'express';
 import axios from 'axios';
 import { db, logger } from './globals';
-import { RegisterRoutes } from './generated/routes';
-import swaggerDocument from './generated/swagger.json';
-import cors from 'cors';
-import { errorHandler } from './errorHandler';
-import path from 'path';
+import { createApp } from './app';
 export type * from './types';
-
-
-const projectRoot = path
-    .resolve(__dirname)
-    .split('server')
-    .slice(0, -1)
-    .join('server');
-const vuePath = path.join(projectRoot, 'client', 'dist');
-
-const app = express();
-
-const rateLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 1000, // Limit each IP to 1000 requests per `window`
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
-
-app.set('trust proxy', true);
-
-app.use(rateLimiter);
-app.use(cors());
-app.use(
-    urlencoded({
-        extended: true,
-    })
-);
-app.use(json());
-RegisterRoutes(app);
-
-app.get(
-    '/api/swagger.json',
-    (_req, res) => {
-        res.send(swaggerDocument);
-    },
-    (e) => {
-        if (e) logger.error(e);
-    }
-);
-
-app.use(staticContent(vuePath));
-
-app.use(errorHandler);
-
-app.get(/.*/, (_req, res) => {
-    res.sendFile(path.join(vuePath, 'index.html'), (e) => {
-        if (e) logger.error(e);
-    });
-});
 
 const port = process.env.PORT || 3000;
 
@@ -106,9 +51,11 @@ async function start() {
     }
     await synchronizeTasks();
     setInterval(synchronizeTasks, 1000 * 60 * 60);
-    app.listen(port, () =>
+    createApp().listen(port, () =>
         logger.info(`App listening at http://localhost:${port}`)
     );
 }
 
-start();
+if (require.main === module) {
+    void start();
+}

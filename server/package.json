@@ -10,7 +10,8 @@
         "dist"
     ],
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "vitest run",
+        "test:watch": "vitest",
         "dev": "nodemon src/index.ts",
         "tsoa": "tsoa spec && tsoa routes",
         "build": "yarn run tsoa && tsc"
@@ -38,13 +39,15 @@
         "@types/express": "^5.0.6",
         "@types/luxon": "^3.7.3",
         "@types/node": "^26.1.2",
+        "node-mocks-http": "^1.18.1",
         "nodemon": "^3.1.14",
         "semantic-release": "^25.0.9",
         "semantic-release-monorepo": "^8.0.2",
         "semantic-release-yarn": "^3.0.2",
         "ts-node": "^10.9.2",
         "tslib": "^2.8.1",
-        "typescript": "~6.0.3"
+        "typescript": "~6.0.3",
+        "vitest": "^4.1.10"
     },
     "dependencies": {
         "@faker-js/faker": "^10.5.0",

@@ -33,6 +33,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install --immutable
+      - run: yarn workspace timeclicker_client test
       - run: yarn run build
   rebase:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
