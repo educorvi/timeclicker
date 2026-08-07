@@ -94,7 +94,6 @@ import type { Task, User, Activity } from 'timeclicker_server';
 import axios from 'axios';
 import TagDropdown from '@/components/tagDropdown.vue';
 import CustomSpinner from '@/App.vue';
-import humanizeDuration from 'humanize-duration';
 import { saveAs } from 'file-saver';
 import { UiError, useErrorStore } from '@/stores/error';
 import { useI18n } from 'vue-i18n';
@@ -174,13 +173,12 @@ function loadActivities() {
 }
 
 const hours = computed(() => {
-    return humanizeDuration(
+    return getHumanizedDuration(
         activities.value.reduce((prev: number, curr: Activity) => {
             return (
                 prev + ((curr.to?.getTime() || 0) - (curr.from?.getTime() || 0))
             );
-        }, 0),
-        { language: locale.value, units: ['h', 'm'] }
+        }, 0)
     );
 });
 
