@@ -1,3 +1,11 @@
+# [timeclicker_client-v3.2.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.1.2...timeclicker_client-v3.2.0) (2026-08-07)
+
+
+### Features
+
+* switch between card and table view based on page width ([6d598d2](https://github.com/educorvi/timeclicker/commit/6d598d225c1872ad521d297b654dde992c2228b5))
+* table view for activities ([c29e90a](https://github.com/educorvi/timeclicker/commit/c29e90ac85675e571162e9b5eefea5adc732966c))
+
 # [timeclicker_client-v3.1.2](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.1.1...timeclicker_client-v3.1.2) (2026-03-02)
 
 
