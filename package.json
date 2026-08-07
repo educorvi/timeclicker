@@ -12,6 +12,7 @@
   },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
-    "prettier": "3.8.1"
+    "prettier": "^3.9.6",
+    "syncpack": "^15.3.2"
   }
 }

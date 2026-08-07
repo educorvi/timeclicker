@@ -6,7 +6,6 @@ import {config} from 'dotenv';
 config()
 
 export const logger = new Logger({
-    hideLogPositionForProduction: true,
     minLevel: process.env.LOG_LEVEL
         ? Number.parseInt(process.env.LOG_LEVEL)
         : 3,
