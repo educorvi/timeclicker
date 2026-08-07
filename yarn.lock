@@ -4929,7 +4929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^14.2.1":
+"@vueuse/core@npm:^14.2.1, @vueuse/core@npm:^14.4.0":
   version: 14.4.0
   resolution: "@vueuse/core@npm:14.4.0"
   dependencies:
@@ -5238,6 +5238,13 @@ __metadata:
   version: 2.0.1
   resolution: "argparse@npm:2.0.1"
   checksum: 83644b56493e89a254bae05702abf3a1101b4fa4d0ca31df1c9985275a5a5bd47b3c27b7fa0b71098d41114d8ca000e6ed90cad764b306f8a503665e4d517ced
+  languageName: node
+  linkType: hard
+
+"argparse@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "argparse@npm:3.0.0"
+  checksum: 166ad46c13ed61e7235f82b9b2f574ebabfe8c83886579d13eef73053c1a9b10b76c160775554b89d8310ae73a0e2806cef41e4db49ef3541a25885c9a3579e3
   languageName: node
   linkType: hard
 
@@ -6132,13 +6139,6 @@ __metadata:
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: ab8c07884e42c3a8dbc5dd9592c606176c7eb5c1ca5ff274bcf907039b2c41de3626f684ea75ccf4d361ba004bbaff1f577d5384c155f3871e456bdf27becf9e
-  languageName: node
-  linkType: hard
-
-"commander@npm:^9.0.0":
-  version: 9.5.0
-  resolution: "commander@npm:9.5.0"
-  checksum: c7a3e27aa59e913b54a1bafd366b88650bc41d6651f0cbe258d4ff09d43d6a7394232a4dadd0bf518b3e696fdf595db1028a0d82c785b88bd61f8a440cecfade
   languageName: node
   linkType: hard
 
@@ -8847,13 +8847,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"humanize-duration@npm:^3.34.0":
-  version: 3.34.0
-  resolution: "humanize-duration@npm:3.34.0"
-  checksum: c9c11f68d35984ea09a6ccc1f82548f86a3be9f66f424d3adf8e74b4c3f6860567631032f99be6d5a5792f3338698d3d3e3d7007681ea40f8423a1f188de07f6
-  languageName: node
-  linkType: hard
-
 "iconv-lite@npm:0.6, iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
@@ -10219,6 +10212,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"linkify-it@npm:^6.0.0":
+  version: 6.1.0
+  resolution: "linkify-it@npm:6.1.0"
+  dependencies:
+    uc.micro: ^3.0.0
+  checksum: 2c8ed6d324b6a3a163eb255fe994455edd2e6733630fd01926bff3304109f3c5e706008134168a6191b2e5913c599cc4785eaebe538b30618deca9d902468c8c
+  languageName: node
+  linkType: hard
+
 "load-json-file@npm:^4.0.0":
   version: 4.0.0
   resolution: "load-json-file@npm:4.0.0"
@@ -10559,6 +10561,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"markdown-it@npm:^15.0.0":
+  version: 15.0.0
+  resolution: "markdown-it@npm:15.0.0"
+  dependencies:
+    argparse: ^3.0.0
+    entities: ^8.0.0
+    linkify-it: ^6.0.0
+    mdurl: ^2.1.0
+    punycode.js: ^2.3.1
+    uc.micro: ^3.0.0
+  bin:
+    markdown-it: bin/markdown-it.mjs
+  checksum: 06188821349324e3d2214bb38881749c91a349466c0a3f15234ba4d250e92c01638738ba389db986bfc8bf31ba6c9cfc086230379c56d9d82692e31023d6a269
+  languageName: node
+  linkType: hard
+
 "marked-terminal@npm:^7.3.0":
   version: 7.3.0
   resolution: "marked-terminal@npm:7.3.0"
@@ -10589,6 +10607,13 @@ __metadata:
   version: 1.1.0
   resolution: "math-intrinsics@npm:1.1.0"
   checksum: 0e513b29d120f478c85a70f49da0b8b19bc638975eca466f2eeae0071f3ad00454c621bf66e16dd435896c208e719fc91ad79bbfba4e400fe0b372e7c1c9c9a2
+  languageName: node
+  linkType: hard
+
+"mdurl@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "mdurl@npm:2.1.0"
+  checksum: 43267b3eba1abcad1448d0716509a94792a3fea041aed65bd38f911dac95640d25d2fa96f48c8763376058256d680a9aa6e4134825b851eb9eb5fce68fcf990c
   languageName: node
   linkType: hard
 
@@ -12515,6 +12540,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"punycode.js@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "punycode.js@npm:2.3.1"
+  checksum: 13466d7ed5e8dacdab8c4cc03837e7dd14218a59a40eb14a837f1f53ca396e18ef2c4ee6d7766b8ed2fc391d6a3ac489eebf2de83b3596f5a54e86df4a251b72
+  languageName: node
+  linkType: hard
+
 "punycode@npm:^2.1.0":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
@@ -14040,17 +14072,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"showdown@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "showdown@npm:2.1.0"
-  dependencies:
-    commander: ^9.0.0
-  bin:
-    showdown: bin/showdown.js
-  checksum: 9e33607612c4465f9ef39de356e2cee512e248eb71d4725e1d4353cf3ab4bbe89a94601ce6bfbd8245000633693c8b90e7d85a9613dfeba7704a7422cee78282
-  languageName: node
-  linkType: hard
-
 "side-channel-list@npm:^1.0.0":
   version: 1.0.0
   resolution: "side-channel-list@npm:1.0.0"
@@ -15099,6 +15120,7 @@ __metadata:
     "@vue/eslint-config-prettier": ^10.2.0
     "@vue/eslint-config-typescript": ^14.9.0
     "@vue/tsconfig": ^0.9.1
+    "@vueuse/core": ^14.4.0
     axios: ^1.19.0
     bootstrap: ^5.3.8
     bootstrap-vue-next: ^0.45.10
@@ -15107,10 +15129,10 @@ __metadata:
     eslint: ^10.8.0
     eslint-plugin-vue: ^10.10.0
     file-saver: ^2.0.5
-    humanize-duration: ^3.34.0
     keycloak-js: ^26.2.4
     license-downloader: ^2.0.0
     license-report: ^6.8.5
+    markdown-it: ^15.0.0
     npm-run-all: ^4.1.5
     pinia: ^4.0.2
     prettier: ^3.9.6
@@ -15119,7 +15141,6 @@ __metadata:
     semantic-release: ^25.0.9
     semantic-release-monorepo: ^8.0.2
     semantic-release-yarn: ^3.0.2
-    showdown: ^2.1.0
     swagger-ui: ^5.32.12
     swagger-ui-dist: ^5.32.12
     timeclicker_server: "workspace:^"
@@ -15719,6 +15740,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 8ed159a81ab4901a620c19fda539632cee610f8ec34dde57a3acc6b6df72894ad0b50bdd1946b763313d9b73dedb019d2e81c03eff06c0f2c785cde30a537d15
+  languageName: node
+  linkType: hard
+
+"uc.micro@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "uc.micro@npm:3.0.0"
+  checksum: b692954bfe7811f03f73849b92e7beb9a55fafb370645ee40af60ab26b43923e77dbe9b444d2278cb974b0979f4f5239da3dfad4a9baac5ccc4e074c3d838499
   languageName: node
   linkType: hard
 

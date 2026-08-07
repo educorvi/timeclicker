@@ -12,13 +12,6 @@ import IconsResolve from 'unplugin-icons/resolver';
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    'swagger-ui': ['swagger-ui-dist'],
-                },
-            },
-        },
     },
     plugins: [
         vue(),
@@ -84,6 +77,15 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
+        },
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                loadPaths: ['node_modules'],
+                quietDeps: true,
+                silenceDeprecations: ['import']
+            },
         },
     },
 });

@@ -8,12 +8,12 @@
   ],
   "compilerOptions": {
     "rootDir": "src",
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
+    "lib": ["ES2025.Intl", "dom"],
     "allowJs": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,

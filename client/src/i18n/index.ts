@@ -14,6 +14,9 @@ if (!lang) {
     localStorage.setItem('language', lang);
 }
 
+const language = lang;
+export {language}
+
 export const humanizeDurationShortLangConfig = {
     language: "shortLang",
     languages: {
