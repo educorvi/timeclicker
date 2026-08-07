@@ -26,7 +26,8 @@
     <div v-if="loaded">
         <b-container fluid id="overview_container">
             <BTable
-                striped
+                class="activities-table"
+                align="middle"
                 hover
                 :items="activities"
                 :fields="tableFields"
@@ -46,8 +47,11 @@
                 <template #cell(duration)="data">
                     {{ getDurationOrDash(data.item.from, data.item.to) }}
                 </template>
+                <template #cell(break)="data">
+                    {{ getHumanizedDuration(data.item.breakMins * 60 * 1000)}}
+                </template>
                 <template #cell(edit)="data">
-                    <b-button-group class="mt-2 mb-2 w-100">
+                    <b-button-group class="w-100">
                         <b-button
                             class="w-50"
                             variant="outline-secondary"
@@ -65,72 +69,6 @@
                     </b-button-group>
                 </template>
             </BTable>
-            <!--            <b-row align-v="stretch" id="row" align-h="start">-->
-            <!--                <b-col v-if="loaded && activities.length === 0">-->
-            <!--                    <b-card class="activity-card text-center">-->
-            <!--                        {{ t('no_entries') }}-->
-            <!--                    </b-card>-->
-            <!--                </b-col>-->
-            <!--                <b-col-->
-            <!--                    v-for="activity in activities"-->
-            <!--                    :key="activity.id"-->
-            <!--                    class="mb-4"-->
-            <!--                >-->
-            <!--                    <b-card no-body class="activity-card">-->
-            <!--                        <b-card-body>-->
-            <!--                            <h5 class="mb-0">-->
-            <!--                                {{-->
-            <!--                                    activity.from-->
-            <!--                                        ? d(activity.from, 'long')-->
-            <!--                                        : ''-->
-            <!--                                }}-->
-            <!--                                - -->
-            <!--                                {{ activity.to ? d(activity.to, 'time') : '' }}-->
-            <!--                            </h5>-->
-            <!--                            <p class="mb-2">-->
-            <!--                                {{-->
-            <!--                                    getDurationOrDash(-->
-            <!--                                        activity.from,-->
-            <!--                                        activity.to,-->
-            <!--                                        activity.breakMins * 60 * 1000,-->
-            <!--                                    )-->
-            <!--                                }}-->
-            <!--                                <span-->
-            <!--                                    v-if="activity.breakMins"-->
-            <!--                                    class="text-muted"-->
-            <!--                                >-->
-            <!--                                    (+{{-->
-            <!--                                        getHumanizedDuration(-->
-            <!--                                            activity.breakMins * 60 * 1000,-->
-            <!--                                            ['m'],-->
-            <!--                                        )-->
-            <!--                                    }}-->
-            <!--                                    {{ t('break') }})-->
-            <!--                                </span>-->
-            <!--                            </p>-->
-            <!--                            <p class="mb-0 text-muted">-->
-            <!--                                {{ activity.task.title }}-->
-            <!--                            </p>-->
-            <!--                        </b-card-body>-->
-            <!--                        <b-card-footer>-->
-            <!--                            <b-button-group class="mt-2 mb-2 w-100">-->
-            <!--                                <b-button-->
-            <!--                                    class="w-50"-->
-            <!--                                    variant="outline-secondary"-->
-            <!--                                    @click="editActivity(activity)"-->
-            <!--                                >{{ t('edit') }}-->
-            <!--                                </b-button>-->
-            <!--                                <b-button-->
-            <!--                                    class="w-50"-->
-            <!--                                    variant="outline-danger"-->
-            <!--                                    @click="askToDeleteActivity(activity)"-->
-            <!--                                >{{ t('delete') }}-->
-            <!--                                </b-button>-->
-            <!--                            </b-button-group>-->
-            <!--                        </b-card-footer>-->
-            <!--                    </b-card>-->
-            <!--                </b-col>-->
-            <!--            </b-row>-->
         </b-container>
 
         <entry-editor
@@ -160,7 +98,6 @@
 import type { Activity, Task } from 'timeclicker_server/src/libindex';
 import CustomSpinner from './CustomSpinner.vue';
 import axios from 'axios';
-import humanizeDuration from 'humanize-duration';
 import EntryEditor from '@/components/ActivityEntryEditor.vue';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { UiError, useErrorStore } from '@/stores/error';
@@ -191,12 +128,14 @@ const tableFields: TableFieldRaw<Activity>[] = [
     {
         key: 'from',
         sortable: true,
+        initialSortDirection: 'asc'
     },
     {
         key: 'to',
         sortable: true,
     },
     'duration',
+    'break',
     'task',
     'edit',
 ];
@@ -217,14 +156,23 @@ const hours = computed(() => {
     );
 });
 
+const formatter = new Intl.DurationFormat();
+
+/**
+ * Converts a duration in milliseconds into a human-readable format based on the specified units.
+ *
+ * @param {number} duration - The duration in milliseconds to be humanized.
+ * @return {string} A human-readable string representation of the duration.
+ */
 function getHumanizedDuration(
     duration: number,
-    units: humanizeDuration.Unit[] = ['h', 'm'],
-) {
-    return humanizeDuration(duration, {
-        language: locale.value,
-        units: units,
-    });
+): string {
+    const totalMinutes = Math.floor(duration / 60_000)
+    const durObj = {
+        hours: Math.floor(totalMinutes / 60),
+        minutes: totalMinutes % 60,
+    }
+    return formatter.format(durObj)
 }
 
 /**
@@ -314,7 +262,20 @@ defineExpose({
 });
 </script>
 
-<style>
+<style lang="scss">
+.activities-table td {
+    button{
+        height: 100%;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+        svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            display: block;
+        }
+    }
+}
+
 .activity-card {
     width: 23rem;
     max-width: 100%;

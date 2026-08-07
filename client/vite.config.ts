@@ -12,13 +12,6 @@ import IconsResolve from 'unplugin-icons/resolver';
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    'swagger-ui': ['swagger-ui-dist'],
-                },
-            },
-        },
     },
     plugins: [
         vue(),
