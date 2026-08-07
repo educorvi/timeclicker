@@ -96,18 +96,4 @@ const tableFields: TableFieldRaw<Activity>[] = [
     }
 }
 
-.activity-card {
-    width: 23rem;
-    max-width: 100%;
-    height: 100%;
-}
-
-@media (max-width: 420px) {
-    .activity-card {
-        width: 100% !important;
-        height: 100%;
-    }
-
-}
-
 </style>

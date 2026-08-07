@@ -83,19 +83,6 @@ const { t, d, locale } = useI18n();
 </template>
 
 <style lang="scss">
-.activities-table td {
-    button {
-        height: 100%;
-        padding: 0.5rem;
-        border-radius: 0.2rem;
-
-        svg {
-            width: 1.1rem;
-            height: 1.1rem;
-            display: block;
-        }
-    }
-}
 
 .activity-card {
     width: 23rem;

@@ -1,4 +1,6 @@
-const formatter = new Intl.DurationFormat();
+import { language } from '@/i18n';
+
+const formatter = new Intl.DurationFormat(language, {style: 'short'});
 
 /**
  * Converts a duration in milliseconds into a human-readable format based on the specified units.
