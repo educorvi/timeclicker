@@ -1,3 +1,10 @@
+# [timeclicker_client-v3.3.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.2.0...timeclicker_client-v3.3.0) (2026-08-11)
+
+
+### Features
+
+* persist table sorting ([04b187b](https://github.com/educorvi/timeclicker/commit/04b187b180cd6e83180bf6a32856363f9f6cf794))
+
 # [timeclicker_client-v3.2.0](https://github.com/educorvi/timeclicker/compare/timeclicker_client-v3.1.2...timeclicker_client-v3.2.0) (2026-08-07)
 
 
