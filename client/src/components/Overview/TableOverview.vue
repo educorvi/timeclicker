@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { Activity } from 'timeclicker_server';
-import type { TableFieldRaw } from 'bootstrap-vue-next';
+import type { BTableSortBy, TableFieldRaw } from 'bootstrap-vue-next';
 import { useI18n } from 'vue-i18n';
 import { getDurationOrDash, getHumanizedDuration } from '@/Commons.ts';
+import { ref, watch } from 'vue';
 
 defineProps<{
     activities: Activity[]
@@ -12,12 +13,18 @@ defineProps<{
 
 const { t, d, locale } = useI18n();
 
+const sortStateFromLocalStorage = localStorage.getItem('sortState');
+const sortState = ref<BTableSortBy[]>(sortStateFromLocalStorage ? JSON.parse(sortStateFromLocalStorage) : []);
+
+watch(sortState, () => {
+    localStorage.setItem('sortState', JSON.stringify(sortState.value));
+}, { deep: true });
+
 const tableFields: TableFieldRaw<Activity>[] = [
     'date',
     {
         key: 'from',
         sortable: true,
-        initialSortDirection: 'asc'
     },
     {
         key: 'to',
@@ -41,6 +48,7 @@ const tableFields: TableFieldRaw<Activity>[] = [
         hover
         :items="activities"
         :fields="tableFields"
+        v-model:sort-by="sortState"
         responsive="sm">
         <template #cell(task)="data">
             {{ data.item.task.title }}
@@ -58,7 +66,7 @@ const tableFields: TableFieldRaw<Activity>[] = [
             {{ getDurationOrDash(data.item.from, data.item.to) }}
         </template>
         <template #cell(break)="data">
-            {{ getHumanizedDuration(data.item.breakMins * 60 * 1000) || '0 min'}}
+            {{ getHumanizedDuration(data.item.breakMins * 60 * 1000) || '0 min' }}
         </template>
         <template #cell(edit)="data">
             <b-button-group class="w-100">
