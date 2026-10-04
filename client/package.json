@@ -18,7 +18,7 @@
     "@observablehq/plot": "^0.6.17",
     "@tsconfig/node-lts": "^24.0.0",
     "@vueuse/core": "^14.4.0",
-    "axios": "^1.19.0",
+    "axios": "^1.20.0",
     "bootstrap": "^5.3.8",
     "bootstrap-vue-next": "^0.45.10",
     "bootswatch": "^5.3.8",
