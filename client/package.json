@@ -27,7 +27,7 @@
     "keycloak-js": "^26.2.4",
     "markdown-it": "^15.0.0",
     "pinia": "^4.0.2",
-    "sanitize-html": "^2.17.6",
+    "sanitize-html": "^2.18.0",
     "swagger-ui": "^5.32.12",
     "swagger-ui-dist": "^5.32.12",
     "timeclicker_server": "workspace:^",
