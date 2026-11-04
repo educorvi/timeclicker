@@ -32,7 +32,7 @@
     "swagger-ui-dist": "^5.32.12",
     "timeclicker_server": "workspace:^",
     "vue": "^3.5.41",
-    "vue-i18n": "^11.4.8",
+    "vue-i18n": "^11.4.14",
     "vue-multiselect": "^3.5.0",
     "vue-router": "^5.2.0"
   },
